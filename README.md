@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aghanim's Labyrinth Compendium
 
-## Getting Started
+A private review site for the Dota 2 arcade game *Aghanim's Labyrinth* — every hero's abilities,
+relics, and a written review. The whole site sits behind one shared passphrase.
 
-First, run the development server:
+## Running locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000. `.env.local` ships with a development passphrase of `labyrinth`
+and a generated signing secret — change the passphrase before anyone else uses it.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Both variables are server-only. Never prefix them with `NEXT_PUBLIC_`.
 
-## Learn More
+| Variable | Purpose |
+| --- | --- |
+| `SITE_PASSWORD` | The passphrase typed on the landing screen. |
+| `SESSION_SECRET` | Signs the session cookie. Changing it signs everyone out. |
 
-To learn more about Next.js, take a look at the following resources:
+Generate a fresh secret with:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## How the gate works
 
-## Deploy on Vercel
+- `app/actions/auth.ts` — Server Action. Constant-time compare against `SITE_PASSWORD`, rate
+  limited per IP, then sets a `jose`-signed httpOnly cookie good for 30 days.
+- `proxy.ts` — redirects any route other than `/` to the landing screen without a valid cookie.
+  (Next 16 renamed `middleware.ts` to `proxy.ts`.)
+- `lib/auth-guard.ts` — `requireSession()`, called at the top of each protected page. Server
+  Functions can fall outside the proxy matcher, so pages verify for themselves too.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Content
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`lib/heroes.ts` is the single source of truth. It currently holds the **full Dota lineup** —
+delete the rows for heroes the Labyrinth doesn't offer and the grid updates itself. Portraits load
+from Valve's CDN, so no images need committing for the grid to work.
+
+When this moves to a database, replace `getHeroes` / `getHero` / `heroesByAttribute` and keep the
+`Hero`, `Ability` and `Relic` shapes.
+
+## Deploying to Vercel
+
+1. Push the repo to GitHub.
+2. Import it in Vercel — the framework preset is detected automatically.
+3. Add `SITE_PASSWORD` and `SESSION_SECRET` under Settings → Environment Variables, for all
+   environments.
+
+**The site is not protected until those variables exist in Vercel.** Without `SITE_PASSWORD` the
+gate refuses every attempt; without `SESSION_SECRET` pages error. Verify the gate against the live
+URL after the first deploy.
+
+## Not built yet
+
+- Hero detail pages (`/heroes/[slug]`) — tiles link there already.
+- Database + in-browser review editor.
+- Ability and relic icon uploads.

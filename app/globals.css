@@ -1,26 +1,119 @@
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   Dark ice
+   Near-black navy, a cold teal bloom rising off the floor, and light caught on
+   hard edges. Accents read as refracted light, never as glowing UI chrome.
+   --------------------------------------------------------------------------- */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ice-void: #05070d;
+  --ice-deep: #0a1424;
+  --ice-teal: #0d3b3f;
+  --ice-glow: #7dd3fc;
+  --ice-frost: #e0f2fe;
+  --ice-muted: #64809c;
+
+  --edge: color-mix(in srgb, var(--ice-glow) 18%, transparent);
+  --edge-lit: color-mix(in srgb, var(--ice-glow) 45%, transparent);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-void: var(--ice-void);
+  --color-deep: var(--ice-deep);
+  --color-teal: var(--ice-teal);
+  --color-glow: var(--ice-glow);
+  --color-frost: var(--ice-frost);
+  --color-muted: var(--ice-muted);
+
+  --font-display: var(--font-bodoni), Georgia, serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-label: var(--font-barlow), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100dvh;
+  background-color: var(--ice-void);
+  color: var(--ice-frost);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Cold light falling from the upper left, teal bloom pooling at the floor. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 18% -10%, color-mix(in srgb, var(--ice-glow) 10%, transparent), transparent 60%),
+    radial-gradient(100% 55% at 50% 108%, color-mix(in srgb, var(--ice-teal) 85%, transparent), transparent 70%),
+    linear-gradient(180deg, var(--ice-void) 0%, var(--ice-deep) 55%, #061a1e 100%);
+}
+
+/*
+  Signature: the labyrinth itself, etched into the dark like frost on glass.
+  Two offset grids at different scales read as passage walls without ever
+  resolving into a legible pattern.
+*/
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 63px, var(--edge) 63px 64px),
+    repeating-linear-gradient(90deg, transparent 0 63px, var(--edge) 63px 64px),
+    repeating-linear-gradient(0deg, transparent 0 15px, color-mix(in srgb, var(--ice-glow) 5%, transparent) 15px 16px),
+    repeating-linear-gradient(90deg, transparent 0 15px, color-mix(in srgb, var(--ice-glow) 5%, transparent) 15px 16px);
+  mask-image: radial-gradient(70% 60% at 50% 35%, #000 0%, transparent 78%);
+  animation: drift 90s linear infinite;
+}
+
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-64px, -64px, 0); }
+}
+
+/* Cut-corner panel: Dota's own angular UI chrome, sharpened into an ice shard. */
+.shard {
+  --cut: 18px;
+  clip-path: polygon(
+    var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)),
+    calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut)
+  );
+}
+
+/* A hairline that catches light, drawn inside the clip so corners stay crisp. */
+.shard-edge {
+  box-shadow: inset 0 0 0 1px var(--edge), inset 0 1px 0 0 var(--edge-lit);
+}
+
+.label {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ice-glow);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
