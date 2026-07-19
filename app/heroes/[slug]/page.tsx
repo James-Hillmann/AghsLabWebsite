@@ -4,29 +4,25 @@ import { notFound } from 'next/navigation'
 import { AbilityGrid } from '@/components/AbilityGrid'
 import { EmptySlot } from '@/components/EmptySlot'
 import { HeroModel } from '@/components/HeroModel'
+import { HeroTabs } from '@/components/HeroTabs'
+import { Section } from '@/components/Section'
 import { SiteHeader } from '@/components/SiteHeader'
+import { TakeCard } from '@/components/TakeCard'
+import { TalentTree } from '@/components/TalentTree'
+import { AUTHORS } from '@/lib/authors'
 import { requireSession } from '@/lib/auth-guard'
 import { ATTRIBUTE_COLOR, getHero } from '@/lib/heroes'
-
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section className="mt-12">
-      <h2 className="label mb-5 border-b border-[var(--edge)] pb-2 text-[0.65rem] text-muted">
-        {title}
-      </h2>
-      {children}
-    </section>
-  )
-}
+import { getTakesForHero } from '@/lib/takes-db'
 
 export default async function HeroPage({ params }: { params: Promise<{ slug: string }> }) {
-  await requireSession()
+  const author = await requireSession()
 
   const { slug } = await params
   const hero = getHero(slug)
   if (!hero) notFound()
 
   const accent = ATTRIBUTE_COLOR[hero.attribute]
+  const takes = await getTakesForHero(hero.slug)
 
   return (
     <main className="flex flex-1 flex-col">
@@ -58,40 +54,58 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
               {hero.name}
             </h1>
 
-            <Section title="Abilities">
-              {hero.abilities?.length ? (
-                <AbilityGrid abilities={hero.abilities} />
-              ) : (
-                <EmptySlot>No abilities recorded for {hero.name} yet.</EmptySlot>
-              )}
-            </Section>
+            <HeroTabs
+              codex={
+                <>
+                  <Section title="Abilities">
+                    {hero.abilities?.length ? (
+                      <AbilityGrid abilities={hero.abilities} />
+                    ) : (
+                      <EmptySlot>No abilities recorded for {hero.name} yet.</EmptySlot>
+                    )}
+                  </Section>
 
-            <Section title="Relics">
-              {hero.relics?.length ? (
-                <ul className="space-y-2 text-sm text-frost">
-                  {hero.relics.map((relic) => (
-                    <li key={relic.name}>{relic.name}</li>
-                  ))}
-                </ul>
-              ) : (
-                <EmptySlot>
-                  Relics for {hero.name} go here, once the images and notes are in.
-                </EmptySlot>
-              )}
-            </Section>
+                  <Section title="Talents">
+                    {hero.talents?.length ? (
+                      <TalentTree talents={hero.talents} />
+                    ) : (
+                      <EmptySlot>
+                        {hero.name}&apos;s talent unlocks go here, level by level.
+                      </EmptySlot>
+                    )}
+                  </Section>
 
-            <Section title="Review">
-              {hero.review ? (
-                <div className="text-sm leading-relaxed whitespace-pre-line text-frost">
-                  {hero.review}
-                </div>
-              ) : (
-                <EmptySlot>
-                  We haven&apos;t written up {hero.name} yet — how it plays in the Labyrinth, what
-                  to build, and which relics carry it.
-                </EmptySlot>
-              )}
-            </Section>
+                  <Section title="Relics">
+                    {hero.relics?.length ? (
+                      <ul className="space-y-2 text-sm text-frost">
+                        {hero.relics.map((relic) => (
+                          <li key={relic.name}>{relic.name}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <EmptySlot>
+                        Relics for {hero.name} go here, once the images and notes are in.
+                      </EmptySlot>
+                    )}
+                  </Section>
+                </>
+              }
+              takes={
+                <Section title="What we think">
+                  <div className="grid gap-6 md:grid-cols-2">
+                    {AUTHORS.map((name) => (
+                      <TakeCard
+                        key={name}
+                        hero={hero}
+                        author={name}
+                        take={takes[name] ?? null}
+                        editable={name === author}
+                      />
+                    ))}
+                  </div>
+                </Section>
+              }
+            />
           </div>
         </div>
       </div>
