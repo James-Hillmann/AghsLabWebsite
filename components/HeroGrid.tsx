@@ -1,14 +1,6 @@
-import { ATTRIBUTES, heroesByAttribute, type Attribute } from '@/lib/heroes'
+import { ATTRIBUTES, ATTRIBUTE_COLOR, heroesByAttribute, type Attribute } from '@/lib/heroes'
 
 import { HeroTile } from './HeroTile'
-
-// Valve's own attribute colours, dimmed to sit inside the ice palette.
-const ATTRIBUTE_COLOR: Record<Attribute, string> = {
-  strength: '#e0654a',
-  agility: '#66bf5c',
-  intelligence: '#5ab6e0',
-  universal: '#c98ee0',
-}
 
 function AttributeColumn({ attribute }: { attribute: Attribute }) {
   const heroes = heroesByAttribute(attribute)
