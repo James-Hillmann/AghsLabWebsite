@@ -33,13 +33,28 @@ export type Relic = {
   description?: string
 }
 
+/**
+ * One rung of the talent tree: the level it unlocks at, and the choice either side.
+ * Text only -- Valve serves no icon for talents, and the Labyrinth wording is ours.
+ */
+export type Talent = {
+  level: number
+  left: string
+  right: string
+}
+
 export type Hero = {
   slug: string
   name: string
   attribute: Attribute
   abilities?: Ability[]
+  talents?: Talent[]
   relics?: Relic[]
-  /** Long-form review, written by us. */
+  /**
+   * Long-form review, written by us.
+   * @deprecated Superseded by per-author takes in the database (lib/takes.ts). Kept so
+   * the few heroes with a written review don't lose it; new writing goes in a take.
+   */
   review?: string
 }
 
@@ -863,4 +878,96 @@ export function getHero(slug: string): Hero | undefined {
 
 export function heroesByAttribute(attribute: Attribute): Hero[] {
   return HEROES.filter((hero) => hero.attribute === attribute)
+}
+
+/**
+ * James's own nickname list. Only the 34 roster heroes he gave a nickname appear here;
+ * the other 29 are findable by name alone.
+ *
+ * Nicknames that merely repeat the display name are left out on purpose -- "underlord",
+ * "magnus" and "clockwerk" already match via the name, so listing them would add a row
+ * that does nothing. Only shorthand the name can't produce is worth a line.
+ */
+const ALIASES: Record<string, string[]> = {
+  shredder: ['timber'], // Timbersaw
+  omniknight: ['omni'],
+  tidehunter: ['tide'],
+  chaos_knight: ['ck'],
+  bristleback: ['bristle'],
+  night_stalker: ['ns'],
+  centaur: ['centaur'], // Centaur Warrunner
+  rattletrap: ['clock'], // Clockwerk
+  dragon_knight: ['dk'],
+  juggernaut: ['jugg'],
+  phantom_assassin: ['pa'],
+  gyrocopter: ['gyro'],
+  faceless_void: ['faceless'],
+  nevermore: ['sf'], // Shadow Fiend
+  ember_spirit: ['ember'],
+  bloodseeker: ['bs', 'blood'],
+  skywrath_mage: ['sky', 'skywrath'],
+  winter_wyvern: ['wyvern'],
+  leshrac: ['lesh'],
+  crystal_maiden: ['cm', 'crystal'],
+  queenofpain: ['qop'],
+  necrolyte: ['necro'], // Necrophos
+  obsidian_destroyer: ['od', 'outworld', 'outhousedecorator'],
+  storm_spirit: ['ss'],
+  venomancer: ['veno'],
+  beastmaster: ['bm'],
+  death_prophet: ['dp'],
+  sand_king: ['sk'],
+  snapfire: ['snap'],
+  windrunner: ['wr', 'wind'], // Windranger
+  void_spirit: ['vs'],
+  pangolier: ['pango'],
+  nyx_assassin: ['nyx'],
+  batrider: ['bat'],
+}
+
+const normalise = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, '')
+
+/** First letter of each word: "Queen of Pain" -> "qop". */
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .map((word) => word[0])
+    .join('')
+    .toLowerCase()
+
+/**
+ * How well a hero answers a query. Lower is better; null means no match.
+ *
+ * Ranking matters more than it looks: "sk" substring-matches chaosKnight, skywrath and
+ * sandKing, and without scoring the roster order would surface Chaos Knight first. A
+ * name or alias that *starts* with what you typed always beats a mid-word hit.
+ */
+export function scoreHero(hero: Hero, query: string): number | null {
+  const q = normalise(query)
+  if (!q) return 0
+
+  const name = normalise(hero.name)
+  const aliases = ALIASES[hero.slug] ?? []
+
+  if (name === q || aliases.includes(q)) return 0
+  if (aliases.some((alias) => alias.startsWith(q))) return 1
+  if (name.startsWith(q)) return 2
+  if (initials(hero.name).startsWith(q)) return 3
+  // Start of any later word: "king" -> Sand King.
+  if (hero.name.split(/\s+/).some((word) => normalise(word).startsWith(q))) return 4
+  if (name.includes(q)) return 5
+  return null
+}
+
+export function matchesQuery(hero: Hero, query: string): boolean {
+  return scoreHero(hero, query) !== null
+}
+
+/** Matching heroes, best first, roster order preserved within a rank. */
+export function searchHeroes(heroes: Hero[], query: string): Hero[] {
+  return heroes
+    .map((hero, index) => ({ hero, index, score: scoreHero(hero, query) }))
+    .filter((entry): entry is { hero: Hero; index: number; score: number } => entry.score !== null)
+    .sort((a, b) => a.score - b.score || a.index - b.index)
+    .map((entry) => entry.hero)
 }

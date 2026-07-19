@@ -4,6 +4,7 @@ import { createHash, timingSafeEqual } from 'node:crypto'
 import { cookies, headers } from 'next/headers'
 import { redirect } from 'next/navigation'
 
+import { AUTHORS, type Author } from '@/lib/authors'
 import { SESSION_COOKIE, SESSION_MAX_AGE, createSessionToken } from '@/lib/session'
 
 export type GateState = { error: string | null }
@@ -30,6 +31,23 @@ function rateLimit(key: string): boolean {
   return entry.count <= ATTEMPT_LIMIT
 }
 
+/**
+ * One passphrase each, so the site knows whose take it's saving.
+ *
+ * SITE_PASSWORD is the old single shared passphrase, kept working as James's so an
+ * existing deployment doesn't lock itself out mid-migration. Set SITE_PASSWORD_JAMES
+ * and drop it.
+ */
+function credentials(): Record<Author, string> | null {
+  const james = process.env.SITE_PASSWORD_JAMES ?? process.env.SITE_PASSWORD
+  const liam = process.env.SITE_PASSWORD_LIAM
+
+  if (!james || !liam) return null
+  if (james === liam) return null
+
+  return { james, liam }
+}
+
 /** Length-independent constant-time comparison. */
 function matches(input: string, expected: string): boolean {
   const a = createHash('sha256').update(input).digest()
@@ -37,13 +55,28 @@ function matches(input: string, expected: string): boolean {
   return timingSafeEqual(a, b)
 }
 
+/**
+ * Checks every passphrase without stopping at the first hit, so how long the answer
+ * takes doesn't reveal which of the two was entered. The passphrases are required to
+ * differ, so at most one can match.
+ */
+function identify(password: string, expected: Record<Author, string>): Author | null {
+  let found: Author | null = null
+  for (const author of AUTHORS) {
+    if (matches(password, expected[author])) found = author
+  }
+  return found
+}
+
 export async function enterSite(_prev: GateState, formData: FormData): Promise<GateState> {
   const password = formData.get('password')
-  const expected = process.env.SITE_PASSWORD
+  const expected = credentials()
 
   if (!expected) {
-    console.error('SITE_PASSWORD is not set -- refusing every attempt.')
-    return { error: 'The site is not configured yet. Set SITE_PASSWORD and redeploy.' }
+    console.error(
+      'SITE_PASSWORD_JAMES and SITE_PASSWORD_LIAM must both be set, and must differ -- refusing every attempt.',
+    )
+    return { error: 'The site is not configured yet. Set both passphrases and redeploy.' }
   }
 
   const headerList = await headers()
@@ -53,13 +86,15 @@ export async function enterSite(_prev: GateState, formData: FormData): Promise<G
     return { error: 'Too many attempts. Wait a minute and try again.' }
   }
 
-  if (typeof password !== 'string' || !matches(password, expected)) {
+  const author = typeof password === 'string' ? identify(password, expected) : null
+
+  if (!author) {
     // Deliberately vague: don't confirm whether the passphrase merely had a typo.
     return { error: "That passphrase doesn't open the door." }
   }
 
   const cookieStore = await cookies()
-  cookieStore.set(SESSION_COOKIE, await createSessionToken(), {
+  cookieStore.set(SESSION_COOKIE, await createSessionToken(author), {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
