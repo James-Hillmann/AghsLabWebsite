@@ -70,19 +70,19 @@ export function HeroBrowser({ heroes, covered }: { heroes: Hero[]; covered: stri
 
   return (
     <>
-      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4 2xl:mb-6">
         <div>
-          <h1 className="font-[family-name:var(--font-display)] text-3xl font-light text-frost">
+          <h1 className="font-[family-name:var(--font-display)] text-3xl font-light text-frost 2xl:text-4xl">
             Choose a hero
           </h1>
-          <p className="mt-2 text-sm text-muted">
+          <p className="mt-2 text-sm text-muted 2xl:text-base">
             {query
               ? `${matches.length} of ${heroes.length} heroes. Enter opens ${matches[0]?.name ?? 'nothing'}.`
               : `${heroes.length} heroes in the roster. Start typing to filter.`}
           </p>
         </div>
 
-        <div className="relative w-full sm:w-64">
+        <div className="relative w-full sm:w-64 2xl:w-80">
           <label htmlFor="hero-search" className="sr-only">
             Search heroes
           </label>
@@ -94,7 +94,7 @@ export function HeroBrowser({ heroes, covered }: { heroes: Hero[]; covered: stri
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search heroes"
             autoComplete="off"
-            className="shard shard-edge w-full bg-[color-mix(in_srgb,var(--ice-deep)_55%,transparent)] px-4 py-2.5 text-sm text-frost outline-none placeholder:text-muted focus:bg-[color-mix(in_srgb,var(--ice-deep)_80%,transparent)]"
+            className="shard shard-edge w-full bg-[color-mix(in_srgb,var(--ice-deep)_55%,transparent)] px-4 py-2.5 text-sm text-frost outline-none placeholder:text-muted focus:bg-[color-mix(in_srgb,var(--ice-deep)_80%,transparent)] 2xl:py-3 2xl:text-base"
             style={{ '--cut': '8px' } as React.CSSProperties}
           />
           {query && (

@@ -21,17 +21,19 @@ function AttributeColumn({
 
   return (
     <section className="min-w-0">
-      <header className="mb-4 flex items-baseline gap-3 border-b border-[var(--edge)] pb-2">
-        <span aria-hidden className="size-2 rotate-45" style={{ backgroundColor: accent }} />
-        <h2 className="label text-[0.7rem]" style={{ color: accent }}>
+      <header className="mb-4 flex items-baseline gap-3 border-b border-[var(--edge)] pb-2 2xl:mb-5">
+        <span aria-hidden className="size-2 rotate-45 2xl:size-2.5" style={{ backgroundColor: accent }} />
+        <h2 className="label text-[0.7rem] 2xl:text-[0.82rem]" style={{ color: accent }}>
           {attribute}
         </h2>
-        <span className="ml-auto font-[family-name:var(--font-label)] text-xs text-muted tabular-nums">
+        <span className="ml-auto font-[family-name:var(--font-label)] text-xs text-muted tabular-nums 2xl:text-sm">
           {heroes.length}
         </span>
       </header>
 
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(60px,1fr))] gap-1.5">
+      {/* The floor grows with the viewport -- on a wide monitor a fixed 60px leaves the
+          art unreadable and the page mostly empty below the fold. */}
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(64px,1fr))] gap-1.5 xl:grid-cols-[repeat(auto-fill,minmax(74px,1fr))] xl:gap-2 2xl:grid-cols-[repeat(auto-fill,minmax(88px,1fr))] 2xl:gap-2">
         {heroes.map((hero) => (
           <HeroTile
             key={hero.slug}

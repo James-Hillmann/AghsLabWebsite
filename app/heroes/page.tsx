@@ -16,7 +16,7 @@ export default async function HeroesPage() {
     <main className="flex flex-1 flex-col">
       <SiteHeader />
 
-      <div className="px-6 py-10">
+      <div className="px-6 py-10 2xl:px-10 2xl:py-8">
         <HeroBrowser heroes={getHeroes()} covered={covered} />
       </div>
     </main>

@@ -65,7 +65,7 @@ export function HeroTile({
         {/* Name reveals on the scrim rather than reserving layout space -- except on the
             top match, which stays labelled so you can see what Enter will open. */}
         <span
-          className={`pointer-events-none absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,var(--ice-void),transparent)] px-1.5 pt-5 pb-1 text-center text-[0.6rem] leading-tight font-medium text-frost transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 ${
+          className={`pointer-events-none absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,var(--ice-void),transparent)] px-1.5 pt-5 pb-1 text-center text-[0.6rem] leading-tight font-medium text-frost transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 2xl:pb-1.5 2xl:text-xs ${
             isTopMatch ? 'opacity-100' : 'opacity-0'
           }`}
         >
