@@ -13,26 +13,23 @@ export async function SiteHeader() {
       <Link href="/heroes" className="shrink-0">
         <Image src="/logo.png" alt="Aghanim's Labyrinth" width={405} height={164} className="w-28" />
       </Link>
-      <span aria-hidden className="hidden h-6 w-px bg-[var(--edge)] sm:block" />
-      <p className="label hidden text-[0.6rem] text-muted sm:block">Compendium</p>
-
       {author && (
-        <span className="ml-auto flex items-center gap-2">
+        <span className="ml-auto flex items-center gap-2.5">
           <span
             aria-hidden
-            className="size-1.5 rotate-45"
+            className="size-2 rotate-45"
             style={{ backgroundColor: AUTHOR_COLOR[author] }}
           />
-          <span className="label text-[0.6rem]" style={{ color: AUTHOR_COLOR[author] }}>
+          <span className="label text-[0.85rem]" style={{ color: AUTHOR_COLOR[author] }}>
             {AUTHOR_NAME[author]}
           </span>
         </span>
       )}
 
-      <form action={leaveSite} className={author ? 'ml-5' : 'ml-auto'}>
+      <form action={leaveSite} className={author ? 'ml-6' : 'ml-auto'}>
         <button
           type="submit"
-          className="label text-[0.6rem] text-muted transition-colors duration-200 hover:text-frost"
+          className="label text-[0.7rem] text-muted transition-colors duration-200 hover:text-frost"
         >
           Sign out
         </button>

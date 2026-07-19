@@ -7,26 +7,25 @@ function AttributeColumn({
   attribute,
   heroes,
   topMatchSlug,
+  searching,
   covered,
 }: {
   attribute: Attribute
   heroes: Hero[]
   topMatchSlug?: string
+  searching: boolean
   covered: Set<string>
 }) {
   const accent = ATTRIBUTE_COLOR[attribute]
 
-  // A column with nothing left in it is noise while searching.
-  if (!heroes.length) return null
-
   return (
     <section className="min-w-0">
       <header className="mb-4 flex items-baseline gap-3 border-b border-[var(--edge)] pb-2 2xl:mb-5">
-        <span aria-hidden className="size-2 rotate-45 2xl:size-2.5" style={{ backgroundColor: accent }} />
-        <h2 className="label text-[0.7rem] 2xl:text-[0.82rem]" style={{ color: accent }}>
+        <span aria-hidden className="size-2.5 rotate-45 2xl:size-3" style={{ backgroundColor: accent }} />
+        <h2 className="label text-[0.95rem] 2xl:text-[1.05rem]" style={{ color: accent }}>
           {attribute}
         </h2>
-        <span className="ml-auto font-[family-name:var(--font-label)] text-xs text-muted tabular-nums 2xl:text-sm">
+        <span className="ml-auto font-[family-name:var(--font-label)] text-sm text-muted tabular-nums 2xl:text-base">
           {heroes.length}
         </span>
       </header>
@@ -39,6 +38,7 @@ function AttributeColumn({
             key={hero.slug}
             hero={hero}
             isTopMatch={hero.slug === topMatchSlug}
+            isDimmed={searching && hero.slug !== topMatchSlug}
             authors={AUTHORS.filter((author) => covered.has(`${hero.slug}:${author}`))}
           />
         ))}
@@ -47,13 +47,19 @@ function AttributeColumn({
   )
 }
 
+/**
+ * Always renders the whole roster. Searching never removes a hero or collapses a column
+ * -- it only dims, so every tile keeps the position you learned it at.
+ */
 export function HeroGrid({
   heroes,
   topMatchSlug,
+  searching = false,
   covered,
 }: {
   heroes: Hero[]
   topMatchSlug?: string
+  searching?: boolean
   covered: Set<string>
 }) {
   return (
@@ -64,6 +70,7 @@ export function HeroGrid({
           attribute={attribute}
           heroes={heroes.filter((hero) => hero.attribute === attribute)}
           topMatchSlug={topMatchSlug}
+          searching={searching}
           covered={covered}
         />
       ))}
