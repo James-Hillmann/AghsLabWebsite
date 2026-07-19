@@ -8,9 +8,12 @@ import { searchHeroes, type Hero } from '@/lib/heroes'
 import { HeroGrid } from './HeroGrid'
 
 /**
- * Dota's picker doesn't make you click a search box -- you just start typing and it
- * filters. This mirrors that: a window-level key listener routes printable characters
- * into the field wherever focus happens to be.
+ * Dota's picker doesn't make you click a search box -- you just start typing, and the
+ * grid dims rather than filters. Every hero holds its position; only the best match
+ * stays lit. That's the point: the tile you learned the position of never moves.
+ *
+ * A window-level key listener routes printable characters into the field wherever focus
+ * happens to be.
  *
  * Keys are appended manually and the event is cancelled, rather than just focusing the
  * input and letting the character through. Focusing mid-keydown is racy across browsers
@@ -76,9 +79,11 @@ export function HeroBrowser({ heroes, covered }: { heroes: Hero[]; covered: stri
             Choose a hero
           </h1>
           <p className="mt-2 text-sm text-muted 2xl:text-base">
-            {query
-              ? `${matches.length} of ${heroes.length} heroes. Enter opens ${matches[0]?.name ?? 'nothing'}.`
-              : `${heroes.length} heroes in the roster. Start typing to filter.`}
+            {!query
+              ? `${heroes.length} heroes in the roster. Start typing to find one.`
+              : matches.length
+                ? `Enter opens ${matches[0].name}.`
+                : `No hero matches “${query}”. Press Escape to clear.`}
           </p>
         </div>
 
@@ -113,17 +118,13 @@ export function HeroBrowser({ heroes, covered }: { heroes: Hero[]; covered: stri
         </div>
       </div>
 
-      {matches.length ? (
-        <HeroGrid
-          heroes={matches}
-          topMatchSlug={query ? matches[0].slug : undefined}
-          covered={coveredSet}
-        />
-      ) : (
-        <p className="py-16 text-center text-sm text-muted">
-          No hero matches &ldquo;{query}&rdquo;. Press Escape to clear.
-        </p>
-      )}
+      {/* The full roster, always. Searching dims rather than filters, so nothing moves. */}
+      <HeroGrid
+        heroes={heroes}
+        topMatchSlug={query ? matches[0]?.slug : undefined}
+        searching={Boolean(query)}
+        covered={coveredSet}
+      />
     </>
   )
 }

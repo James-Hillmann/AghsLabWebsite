@@ -7,10 +7,16 @@ import { portraitUrl, type Hero } from '@/lib/heroes'
 export function HeroTile({
   hero,
   isTopMatch = false,
+  isDimmed = false,
   authors = [],
 }: {
   hero: Hero
   isTopMatch?: boolean
+  /**
+   * Searching dims everything except the one lit hero. Purely visual -- a dimmed tile
+   * is still a working link, and hovering one brings it back to full strength.
+   */
+  isDimmed?: boolean
   /** Who has written a take on this hero. Drawn as a dot each. */
   authors?: readonly Author[]
 }) {
@@ -25,15 +31,21 @@ export function HeroTile({
       // The attribute columns reorder results, so the best match isn't necessarily the
       // first tile on screen. Mark it, or pressing Enter goes somewhere unexpected.
       data-top-match={isTopMatch || undefined}
+      data-dimmed={isDimmed || undefined}
       // Tailwind's scale-* sets the `scale` property, not `transform` -- transition that
       // property by name or the hover snaps instead of easing.
       className="group relative block aspect-[235/272] overflow-visible transition-[scale] duration-200 ease-out hover:z-20 hover:scale-[1.18] focus-visible:z-20 focus-visible:scale-[1.18] motion-reduce:hover:scale-100 motion-reduce:focus-visible:scale-100"
     >
       <span
-        className={`absolute inset-0 overflow-hidden bg-[color-mix(in_srgb,var(--ice-deep)_60%,transparent)] transition-shadow duration-200 group-hover:shadow-[0_0_0_1px_var(--edge-lit),0_10px_30px_-6px_color-mix(in_srgb,var(--ice-glow)_45%,transparent)] group-focus-visible:shadow-[0_0_0_1px_var(--edge-lit),0_10px_30px_-6px_color-mix(in_srgb,var(--ice-glow)_45%,transparent)] ${
+        className={`absolute inset-0 overflow-hidden bg-[color-mix(in_srgb,var(--ice-deep)_60%,transparent)] transition-[opacity,filter,box-shadow] duration-200 group-hover:shadow-[0_0_0_1px_var(--edge-lit),0_10px_30px_-6px_color-mix(in_srgb,var(--ice-glow)_45%,transparent)] group-focus-visible:shadow-[0_0_0_1px_var(--edge-lit),0_10px_30px_-6px_color-mix(in_srgb,var(--ice-glow)_45%,transparent)] ${
           isTopMatch
             ? 'shadow-[0_0_0_2px_var(--ice-glow),0_8px_24px_-6px_color-mix(in_srgb,var(--ice-glow)_55%,transparent)]'
             : 'shadow-[0_0_0_1px_var(--edge)]'
+        } ${
+          // Hover and focus pull a dimmed tile back to full strength -- it's still a link.
+          isDimmed
+            ? 'opacity-25 grayscale group-hover:opacity-100 group-hover:grayscale-0 group-focus-visible:opacity-100 group-focus-visible:grayscale-0'
+            : ''
         }`}
       >
         <Image
