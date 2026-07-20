@@ -21,17 +21,21 @@ function Fact({ label, children }: { label: string; children: React.ReactNode })
 const RARE_THRESHOLD = 0.5
 
 /**
- * The game shows world difficulty as a letter grade (E through S++, then EX) rather than the
- * raw RequireDifLevel number. Confirmed against the game's own strings and item data: EX with
- * no suffix sits at 24 ("Drops... in EX worlds or above" pairs with RequireDifLevel 24), and
- * FromList tokens like OverLevelEX13 pair with RequireDifLevel 37 -- so EX+N is 24 + N.
+ * The game shows world difficulty as a letter grade (E through SSS+, then EX) rather than the
+ * raw RequireDifLevel number.
  *
- * Below 24, the 8 tiers below EX (E through S++) each split into a -/plain/+ sub-grade, which
- * is 8 * 3 = 24 steps -- exactly the run-up to EX starting at 24. That arithmetic match is the
- * only evidence for the -/plain/+ ordering within a tier; it isn't independently confirmed
- * against the game's own strings the way the EX+N part is.
+ * This mirrors `getLevel()` in the game's own `panorama/layout/custom_game/utils/utils.vjs`,
+ * which is the function that renders these grades in-game: tier is level / 3, and the
+ * remainder picks the sub-grade in -/plain/+ order. At 24 and above it switches to EX, with
+ * EX+N for N over 24. `RatingList` in `scripts/vscripts/constants.lua` spells the same scale
+ * out literally ("E-", "E", "E+", ... "SSS+"), and the item data agrees: OverLevelA pairs with
+ * RequireDifLevel 12 (A-) and OverLevelEX13 with 37 (EX+13).
+ *
+ * The tiers are single/double/triple S, not S/S+/S++ -- an earlier reading of this scale had
+ * the latter, which both duplicated grades (17 and 19 each rendered "S+") and emitted
+ * nonsense ones ("S+-", "S+++") for levels 18-23.
  */
-const PRE_EX_TIERS = ['E', 'D', 'C', 'B', 'A', 'S', 'S+', 'S++']
+const PRE_EX_TIERS = ['E', 'D', 'C', 'B', 'A', 'S', 'SS', 'SSS']
 const SUB_GRADES = ['-', '', '+']
 
 function formatDifficulty(level: number): string {
@@ -100,7 +104,16 @@ export function ArtifactFacts({ artifact }: { artifact: Artifact }) {
 
       {sources.length > 0 && (
         <Fact label="Also from">
-          <span className="text-xs leading-relaxed">{sources.join(' · ')}</span>
+          {/*
+            One line each rather than a joined run: these are the game's own sentences, and
+            several carry an interpunct of their own ("Astral Vault · Shadow Sect"), which a
+            " · " separator would run straight into.
+          */}
+          <ul className="space-y-0.5 text-xs leading-relaxed">
+            {sources.map((source) => (
+              <li key={source}>{source}</li>
+            ))}
+          </ul>
         </Fact>
       )}
     </dl>

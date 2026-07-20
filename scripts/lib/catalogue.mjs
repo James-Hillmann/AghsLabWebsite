@@ -13,11 +13,21 @@ export { resolveTemplate }
 /** `rarity` 1-4 is the Archive's era, named by Hud_Artifact_Level1-4 in the localization. */
 export const ERA_BY_RARITY = { 1: 'origin', 2: 'genesis', 3: 'middle', 4: 'post' }
 
+/**
+ * Upgrade slots, in order.
+ *
+ * Seven, not four. Most artifacts stop at slot 4 because most cap at level 40, but the ones
+ * with a higher `MaxLevel` keep going -- Precious Fire Dragon Egg caps at 100 and fills all
+ * seven, and twelve others define a slot 5. Stopping at 4 silently dropped those upgrades.
+ */
 export const UPGRADE_LEVEL_KEYS = [
   'additional_unlock_level_1',
   'additional_unlock_level_2',
   'additional_unlock_level_3',
   'additional_unlock_level_4',
+  'additional_unlock_level_5',
+  'additional_unlock_level_6',
+  'additional_unlock_level_7',
 ]
 
 /**
@@ -173,24 +183,44 @@ function readUpgrades(gameId, entry, english, values, refs, problems) {
   return upgrades
 }
 
-/** FromList is a comma-separated set of internal source tags; these are the readable ones. */
-function readSources(fromList) {
+/**
+ * Fallbacks for source tags the localization doesn't name.
+ *
+ * Every tag in the game today has an `Artifact_From__<tag>` string, so nothing reaches these --
+ * they exist so a tag added in a future patch degrades to something readable rather than
+ * leaking an internal id onto the page.
+ */
+function describeUnnamedSource(tag) {
+  if (tag === 'Default') return 'Drops in runs'
+  if (tag === 'ShopDefault') return 'Shop'
+  if (tag.startsWith('Card_')) return 'Card pack'
+  if (tag.startsWith('OverLevel')) return `Drops in ${tag.slice(9)} world or above`
+  if (tag.startsWith('BOSS_')) return `Boss: ${tag.slice(5).replace(/([a-z])([A-Z])/g, '$1 $2')}`
+  if (tag === 'Login') return 'Login reward'
+  if (tag === 'Daily') return 'Daily reward'
+  if (tag === 'Contract') return 'Contract'
+  if (tag.startsWith('CDKBook')) return 'Code redemption'
+  if (tag.startsWith('Event')) return 'Event'
+  return tag
+}
+
+/**
+ * FromList is a comma-separated set of internal source tags.
+ *
+ * The game names each one itself, in `Artifact_From__<tag>` -- the same sentence its own UI
+ * shows on the artifact's card. Preferring that over a hand-written table keeps the site
+ * saying what the game says, and keeps tags distinct that a table tends to collapse: the seven
+ * `Card_*` vaults are seven different Astral Vaults, not one generic "card pack", and each
+ * `OverLevel*` names the world tier it actually gates on.
+ */
+function readSources(fromList, english) {
   if (!fromList) return []
 
   const seen = new Set()
   for (const tag of fromList.split(',').map((value) => value.trim())) {
     if (!tag) continue
-    if (tag === 'Default') seen.add('Drops in runs')
-    else if (tag === 'ShopDefault') seen.add('Shop')
-    else if (tag.startsWith('Card_')) seen.add('Card pack')
-    else if (tag.startsWith('OverLevel')) seen.add('Level reward')
-    else if (tag.startsWith('BOSS_')) seen.add(`Boss: ${tag.slice(5).replace(/([a-z])([A-Z])/g, '$1 $2')}`)
-    else if (tag === 'Login') seen.add('Login reward')
-    else if (tag === 'Daily') seen.add('Daily reward')
-    else if (tag === 'Contract') seen.add('Contract')
-    else if (tag.startsWith('CDKBook')) seen.add('Code redemption')
-    else if (tag.startsWith('Event')) seen.add('Event')
-    else seen.add(tag)
+    const named = english.get(`Artifact_From__${tag}`)
+    seen.add(named ? stripTags(named) : describeUnnamedSource(tag))
   }
   return [...seen]
 }
@@ -337,7 +367,7 @@ export function buildCatalogue() {
         ...(num(entry.RequireDifLevel) !== undefined
           ? { requiredDifficulty: num(entry.RequireDifLevel) }
           : {}),
-        sources: readSources(entry.FromList),
+        sources: readSources(entry.FromList, english),
       })
     }
 

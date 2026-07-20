@@ -108,7 +108,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 15,
     },
     sources: [
-      "Login reward",
+      "Event · 7-Day Login Reward",
     ],
   },
   {
@@ -167,7 +167,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 800,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -225,8 +225,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 800,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -284,8 +284,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 800,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -350,7 +350,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -414,7 +414,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -459,13 +459,18 @@ export const ARTIFACTS: Artifact[] = [
         description: "Every [[value]]60[[/]] seconds, an other equipped Artifact gain [[value]]30[[/]] flat Artifact XP.",
         note: "The Artifact XP gained is a fixed value and is not affected or modified by any effects.",
       },
+      {
+        level: 50,
+        name: "Cosmic Beacon",
+        description: "This artifact No longer gains XP when possible. Instead, [[ref]]Galactic Beacon[[/]] grants [[value]]0.5%[[/]] of the missing XP each time, up to a maximum of [[value]]20[[/]].",
+      },
     ],
     flavor: "An entire galaxy is contained within the curved glass of this compass, guiding you toward things you have yet to discover.",
     cost: {
       dust: 15,
     },
     sources: [
-      "Login reward",
+      "Event · 7-Day Login Reward",
     ],
   },
   {
@@ -517,7 +522,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · DOTA",
     ],
   },
   {
@@ -568,7 +573,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 15,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Darkmoon Guidance",
     ],
   },
   {
@@ -627,8 +632,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 800,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -693,7 +698,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -748,7 +753,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 15,
     },
     sources: [
-      "Code redemption",
+      "Event · Path of Guidance · Initial Guidance Ultimate Reward",
     ],
   },
   {
@@ -785,7 +790,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -829,6 +834,21 @@ export const ARTIFACTS: Artifact[] = [
         name: "Adult Red Dragon",
         description: "After [[value]]7[[/]] [[ref]]Grow[[/]], every [[value]]6[[/]] attacks unleash a dash strike, dealing magic damage equal to [[value]]300%[[/]] of Attack Damage",
       },
+      {
+        level: 60,
+        name: "Hatched Dragon Egg",
+        description: "Starts already hatched",
+      },
+      {
+        level: 80,
+        name: "Ancient Might",
+        description: "Starts with [[value]]4[[/]] [[ref]]Grow[[/]]",
+      },
+      {
+        level: 100,
+        name: "Faint Pulse",
+        description: "A warm core pulses faintly, yet this trace of divine power has not awakened into a force that can manifest itself.",
+      },
     ],
     flavor: "A dragon egg still in its infancy, radiating a faint warmth. With proper care, it may one day hatch into a true dragon.",
     drop: {
@@ -843,7 +863,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -893,7 +913,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 15,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Visitor from Outerworld",
     ],
   },
   {
@@ -951,7 +971,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -1011,8 +1031,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 800,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -1068,7 +1088,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 15,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Shadow Sect",
     ],
   },
   {
@@ -1121,7 +1141,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Contract",
+      "Available in Pact Vault",
     ],
   },
   {
@@ -1172,7 +1192,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 30,
     },
     sources: [
-      "Contract",
+      "Available in Pact Vault",
     ],
   },
   {
@@ -1240,7 +1260,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -1304,7 +1324,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -1369,8 +1389,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -1421,7 +1441,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 30,
     },
     sources: [
-      "Contract",
+      "Available in Pact Vault",
     ],
   },
   {
@@ -1472,7 +1492,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 800,
     },
     sources: [
-      "Daily reward",
+      "Has a chance to appear for sale in the Daily Selection",
     ],
   },
   {
@@ -1532,7 +1552,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -1589,7 +1609,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 30,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Visitor from Beyond",
     ],
   },
   {
@@ -1649,7 +1669,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Shadow Sect",
     ],
   },
   {
@@ -1715,7 +1735,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 37,
     sources: [
-      "Level reward",
+      "May drop in EX+13 worlds or above",
     ],
   },
   {
@@ -1775,7 +1795,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -1841,7 +1861,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -1905,7 +1925,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -1966,7 +1986,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -2025,7 +2045,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -2069,6 +2089,11 @@ export const ARTIFACTS: Artifact[] = [
         name: "Cost Conversion",
         description: "This Artifact can be activated to increase all attributes by [[value]]35%[[/]] for the current stage. At the end of the stage, you are afflicted with a debuff that permanently reduces all attributes by [[value]]10%[[/]]. Press Alt + Left Mouse on the debuff and spend [[value]]3500[[/]] could remove it",
       },
+      {
+        level: 50,
+        name: "Guarantee",
+        description: "After activating [[ref]]Cost Conversion[[/]], it can be used up to [[value]]2[[/]] additional times, but each use costs an additional [[value]]1500[[/]]",
+      },
     ],
     flavor: "Most exchanges are never truly equal. You may give much and receive little in return—in love as in business.",
     cost: {
@@ -2076,7 +2101,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · DOTA",
     ],
   },
   {
@@ -2140,7 +2165,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -2196,7 +2221,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Imperial Reign",
     ],
   },
   {
@@ -2252,7 +2277,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Imperial Reign",
     ],
   },
   {
@@ -2303,7 +2328,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 800,
     },
     sources: [
-      "Daily reward",
+      "Has a chance to appear for sale in the Daily Selection",
     ],
   },
   {
@@ -2362,8 +2387,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -2427,7 +2452,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -2483,7 +2508,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 30,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Visitor from Outerworld",
     ],
   },
   {
@@ -2547,8 +2572,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -2599,7 +2624,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Imperial Reign",
     ],
   },
   {
@@ -2657,7 +2682,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · DOTA",
     ],
   },
   {
@@ -2712,7 +2737,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 45,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Visitor from Beyond",
     ],
   },
   {
@@ -2776,7 +2801,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 15,
     sources: [
-      "Level reward",
+      "May drop in S world or above",
     ],
   },
   {
@@ -2832,7 +2857,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 45,
     },
     sources: [
-      "Contract",
+      "Available in Pact Vault",
     ],
   },
   {
@@ -2887,6 +2912,11 @@ export const ARTIFACTS: Artifact[] = [
         name: "Starpath",
         description: "Each day, after clearing a Stage with this Artifact, it grants additional [[value]]8[[/]] Luck for the day. This bonus decreases by [[value]]1[[/]] each time",
       },
+      {
+        level: 50,
+        name: "Stellar Reforging",
+        description: "Can be used actively once. Transforms the effect of the Artifact, converting its Luck bonus into [[value]]60[[/]] to all Attributes.",
+      },
     ],
     flavor: "A robe embodying the legacy of legendary pioneers, granting fleeting visions of its power only to those whose sight reaches the farthest horizons. In ages long past, only a handful of true relics existed, their names etched upon the very pinnacle of the Constellation — [Aeili][肥宅快乐浪][四棱][李狗蛋][无色无味]. In later eras, countless imitations emerged. Though lacking the full divine might of the originals, they still bear the honored name of the Constellation Relic.",
     cost: {
@@ -2894,7 +2924,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Event",
+      "Rewards from certain limited-time events.",
     ],
   },
   {
@@ -2958,7 +2988,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1500,
     },
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -3021,7 +3051,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 24,
     sources: [
-      "Boss: Breaker",
+      "Drops only from the [Prison of the Siltbreaker] in EX worlds or above.",
     ],
   },
   {
@@ -3088,7 +3118,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 24,
     sources: [
-      "Boss: Frost Giant",
+      "Drops only from the [Frost Giant · Jotunheim] in EX worlds or above",
     ],
   },
   {
@@ -3143,7 +3173,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 45,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Darkmoon Guidance",
     ],
   },
   {
@@ -3209,7 +3239,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 15,
     sources: [
-      "Level reward",
+      "May drop in S world or above",
     ],
   },
   {
@@ -3276,7 +3306,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -3333,8 +3363,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -3399,7 +3429,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -3456,7 +3486,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · DOTA",
     ],
   },
   {
@@ -3522,8 +3552,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -3581,7 +3611,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 27,
     sources: [
-      "Level reward",
+      "May drop in EX+3 worlds or above",
     ],
   },
   {
@@ -3637,7 +3667,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 45,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Visitor from Beyond",
     ],
   },
   {
@@ -3707,7 +3737,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -3758,7 +3788,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Weapon Master",
     ],
   },
   {
@@ -3822,7 +3852,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -3883,7 +3913,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -3926,7 +3956,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 27,
     sources: [
-      "Level reward",
+      "May drop in EX+3 worlds or above",
     ],
   },
   {
@@ -3989,7 +4019,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -4045,7 +4075,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Weapon Master",
     ],
   },
   {
@@ -4108,8 +4138,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -4164,7 +4194,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 45,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Darkmoon Guidance",
     ],
   },
   {
@@ -4227,7 +4257,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 27,
     sources: [
-      "Level reward",
+      "May drop in EX+3 worlds or above",
     ],
   },
   {
@@ -4278,7 +4308,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Imperial Reign",
     ],
   },
   {
@@ -4323,6 +4353,11 @@ export const ARTIFACTS: Artifact[] = [
         name: "Soothe Obsession",
         description: "Can be used, each time consuming [[value]]2000[[/]] gold to permanently gain secondary bonus from [[value]]5%[[/]] Primary Attributes, after reaching [[value]]5[[/]] times it is no longer affected by [[ref]]Tyranny[[/]], and can be removed/used at any times.",
       },
+      {
+        level: 100,
+        name: "Awaken",
+        description: "The obsession lingering here has not yet gained enough strength to manifest...",
+      },
     ],
     flavor: "The Hidden Church's collection is truly diverse... they even managed to acquire the mantle of a former tyrant king. Although that tyrant has vanished into the river of history, his former subjects would never allow 'commoners' to touch their king's belongings. But the Hidden Church cares not for such things; these items all flow into their black market.",
     cost: {
@@ -4330,7 +4365,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Shadow Sect",
     ],
   },
   {
@@ -4390,7 +4425,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 15,
     sources: [
-      "Level reward",
+      "May drop in S world or above",
     ],
   },
   {
@@ -4449,7 +4484,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 27,
     sources: [
-      "Level reward",
+      "May drop in EX+3 worlds or above",
     ],
   },
   {
@@ -4500,6 +4535,11 @@ export const ARTIFACTS: Artifact[] = [
         description: "[[value]]2[[/]] times per day. Activate to assume a massive sea monster form. In this form:· +[[value]]50%[[/]] Max HP, +[[value]]30%[[/]] Base Strength and Base Agility· Your attacks are always melee and deal [[value]]50%[[/]] splash damage within [[value]]300[[/]] range[[color:#fe6161]]· Intelligence reduced by [[value]]50%[[/]]· No other transformations allowed· Leaving disables bonuses for [[value]]15[[/]] seconds[[/]]",
         note: "Base Attack Range is set to [[value]]250[[/]]. Removing this Artifact also removes this effect.",
       },
+      {
+        level: 60,
+        name: "Tainted Fall",
+        description: "[[ref]]Abyssal Descent[[/]] daily limit increased to [[value]]4[[/]]. After reaching the daily limit, further uses require .",
+      },
     ],
     flavor: "Your soul is but a single droplet within the boundless ocean of my power. Offer it willingly, be reborn within the abyssal vortex, and let your enemies find their doom therein.",
     drop: {
@@ -4514,7 +4554,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 24,
     sources: [
-      "Boss: Breaker",
+      "Drops only from the [Prison of the Siltbreaker] in EX worlds or above.",
     ],
   },
   {
@@ -4578,7 +4618,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 37,
     sources: [
-      "Level reward",
+      "May drop in EX+13 worlds or above",
     ],
   },
   {
@@ -4642,7 +4682,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -4694,6 +4734,11 @@ export const ARTIFACTS: Artifact[] = [
         description: "After [[ref]]Immortal Ascension[[/]] reaches its cap, it can continue to gain attribute bonuses, but each subsequent bonus gain is reduced to [[value]]4%[[/]].",
         note: "Max Bonus: [[value]]100%[[/]]",
       },
+      {
+        level: 50,
+        name: "Cosmic Union",
+        description: "This Artifact can be activated up to [[value]]1[[/]] times per stage to fuse with the Guardian. For [[value]]30[[/]]s, you become invulnerable and can control only the Guardian. During this time, the Guardian cannot die, deals [[value]]200%[[/]] increased damage, and cannot move too far away from the summoner. When the effect ends, the summoner takes non-lethal backlash damage based on the damage taken during the fusion that could not be reverted. Taking a large amount of unreverted damage will end the fusion prematurely",
+      },
     ],
     flavor: "For centuries, stargazers have been trying to explore the mysteries of the cosmos, and astrological research has also made rapid progress. During a routine assignment, a student at the Calatos Observatory spotted a strange creature. It looked like Roshan, but it could move freely through space.",
     cost: {
@@ -4701,7 +4746,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · DOTA",
     ],
   },
   {
@@ -4762,7 +4807,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1200,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Shadow Sect",
     ],
   },
   {
@@ -4818,13 +4863,18 @@ export const ARTIFACTS: Artifact[] = [
         description: "[[ref]]Darkmoon Shackles[[/]] arms can now grasp the same target. Casting a single-target Ability creates 1 additional arm acting on the target.Duration: ([[value]]4[[/]] + [[value]]75%[[/]] of the Ability's base cooldown)",
         note: "A single target can be grasped by up to [[value]]5[[/]] additional arms, and the slow effect does not stack.",
       },
+      {
+        level: 60,
+        name: "Lunar Chantress",
+        description: "[[ref]]Lunar Crossing[[/]] base duration is increased by [[value]]4[[/]] seconds and is no longer limited to unit-targeted Abilities.",
+      },
     ],
     flavor: "An extra pair of arms can be incredibly useful—unfortunately, they are terribly bad at hugging or shaking hands, unless you happen to enjoy the sensation of a thousand ice cubes slowly sliding down your spine.",
     cost: {
       dust: 60,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Darkmoon Guidance",
     ],
   },
   {
@@ -4873,13 +4923,18 @@ export const ARTIFACTS: Artifact[] = [
         name: "The Fifth Tome: Perfect Casting",
         description: "When [[ref]]The First Tome: Time Lockdown[[/]] is off cooldown, +[[value]]20%[[/]] area radius. Otherwise, +[[value]]20%[[/]] spell amplification.",
       },
+      {
+        level: 60,
+        name: "The Sixth Tome: Triumphant Return",
+        description: "When [[ref]]The First Tome: Time Lockdown[[/]] is active, has a [[value]]20%[[/]] chance to instantly end an Ability's cooldown, without generating additional burden. After triggering this effect, the trigger chance is reduced by [[value]]5%[[/]] for the next [[value]]20[[/]] seconds.",
+      },
     ],
     flavor: "This is a spear and also a special key, possessing a unique ability to open a small spiritual gate, allowing the wielder to temporarily summon a tome from a designated area of the Hall of Enlightenment. These tomes contain powerful sacred magic, capable of manifesting the essence of the knowledge or stories they carry. This manifestation may be a blessing applied to the wielder or a magical phenomenon affecting the surrounding area.",
     cost: {
       dust: 60,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Imperial Reign",
     ],
   },
   {
@@ -4941,7 +4996,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -4991,6 +5046,11 @@ export const ARTIFACTS: Artifact[] = [
         name: "Millennial Glory",
         description: "Forged through countless battles, this war hammer grows stronger over time. For every [[value]]10[[/]] bosses killed, the damage bonus of [[ref]]Wex Strike[[/]] permanently increases by [[value]]1%[[/]](+). Stacks up to [[value]]260%[[/]].",
       },
+      {
+        level: 60,
+        name: "True Ascension",
+        description: "Immediately raises the bonus from [[ref]]Millennial Glory[[/]] to [[value]]100%[[/]]. Once the additional bonus reaches its maximum, the Attack Damage granted by this Artifact's base attributes is converted into Final Attack Damage Bonus. Additionally, killing a Boss enemy counts as [[value]]15[[/]] Leader kills.",
+      },
     ],
     flavor: "A product of technology at its peak. It stands as a symbol of loyalty made real.",
     cost: {
@@ -4998,7 +5058,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Weapon Master",
     ],
   },
   {
@@ -5061,7 +5121,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 27,
     sources: [
-      "Level reward",
+      "May drop in EX+3 worlds or above",
     ],
   },
   {
@@ -5110,13 +5170,18 @@ export const ARTIFACTS: Artifact[] = [
         name: "Trial",
         description: "Attacking enemies within the affected area of [[ref]]Wrath of Strife[[/]] also triggers its effect. Cooldown: [[value]]15[[/]] seconds.",
       },
+      {
+        level: 60,
+        name: "Impurity Strike",
+        description: "[[ref]]Divine Retribution[[/]] deals bonus damage equal to [[value]]50%[[/]] of the damage mitigated by the most recent trigger of %[[ref]]Wrath of Strife[[/]].",
+      },
     ],
     flavor: "Trust not in the mercy of gods, for many find it more fearsome than mortal spite.",
     cost: {
       dust: 60,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Darkmoon Guidance",
     ],
   },
   {
@@ -5166,7 +5231,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 60,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Visitor from Outerworld",
     ],
   },
   {
@@ -5227,8 +5292,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -5293,7 +5358,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 27,
     sources: [
-      "Level reward",
+      "May drop in EX+3 worlds or above",
     ],
   },
   {
@@ -5342,13 +5407,18 @@ export const ARTIFACTS: Artifact[] = [
         name: "Solar Radiance",
         description: "While under Status, the attack range bonus from Houyi's Bow is increased by +[[value]]75%[[/]] and you gain 2 passive effects:·When any enemy dies under [[color:#ff9b4a]]Burn State[[/]], gain Status for [[value]]8[[/]]s.·When [[color:#ff9b4a]]Burn Stacks[[/]] on any enemy within attack range reaches [[value]]20%[[/]] of their max HP, gain Status",
       },
+      {
+        level: 60,
+        name: "Scorching Finale",
+        description: "[[ref]]Fire Arrows[[/]] deals increased hit damage equal to [[value]]10%[[/]] of the target's [[color:#f07c4e]]Hotspot[[/]]",
+      },
     ],
     flavor: "Since the dawn of creation, there were once ten suns in the sky. Hou Yi drew his bow and shot down nine fiery crows, leaving only a single Golden Sun—the true flame of the sun itself.",
     cost: {
       dust: 60,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Visitor from Beyond",
     ],
   },
   {
@@ -5398,6 +5468,11 @@ export const ARTIFACTS: Artifact[] = [
         name: "Marked Weakness",
         description: "+[[value]]25[[/]] angle considered as back",
       },
+      {
+        level: 60,
+        name: "Jade Shadow",
+        description: "Attacks have a [[value]]35%[[/]] chance to be considered backstabs. Increases [[color:#98f698]]Poison[[/]] applied by [[ref]]Backstab[[/]] to [[value]]300%[[/]] .",
+      },
     ],
     flavor: "Many say the Jade Assembly are merely hired killers... But that is too simplistic a view. Lorlin Lasan's spy network offers many services — as long as the client can pay. Assassinations are merely the most popular among them.",
     cost: {
@@ -5405,7 +5480,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Shadow Sect",
     ],
   },
   {
@@ -5468,8 +5543,8 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
-      "Shop",
+      "May drop while completing the Stage",
+      "Available for purchase or exchange in the Curated Vault",
     ],
   },
   {
@@ -5533,7 +5608,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1200,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -5589,7 +5664,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 60,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Darkmoon Guidance",
     ],
   },
   {
@@ -5646,7 +5721,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1500,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Weapon Master",
     ],
   },
   {
@@ -5711,7 +5786,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -5776,7 +5851,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 27,
     sources: [
-      "Level reward",
+      "May drop in EX+3 worlds or above",
     ],
   },
   {
@@ -5841,7 +5916,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 15,
     sources: [
-      "Level reward",
+      "May drop in S world or above",
     ],
   },
   {
@@ -5899,7 +5974,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1500,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Weapon Master",
     ],
   },
   {
@@ -5963,7 +6038,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 12,
     sources: [
-      "Level reward",
+      "May drop in A world or above",
     ],
   },
   {
@@ -6015,7 +6090,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 60,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Visitor from Outerworld",
     ],
   },
   {
@@ -6072,7 +6147,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 60,
     },
     sources: [
-      "Code redemption",
+      "Event · Path of Guidance · Tome of the Fallen Ultimate Reward",
     ],
   },
   {
@@ -6127,7 +6202,7 @@ export const ARTIFACTS: Artifact[] = [
       dust: 60,
     },
     sources: [
-      "Card pack",
+      "Drops from Astral Vault · Visitor from Beyond",
     ],
   },
   {
@@ -6190,7 +6265,7 @@ export const ARTIFACTS: Artifact[] = [
     },
     requiredDifficulty: 27,
     sources: [
-      "Level reward",
+      "May drop in EX+3 worlds or above",
     ],
   },
   {
@@ -6253,7 +6328,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
   {
@@ -6319,7 +6394,7 @@ export const ARTIFACTS: Artifact[] = [
       platinum: 1000,
     },
     sources: [
-      "Drops in runs",
+      "May drop while completing the Stage",
     ],
   },
 ]
