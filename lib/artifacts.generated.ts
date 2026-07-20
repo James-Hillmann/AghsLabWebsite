@@ -258,7 +258,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 20,
         name: "Mythic Forge",
-        description: "Every [[value]]7[[/]] Stages, gain one that converts into .",
+        description: "Every [[value]]7[[/]] Stages, gain one [[ref]]Ascend[[/]] that converts into .",
       },
       {
         level: 30,
@@ -268,7 +268,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 40,
         name: "Legendary Forge",
-        description: "Upon first retrieval, gain [[value]]1[[/]] .",
+        description: "Upon first retrieval, gain [[value]]1[[/]] [[ref]]Ascend[[/]].",
       },
     ],
     flavor: "A legendary anvil said to be capable of forging something powerful.",
@@ -2046,7 +2046,7 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Unequal Exchange",
-      description: "After each stage, gain an buff. Press Alt + Left Mouse on the buff to exchange [[value]]6[[/]] all attributes for [[value]]550[[/]]. After every [[value]]1[[/]] stages cleared, [[value]]1[[/]] of the attributes deducted by this exchange are restored, provided you contributed at least [[value]]40%[[/]] of the total damage during that stage. Can be exchanged up to [[value]]3[[/]] times per stage.",
+      description: "After each stage, gain an [[ref]][Exchange][[/]] buff. Press Alt + Left Mouse on the buff to exchange [[value]]6[[/]] all attributes for [[value]]550[[/]]. After every [[value]]1[[/]] stages cleared, [[value]]1[[/]] of the attributes deducted by this exchange are restored, provided you contributed at least [[value]]40%[[/]] of the total damage during that stage. Can be exchanged up to [[value]]3[[/]] times per stage.",
     },
     upgrades: [
       {
@@ -2739,7 +2739,7 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Agony Recompense",
-      description: "After taking cumulative damage equal to [[value]]10%[[/]] of your maximum health, release a slowly spreading that affects enemies up to [[value]]800[[/]] units away. Enemies that touch are immediately afflicted with [[color:#98f698]]Poison[[/]] equal to [[value]]15%[[/]] of their maximum health. While within its area, they are afflicted with an additional [[value]]3%[[/]] of their maximum health as [[color:#98f698]]Poison[[/]] each second. lasts [[value]]3[[/]] seconds.",
+      description: "After taking cumulative damage equal to [[value]]10%[[/]] of your maximum health, release a slowly spreading [[ref]]Poison Mist[[/]] that affects enemies up to [[value]]800[[/]] units away. Enemies that touch [[ref]]Poison Mist[[/]] are immediately afflicted with [[color:#98f698]]Poison[[/]] equal to [[value]]15%[[/]] of their maximum health. While within its area, they are afflicted with an additional [[value]]3%[[/]] of their maximum health as [[color:#98f698]]Poison[[/]] each second. [[ref]]Poison Mist[[/]] lasts [[value]]3[[/]] seconds.",
     },
     upgrades: [
       {
@@ -2750,17 +2750,17 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 20,
         name: "Foul Recompense",
-        description: "Releasing also applies a weak dispel to yourself. If any debuff is dispelled, gains [[value]]40%[[/]] potency, plus an additional [[value]]5%[[/]] for each debuff dispelled",
+        description: "Releasing [[ref]]Poison Mist[[/]] also applies a weak dispel to yourself. If any debuff is dispelled, [[ref]]Poison Mist[[/]] gains [[value]]40%[[/]] potency, plus an additional [[value]]5%[[/]] for each debuff dispelled",
       },
       {
         level: 30,
         name: "Concurrent Recompense",
-        description: "gains [[value]]10%[[/]] potency for each [[color:#98f698]]Poison Target[[/]] on the battlefield",
+        description: "[[ref]]Poison Mist[[/]] gains [[value]]10%[[/]] potency for each [[color:#98f698]]Poison Target[[/]] on the battlefield",
       },
       {
         level: 40,
         name: "Origin of Plague",
-        description: "An area of [[value]]300[[/]] around you constantly produces the effect of at the highest potency it has reached during the current stage",
+        description: "An area of [[value]]300[[/]] around you constantly produces the effect of [[ref]]Poison Mist[[/]] at the highest potency it has reached during the current stage",
       },
     ],
     flavor: "Every wound, every brush with death, and every curse dispelled is refined into pestilent miasma.",
@@ -3806,7 +3806,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 40,
         name: "Assimilation",
-        description: "After [[ref]]Stoneskin[[/]] takes effect, gain an additional [[value]]25%[[/]] model scale. [[ref]]Stoneskin[[/]] is replaced by , no longer reduces MS, and now can block [[value]]150[[/]] physical damage",
+        description: "After [[ref]]Stoneskin[[/]] takes effect, gain an additional [[value]]25%[[/]] model scale. [[ref]]Stoneskin[[/]] is replaced by [[ref]]Advanced Stoneskin[[/]], no longer reduces MS, and now can block [[value]]150[[/]] physical damage",
       },
     ],
     flavor: "You must understand—he is a myth. There has never been any proof, and it is not unreasonable to think it all a mess of foolish assumptions. So when the blasting slurry detonated ahead of schedule, shattering the supports, every crewman knew we were finished. The cavern groaned under its own weight; there was nowhere to go but down. Then the ground split. Jagged crystals burst from the fissures, rising toward the ceiling. We fled without shame—most with only minor wounds. I was the last to leave. And when I looked back… I will never forget that diamond-bright smile at the end of the tunnel, before the crystal faded and everything collapsed. No one else saw it, but… I know it was no illusion. He is still down there, somewhere. I know it. And while he remains, I will do all I can to repay him. — Report of a miner’s encounter with Tyre Gallem, from Planar Exiles",
@@ -4015,7 +4015,7 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Overture",
-      description: "Odd-numbered attacks trigger , consuming [[value]]5%[[/]] of your current HP and converting it into [[value]]150%[[/]] bonus Attack Damage. Even-numbered attacks trigger , healing you for [[value]]20%[[/]] of the attack's damage. When your HP is below [[value]]50%[[/]], both effects are amplified by [[value]]100%[[/]].Every [[value]]4[[/]] attack cycles, gain [[value]]1[[/]] stacks of [[ref]]Overture[[/]]. The cycles required for each subsequent gain increase by [[value]]1[[/]].",
+      description: "Odd-numbered attacks trigger [[ref]]Blood Rhythm[[/]], consuming [[value]]5%[[/]] of your current HP and converting it into [[value]]150%[[/]] bonus Attack Damage. Even-numbered attacks trigger [[ref]]Holy Rhythm[[/]], healing you for [[value]]20%[[/]] of the attack's damage. When your HP is below [[value]]50%[[/]], both effects are amplified by [[value]]100%[[/]].Every [[value]]4[[/]] attack cycles, gain [[value]]1[[/]] stacks of [[ref]]Overture[[/]]. The cycles required for each subsequent gain increase by [[value]]1[[/]].",
     },
     upgrades: [
       {
@@ -4031,7 +4031,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 30,
         name: "Variation",
-        description: "splatters blood, sending [[color:#ff3321]]Blood Mark[[/]] to nearby enemies. Hitting a marked enemy with transfers [[value]]1[[/]] stacks of to another nearby enemy and deals bonus damage equal to [[color:#ff3321]]Blood Mark Stacks[[/]] × [[value]]10%[[/]] of your Attack Damage. stacks independently and lasts [[value]]7[[/]]s",
+        description: "[[ref]]Blood Rhythm[[/]] splatters blood, sending [[color:#ff3321]]Blood Mark[[/]] to nearby enemies. Hitting a marked enemy with [[ref]]Holy Rhythm[[/]] transfers [[value]]1[[/]] stacks of to another nearby enemy and deals bonus damage equal to [[color:#ff3321]]Blood Mark Stacks[[/]] × [[value]]10%[[/]] of your Attack Damage. stacks independently and lasts [[value]]7[[/]]s",
       },
       {
         level: 40,
@@ -4541,7 +4541,7 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Blighttouch Parasite",
-      description: "Enemies you afflict with [[color:#98f698]]Poison[[/]] are marked by a Parasite. If a marked enemy maintains the highest [[color:#98f698]]Poison[[/]] stacks for [[value]]3[[/]]s, the Parasite awakens, pulling up to [[value]]4[[/]] marked enemies within [[value]]400[[/]] toward it.Affected enemies gain for [[value]]3[[/]]s, slowing movement by [[value]]20%[[/]] and [[color:#98f698]]Poison Decay[[/]] by [[value]]15%[[/]], and activating [[color:#98f698]]Poison[[/]] once. Secondary targets consume no [[color:#98f698]]Poison Stacks[[/]] and use the primary target's stack count.Activation Ratio: [[value]]5%[[/]]Activation Damage: [[value]]1200%[[/]]",
+      description: "Enemies you afflict with [[color:#98f698]]Poison[[/]] are marked by a Parasite. If a marked enemy maintains the highest [[color:#98f698]]Poison[[/]] stacks for [[value]]3[[/]]s, the Parasite awakens, pulling up to [[value]]4[[/]] marked enemies within [[value]]400[[/]] toward it.Affected enemies gain [[ref]]Blighttouch[[/]] for [[value]]3[[/]]s, slowing movement by [[value]]20%[[/]] and [[color:#98f698]]Poison Decay[[/]] by [[value]]15%[[/]], and activating [[color:#98f698]]Poison[[/]] once. Secondary targets consume no [[color:#98f698]]Poison Stacks[[/]] and use the primary target's stack count.Activation Ratio: [[value]]5%[[/]]Activation Damage: [[value]]1200%[[/]]",
     },
     upgrades: [
       {
@@ -4557,7 +4557,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 30,
         name: "Strangulation",
-        description: "While lasts, activates [[color:#98f698]]Poison[[/]] every [[value]]1[[/]]s.Activation Ratio: [[value]]2%[[/]]Activation Damage: [[value]]700%[[/]]",
+        description: "While [[ref]]Blighttouch[[/]] lasts, activates [[color:#98f698]]Poison[[/]] every [[value]]1[[/]]s.Activation Ratio: [[value]]2%[[/]]Activation Damage: [[value]]700%[[/]]",
       },
       {
         level: 40,
@@ -5319,23 +5319,23 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Solar Strike",
-      description: "Attacks fire into the sky. After [[value]]3[[/]]s, they fall on enemies within [[value]]200%[[/]] attack range at a rate of [[value]]5[[/]] arrows/s. deals [[value]]150%[[/]] damage. When many are stored, their consumption speed and damage are increased.",
+      description: "Attacks fire [[ref]]Fire Arrows[[/]] into the sky. After [[value]]3[[/]]s, they fall on enemies within [[value]]200%[[/]] attack range at a rate of [[value]]5[[/]] arrows/s.[[ref]]Fire Arrows[[/]] deals [[value]]150%[[/]] damage. When many [[ref]]Fire Arrows[[/]] are stored, their consumption speed and damage are increased.",
     },
     upgrades: [
       {
         level: 10,
         name: "Volley of Arrows",
-        description: "Fires [[value]]8[[/]] when attacking a target for the first time.",
+        description: "Fires [[value]]8[[/]] [[ref]]Fire Arrows[[/]] when attacking a target for the first time.",
       },
       {
         level: 20,
         name: "Set Ablaze",
-        description: "applies [[color:#ff9b4a]]Burn[[/]] equal to [[value]]80%[[/]]",
+        description: "[[ref]]Fire Arrows[[/]] applies [[color:#ff9b4a]]Burn[[/]] equal to [[value]]80%[[/]]",
       },
       {
         level: 30,
         name: "Sun Chaser",
-        description: "During Status, +[[value]]25%[[/]] [[color:#ff9b4a]]Burn[[/]] application, and fall faster",
+        description: "During Status, +[[value]]25%[[/]] [[color:#ff9b4a]]Burn[[/]] application, and [[ref]]Fire Arrows[[/]] fall faster",
       },
       {
         level: 40,

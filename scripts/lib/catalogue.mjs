@@ -298,6 +298,22 @@ export function buildCatalogue() {
       }
     }
 
+    // Every `additional_<N>_title` the localization defines, grouped by artifact.
+    //
+    // Slots 1-4 are the unlockable upgrades, but the game also names sub-mechanics in a higher
+    // block -- Eden Anvil's slot 10 is "Ascend", the thing its lv20 and lv40 upgrades hand you.
+    // Those have a title and nothing else: no description, no `additional_unlock_level_10`. They
+    // exist only to be cited by {additional_N} in other upgrades, so they're indexed here rather
+    // than derived from UPGRADE_LEVEL_KEYS, which would stop at slot 4 and drop the citation.
+    const additionalTitles = new Map()
+    for (const [token, title] of english) {
+      const match = token.match(/^DOTA_Tooltip_ability_(.+)_additional_(\d+)_title$/)
+      if (!match) continue
+      const [, gameId, slot] = match
+      if (!additionalTitles.has(gameId)) additionalTitles.set(gameId, new Map())
+      additionalTitles.get(gameId).set(slot, title)
+    }
+
     const eraNames = {}
     for (const [rarity, era] of Object.entries(ERA_BY_RARITY)) {
       eraNames[era] = english.get(`Hud_Artifact_Level${rarity}`) ?? era
@@ -327,10 +343,9 @@ export function buildCatalogue() {
         refs.abilit2 = refs.main_ability
       }
       // Some upgrades refer to each other by slot, e.g. Galaxy Compass's lv30 cites its lv10.
-      UPGRADE_LEVEL_KEYS.forEach((_, index) => {
-        const title = english.get(`DOTA_Tooltip_ability_${gameId}_additional_${index + 1}_title`)
-        if (title) refs[`additional_${index + 1}`] = `[[ref]]${stripTags(title)}[[/]]`
-      })
+      for (const [slot, title] of additionalTitles.get(gameId) ?? []) {
+        refs[`additional_${slot}`] = `[[ref]]${stripTags(title)}[[/]]`
+      }
 
       const uniqueText = english.get(`DOTA_Tooltip_ability_${gameId}_main_ability`)
       const flavor = english.get(`DOTA_Tooltip_ability_${gameId}_Lore`)
