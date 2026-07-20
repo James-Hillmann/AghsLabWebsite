@@ -75,19 +75,6 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
                     )}
                   </Section>
 
-                  <Section title="Relics">
-                    {hero.relics?.length ? (
-                      <ul className="space-y-2 text-sm text-frost">
-                        {hero.relics.map((relic) => (
-                          <li key={relic.name}>{relic.name}</li>
-                        ))}
-                      </ul>
-                    ) : (
-                      <EmptySlot>
-                        Relics for {hero.name} go here, once the images and notes are in.
-                      </EmptySlot>
-                    )}
-                  </Section>
                 </>
               }
               takes={

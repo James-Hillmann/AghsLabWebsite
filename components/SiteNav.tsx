@@ -1,0 +1,45 @@
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+
+/**
+ * The floors of the site. Split out of SiteHeader because marking the active link needs
+ * usePathname, and SiteHeader is an async Server Component that reads the session -- keeping
+ * the client boundary this small leaves the author badge on the server.
+ *
+ * Ordered roster, catalogues, tracker: Heroes and the two generated catalogues are reference,
+ * Guidance is the thing you actually update as you play.
+ */
+const LINKS = [
+  { href: '/heroes', label: 'Heroes' },
+  { href: '/artifacts', label: 'Artifacts' },
+  { href: '/relics', label: 'Relics' },
+  { href: '/guidance', label: 'Guidance' },
+]
+
+export function SiteNav() {
+  const pathname = usePathname()
+
+  return (
+    <nav className="flex items-center gap-5">
+      {LINKS.map((link) => {
+        // startsWith so a detail page keeps its section lit, not just the index.
+        const isActive = pathname.startsWith(link.href)
+
+        return (
+          <Link
+            key={link.href}
+            href={link.href}
+            aria-current={isActive ? 'page' : undefined}
+            className={`label text-[0.7rem] transition-colors duration-200 hover:text-frost ${
+              isActive ? 'text-frost' : 'text-muted'
+            }`}
+          >
+            {link.label}
+          </Link>
+        )
+      })}
+    </nav>
+  )
+}

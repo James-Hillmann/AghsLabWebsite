@@ -5,9 +5,13 @@ import { leaveSite } from '@/app/actions/auth'
 import { AUTHOR_COLOR, AUTHOR_NAME } from '@/lib/authors'
 import { getAuthor } from '@/lib/auth-guard'
 
+import { SiteNav } from './SiteNav'
+
 export async function SiteHeader() {
   const author = await getAuthor()
 
+  // Tighter gaps and a smaller logo below sm: four nav links plus the author badge and Sign
+  // out overflow a 375px viewport at the desktop sizes.
   return (
     <header className="sticky top-0 z-30 flex items-center gap-3 border-b border-[var(--edge)] bg-[color-mix(in_srgb,var(--ice-void)_78%,transparent)] px-4 py-3 backdrop-blur-md sm:gap-5 sm:px-6">
       <Link href="/heroes" className="shrink-0">
@@ -20,20 +24,7 @@ export async function SiteHeader() {
         />
       </Link>
 
-      <nav className="flex items-center gap-3 sm:gap-5">
-        <Link
-          href="/heroes"
-          className="label text-[0.62rem] text-muted transition-colors duration-200 hover:text-frost"
-        >
-          Heroes
-        </Link>
-        <Link
-          href="/guidance"
-          className="label text-[0.62rem] text-muted transition-colors duration-200 hover:text-frost"
-        >
-          Guidance
-        </Link>
-      </nav>
+      <SiteNav />
 
       {author && (
         <span className="ml-auto flex items-center gap-2.5">

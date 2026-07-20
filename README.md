@@ -10,17 +10,24 @@ npm install
 npm run dev
 ```
 
-Then open http://localhost:3000. `.env.local` ships with a development passphrase of `labyrinth`
-and a generated signing secret — change the passphrase before anyone else uses it.
+Then open http://localhost:3000. Locally the passphrases are `james` and `liam` — change them
+before anyone else uses this.
 
 ## Environment
 
-Both variables are server-only. Never prefix them with `NEXT_PUBLIC_`.
+All of these are server-only. Never prefix them with `NEXT_PUBLIC_`.
 
 | Variable | Purpose |
 | --- | --- |
-| `SITE_PASSWORD` | The passphrase typed on the landing screen. |
+| `SITE_PASSWORD_JAMES` | James's passphrase. Signing in with it is what marks a take as his. |
+| `SITE_PASSWORD_LIAM` | Liam's passphrase. Must differ from James's, or the gate refuses everyone. |
 | `SESSION_SECRET` | Signs the session cookie. Changing it signs everyone out. |
+| `DATABASE_URL` | Neon Postgres, for per-author takes. Unset, takes silently no-op and the rest of the site works. |
+
+There is **one passphrase per person**, not one shared one — that's how the site knows whose take
+it's saving. `SITE_PASSWORD` is the old shared variable; it still works as a fallback for James
+(`app/actions/auth.ts:42`), but `SITE_PASSWORD_JAMES` overrides it when both are set, which is a
+confusing way to lock yourself out. Set the per-author pair and delete the old one.
 
 Generate a fresh secret with:
 
@@ -39,12 +46,30 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
 
 ## Content
 
-`lib/heroes.ts` is the single source of truth. It currently holds the **full Dota lineup** —
-delete the rows for heroes the Labyrinth doesn't offer and the grid updates itself. Portraits load
-from Valve's CDN, so no images need committing for the grid to work.
+Two hand-written source files, both flat arrays with getters, so either can move to the database
+later without changing call sites.
 
-When this moves to a database, replace `getHeroes` / `getHero` / `heroesByAttribute` and keep the
-`Hero`, `Ability` and `Relic` shapes.
+**Heroes are hand-written. Artifacts and relics are generated.**
+
+`lib/heroes.ts` — the 63-hero Labyrinth roster, in the order the in-game picker shows them.
+Portraits and turntable renders load from Valve's CDN, so no images need committing for the grid
+to work. When this moves to a database, replace `getHeroes` / `getHero` / `heroesByAttribute` and
+keep the `Hero` and `Ability` shapes.
+
+`lib/artifacts.generated.ts` and `lib/relics.generated.ts` — 106 artifacts and 117 relics, read
+straight out of the game's own files. **Never edit these by hand**; a regeneration overwrites
+them. The hand-written `lib/artifacts.ts` / `lib/relics.ts` sit on top and hold the behaviour.
+
+```bash
+npm run catalogue:generate   # rewrite both generated files from the game files
+npm run catalogue:icons      # extract artifact art (needs Source 2 Viewer)
+npm run artifacts:check      # validate, and diff the committed data against the game
+```
+
+See [ARTIFACTS.md](ARTIFACTS.md) for how it works and what the sharp edges are.
+
+Because the catalogue is all fact and none of it ours, opinions live in the database instead —
+a comment per person per artifact or relic, next to the same per-author takes heroes have.
 
 ## Deploying to Vercel
 
@@ -59,6 +84,6 @@ URL after the first deploy.
 
 ## Not built yet
 
-- Hero detail pages (`/heroes/[slug]`) — tiles link there already.
-- Database + in-browser review editor.
-- Ability and relic icon uploads.
+- Artifact icons — the data is complete, but the art needs a local Source 2 Viewer run.
+- Talents on hero pages — the shape exists in `lib/heroes.ts`, the data doesn't.
+- Relic icons, which are in the VPK but not yet extracted.

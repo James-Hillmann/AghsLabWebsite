@@ -27,12 +27,6 @@ export type Ability = {
   description?: string
 }
 
-export type Relic = {
-  name: string
-  image?: string
-  description?: string
-}
-
 /**
  * One rung of the talent tree: the level it unlocks at, and the choice either side.
  * Text only -- Valve serves no icon for talents, and the Labyrinth wording is ours.
@@ -49,7 +43,6 @@ export type Hero = {
   attribute: Attribute
   abilities?: Ability[]
   talents?: Talent[]
-  relics?: Relic[]
   /**
    * Long-form review, written by us.
    * @deprecated Superseded by per-author takes in the database (lib/takes.ts). Kept so

@@ -1,9 +1,10 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 
 import { searchHeroes, type Hero } from '@/lib/heroes'
+import { useTypeToSearch } from '@/lib/use-type-to-search'
 
 import { HeroGrid } from './HeroGrid'
 
@@ -12,12 +13,7 @@ import { HeroGrid } from './HeroGrid'
  * grid dims rather than filters. Every hero holds its position; only the best match
  * stays lit. That's the point: the tile you learned the position of never moves.
  *
- * A window-level key listener routes printable characters into the field wherever focus
- * happens to be.
- *
- * Keys are appended manually and the event is cancelled, rather than just focusing the
- * input and letting the character through. Focusing mid-keydown is racy across browsers
- * and drops or doubles the first letter.
+ * The key handling itself lives in useTypeToSearch, shared with the artifact Archive.
  */
 export function HeroBrowser({ heroes, covered }: { heroes: Hero[]; covered: string[] }) {
   const [query, setQuery] = useState('')
@@ -28,48 +24,14 @@ export function HeroBrowser({ heroes, covered }: { heroes: Hero[]; covered: stri
 
   const matches = useMemo(() => searchHeroes(heroes, query), [heroes, query])
 
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.metaKey || event.ctrlKey || event.altKey) return
-
-      const target = event.target as HTMLElement | null
-      const typingElsewhere =
-        target instanceof HTMLInputElement ||
-        target instanceof HTMLTextAreaElement ||
-        target?.isContentEditable
-
-      if (event.key === 'Escape') {
-        setQuery('')
-        inputRef.current?.blur()
-        return
-      }
-
-      // Enter opens the best match -- matches are already sorted best-first.
-      if (event.key === 'Enter' && query && matches.length) {
-        event.preventDefault()
-        router.push(`/heroes/${matches[0].slug}`)
-        return
-      }
-
-      if (typingElsewhere) return
-
-      if (event.key === 'Backspace') {
-        event.preventDefault()
-        setQuery((q) => q.slice(0, -1))
-        inputRef.current?.focus()
-        return
-      }
-
-      if (event.key.length === 1 && event.key !== ' ') {
-        event.preventDefault()
-        setQuery((q) => q + event.key)
-        inputRef.current?.focus()
-      }
-    }
-
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
+  // Enter opens the best match -- matches are already sorted best-first.
+  const openTopMatch = useCallback(() => {
+    if (!query || !matches.length) return false
+    router.push(`/heroes/${matches[0].slug}`)
+    return true
   }, [router, matches, query])
+
+  useTypeToSearch({ inputRef, setQuery, onEnter: openTopMatch })
 
   return (
     <>

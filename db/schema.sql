@@ -4,6 +4,21 @@
 -- save is an upsert, there are no surrogate ids, and it's structurally impossible for
 -- one person to end up with two takes on the same hero.
 
+-- Artifact and relic data is generated from the game files, so it's all fact and none of it
+-- is ours. This is where the opinions go instead: one comment per (thing, author), same
+-- composite-key upsert design as takes.
+--
+-- One table rather than two because an artifact comment and a relic comment are the same
+-- shape, and subject_kind keeps them from colliding when a slug appears in both catalogues.
+create table if not exists comments (
+  subject_kind text not null check (subject_kind in ('artifact', 'relic')),
+  subject_slug text not null,
+  author       text not null check (author in ('james', 'liam')),
+  body         text,
+  updated_at   timestamptz not null default now(),
+  primary key (subject_kind, subject_slug, author)
+);
+
 create table if not exists takes (
   hero_slug     text not null,
   author        text not null check (author in ('james', 'liam')),

@@ -24,6 +24,14 @@
 .DS_Store
 *.pem
 
+# Local binaries. Source2Viewer-CLI.exe lives here for `npm run catalogue:icons` -- it's
+# ~90MB and everyone downloads their own, so it must never be committed.
+/tools/
+
+# Source 2 Viewer drops its crash log in the working directory. It's noisy but harmless --
+# the icon extractor retries whatever the crash skipped.
+/exceptions.txt
+
 # debug
 npm-debug.log*
 yarn-debug.log*
