@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
-import { AbilityGrid } from '@/components/AbilityGrid'
+import { AbilityCard } from '@/components/AbilityCard'
 import { EmptySlot } from '@/components/EmptySlot'
 import { HeroModel } from '@/components/HeroModel'
 import { HeroTabs } from '@/components/HeroTabs'
@@ -9,7 +9,7 @@ import { Section } from '@/components/Section'
 import { SiteHeader } from '@/components/SiteHeader'
 import { TakeCard } from '@/components/TakeCard'
 import { TalentTree } from '@/components/TalentTree'
-import { abilitiesByHero, abilityHref } from '@/lib/abilities'
+import { abilitiesByHero } from '@/lib/abilities'
 import { AUTHORS } from '@/lib/authors'
 import { requireSession } from '@/lib/auth-guard'
 import { ATTRIBUTE_COLOR, getHero } from '@/lib/heroes'
@@ -25,16 +25,13 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
   const accent = ATTRIBUTE_COLOR[hero.attribute]
   const takes = await getTakesForHero(hero.slug)
 
-  // The write-ups here are ours and stay the source of truth. What the generated catalogue adds
-  // is a link: about three quarters of the hand-written entries name an ability that exists in
-  // the game files too, and those get a route through to its real numbers. The rest are Dota
-  // abilities Labyrinth doesn't use, and stay plain text.
-  const generated = abilitiesByHero()[hero.slug] ?? []
-  const normalise = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/g, '')
-  const abilities = (hero.abilities ?? []).map((ability) => {
-    const match = generated.find((other) => normalise(other.name) === normalise(ability.name))
-    return match ? { ...ability, href: abilityHref(match) } : ability
-  })
+  // Straight from the generated catalogue, in skill-bar order.
+  //
+  // This section used to render hero.abilities, the hand-written Dota scaffolding -- 341
+  // entries of name and icon id with not one description between them, including abilities
+  // Labyrinth doesn't have. That list still exists, because the takes editor picks its key
+  // abilities out of it by valveId, but nothing displays it any more.
+  const abilities = abilitiesByHero()[hero.slug] ?? []
 
   return (
     <main className="flex flex-1 flex-col">
@@ -69,11 +66,18 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
             <HeroTabs
               codex={
                 <>
+                  {/* One column, unlike the two the old browse page used: these cards sit in
+                      the hero page's narrower right-hand column, where two abreast leaves the
+                      description about twenty characters wide. */}
                   <Section title="Abilities">
                     {abilities.length ? (
-                      <AbilityGrid abilities={abilities} />
+                      <div className="grid gap-3">
+                        {abilities.map((ability) => (
+                          <AbilityCard key={ability.slug} ability={ability} />
+                        ))}
+                      </div>
                     ) : (
-                      <EmptySlot>No abilities recorded for {hero.name} yet.</EmptySlot>
+                      <EmptySlot>The game files carry no abilities for {hero.name}.</EmptySlot>
                     )}
                   </Section>
 

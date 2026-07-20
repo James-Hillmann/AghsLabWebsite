@@ -157,12 +157,25 @@ And for `scripts/lib/abilities.mjs`:
   (`magic_rmagic_armorsist`, `epic6_stun_duration`, `projectiles_per_stack`). They're dropped
   from the text rather than guessed at — substituting the number that *looks* intended would be
   inventing data. Anything not on that list still fails the build.
-- **7 heroes have abilities but no roster entry** in `lib/heroes.ts` (Abaddon, Alchemist, Bane,
-  Drow Ranger, Primal Beast, Vengeful Spirit, Warlock). Since abilities are reached through
-  their hero and those heroes have no page, their ~34 abilities are now **unreachable by
-  navigation** — the pages render if you type the URL, and nothing links to them. Adding the
-  heroes to `HEROES` fixes it; that's hand-written roster content, so it hasn't been guessed at.
-  Muerta is the reverse: on the roster, no abilities.
+- **7 heroes have abilities in the game files but no roster entry** in `lib/heroes.ts`, and
+  that's deliberate rather than an oversight. Abilities are reached through their hero, so with
+  no hero page nothing links to them — their ~34 pages render only if you type the URL. They
+  split into two groups:
+
+  - *Warlock, Alchemist, Primal Beast* — 0–1 epics, no shards, no talents. Bosses or stubs;
+    nothing player-facing is attached to them. Vengeful Spirit is partial: 8 shards, no epics.
+  - *Drow Ranger, Abaddon, Bane* — 8–20 epics and 5–12 shards each, Drow Ranger with 6 talents
+    on top. That is a complete player kit.
+
+  For contrast, Ursa has 14 epics and 12 shards. Epics and shards are things a *player* picks
+  mid-run, so a boss has no reason to carry them — the best reading is that the last three are
+  heroes the mod team has built but not yet released, sitting in the VPK ahead of their patch.
+
+  Leave them off the roster until they ship. When one does, adding it to `HEROES` is all that's
+  needed; the abilities are already generated and become reachable the moment the hero page
+  exists. Regenerating after a patch and watching for a new hero dir is a decent early warning.
+
+  Muerta is the reverse: on the roster, no abilities in the files.
 - **A few epic upgrades ship untranslated**, still in Chinese in `addon_english.txt`. They're
   passed through as-is; there's nothing else to show.
 - **The generator needs the game installed.** It's a regeneration step, not a build step — the
