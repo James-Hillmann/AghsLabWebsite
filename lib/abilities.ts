@@ -3,8 +3,11 @@
 // everything here is behaviour.
 //
 // Unlike an artifact, an ability doesn't scale by a formula: the game writes its numbers out at
-// each of its 1-4 levels, which is why the page shows level tabs rather than a slider. And
-// unlike a relic, an ability belongs to a hero, so that's what the browse page groups by.
+// each of its 1-4 levels, which is why the page shows level tabs rather than a slider.
+//
+// And unlike an artifact or a relic, an ability isn't a catalogue of its own -- it belongs to a
+// hero, and lives under one at /heroes/<hero>/<ability>. Hence two identifiers: `slug` is
+// globally unique and keys the comment thread, `path` is the short segment under the hero.
 
 import {
   ABILITIES,
@@ -35,12 +38,19 @@ const OFF_ROSTER_NAMES: Record<string, string> = {
 /** Neutral accent for a hero with no roster entry, and therefore no attribute. */
 const NEUTRAL_ACCENT = '#8aa4b8'
 
-export function getAbilities(): HeroAbility[] {
-  return ABILITIES
-}
-
+/** By the globally unique slug -- what a comment thread is keyed on. */
 export function getAbility(slug: string): HeroAbility | undefined {
   return ABILITIES.find((ability) => ability.slug === slug)
+}
+
+/** By the route: /heroes/ursa/earthshock. `path` is only unique within its hero. */
+export function getHeroAbility(hero: string, path: string): HeroAbility | undefined {
+  return ABILITIES.find((ability) => ability.hero === hero && ability.path === path)
+}
+
+/** Where an ability lives. One definition, so links and revalidation can't disagree. */
+export function abilityHref(ability: HeroAbility): string {
+  return `/heroes/${ability.hero}/${ability.path}`
 }
 
 /** True when the hero has a page to link to. Seven heroes have abilities but no roster entry. */
@@ -61,7 +71,7 @@ export function heroName(hero: string): string {
 
 /**
  * Abilities grouped by hero, in the generated order -- which is already hero, then skill-bar
- * slot -- so the browse page's sections read the way the in-game picker does.
+ * slot -- so a hero's kit reads the way the in-game picker shows it.
  */
 export function abilitiesByHero(abilities: HeroAbility[] = ABILITIES): Record<string, HeroAbility[]> {
   const groups: Record<string, HeroAbility[]> = {}
@@ -69,12 +79,7 @@ export function abilitiesByHero(abilities: HeroAbility[] = ABILITIES): Record<st
   return groups
 }
 
-/** Every hero with abilities, in roster order where they have one. */
-export function abilityHeroes(abilities: HeroAbility[] = ABILITIES): string[] {
-  return [...new Set(abilities.map((ability) => ability.hero))]
-}
-
-export function heroAttribute(hero: string): Attribute | undefined {
+function heroAttribute(hero: string): Attribute | undefined {
   return getHero(hero)?.attribute
 }
 
@@ -82,8 +87,8 @@ export function heroAttribute(hero: string): Attribute | undefined {
  * The accent colour for an ability.
  *
  * Abilities carry no era, rarity or group of their own, so unlike artifacts and relics there's
- * no colour in the data. The hero's attribute is the honest stand-in: it matches the hero pages
- * and gives the rail four colours rather than sixty-nine.
+ * no colour in the data. The hero's attribute is the honest stand-in, and it matches the accent
+ * the hero's own page already uses.
  */
 export function accentFor(ability: HeroAbility): string {
   const attribute = heroAttribute(ability.hero)
@@ -102,10 +107,6 @@ export function abilityIconFor(ability: HeroAbility): string | null {
  */
 export function valueAtLevel(value: AbilityValue, level: number): number {
   return value.values[Math.min(level, value.values.length) - 1] ?? value.values[0]
-}
-
-export function formatValue(value: AbilityValue, level: number): string {
-  return `${valueAtLevel(value, level)}${value.unit ?? ''}`
 }
 
 /** "150 / 190 / 230 / 270", or null when the value doesn't change with level. */
@@ -130,38 +131,4 @@ export function formatCast(values: number[] | undefined): string | null {
 /** "Cooldown −7", the way a shard effect reads. */
 export function formatShardEffect(effect: AbilityShard['effects'][number]): string {
   return `${effect.name} ${effect.direction === 'down' ? '−' : '+'}${effect.amount}`
-}
-
-const normalise = (value: string) => value.toLowerCase().replace(/[^a-z0-9]/g, '')
-
-/**
- * Same ranking as artifacts, relics and heroes: a prefix beats a mid-word hit.
- *
- * The hero's name is searchable above the description, so typing "ursa" surfaces the whole kit
- * rather than every ability that happens to mention bears.
- */
-export function scoreAbility(ability: HeroAbility, query: string): number | null {
-  const q = normalise(query)
-  if (!q) return 0
-
-  const name = normalise(ability.name)
-
-  if (name === q) return 0
-  if (name.startsWith(q)) return 1
-  if (ability.name.split(/\s+/).some((word) => normalise(word).startsWith(q))) return 2
-  if (normalise(heroName(ability.hero)).startsWith(q)) return 3
-  if (name.includes(q)) return 4
-  if (normalise(ability.description).includes(q)) return 5
-  return null
-}
-
-export function searchAbilities(abilities: HeroAbility[], query: string): HeroAbility[] {
-  return abilities
-    .map((ability, index) => ({ ability, index, score: scoreAbility(ability, query) }))
-    .filter(
-      (entry): entry is { ability: HeroAbility; index: number; score: number } =>
-        entry.score !== null,
-    )
-    .sort((a, b) => a.score - b.score || a.index - b.index)
-    .map((entry) => entry.ability)
 }

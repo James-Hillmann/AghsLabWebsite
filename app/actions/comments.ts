@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 
-import { getAbility } from '@/lib/abilities'
+import { abilityHref, getAbility } from '@/lib/abilities'
 import { getArtifact } from '@/lib/artifacts'
 import { requireSession } from '@/lib/auth-guard'
 import { COMMENT_MAX_LENGTH, isCommentKind, type CommentKind } from '@/lib/comments'
@@ -26,10 +26,26 @@ function subjectExists(kind: CommentKind, slug: string): boolean {
   return Boolean(getAbility(slug))
 }
 
-/** Each kind is its own top-level section, and the plural is the route. */
+/**
+ * Refreshes the pages a comment appears on.
+ *
+ * Spelled out per kind rather than pluralising the kind name. That shortcut worked for
+ * artifacts and relics and produced `/abilitys` for the third, so ability threads silently
+ * never refreshed -- and abilities don't sit at a top-level route at all any more, so there
+ * was no string transformation that could have been right.
+ */
 function revalidateSubject(kind: CommentKind, slug: string) {
-  revalidatePath(`/${kind}s/${slug}`)
-  revalidatePath(`/${kind}s`)
+  if (kind === 'ability') {
+    const ability = getAbility(slug)
+    if (!ability) return
+    revalidatePath(abilityHref(ability))
+    revalidatePath(`/heroes/${ability.hero}`)
+    return
+  }
+
+  const section = kind === 'artifact' ? 'artifacts' : 'relics'
+  revalidatePath(`/${section}/${slug}`)
+  revalidatePath(`/${section}`)
 }
 
 /**

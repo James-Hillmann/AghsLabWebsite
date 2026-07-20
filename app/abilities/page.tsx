@@ -1,20 +1,10 @@
-import { AbilityBrowser } from '@/components/AbilityBrowser'
-import { SiteHeader } from '@/components/SiteHeader'
-import { getAbilities } from '@/lib/abilities'
-import { requireSession } from '@/lib/auth-guard'
+import { permanentRedirect } from 'next/navigation'
 
-export default async function AbilitiesPage() {
-  // Server Functions can fall outside the proxy matcher, so every protected page verifies
-  // the session itself rather than trusting the redirect in proxy.ts.
-  await requireSession()
-
-  return (
-    <main className="flex flex-1 flex-col">
-      <SiteHeader />
-
-      <div className="px-6 py-10 2xl:px-10 2xl:py-8">
-        <AbilityBrowser abilities={getAbilities()} />
-      </div>
-    </main>
-  )
+/**
+ * The abilities catalogue is gone -- abilities are reached through their hero now. Anyone
+ * holding a link to the old index lands on the roster, which is where they'd have to start
+ * anyway.
+ */
+export default function LegacyAbilitiesIndex() {
+  permanentRedirect('/heroes')
 }

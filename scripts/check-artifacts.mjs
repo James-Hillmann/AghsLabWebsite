@@ -146,6 +146,8 @@ for (const relic of RELICS) {
 // --- abilities ---------------------------------------------------------------------------
 
 const abilitySlugs = new Set()
+// `path` only has to be unique within its hero, since that's all the route disambiguates.
+const abilityPaths = new Set()
 const epicIds = new Set(ABILITIES.flatMap((ability) => ability.epics.map((epic) => epic.gameId)))
 
 for (const ability of ABILITIES) {
@@ -156,6 +158,15 @@ for (const ability of ABILITIES) {
   }
   if (abilitySlugs.has(ability.slug)) fail(`${where}: duplicate slug`)
   abilitySlugs.add(ability.slug)
+
+  // The route is /heroes/<hero>/<path>, so a clash inside one hero makes an ability
+  // unreachable -- whichever the lookup finds first wins and the other has no url.
+  if (!ability.path || !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(ability.path)) {
+    fail(`${where}: path must be kebab-case`)
+  }
+  const route = `${ability.hero}/${ability.path}`
+  if (abilityPaths.has(route)) fail(`${where}: duplicate path within ${ability.hero}`)
+  abilityPaths.add(route)
 
   if (!ability.name) fail(`${where}: missing name`)
   if (!ability.hero) fail(`${where}: missing hero`)
@@ -288,7 +299,9 @@ try {
       differences.push(`${ability.slug} exists in the game but not in the committed abilities`)
       continue
     }
-    for (const field of ['name', 'hero', 'maxLevel', 'isUltimate', 'requiredLevel']) {
+    // `path` is in here because it's a url: a game update that renames an ability silently
+    // breaks every link to it, and that should show up as drift rather than as a 404.
+    for (const field of ['name', 'hero', 'path', 'maxLevel', 'isUltimate', 'requiredLevel']) {
       if (JSON.stringify(existing[field]) !== JSON.stringify(ability[field])) {
         differences.push(`${ability.slug}.${field}: committed ${existing[field]}, game says ${ability[field]}`)
       }

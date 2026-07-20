@@ -72,7 +72,17 @@ export type AbilityShard = {
 }
 
 export type HeroAbility = {
+  /**
+   * Globally unique, and what a comment thread is keyed on. Distinct from `path` on purpose:
+   * this one has to stay stable and collision-free across every hero, because it identifies
+   * the ability in the database, where nothing knows about routes.
+   */
   slug: string
+  /**
+   * The URL segment under the hero -- 'earthshock', not 'ursa-earthshock'. Unique within its
+   * hero, which is all a nested route needs.
+   */
+  path: string
   /** The game's own id, so a row can be traced back to the KV it came from. */
   gameId: string
   name: string
@@ -103,6 +113,7 @@ export type HeroAbility = {
 export const ABILITIES: HeroAbility[] = [
   {
     slug: "abaddon-innate-miasma",
+    path: "innate-miasma",
     gameId: "hd_abaddon_innate_miasma",
     name: "Miasma Art",
     hero: "abaddon",
@@ -158,6 +169,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "abaddon-innate-withering-mist",
+    path: "innate-withering-mist",
     gameId: "hd_abaddon_innate_withering_mist",
     name: "Withering Mist",
     hero: "abaddon",
@@ -191,6 +203,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "abaddon-aphotic-shield",
+    path: "aphotic-shield",
     gameId: "hd_abaddon_aphotic_shield",
     name: "Aphotic Shield",
     hero: "abaddon",
@@ -423,6 +436,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "abaddon-frostmourne",
+    path: "frostmourne",
     gameId: "hd_abaddon_frostmourne",
     name: "Curse of Avernus",
     hero: "abaddon",
@@ -561,6 +575,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "abaddon-death-coil",
+    path: "death-coil",
     gameId: "hd_abaddon_death_coil",
     name: "Mist Coil",
     hero: "abaddon",
@@ -695,6 +710,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "abaddon-borrowed-time",
+    path: "borrowed-time",
     gameId: "hd_abaddon_borrowed_time",
     name: "Borrowed Time",
     hero: "abaddon",
@@ -856,6 +872,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "abyssal-underlord-innate-raid-boss",
+    path: "innate-raid-boss",
     gameId: "hd_abyssal_underlord_innate_raid_boss",
     name: "Invading Force",
     hero: "abyssal_underlord",
@@ -922,6 +939,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "abyssal-underlord-atrophy-aura",
+    path: "atrophy-aura",
     gameId: "hd_abyssal_underlord_atrophy_aura",
     name: "Atrophy Aura",
     hero: "abyssal_underlord",
@@ -1067,6 +1085,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "abyssal-underlord-firestorm",
+    path: "firestorm",
     gameId: "hd_abyssal_underlord_firestorm",
     name: "Firestorm",
     hero: "abyssal_underlord",
@@ -1296,6 +1315,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "abyssal-underlord-pit-of-malice",
+    path: "pit-of-malice",
     gameId: "hd_abyssal_underlord_pit_of_malice",
     name: "Pit of Malice",
     hero: "abyssal_underlord",
@@ -1484,6 +1504,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "abyssal-underlord-dark-rift-v2",
+    path: "dark-rift-v2",
     gameId: "hd_abyssal_underlord_dark_rift_v2",
     name: "Fiend's Gate",
     hero: "abyssal_underlord",
@@ -1607,6 +1628,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "alchemist-goblins-greed",
+    path: "goblins-greed",
     gameId: "hd_alchemist_goblins_greed",
     name: "贪魔的贪婪",
     hero: "alchemist",
@@ -1633,6 +1655,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "alchemist-unstable-concoction",
+    path: "unstable-concoction",
     gameId: "hd_alchemist_unstable_concoction",
     name: "不稳定化合物",
     hero: "alchemist",
@@ -1730,6 +1753,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "alchemist-unstable-concoction-throw",
+    path: "unstable-concoction-throw",
     gameId: "hd_alchemist_unstable_concoction_throw",
     name: "投掷不稳定化合物",
     hero: "alchemist",
@@ -1815,6 +1839,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "alchemist-corrosive-weaponry",
+    path: "corrosive-weaponry",
     gameId: "hd_alchemist_corrosive_weaponry",
     name: "腐蚀兵械",
     hero: "alchemist",
@@ -1887,6 +1912,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "alchemist-acid-spray",
+    path: "acid-spray",
     gameId: "hd_alchemist_acid_spray",
     name: "酸性喷雾",
     hero: "alchemist",
@@ -1974,6 +2000,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "alchemist-chemical-rage",
+    path: "chemical-rage",
     gameId: "hd_alchemist_chemical_rage",
     name: "化学狂暴",
     hero: "alchemist",
@@ -2051,6 +2078,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "axe-battle-hunger",
+    path: "battle-hunger",
     gameId: "hd_axe_battle_hunger",
     name: "Battle Hunger",
     hero: "axe",
@@ -2255,6 +2283,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "axe-berserkers-call",
+    path: "berserkers-call",
     gameId: "hd_axe_berserkers_call",
     name: "Berserker's Call",
     hero: "axe",
@@ -2427,6 +2456,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "axe-bloody-mantle",
+    path: "bloody-mantle",
     gameId: "hd_axe_bloody_mantle",
     name: "Coat of Blood",
     hero: "axe",
@@ -2492,6 +2522,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "axe-counter-helix",
+    path: "counter-helix",
     gameId: "hd_axe_counter_helix",
     name: "Counter Helix",
     hero: "axe",
@@ -2686,6 +2717,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "axe-culling-blade",
+    path: "culling-blade",
     gameId: "hd_axe_culling_blade",
     name: "Culling Blade",
     hero: "axe",
@@ -2887,6 +2919,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bane-nightmare-end",
+    path: "nightmare-end",
     gameId: "hd_bane_nightmare_end",
     name: "噩梦终止",
     hero: "bane",
@@ -2904,6 +2937,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bane-nightmare",
+    path: "nightmare",
     gameId: "hd_bane_nightmare",
     name: "噩梦",
     hero: "bane",
@@ -3047,6 +3081,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bane-enfeeble",
+    path: "enfeeble",
     gameId: "hd_bane_enfeeble",
     name: "虚弱",
     hero: "bane",
@@ -3210,6 +3245,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bane-brain-sap",
+    path: "brain-sap",
     gameId: "hd_bane_brain_sap",
     name: "蚀脑",
     hero: "bane",
@@ -3338,6 +3374,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bane-fiends-grip",
+    path: "fiends-grip",
     gameId: "hd_bane_fiends_grip",
     name: "魔爪",
     hero: "bane",
@@ -3456,6 +3493,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "batrider-innate-smoldering-resin",
+    path: "innate-smoldering-resin",
     gameId: "hd_batrider_innate_smoldering_resin",
     name: "Smoldering Resin",
     hero: "batrider",
@@ -3573,6 +3611,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "batrider-homo-chain",
+    path: "homo-chain",
     gameId: "hd_batrider_homo_chain",
     name: "Tether Chain",
     hero: "batrider",
@@ -3647,6 +3686,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "batrider-firefly",
+    path: "firefly",
     gameId: "hd_batrider_firefly",
     name: "Firefly",
     hero: "batrider",
@@ -3862,6 +3902,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "batrider-flamebreak",
+    path: "flamebreak",
     gameId: "hd_batrider_flamebreak",
     name: "Flamebreak",
     hero: "batrider",
@@ -4098,6 +4139,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "batrider-sticky-napalm",
+    path: "sticky-napalm",
     gameId: "hd_batrider_sticky_napalm",
     name: "Sticky Napalm",
     hero: "batrider",
@@ -4326,6 +4368,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "batrider-flaming-lasso",
+    path: "flaming-lasso",
     gameId: "hd_batrider_flaming_lasso",
     name: "Flaming Lasso",
     hero: "batrider",
@@ -4443,6 +4486,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "beastmaster-inner-beast",
+    path: "inner-beast",
     gameId: "hd_beastmaster_inner_beast",
     name: "Inner Beast",
     hero: "beastmaster",
@@ -4653,6 +4697,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "beastmaster-innate-king-of-beast",
+    path: "innate-king-of-beast",
     gameId: "hd_beastmaster_innate_king_of_beast",
     name: "King of Beasts",
     hero: "beastmaster",
@@ -4693,6 +4738,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "beastmaster-call-of-the-wild",
+    path: "call-of-the-wild",
     gameId: "hd_beastmaster_call_of_the_wild",
     name: "Call of the Wild",
     hero: "beastmaster",
@@ -5029,6 +5075,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "beastmaster-wild-axes",
+    path: "wild-axes",
     gameId: "hd_beastmaster_wild_axes",
     name: "Wild Axes",
     hero: "beastmaster",
@@ -5237,6 +5284,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "beastmaster-primal-roar",
+    path: "primal-roar",
     gameId: "hd_beastmaster_primal_roar",
     name: "Primal Roar",
     hero: "beastmaster",
@@ -5436,6 +5484,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bloodseeker-innate-sanguivore",
+    path: "innate-sanguivore",
     gameId: "hd_bloodseeker_innate_sanguivore",
     name: "Sanguivore",
     hero: "bloodseeker",
@@ -5532,6 +5581,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bloodseeker-blood-bath",
+    path: "blood-bath",
     gameId: "hd_bloodseeker_blood_bath",
     name: "Blood Bath",
     hero: "bloodseeker",
@@ -5723,6 +5773,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bloodseeker-blood-flash",
+    path: "blood-flash",
     gameId: "hd_bloodseeker_blood_flash",
     name: "Blood Retreat",
     hero: "bloodseeker",
@@ -5789,6 +5840,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bloodseeker-bloodrage",
+    path: "bloodrage",
     gameId: "hd_bloodseeker_bloodrage",
     name: "Bloodrage",
     hero: "bloodseeker",
@@ -5986,6 +6038,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bloodseeker-thirst",
+    path: "thirst",
     gameId: "hd_bloodseeker_thirst",
     name: "Thirst",
     hero: "bloodseeker",
@@ -6192,6 +6245,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bloodseeker-rupture",
+    path: "rupture",
     gameId: "hd_bloodseeker_rupture",
     name: "Rupture",
     hero: "bloodseeker",
@@ -6386,6 +6440,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bristleback-innate-prickly",
+    path: "innate-prickly",
     gameId: "hd_bristleback_innate_prickly",
     name: "Backline Temper",
     hero: "bristleback",
@@ -6441,6 +6496,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bristleback-bristleback",
+    path: "bristleback",
     gameId: "hd_bristleback_bristleback",
     name: "Bristleback",
     hero: "bristleback",
@@ -6675,6 +6731,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bristleback-quill-spray",
+    path: "quill-spray",
     gameId: "hd_bristleback_quill_spray",
     name: "Quill Spray",
     hero: "bristleback",
@@ -6875,6 +6932,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bristleback-viscous-nasal-goo",
+    path: "viscous-nasal-goo",
     gameId: "hd_bristleback_viscous_nasal_goo",
     name: "Viscous Nasal Goo",
     hero: "bristleback",
@@ -7069,6 +7127,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "bristleback-warpath",
+    path: "warpath",
     gameId: "hd_bristleback_warpath",
     name: "Warpath",
     hero: "bristleback",
@@ -7226,6 +7285,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "centaur-double-edge",
+    path: "double-edge",
     gameId: "hd_centaur_double_edge",
     name: "Double Edge",
     hero: "centaur",
@@ -7394,6 +7454,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "centaur-chariot",
+    path: "chariot",
     gameId: "hd_centaur_chariot",
     name: "Free Ride",
     hero: "centaur",
@@ -7478,6 +7539,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "centaur-hoof-stomp",
+    path: "hoof-stomp",
     gameId: "hd_centaur_hoof_stomp",
     name: "Hoof Stomp",
     hero: "centaur",
@@ -7662,6 +7724,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "centaur-innate-rawhide",
+    path: "innate-rawhide",
     gameId: "hd_centaur_innate_rawhide",
     name: "Rawhide",
     hero: "centaur",
@@ -7687,6 +7750,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "centaur-return",
+    path: "return",
     gameId: "hd_centaur_return",
     name: "Retaliate",
     hero: "centaur",
@@ -7805,6 +7869,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "centaur-stampede",
+    path: "stampede",
     gameId: "hd_centaur_stampede",
     name: "Stampede",
     hero: "centaur",
@@ -8008,6 +8073,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "chaos-knight-innate-fundamental-forging",
+    path: "innate-fundamental-forging",
     gameId: "hd_chaos_knight_innate_fundamental_forging",
     name: "Fundamental Forging",
     hero: "chaos_knight",
@@ -8033,6 +8099,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "chaos-knight-chaos-bolt",
+    path: "chaos-bolt",
     gameId: "hd_chaos_knight_chaos_bolt",
     name: "Chaos Bolt",
     hero: "chaos_knight",
@@ -8276,6 +8343,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "chaos-knight-chaos-strike",
+    path: "chaos-strike",
     gameId: "hd_chaos_knight_chaos_strike",
     name: "Chaos Strike",
     hero: "chaos_knight",
@@ -8440,6 +8508,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "chaos-knight-reality-rift",
+    path: "reality-rift",
     gameId: "hd_chaos_knight_reality_rift",
     name: "Reality Rift",
     hero: "chaos_knight",
@@ -8615,6 +8684,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "chaos-knight-phantasm",
+    path: "phantasm",
     gameId: "hd_chaos_knight_phantasm",
     name: "Phantasm",
     hero: "chaos_knight",
@@ -8788,6 +8858,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "crystal-maiden-blueheart-floe",
+    path: "blueheart-floe",
     gameId: "hd_crystal_maiden_blueheart_floe",
     name: "Blueheart Floe",
     hero: "crystal_maiden",
@@ -8842,6 +8913,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "crystal-maiden-brilliance-aura",
+    path: "brilliance-aura",
     gameId: "hd_crystal_maiden_brilliance_aura",
     name: "Arcane Aura",
     hero: "crystal_maiden",
@@ -8991,6 +9063,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "crystal-maiden-crystal-nova",
+    path: "crystal-nova",
     gameId: "hd_crystal_maiden_crystal_nova",
     name: "Crystal Nova",
     hero: "crystal_maiden",
@@ -9209,6 +9282,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "crystal-maiden-frostbite",
+    path: "frostbite",
     gameId: "hd_crystal_maiden_frostbite",
     name: "Frostbite",
     hero: "crystal_maiden",
@@ -9396,6 +9470,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "crystal-maiden-freezing-field-end",
+    path: "freezing-field-end",
     gameId: "hd_crystal_maiden_freezing_field_end",
     name: "Freezing Field",
     hero: "crystal_maiden",
@@ -9413,6 +9488,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "crystal-maiden-freezing-field",
+    path: "freezing-field",
     gameId: "hd_crystal_maiden_freezing_field",
     name: "Freezing Field",
     hero: "crystal_maiden",
@@ -9687,6 +9763,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "dazzle-innate-weave",
+    path: "innate-weave",
     gameId: "hd_dazzle_innate_weave",
     name: "Weave",
     hero: "dazzle",
@@ -9748,6 +9825,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "dazzle-poison-touch",
+    path: "poison-touch",
     gameId: "hd_dazzle_poison_touch",
     name: "Poison Touch",
     hero: "dazzle",
@@ -9979,6 +10057,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "dazzle-shadow-wave",
+    path: "shadow-wave",
     gameId: "hd_dazzle_shadow_wave",
     name: "Shadow Wave",
     hero: "dazzle",
@@ -10190,6 +10269,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "dazzle-shallow-grave",
+    path: "shallow-grave",
     gameId: "hd_dazzle_shallow_grave",
     name: "Shallow Grave",
     hero: "dazzle",
@@ -10332,6 +10412,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "dazzle-nothl-projection",
+    path: "nothl-projection",
     gameId: "hd_dazzle_nothl_projection",
     name: "Nothl Projection",
     hero: "dazzle",
@@ -10537,6 +10618,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "death-prophet-innate-witchcraft",
+    path: "innate-witchcraft",
     gameId: "hd_death_prophet_innate_witchcraft",
     name: "Witchcraft",
     hero: "death_prophet",
@@ -10585,6 +10667,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "death-prophet-carrion-swarm",
+    path: "carrion-swarm",
     gameId: "hd_death_prophet_carrion_swarm",
     name: "Crypt Swarm",
     hero: "death_prophet",
@@ -10780,6 +10863,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "death-prophet-silence",
+    path: "silence",
     gameId: "hd_death_prophet_silence",
     name: "Silence",
     hero: "death_prophet",
@@ -10957,6 +11041,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "death-prophet-spirit-siphon",
+    path: "spirit-siphon",
     gameId: "hd_death_prophet_spirit_siphon",
     name: "Spirit Siphon",
     hero: "death_prophet",
@@ -11166,6 +11251,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "death-prophet-exorcism",
+    path: "exorcism",
     gameId: "hd_death_prophet_exorcism",
     name: "Exorcism",
     hero: "death_prophet",
@@ -11474,6 +11560,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "dragon-knight-dragon-blood",
+    path: "dragon-blood",
     gameId: "hd_dragon_knight_dragon_blood",
     name: "Dragon Blood",
     hero: "dragon_knight",
@@ -11533,6 +11620,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "dragon-knight-breathe-fire",
+    path: "breathe-fire",
     gameId: "hd_dragon_knight_breathe_fire",
     name: "Breathe Fire",
     hero: "dragon_knight",
@@ -11752,6 +11840,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "dragon-knight-dragon-tail",
+    path: "dragon-tail",
     gameId: "hd_dragon_knight_dragon_tail",
     name: "Dragon Tail",
     hero: "dragon_knight",
@@ -11912,6 +12001,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "dragon-knight-wyrms-wrath",
+    path: "wyrms-wrath",
     gameId: "hd_dragon_knight_wyrms_wrath",
     name: "Wyrm'S Wrath",
     hero: "dragon_knight",
@@ -12084,6 +12174,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "dragon-knight-elder-dragon-form",
+    path: "elder-dragon-form",
     gameId: "hd_dragon_knight_elder_dragon_form",
     name: "Elder Dragon Form",
     hero: "dragon_knight",
@@ -12350,6 +12441,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "drow-ranger-innate-accurate",
+    path: "innate-accurate",
     gameId: "hd_drow_ranger_innate_accurate",
     name: "Sharpened Precision",
     hero: "drow_ranger",
@@ -12384,6 +12476,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "drow-ranger-frost-arrows",
+    path: "frost-arrows",
     gameId: "hd_drow_ranger_frost_arrows",
     name: "Frost Arrows",
     hero: "drow_ranger",
@@ -12528,6 +12621,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "drow-ranger-wave-of-silence",
+    path: "wave-of-silence",
     gameId: "hd_drow_ranger_wave_of_silence",
     name: "Gust",
     hero: "drow_ranger",
@@ -12735,6 +12829,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "drow-ranger-multishot",
+    path: "multishot",
     gameId: "hd_drow_ranger_multishot",
     name: "Multishot",
     hero: "drow_ranger",
@@ -12944,6 +13039,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "drow-ranger-marksmanship",
+    path: "marksmanship",
     gameId: "hd_drow_ranger_marksmanship",
     name: "Marksmanship",
     hero: "drow_ranger",
@@ -13086,6 +13182,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "ember-spirit-immolation",
+    path: "immolation",
     gameId: "hd_ember_spirit_immolation",
     name: "Immolation",
     hero: "ember_spirit",
@@ -13158,6 +13255,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "ember-spirit-activate-fire-remnant",
+    path: "activate-fire-remnant",
     gameId: "hd_ember_spirit_activate_fire_remnant",
     name: "Activate Fire Remnant",
     hero: "ember_spirit",
@@ -13256,6 +13354,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "ember-spirit-flame-guard",
+    path: "flame-guard",
     gameId: "hd_ember_spirit_flame_guard",
     name: "Flame Guard",
     hero: "ember_spirit",
@@ -13507,6 +13606,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "ember-spirit-searing-chains",
+    path: "searing-chains",
     gameId: "hd_ember_spirit_searing_chains",
     name: "Searing Chains",
     hero: "ember_spirit",
@@ -13721,6 +13821,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "ember-spirit-sleight-of-fist",
+    path: "sleight-of-fist",
     gameId: "hd_ember_spirit_sleight_of_fist",
     name: "Sleight Of Fist",
     hero: "ember_spirit",
@@ -13933,6 +14034,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "ember-spirit-fire-remnant",
+    path: "fire-remnant",
     gameId: "hd_ember_spirit_fire_remnant",
     name: "Fire Remnant",
     hero: "ember_spirit",
@@ -14111,6 +14213,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "faceless-void-time-walk-reverse",
+    path: "time-walk-reverse",
     gameId: "hd_faceless_void_time_walk_reverse",
     name: "Reverse Time Walk",
     hero: "faceless_void",
@@ -14141,6 +14244,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "faceless-void-innate-time-scheduling",
+    path: "innate-time-scheduling",
     gameId: "hd_faceless_void_innate_time_scheduling",
     name: "Time Scheduling",
     hero: "faceless_void",
@@ -14169,6 +14273,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "faceless-void-time-lock",
+    path: "time-lock",
     gameId: "hd_faceless_void_time_lock",
     name: "Time Lock",
     hero: "faceless_void",
@@ -14305,6 +14410,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "faceless-void-time-dilation",
+    path: "time-dilation",
     gameId: "hd_faceless_void_time_dilation",
     name: "Time Manipulation",
     hero: "faceless_void",
@@ -14524,6 +14630,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "faceless-void-time-walk",
+    path: "time-walk",
     gameId: "hd_faceless_void_time_walk",
     name: "Time Walk",
     hero: "faceless_void",
@@ -14679,6 +14786,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "faceless-void-chronosphere",
+    path: "chronosphere",
     gameId: "hd_faceless_void_chronosphere",
     name: "Chronosphere",
     hero: "faceless_void",
@@ -14850,6 +14958,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "gyrocopter-innate-ammo",
+    path: "innate-ammo",
     gameId: "hd_gyrocopter_innate_ammo",
     name: "Ammo Belt",
     hero: "gyrocopter",
@@ -14918,6 +15027,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "gyrocopter-flak-cannon",
+    path: "flak-cannon",
     gameId: "hd_gyrocopter_flak_cannon",
     name: "Flak Cannon",
     hero: "gyrocopter",
@@ -15073,6 +15183,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "gyrocopter-homing-missile",
+    path: "homing-missile",
     gameId: "hd_gyrocopter_homing_missile",
     name: "Homing Missile",
     hero: "gyrocopter",
@@ -15283,6 +15394,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "gyrocopter-rocket-barrage",
+    path: "rocket-barrage",
     gameId: "hd_gyrocopter_rocket_barrage",
     name: "Rocket Barrage",
     hero: "gyrocopter",
@@ -15482,6 +15594,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "gyrocopter-call-down",
+    path: "call-down",
     gameId: "hd_gyrocopter_call_down",
     name: "Call Down",
     hero: "gyrocopter",
@@ -15684,6 +15797,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "juggernaut-blade-dance",
+    path: "blade-dance",
     gameId: "hd_juggernaut_blade_dance",
     name: "Blade Dance",
     hero: "juggernaut",
@@ -15837,6 +15951,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "juggernaut-blade-fury",
+    path: "blade-fury",
     gameId: "hd_juggernaut_blade_fury",
     name: "Blade Fury",
     hero: "juggernaut",
@@ -16061,6 +16176,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "juggernaut-innate-blocking",
+    path: "innate-blocking",
     gameId: "hd_juggernaut_innate_blocking",
     name: "Hawk-Eye",
     hero: "juggernaut",
@@ -16135,6 +16251,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "juggernaut-healing-ward",
+    path: "healing-ward",
     gameId: "hd_juggernaut_healing_ward",
     name: "Healing Ward",
     hero: "juggernaut",
@@ -16352,6 +16469,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "juggernaut-omni-slash",
+    path: "omni-slash",
     gameId: "hd_juggernaut_omni_slash",
     name: "Omnislash",
     hero: "juggernaut",
@@ -16567,6 +16685,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "leshrac-innate-defilement",
+    path: "innate-defilement",
     gameId: "hd_leshrac_innate_defilement",
     name: "Defilement",
     hero: "leshrac",
@@ -16592,6 +16711,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "leshrac-diabolic-edict",
+    path: "diabolic-edict",
     gameId: "hd_leshrac_diabolic_edict",
     name: "Diabolic Edict",
     hero: "leshrac",
@@ -16805,6 +16925,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "leshrac-lightning-storm",
+    path: "lightning-storm",
     gameId: "hd_leshrac_lightning_storm",
     name: "Lightning Storm",
     hero: "leshrac",
@@ -17010,6 +17131,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "leshrac-split-earth",
+    path: "split-earth",
     gameId: "hd_leshrac_split_earth",
     name: "Split Earth",
     hero: "leshrac",
@@ -17204,6 +17326,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "leshrac-pulse-nova",
+    path: "pulse-nova",
     gameId: "hd_leshrac_pulse_nova",
     name: "Pulse Nova",
     hero: "leshrac",
@@ -17417,6 +17540,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lich-dark-ritual",
+    path: "dark-ritual",
     gameId: "hd_lich_dark_ritual",
     name: "Death Charge",
     hero: "lich",
@@ -17470,6 +17594,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lich-frost-nova",
+    path: "frost-nova",
     gameId: "hd_lich_frost_nova",
     name: "Frost Blast",
     hero: "lich",
@@ -17668,6 +17793,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lich-frost-shield",
+    path: "frost-shield",
     gameId: "hd_lich_frost_shield",
     name: "Frost Shield",
     hero: "lich",
@@ -17888,6 +18014,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lich-sinister-gaze",
+    path: "sinister-gaze",
     gameId: "hd_lich_sinister_gaze",
     name: "Sinister Gaze",
     hero: "lich",
@@ -18052,6 +18179,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lich-chain-frost",
+    path: "chain-frost",
     gameId: "hd_lich_chain_frost",
     name: "Chain Frost",
     hero: "lich",
@@ -18309,6 +18437,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lina-innate-combustion",
+    path: "innate-combustion",
     gameId: "hd_lina_innate_combustion",
     name: "Combustion",
     hero: "lina",
@@ -18371,6 +18500,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lina-fiery-soul",
+    path: "fiery-soul",
     gameId: "hd_lina_fiery_soul",
     name: "Fiery Soul",
     hero: "lina",
@@ -18535,6 +18665,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lina-flame-cloak",
+    path: "flame-cloak",
     gameId: "hd_lina_flame_cloak",
     name: "Flame Cloak",
     hero: "lina",
@@ -18597,6 +18728,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lina-dragon-slave",
+    path: "dragon-slave",
     gameId: "hd_lina_dragon_slave",
     name: "Dragon Slave",
     hero: "lina",
@@ -18803,6 +18935,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lina-light-strike-array",
+    path: "light-strike-array",
     gameId: "hd_lina_light_strike_array",
     name: "Light Strike Array",
     hero: "lina",
@@ -19003,6 +19136,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lina-laguna-blade",
+    path: "laguna-blade",
     gameId: "hd_lina_laguna_blade",
     name: "Laguna Blade",
     hero: "lina",
@@ -19172,6 +19306,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lion-innate-to-hell-and-back",
+    path: "innate-to-hell-and-back",
     gameId: "hd_lion_innate_to_hell_and_back",
     name: "To Hell and Back",
     hero: "lion",
@@ -19216,6 +19351,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lion-impale",
+    path: "impale",
     gameId: "hd_lion_impale",
     name: "Earth Spike",
     hero: "lion",
@@ -19425,6 +19561,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lion-voodoo",
+    path: "voodoo",
     gameId: "hd_lion_voodoo",
     name: "Hex",
     hero: "lion",
@@ -19597,6 +19734,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lion-mana-drain",
+    path: "mana-drain",
     gameId: "hd_lion_mana_drain",
     name: "Mana Drain",
     hero: "lion",
@@ -19773,6 +19911,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "lion-finger-of-death",
+    path: "finger-of-death",
     gameId: "hd_lion_finger_of_death",
     name: "Finger of Death",
     hero: "lion",
@@ -19953,6 +20092,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "luna-innate-blessing",
+    path: "innate-blessing",
     gameId: "hd_luna_innate_blessing",
     name: "Lunar Blessing",
     hero: "luna",
@@ -20065,6 +20205,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "luna-lucent-beam",
+    path: "lucent-beam",
     gameId: "hd_luna_lucent_beam",
     name: "Lucent Beam",
     hero: "luna",
@@ -20289,6 +20430,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "luna-lunar-orbit",
+    path: "lunar-orbit",
     gameId: "hd_luna_lunar_orbit",
     name: "Lunar Orbit",
     hero: "luna",
@@ -20460,6 +20602,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "luna-moon-glaive",
+    path: "moon-glaive",
     gameId: "hd_luna_moon_glaive",
     name: "Moon Glaives",
     hero: "luna",
@@ -20583,6 +20726,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "luna-eclipse",
+    path: "eclipse",
     gameId: "hd_luna_eclipse",
     name: "Eclipse",
     hero: "luna",
@@ -20743,6 +20887,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "magnataur-innate-solid-core",
+    path: "innate-solid-core",
     gameId: "hd_magnataur_innate_solid_core",
     name: "Solid Core",
     hero: "magnataur",
@@ -20772,6 +20917,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "magnataur-empower",
+    path: "empower",
     gameId: "hd_magnataur_empower",
     name: "Empower",
     hero: "magnataur",
@@ -21061,6 +21207,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "magnataur-shockwave",
+    path: "shockwave",
     gameId: "hd_magnataur_shockwave",
     name: "Shockwave",
     hero: "magnataur",
@@ -21305,6 +21452,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "magnataur-skewer",
+    path: "skewer",
     gameId: "hd_magnataur_skewer",
     name: "Skewer",
     hero: "magnataur",
@@ -21605,6 +21753,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "magnataur-reverse-polarity",
+    path: "reverse-polarity",
     gameId: "hd_magnataur_reverse_polarity",
     name: "Reverse Polarity",
     hero: "magnataur",
@@ -21793,6 +21942,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "marci-innate-divine-power",
+    path: "innate-divine-power",
     gameId: "hd_marci_innate_divine_power",
     name: "Divine Power",
     hero: "marci",
@@ -21829,6 +21979,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "marci-flash-step",
+    path: "flash-step",
     gameId: "hd_marci_flash_step",
     name: "Flash Step",
     hero: "marci",
@@ -21946,6 +22097,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "marci-bodyguard",
+    path: "bodyguard",
     gameId: "hd_marci_bodyguard",
     name: "Bodyguard",
     hero: "marci",
@@ -22153,6 +22305,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "marci-grapple",
+    path: "grapple",
     gameId: "hd_marci_grapple",
     name: "Dispose",
     hero: "marci",
@@ -22368,6 +22521,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "marci-companion-run",
+    path: "companion-run",
     gameId: "hd_marci_companion_run",
     name: "Rebound",
     hero: "marci",
@@ -22633,6 +22787,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "marci-unleash",
+    path: "unleash",
     gameId: "hd_marci_unleash",
     name: "Unleash",
     hero: "marci",
@@ -22922,6 +23077,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "mars-dauntless",
+    path: "dauntless",
     gameId: "hd_mars_dauntless",
     name: "Dauntless",
     hero: "mars",
@@ -22966,6 +23122,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "mars-bulwark",
+    path: "bulwark",
     gameId: "hd_mars_bulwark",
     name: "Bulwark",
     hero: "mars",
@@ -23115,6 +23272,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "mars-gods-rebuke",
+    path: "gods-rebuke",
     gameId: "hd_mars_gods_rebuke",
     name: "God's Rebuke",
     hero: "mars",
@@ -23329,6 +23487,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "mars-spear",
+    path: "spear",
     gameId: "hd_mars_spear",
     name: "Spear of Mars",
     hero: "mars",
@@ -23562,6 +23721,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "mars-arena-of-blood",
+    path: "arena-of-blood",
     gameId: "hd_mars_arena_of_blood",
     name: "Arena Of Blood",
     hero: "mars",
@@ -23802,6 +23962,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "mirana-innate-lunar-bloom",
+    path: "innate-lunar-bloom",
     gameId: "hd_mirana_innate_lunar_bloom",
     name: "Follower of Selemene",
     hero: "mirana",
@@ -23855,6 +24016,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "mirana-leap",
+    path: "leap",
     gameId: "hd_mirana_leap",
     name: "Leap",
     hero: "mirana",
@@ -24089,6 +24251,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "mirana-arrow",
+    path: "arrow",
     gameId: "hd_mirana_arrow",
     name: "Sacred Arrow",
     hero: "mirana",
@@ -24346,6 +24509,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "mirana-starfall",
+    path: "starfall",
     gameId: "hd_mirana_starfall",
     name: "Starstorm",
     hero: "mirana",
@@ -24568,6 +24732,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "mirana-invis",
+    path: "invis",
     gameId: "hd_mirana_invis",
     name: "Moonlight Shadow",
     hero: "mirana",
@@ -24719,6 +24884,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "necrolyte-innate-necro-singer",
+    path: "innate-necro-singer",
     gameId: "hd_necrolyte_innate_necro_singer",
     name: "Plague Dirge",
     hero: "necrolyte",
@@ -24776,6 +24942,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "necrolyte-death-pulse",
+    path: "death-pulse",
     gameId: "hd_necrolyte_death_pulse",
     name: "Death Pulse",
     hero: "necrolyte",
@@ -24985,6 +25152,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "necrolyte-ghost-shroud",
+    path: "ghost-shroud",
     gameId: "hd_necrolyte_ghost_shroud",
     name: "Ghost Shroud",
     hero: "necrolyte",
@@ -25163,6 +25331,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "necrolyte-heartstopper-aura",
+    path: "heartstopper-aura",
     gameId: "hd_necrolyte_heartstopper_aura",
     name: "Heartstopper Aura",
     hero: "necrolyte",
@@ -25333,6 +25502,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "necrolyte-reapers-scythe",
+    path: "reapers-scythe",
     gameId: "hd_necrolyte_reapers_scythe",
     name: "Reaper's Scythe",
     hero: "necrolyte",
@@ -25526,6 +25696,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nevermore-frenzy",
+    path: "frenzy",
     gameId: "hd_nevermore_frenzy",
     name: "Feast of Souls",
     hero: "nevermore",
@@ -25706,6 +25877,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nevermore-innate-necromastery",
+    path: "innate-necromastery",
     gameId: "hd_nevermore_innate_necromastery",
     name: "Necromastery",
     hero: "nevermore",
@@ -25855,6 +26027,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nevermore-dark-lord",
+    path: "dark-lord",
     gameId: "hd_nevermore_dark_lord",
     name: "Presence of the Dark Lord",
     hero: "nevermore",
@@ -25980,6 +26153,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nevermore-shadowraze1",
+    path: "shadowraze1",
     gameId: "hd_nevermore_shadowraze1",
     name: "Shadowraze",
     hero: "nevermore",
@@ -26185,6 +26359,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nevermore-shadowraze2",
+    path: "shadowraze2",
     gameId: "hd_nevermore_shadowraze2",
     name: "Shadowraze",
     hero: "nevermore",
@@ -26298,6 +26473,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nevermore-shadowraze3",
+    path: "shadowraze3",
     gameId: "hd_nevermore_shadowraze3",
     name: "Shadowraze",
     hero: "nevermore",
@@ -26411,6 +26587,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nevermore-requiem",
+    path: "requiem",
     gameId: "hd_nevermore_requiem",
     name: "Requiem of Souls",
     hero: "nevermore",
@@ -26613,6 +26790,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "night-stalker-heart-of-darkness",
+    path: "heart-of-darkness",
     gameId: "hd_night_stalker_heart_of_darkness",
     name: "Heart of Darkness",
     hero: "night_stalker",
@@ -26666,6 +26844,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "night-stalker-crippling-fear",
+    path: "crippling-fear",
     gameId: "hd_night_stalker_crippling_fear",
     name: "Crippling Fear",
     hero: "night_stalker",
@@ -26914,6 +27093,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "night-stalker-hunter-in-the-night",
+    path: "hunter-in-the-night",
     gameId: "hd_night_stalker_hunter_in_the_night",
     name: "Hunter in the Night",
     hero: "night_stalker",
@@ -27037,6 +27217,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "night-stalker-void",
+    path: "void",
     gameId: "hd_night_stalker_void",
     name: "Void",
     hero: "night_stalker",
@@ -27217,6 +27398,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "night-stalker-darkness",
+    path: "darkness",
     gameId: "hd_night_stalker_darkness",
     name: "Dark Ascension",
     hero: "night_stalker",
@@ -27389,6 +27571,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nyx-assassin-burrow",
+    path: "burrow",
     gameId: "hd_nyx_assassin_burrow",
     name: "Burrow",
     hero: "nyx_assassin",
@@ -27472,6 +27655,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nyx-assassin-nyxth-sense",
+    path: "nyxth-sense",
     gameId: "hd_nyx_assassin_nyxth_sense",
     name: "Nyxth Sense",
     hero: "nyx_assassin",
@@ -27527,6 +27711,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nyx-assassin-unburrow",
+    path: "unburrow",
     gameId: "hd_nyx_assassin_unburrow",
     name: "Unburrow",
     hero: "nyx_assassin",
@@ -27545,6 +27730,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nyx-assassin-impale",
+    path: "impale",
     gameId: "hd_nyx_assassin_impale",
     name: "Impale",
     hero: "nyx_assassin",
@@ -27750,6 +27936,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nyx-assassin-jolt",
+    path: "jolt",
     gameId: "hd_nyx_assassin_jolt",
     name: "Mind Flare",
     hero: "nyx_assassin",
@@ -27953,6 +28140,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nyx-assassin-spiked-carapace",
+    path: "spiked-carapace",
     gameId: "hd_nyx_assassin_spiked_carapace",
     name: "Spiked Carapace",
     hero: "nyx_assassin",
@@ -28131,6 +28319,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "nyx-assassin-vendetta",
+    path: "vendetta",
     gameId: "hd_nyx_assassin_vendetta",
     name: "Vendetta",
     hero: "nyx_assassin",
@@ -28317,6 +28506,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "obsidian-destroyer-arcane-orb",
+    path: "arcane-orb",
     gameId: "hd_obsidian_destroyer_arcane_orb",
     name: "Arcane Orb",
     hero: "obsidian_destroyer",
@@ -28468,6 +28658,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "obsidian-destroyer-astral-imprisonment",
+    path: "astral-imprisonment",
     gameId: "hd_obsidian_destroyer_astral_imprisonment",
     name: "Astral Imprisonment",
     hero: "obsidian_destroyer",
@@ -28681,6 +28872,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "obsidian-destroyer-equilibrium",
+    path: "equilibrium",
     gameId: "hd_obsidian_destroyer_equilibrium",
     name: "Essence Flux",
     hero: "obsidian_destroyer",
@@ -28784,6 +28976,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "obsidian-destroyer-innate-ominous-discernment",
+    path: "innate-ominous-discernment",
     gameId: "hd_obsidian_destroyer_innate_ominous_discernment",
     name: "Outworld Might",
     hero: "obsidian_destroyer",
@@ -28822,6 +29015,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "obsidian-destroyer-sanity-eclipse",
+    path: "sanity-eclipse",
     gameId: "hd_obsidian_destroyer_sanity_eclipse",
     name: "Sanity's Eclipse",
     hero: "obsidian_destroyer",
@@ -28973,6 +29167,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "omniknight-innate-divine-avatar",
+    path: "innate-divine-avatar",
     gameId: "hd_omniknight_innate_divine_avatar",
     name: "Paladin",
     hero: "omniknight",
@@ -29033,6 +29228,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "omniknight-holy-aura",
+    path: "holy-aura",
     gameId: "hd_omniknight_holy_aura",
     name: "Divine Aura",
     hero: "omniknight",
@@ -29204,6 +29400,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "omniknight-holy-mark",
+    path: "holy-mark",
     gameId: "hd_omniknight_holy_mark",
     name: "Divine Consecration",
     hero: "omniknight",
@@ -29281,6 +29478,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "omniknight-hammer-of-purity",
+    path: "hammer-of-purity",
     gameId: "hd_omniknight_hammer_of_purity",
     name: "Hammer of Purity",
     hero: "omniknight",
@@ -29498,6 +29696,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "omniknight-purification",
+    path: "purification",
     gameId: "hd_omniknight_purification",
     name: "Purification",
     hero: "omniknight",
@@ -29676,6 +29875,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "omniknight-guardian-angel",
+    path: "guardian-angel",
     gameId: "hd_omniknight_guardian_angel",
     name: "Guardian Angel",
     hero: "omniknight",
@@ -29813,6 +30013,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "pangolier-innate-fortune-favors-the-bold",
+    path: "innate-fortune-favors-the-bold",
     gameId: "hd_pangolier_innate_fortune_favors_the_bold",
     name: "Blessed Brave",
     hero: "pangolier",
@@ -29865,6 +30066,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "pangolier-lucky-shot",
+    path: "lucky-shot",
     gameId: "hd_pangolier_lucky_shot",
     name: "Lucky Shot",
     hero: "pangolier",
@@ -29990,6 +30192,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "pangolier-shield-crash",
+    path: "shield-crash",
     gameId: "hd_pangolier_shield_crash",
     name: "Shield Crash",
     hero: "pangolier",
@@ -30244,6 +30447,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "pangolier-swashbuckle",
+    path: "swashbuckle",
     gameId: "hd_pangolier_swashbuckle",
     name: "Swashbuckle",
     hero: "pangolier",
@@ -30480,6 +30684,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "pangolier-gyroshell-stop",
+    path: "gyroshell-stop",
     gameId: "hd_pangolier_gyroshell_stop",
     name: "Stop Rolling",
     hero: "pangolier",
@@ -30527,6 +30732,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "pangolier-gyroshell",
+    path: "gyroshell",
     gameId: "hd_pangolier_gyroshell",
     name: "Rolling Thunder",
     hero: "pangolier",
@@ -30806,6 +31012,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phantom-assassin-innate-immaterial",
+    path: "innate-immaterial",
     gameId: "hd_phantom_assassin_innate_immaterial",
     name: "Immaterial",
     hero: "phantom_assassin",
@@ -30847,6 +31054,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phantom-assassin-blur",
+    path: "blur",
     gameId: "hd_phantom_assassin_blur",
     name: "Blur",
     hero: "phantom_assassin",
@@ -30965,6 +31173,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phantom-assassin-phantom-strike",
+    path: "phantom-strike",
     gameId: "hd_phantom_assassin_phantom_strike",
     name: "Phantom Strike",
     hero: "phantom_assassin",
@@ -31123,6 +31332,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phantom-assassin-stifling-dagger",
+    path: "stifling-dagger",
     gameId: "hd_phantom_assassin_stifling_dagger",
     name: "Stifling Dagger",
     hero: "phantom_assassin",
@@ -31302,6 +31512,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phantom-assassin-coup-de-grace",
+    path: "coup-de-grace",
     gameId: "hd_phantom_assassin_coup_de_grace",
     name: "Coup de Grace",
     hero: "phantom_assassin",
@@ -31441,6 +31652,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phoenix-innate-radiant-sun",
+    path: "innate-radiant-sun",
     gameId: "hd_phoenix_innate_radiant_sun",
     name: "Blazing Sun",
     hero: "phoenix",
@@ -31531,6 +31743,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phoenix-sun-ray-toggle-move",
+    path: "sun-ray-toggle-move",
     gameId: "hd_phoenix_sun_ray_toggle_move",
     name: "Toggle Move Mode",
     hero: "phoenix",
@@ -31550,6 +31763,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phoenix-sun-ray-stop",
+    path: "sun-ray-stop",
     gameId: "hd_phoenix_sun_ray_stop",
     name: "Cancel Sun Ray",
     hero: "phoenix",
@@ -31568,6 +31782,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phoenix-fire-spirits",
+    path: "fire-spirits",
     gameId: "hd_phoenix_fire_spirits",
     name: "Fire Spirits",
     hero: "phoenix",
@@ -31805,6 +32020,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phoenix-icarus-dive",
+    path: "icarus-dive",
     gameId: "hd_phoenix_icarus_dive",
     name: "Icarus Dive",
     hero: "phoenix",
@@ -31996,6 +32212,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phoenix-launch-fire-spirit",
+    path: "launch-fire-spirit",
     gameId: "hd_phoenix_launch_fire_spirit",
     name: "Launch Fire Spirit",
     hero: "phoenix",
@@ -32145,6 +32362,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phoenix-sun-ray",
+    path: "sun-ray",
     gameId: "hd_phoenix_sun_ray",
     name: "Sun Ray",
     hero: "phoenix",
@@ -32383,6 +32601,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "phoenix-supernova",
+    path: "supernova",
     gameId: "hd_phoenix_supernova",
     name: "Supernova",
     hero: "phoenix",
@@ -32604,6 +32823,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "primal-beast-colossal",
+    path: "colossal",
     gameId: "hd_primal_beast_colossal",
     name: "庞",
     hero: "primal_beast",
@@ -32643,6 +32863,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "primal-beast-rock-throw",
+    path: "rock-throw",
     gameId: "hd_primal_beast_rock_throw",
     name: "砸",
     hero: "primal_beast",
@@ -32744,6 +32965,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "primal-beast-uproar",
+    path: "uproar",
     gameId: "hd_primal_beast_uproar",
     name: "咤",
     hero: "primal_beast",
@@ -32854,6 +33076,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "primal-beast-onslaught",
+    path: "onslaught",
     gameId: "hd_primal_beast_onslaught",
     name: "突",
     hero: "primal_beast",
@@ -32962,6 +33185,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "primal-beast-trample",
+    path: "trample",
     gameId: "hd_primal_beast_trample",
     name: "踏",
     hero: "primal_beast",
@@ -33045,6 +33269,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "primal-beast-pulverize",
+    path: "pulverize",
     gameId: "hd_primal_beast_pulverize",
     name: "捶",
     hero: "primal_beast",
@@ -33137,6 +33362,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "pudge-innate-graft-flesh",
+    path: "innate-graft-flesh",
     gameId: "hd_pudge_innate_graft_flesh",
     name: "Flesh Heap",
     hero: "pudge",
@@ -33235,6 +33461,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "pudge-meat-hook",
+    path: "meat-hook",
     gameId: "hd_pudge_meat_hook",
     name: "Meat Hook",
     hero: "pudge",
@@ -33441,6 +33668,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "pudge-flesh-heap",
+    path: "flesh-heap",
     gameId: "hd_pudge_flesh_heap",
     name: "Meat Shield",
     hero: "pudge",
@@ -33552,6 +33780,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "pudge-rot",
+    path: "rot",
     gameId: "hd_pudge_rot",
     name: "Rot",
     hero: "pudge",
@@ -33729,6 +33958,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "pudge-dismember",
+    path: "dismember",
     gameId: "hd_pudge_dismember",
     name: "Dismember",
     hero: "pudge",
@@ -33901,6 +34131,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "queenofpain-innate-succubus",
+    path: "innate-succubus",
     gameId: "hd_queenofpain_innate_succubus",
     name: "Succubus",
     hero: "queenofpain",
@@ -33951,6 +34182,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "queenofpain-blink",
+    path: "blink",
     gameId: "hd_queenofpain_blink",
     name: "Blink",
     hero: "queenofpain",
@@ -34085,6 +34317,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "queenofpain-scream-of-pain",
+    path: "scream-of-pain",
     gameId: "hd_queenofpain_scream_of_pain",
     name: "Scream of Pain",
     hero: "queenofpain",
@@ -34257,6 +34490,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "queenofpain-shadow-strike",
+    path: "shadow-strike",
     gameId: "hd_queenofpain_shadow_strike",
     name: "Shadow Strike",
     hero: "queenofpain",
@@ -34490,6 +34724,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "queenofpain-sonic-wave",
+    path: "sonic-wave",
     gameId: "hd_queenofpain_sonic_wave",
     name: "Sonic Wave",
     hero: "queenofpain",
@@ -34686,6 +34921,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "rattletrap-innate-armor-power",
+    path: "innate-armor-power",
     gameId: "hd_rattletrap_innate_armor_power",
     name: "Armor Power",
     hero: "rattletrap",
@@ -34883,6 +35119,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "rattletrap-battery-assault",
+    path: "battery-assault",
     gameId: "hd_rattletrap_battery_assault",
     name: "Battery Assault",
     hero: "rattletrap",
@@ -35066,6 +35303,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "rattletrap-energy-explosion",
+    path: "energy-explosion",
     gameId: "hd_rattletrap_energy_explosion",
     name: "Energy Explosion",
     hero: "rattletrap",
@@ -35146,6 +35384,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "rattletrap-power-cogs",
+    path: "power-cogs",
     gameId: "hd_rattletrap_power_cogs",
     name: "Power Cogs",
     hero: "rattletrap",
@@ -35384,6 +35623,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "rattletrap-rocket-flare",
+    path: "rocket-flare",
     gameId: "hd_rattletrap_rocket_flare",
     name: "Rocket Flare",
     hero: "rattletrap",
@@ -35654,6 +35894,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "rattletrap-energy-shield",
+    path: "energy-shield",
     gameId: "hd_rattletrap_energy_shield",
     name: "Energy Shield",
     hero: "rattletrap",
@@ -35784,6 +36025,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "razor-plasma-field",
+    path: "plasma-field",
     gameId: "hd_razor_plasma_field",
     name: "Plasma Field",
     hero: "razor",
@@ -35995,6 +36237,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "razor-static-link",
+    path: "static-link",
     gameId: "hd_razor_static_link",
     name: "Static Link",
     hero: "razor",
@@ -36202,6 +36445,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "razor-storm-surge",
+    path: "storm-surge",
     gameId: "hd_razor_storm_surge",
     name: "Storm Surge",
     hero: "razor",
@@ -36375,6 +36619,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "razor-innate-unstable-current",
+    path: "innate-unstable-current",
     gameId: "hd_razor_innate_unstable_current",
     name: "Unstable Current",
     hero: "razor",
@@ -36403,6 +36648,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "razor-eye-of-the-storm",
+    path: "eye-of-the-storm",
     gameId: "hd_razor_eye_of_the_storm",
     name: "Eye of the Storm",
     hero: "razor",
@@ -36623,6 +36869,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "riki-innate-backstab",
+    path: "innate-backstab",
     gameId: "hd_riki_innate_backstab",
     name: "Backstab",
     hero: "riki",
@@ -36718,6 +36965,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "riki-blink-strike",
+    path: "blink-strike",
     gameId: "hd_riki_blink_strike",
     name: "BLINK STRIKE",
     hero: "riki",
@@ -36850,6 +37098,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "riki-smoke-screen",
+    path: "smoke-screen",
     gameId: "hd_riki_smoke_screen",
     name: "SMOKE SCREEN",
     hero: "riki",
@@ -37021,6 +37270,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "riki-tricks-of-the-trade",
+    path: "tricks-of-the-trade",
     gameId: "hd_riki_tricks_of_the_trade",
     name: "Tricks of the Trade",
     hero: "riki",
@@ -37208,6 +37458,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "riki-permanent-invisibility",
+    path: "permanent-invisibility",
     gameId: "hd_riki_permanent_invisibility",
     name: "Cloak And Dagger",
     hero: "riki",
@@ -37319,6 +37570,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sandking-caustic-finale",
+    path: "caustic-finale",
     gameId: "hd_sandking_caustic_finale",
     name: "Caustic Finale",
     hero: "sand_king",
@@ -37439,6 +37691,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sandking-burrowstrike-return",
+    path: "burrowstrike-return",
     gameId: "hd_sandking_burrowstrike_return",
     name: "Second Burrow",
     hero: "sand_king",
@@ -37456,6 +37709,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sandking-burrowstrike",
+    path: "burrowstrike",
     gameId: "hd_sandking_burrowstrike",
     name: "Burrowstrike",
     hero: "sand_king",
@@ -37686,6 +37940,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sandking-sand-storm",
+    path: "sand-storm",
     gameId: "hd_sandking_sand_storm",
     name: "Sand Storm",
     hero: "sand_king",
@@ -37887,6 +38142,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sandking-scorpion-strike",
+    path: "scorpion-strike",
     gameId: "hd_sandking_scorpion_strike",
     name: "Stinger",
     hero: "sand_king",
@@ -38100,6 +38356,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sandking-epicenter",
+    path: "epicenter",
     gameId: "hd_sandking_epicenter",
     name: "Epicenter",
     hero: "sand_king",
@@ -38312,6 +38569,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "shredder-innate-thermal-power",
+    path: "innate-thermal-power",
     gameId: "hd_shredder_innate_thermal_power",
     name: "Firepower Industry",
     hero: "shredder",
@@ -38380,6 +38638,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "shredder-reactive-armor",
+    path: "reactive-armor",
     gameId: "hd_shredder_reactive_armor",
     name: "Reactive Armor",
     hero: "shredder",
@@ -38610,6 +38869,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "shredder-timber-chain",
+    path: "timber-chain",
     gameId: "hd_shredder_timber_chain",
     name: "Timber Chain",
     hero: "shredder",
@@ -38740,6 +39000,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "shredder-whirling-death",
+    path: "whirling-death",
     gameId: "hd_shredder_whirling_death",
     name: "Whirling Death",
     hero: "shredder",
@@ -38971,6 +39232,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "shredder-return-chakram",
+    path: "return-chakram",
     gameId: "hd_shredder_return_chakram",
     name: "Retracts Chakrams",
     hero: "shredder",
@@ -38988,6 +39250,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "shredder-return-chakram2",
+    path: "return-chakram2",
     gameId: "hd_shredder_return_chakram2",
     name: "Retracts Chakrams",
     hero: "shredder",
@@ -39005,6 +39268,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "shredder-chakram",
+    path: "chakram",
     gameId: "hd_shredder_chakram",
     name: "Chakram",
     hero: "shredder",
@@ -39246,6 +39510,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "silencer-curse-of-the-silent",
+    path: "curse-of-the-silent",
     gameId: "hd_silencer_curse_of_the_silent",
     name: "Arcane Curse",
     hero: "silencer",
@@ -39418,6 +39683,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "silencer-glaives-of-wisdom",
+    path: "glaives-of-wisdom",
     gameId: "hd_silencer_glaives_of_wisdom",
     name: "Glaives of Wisdom",
     hero: "silencer",
@@ -39620,6 +39886,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "silencer-last-word",
+    path: "last-word",
     gameId: "hd_silencer_last_word",
     name: "Last Word",
     hero: "silencer",
@@ -39803,6 +40070,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "silencer-innate-brain-drain",
+    path: "innate-brain-drain",
     gameId: "hd_silencer_innate_brain_drain",
     name: "Silence Is Golden",
     hero: "silencer",
@@ -39863,6 +40131,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "silencer-global-silence",
+    path: "global-silence",
     gameId: "hd_silencer_global_silence",
     name: "Global Silence",
     hero: "silencer",
@@ -39998,6 +40267,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "skywrath-mage-innate-immaterial",
+    path: "innate-immaterial",
     gameId: "hd_skywrath_mage_innate_immaterial",
     name: "Chaos Mend",
     hero: "skywrath_mage",
@@ -40039,6 +40309,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "skywrath-mage-ancient-seal",
+    path: "ancient-seal",
     gameId: "hd_skywrath_mage_ancient_seal",
     name: "Ancient Seal",
     hero: "skywrath_mage",
@@ -40176,6 +40447,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "skywrath-mage-arcane-bolt",
+    path: "arcane-bolt",
     gameId: "hd_skywrath_mage_arcane_bolt",
     name: "Arcane Bolt",
     hero: "skywrath_mage",
@@ -40342,6 +40614,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "skywrath-mage-concussive-shot",
+    path: "concussive-shot",
     gameId: "hd_skywrath_mage_concussive_shot",
     name: "Concussive Shot",
     hero: "skywrath_mage",
@@ -40562,6 +40835,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "skywrath-mage-mystic-flare",
+    path: "mystic-flare",
     gameId: "hd_skywrath_mage_mystic_flare",
     name: "Mystic Flare",
     hero: "skywrath_mage",
@@ -40760,6 +41034,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "slardar-seaborn-sentinel",
+    path: "seaborn-sentinel",
     gameId: "hd_slardar_seaborn_sentinel",
     name: "Seaborn Sentinel",
     hero: "slardar",
@@ -40846,6 +41121,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "slardar-bash",
+    path: "bash",
     gameId: "hd_slardar_bash",
     name: "Bash of the Deep",
     hero: "slardar",
@@ -40967,6 +41243,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "slardar-sprint",
+    path: "sprint",
     gameId: "hd_slardar_sprint",
     name: "Guardian Sprint",
     hero: "slardar",
@@ -41149,6 +41426,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "slardar-slithereen-crush",
+    path: "slithereen-crush",
     gameId: "hd_slardar_slithereen_crush",
     name: "Slithereen Crush",
     hero: "slardar",
@@ -41349,6 +41627,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "slardar-amplify-damage",
+    path: "amplify-damage",
     gameId: "hd_slardar_amplify_damage",
     name: "Corrosive Haze",
     hero: "slardar",
@@ -41487,6 +41766,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "slark-depth-shroud",
+    path: "depth-shroud",
     gameId: "hd_slark_depth_shroud",
     name: "Depth Shroud",
     hero: "slark",
@@ -41530,6 +41810,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "slark-innate-sea-dwellers",
+    path: "innate-sea-dwellers",
     gameId: "hd_slark_innate_sea_dwellers",
     name: "Secretive Dweller",
     hero: "slark",
@@ -41590,6 +41871,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "slark-dark-pact",
+    path: "dark-pact",
     gameId: "hd_slark_dark_pact",
     name: "Dark Pact",
     hero: "slark",
@@ -41798,6 +42080,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "slark-essence-shift",
+    path: "essence-shift",
     gameId: "hd_slark_essence_shift",
     name: "Essence Shift",
     hero: "slark",
@@ -41987,6 +42270,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "slark-pounce",
+    path: "pounce",
     gameId: "hd_slark_pounce",
     name: "Pounce",
     hero: "slark",
@@ -42255,6 +42539,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "slark-shadow-dance",
+    path: "shadow-dance",
     gameId: "hd_slark_shadow_dance",
     name: "Shadow Dance",
     hero: "slark",
@@ -42434,6 +42719,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "snapfire-innate-buckshot",
+    path: "innate-buckshot",
     gameId: "hd_snapfire_innate_buckshot",
     name: "Buckshot",
     hero: "snapfire",
@@ -42473,6 +42759,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "snapfire-firesnap-cookie",
+    path: "firesnap-cookie",
     gameId: "hd_snapfire_firesnap_cookie",
     name: "Firesnap Cookie",
     hero: "snapfire",
@@ -42711,6 +42998,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "snapfire-lil-shredder",
+    path: "lil-shredder",
     gameId: "hd_snapfire_lil_shredder",
     name: "Lil' Shredder",
     hero: "snapfire",
@@ -42941,6 +43229,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "snapfire-scatterblast",
+    path: "scatterblast",
     gameId: "hd_snapfire_scatterblast",
     name: "Scatterblast",
     hero: "snapfire",
@@ -43206,6 +43495,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "snapfire-mortimer-kisses",
+    path: "mortimer-kisses",
     gameId: "hd_snapfire_mortimer_kisses",
     name: "Mortimer Kisses",
     hero: "snapfire",
@@ -43512,6 +43802,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sniper-concussive-grenade",
+    path: "concussive-grenade",
     gameId: "hd_sniper_concussive_grenade",
     name: "Concussive Grenade",
     hero: "sniper",
@@ -43616,6 +43907,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sniper-keen-scope",
+    path: "keen-scope",
     gameId: "hd_sniper_keen_scope",
     name: "Keen Scope",
     hero: "sniper",
@@ -43654,6 +43946,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sniper-headshot",
+    path: "headshot",
     gameId: "hd_sniper_headshot",
     name: "Headshot",
     hero: "sniper",
@@ -43798,6 +44091,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sniper-shrapnel",
+    path: "shrapnel",
     gameId: "hd_sniper_shrapnel",
     name: "Shrapnel",
     hero: "sniper",
@@ -44017,6 +44311,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sniper-take-aim",
+    path: "take-aim",
     gameId: "hd_sniper_take_aim",
     name: "Take Aim",
     hero: "sniper",
@@ -44213,6 +44508,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sniper-assassinate",
+    path: "assassinate",
     gameId: "hd_sniper_assassinate",
     name: "Assassinate",
     hero: "sniper",
@@ -44355,6 +44651,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "storm-spirit-galvanized",
+    path: "galvanized",
     gameId: "hd_storm_spirit_galvanized",
     name: "Galvanized",
     hero: "storm_spirit",
@@ -44411,6 +44708,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "storm-spirit-electric-vortex",
+    path: "electric-vortex",
     gameId: "hd_storm_spirit_electric_vortex",
     name: "Electric Vortex",
     hero: "storm_spirit",
@@ -44596,6 +44894,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "storm-spirit-overload",
+    path: "overload",
     gameId: "hd_storm_spirit_overload",
     name: "Overload",
     hero: "storm_spirit",
@@ -44742,6 +45041,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "storm-spirit-static-remnant",
+    path: "static-remnant",
     gameId: "hd_storm_spirit_static_remnant",
     name: "Static Remnant",
     hero: "storm_spirit",
@@ -44949,6 +45249,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "storm-spirit-ball-lightning",
+    path: "ball-lightning",
     gameId: "hd_storm_spirit_ball_lightning",
     name: "Ball Lightning",
     hero: "storm_spirit",
@@ -45139,6 +45440,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sven-innate-vanquisher",
+    path: "innate-vanquisher",
     gameId: "hd_sven_innate_vanquisher",
     name: "Vanquisher",
     hero: "sven",
@@ -45222,6 +45524,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sven-great-cleave",
+    path: "great-cleave",
     gameId: "hd_sven_great_cleave",
     name: "Great Cleave",
     hero: "sven",
@@ -45360,6 +45663,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sven-storm-bolt",
+    path: "storm-bolt",
     gameId: "hd_sven_storm_bolt",
     name: "Storm Hammer",
     hero: "sven",
@@ -45590,6 +45894,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sven-warcry",
+    path: "warcry",
     gameId: "hd_sven_warcry",
     name: "Warcry",
     hero: "sven",
@@ -45759,6 +46064,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "sven-gods-strength",
+    path: "gods-strength",
     gameId: "hd_sven_gods_strength",
     name: "God's Strength",
     hero: "sven",
@@ -45933,6 +46239,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "techies-innate-spoons-stash",
+    path: "innate-spoons-stash",
     gameId: "hd_techies_innate_spoons_stash",
     name: "Spoon's Stash",
     hero: "techies",
@@ -46231,6 +46538,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "techies-blasting-mines",
+    path: "blasting-mines",
     gameId: "hd_techies_blasting_mines",
     name: "Blast Bomb",
     hero: "techies",
@@ -46433,6 +46741,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "techies-minefield-sign",
+    path: "minefield-sign",
     gameId: "hd_techies_minefield_sign",
     name: "Minefield Sign",
     hero: "techies",
@@ -46472,6 +46781,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "techies-stasis-trap",
+    path: "stasis-trap",
     gameId: "hd_techies_stasis_trap",
     name: "Shock Bomb",
     hero: "techies",
@@ -46638,6 +46948,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "techies-sticky-bomb",
+    path: "sticky-bomb",
     gameId: "hd_techies_sticky_bomb",
     name: "Sticky Bomb",
     hero: "techies",
@@ -46867,6 +47178,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "techies-land-mines",
+    path: "land-mines",
     gameId: "hd_techies_land_mines",
     name: "Proximity Mine",
     hero: "techies",
@@ -47071,6 +47383,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tidehunter-innate-leviathan",
+    path: "innate-leviathan",
     gameId: "hd_tidehunter_innate_leviathan",
     name: "From the Abyss",
     hero: "tidehunter",
@@ -47133,6 +47446,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tidehunter-anchor-smash",
+    path: "anchor-smash",
     gameId: "hd_tidehunter_anchor_smash",
     name: "Anchor Smash",
     hero: "tidehunter",
@@ -47378,6 +47692,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tidehunter-gush",
+    path: "gush",
     gameId: "hd_tidehunter_gush",
     name: "Gush",
     hero: "tidehunter",
@@ -47590,6 +47905,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tidehunter-kraken-shell",
+    path: "kraken-shell",
     gameId: "hd_tidehunter_kraken_shell",
     name: "Kraken Shell",
     hero: "tidehunter",
@@ -47770,6 +48086,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tidehunter-ravage",
+    path: "ravage",
     gameId: "hd_tidehunter_ravage",
     name: "Ravage",
     hero: "tidehunter",
@@ -47973,6 +48290,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tinker-innate-eureka",
+    path: "innate-eureka",
     gameId: "hd_tinker_innate_eureka",
     name: "Eureka!",
     hero: "tinker",
@@ -48109,6 +48427,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tinker-reboot-the-server",
+    path: "reboot-the-server",
     gameId: "hd_tinker_reboot_the_server",
     name: "Reboot the Server",
     hero: "tinker",
@@ -48187,6 +48506,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tinker-deploy-turrets",
+    path: "deploy-turrets",
     gameId: "hd_tinker_deploy_turrets",
     name: "Deploy Turrets",
     hero: "tinker",
@@ -48508,6 +48828,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tinker-laser",
+    path: "laser",
     gameId: "hd_tinker_laser",
     name: "Laser",
     hero: "tinker",
@@ -48761,6 +49082,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tinker-march-of-the-machines",
+    path: "march-of-the-machines",
     gameId: "hd_tinker_march_of_the_machines",
     name: "March Of The Machines",
     hero: "tinker",
@@ -48969,6 +49291,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tinker-rearm",
+    path: "rearm",
     gameId: "hd_tinker_rearm",
     name: "Rearm",
     hero: "tinker",
@@ -49120,6 +49443,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tiny-innate-growth",
+    path: "innate-growth",
     gameId: "hd_tiny_innate_growth",
     name: "Tiny's Growth",
     hero: "tiny",
@@ -49152,6 +49476,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tiny-avalanche",
+    path: "avalanche",
     gameId: "hd_tiny_avalanche",
     name: "Avalanche",
     hero: "tiny",
@@ -49370,6 +49695,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tiny-toss",
+    path: "toss",
     gameId: "hd_tiny_toss",
     name: "Toss",
     hero: "tiny",
@@ -49612,6 +49938,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tiny-tree-grab",
+    path: "tree-grab",
     gameId: "hd_tiny_tree_grab",
     name: "Tree Grab",
     hero: "tiny",
@@ -49825,6 +50152,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tiny-toss-tree",
+    path: "toss-tree",
     gameId: "hd_tiny_toss_tree",
     name: "Tree Throw",
     hero: "tiny",
@@ -49891,6 +50219,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "tiny-grow",
+    path: "grow",
     gameId: "hd_tiny_grow",
     name: "Grow",
     hero: "tiny",
@@ -50034,6 +50363,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "undying-tombstone-zombie-deathstrike",
+    path: "tombstone-zombie-deathstrike",
     gameId: "hd_undying_tombstone_zombie_deathstrike",
     name: "Deathlust",
     hero: "undying",
@@ -50094,6 +50424,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "undying-decay",
+    path: "decay",
     gameId: "hd_undying_decay",
     name: "Decay",
     hero: "undying",
@@ -50307,6 +50638,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "undying-innate-ceaseless-dirge",
+    path: "innate-ceaseless-dirge",
     gameId: "hd_undying_innate_ceaseless_dirge",
     name: "Dirge",
     hero: "undying",
@@ -50366,6 +50698,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "undying-consume-zombies",
+    path: "consume-zombies",
     gameId: "hd_undying_consume_zombies",
     name: "Ravenous Devourer",
     hero: "undying",
@@ -50418,6 +50751,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "undying-soul-rip",
+    path: "soul-rip",
     gameId: "hd_undying_soul_rip",
     name: "Soul Rip",
     hero: "undying",
@@ -50604,6 +50938,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "undying-tombstone",
+    path: "tombstone",
     gameId: "hd_undying_tombstone",
     name: "Tombstone",
     hero: "undying",
@@ -50846,6 +51181,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "undying-flesh-golem",
+    path: "flesh-golem",
     gameId: "hd_undying_flesh_golem",
     name: "Flesh Golem",
     hero: "undying",
@@ -51011,6 +51347,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "ursa-innate-maul",
+    path: "innate-maul",
     gameId: "hd_ursa_innate_maul",
     name: "Maul",
     hero: "ursa",
@@ -51049,6 +51386,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "ursa-earthshock",
+    path: "earthshock",
     gameId: "hd_ursa_earthshock",
     name: "Earthshock",
     hero: "ursa",
@@ -51266,6 +51604,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "ursa-fury-swipes",
+    path: "fury-swipes",
     gameId: "hd_ursa_fury_swipes",
     name: "Fury Swipes",
     hero: "ursa",
@@ -51420,6 +51759,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "ursa-overpower",
+    path: "overpower",
     gameId: "hd_ursa_overpower",
     name: "Overpower",
     hero: "ursa",
@@ -51574,6 +51914,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "ursa-enrage",
+    path: "enrage",
     gameId: "hd_ursa_enrage",
     name: "Enrage",
     hero: "ursa",
@@ -51686,6 +52027,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "vengefulspirit-command-aura",
+    path: "command-aura",
     gameId: "hd_vengefulspirit_command_aura",
     name: "复仇光环",
     hero: "vengefulspirit",
@@ -51759,6 +52101,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "vengefulspirit-wave-of-terror",
+    path: "wave-of-terror",
     gameId: "hd_vengefulspirit_wave_of_terror",
     name: "恐怖波动",
     hero: "vengefulspirit",
@@ -51920,6 +52263,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "vengefulspirit-magic-missile",
+    path: "magic-missile",
     gameId: "hd_vengefulspirit_magic_missile",
     name: "魔法箭",
     hero: "vengefulspirit",
@@ -52038,6 +52382,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "vengefulspirit-nether-swap",
+    path: "nether-swap",
     gameId: "hd_vengefulspirit_nether_swap",
     name: "移形换位",
     hero: "vengefulspirit",
@@ -52092,6 +52437,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "venomancer-innate-poison-born",
+    path: "innate-poison-born",
     gameId: "hd_venomancer_innate_poison_born",
     name: "Venom Genesis",
     hero: "venomancer",
@@ -52147,6 +52493,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "venomancer-plague-ward",
+    path: "plague-ward",
     gameId: "hd_venomancer_plague_ward",
     name: "Plague Ward",
     hero: "venomancer",
@@ -52429,6 +52776,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "venomancer-poison-sting",
+    path: "poison-sting",
     gameId: "hd_venomancer_poison_sting",
     name: "Poison Sting",
     hero: "venomancer",
@@ -52580,6 +52928,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "venomancer-venomous-gale",
+    path: "venomous-gale",
     gameId: "hd_venomancer_venomous_gale",
     name: "Venomous Gale",
     hero: "venomancer",
@@ -52819,6 +53168,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "venomancer-noxious-plague",
+    path: "noxious-plague",
     gameId: "hd_venomancer_noxious_plague",
     name: "Noxious Plague",
     hero: "venomancer",
@@ -53051,6 +53401,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "viper-innate-predator",
+    path: "innate-predator",
     gameId: "hd_viper_innate_predator",
     name: "Poison Burst Damage",
     hero: "viper",
@@ -53126,6 +53477,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "viper-corrosive-skin",
+    path: "corrosive-skin",
     gameId: "hd_viper_corrosive_skin",
     name: "Corrosive Skin",
     hero: "viper",
@@ -53314,6 +53666,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "viper-nethertoxin",
+    path: "nethertoxin",
     gameId: "hd_viper_nethertoxin",
     name: "Nethertoxin",
     hero: "viper",
@@ -53554,6 +53907,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "viper-poison-attack",
+    path: "poison-attack",
     gameId: "hd_viper_poison_attack",
     name: "Poison Attack",
     hero: "viper",
@@ -53753,6 +54107,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "viper-viper-strike",
+    path: "viper-strike",
     gameId: "hd_viper_viper_strike",
     name: "Viper Strike",
     hero: "viper",
@@ -54003,6 +54358,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "void-spirit-innate-intrinsic-edge",
+    path: "innate-intrinsic-edge",
     gameId: "hd_void_spirit_innate_intrinsic_edge",
     name: "Intrinsic Edge",
     hero: "void_spirit",
@@ -54055,6 +54411,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "void-spirit-aether-remnant",
+    path: "aether-remnant",
     gameId: "hd_void_spirit_aether_remnant",
     name: "Aether Remnant",
     hero: "void_spirit",
@@ -54326,6 +54683,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "void-spirit-dissimilate",
+    path: "dissimilate",
     gameId: "hd_void_spirit_dissimilate",
     name: "Dissimilate",
     hero: "void_spirit",
@@ -54496,6 +54854,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "void-spirit-resonant-pulse",
+    path: "resonant-pulse",
     gameId: "hd_void_spirit_resonant_pulse",
     name: "Resonant Pulse",
     hero: "void_spirit",
@@ -54743,6 +55102,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "void-spirit-astral-step",
+    path: "astral-step",
     gameId: "hd_void_spirit_astral_step",
     name: "Astral Step",
     hero: "void_spirit",
@@ -54931,6 +55291,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "warlock-eldritch-summoning",
+    path: "eldritch-summoning",
     gameId: "hd_warlock_eldritch_summoning",
     name: "邪术召唤",
     hero: "warlock",
@@ -54982,6 +55343,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "warlock-rain-of-chaos",
+    path: "rain-of-chaos",
     gameId: "hd_warlock_rain_of_chaos",
     name: "混乱之祭",
     hero: "warlock",
@@ -55123,6 +55485,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "weaver-innate-rewoven",
+    path: "innate-rewoven",
     gameId: "hd_weaver_innate_rewoven",
     name: "The Swarm Heart",
     hero: "weaver",
@@ -55198,6 +55561,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "weaver-geminate-attack",
+    path: "geminate-attack",
     gameId: "hd_weaver_geminate_attack",
     name: "Geminate Attack",
     hero: "weaver",
@@ -55414,6 +55778,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "weaver-shukuchi",
+    path: "shukuchi",
     gameId: "hd_weaver_shukuchi",
     name: "Shukuchi",
     hero: "weaver",
@@ -55683,6 +56048,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "weaver-the-swarm",
+    path: "the-swarm",
     gameId: "hd_weaver_the_swarm",
     name: "The Swarm",
     hero: "weaver",
@@ -55932,6 +56298,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "weaver-time-lapse",
+    path: "time-lapse",
     gameId: "hd_weaver_time_lapse",
     name: "Time Lapse",
     hero: "weaver",
@@ -56132,6 +56499,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "windrunner-innate-easy-breezy",
+    path: "innate-easy-breezy",
     gameId: "hd_windrunner_innate_easy_breezy",
     name: "Easy Breezy",
     hero: "windrunner",
@@ -56194,6 +56562,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "windrunner-focusfire-stop",
+    path: "focusfire-stop",
     gameId: "hd_windrunner_focusfire_stop",
     name: "Stop Whirlwind",
     hero: "windrunner",
@@ -56211,6 +56580,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "windrunner-powershot",
+    path: "powershot",
     gameId: "hd_windrunner_powershot",
     name: "Powershot",
     hero: "windrunner",
@@ -56445,6 +56815,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "windrunner-shackleshot",
+    path: "shackleshot",
     gameId: "hd_windrunner_shackleshot",
     name: "Shackleshot",
     hero: "windrunner",
@@ -56612,6 +56983,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "windrunner-windrun",
+    path: "windrun",
     gameId: "hd_windrunner_windrun",
     name: "Windrun",
     hero: "windrunner",
@@ -56786,6 +57158,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "windrunner-focusfire",
+    path: "focusfire",
     gameId: "hd_windrunner_focusfire",
     name: "Whirlwind",
     hero: "windrunner",
@@ -56978,6 +57351,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "winter-wyvern-innate-eldwurm-scholar",
+    path: "innate-eldwurm-scholar",
     gameId: "hd_winter_wyvern_innate_eldwurm_scholar",
     name: "Eldwurm Scholar",
     hero: "winter_wyvern",
@@ -57011,6 +57385,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "winter-wyvern-arctic-burn",
+    path: "arctic-burn",
     gameId: "hd_winter_wyvern_arctic_burn",
     name: "Arctic Burn",
     hero: "winter_wyvern",
@@ -57259,6 +57634,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "winter-wyvern-cold-embrace",
+    path: "cold-embrace",
     gameId: "hd_winter_wyvern_cold_embrace",
     name: "Cold Embrace",
     hero: "winter_wyvern",
@@ -57427,6 +57803,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "winter-wyvern-splinter-blast",
+    path: "splinter-blast",
     gameId: "hd_winter_wyvern_splinter_blast",
     name: "Splinter Blast",
     hero: "winter_wyvern",
@@ -57638,6 +58015,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "winter-wyvern-winters-curse",
+    path: "winters-curse",
     gameId: "hd_winter_wyvern_winters_curse",
     name: "Winter's Curse",
     hero: "winter_wyvern",
@@ -57812,6 +58190,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "zuus-static-field",
+    path: "static-field",
     gameId: "hd_zuus_static_field",
     name: "Static Field",
     hero: "zuus",
@@ -57884,6 +58263,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "zuus-arc-lightning",
+    path: "arc-lightning",
     gameId: "hd_zuus_arc_lightning",
     name: "Arc Lightning",
     hero: "zuus",
@@ -58039,6 +58419,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "zuus-heavenly-jump",
+    path: "heavenly-jump",
     gameId: "hd_zuus_heavenly_jump",
     name: "Heavenly Jump",
     hero: "zuus",
@@ -58242,6 +58623,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "zuus-lightning-bolt",
+    path: "lightning-bolt",
     gameId: "hd_zuus_lightning_bolt",
     name: "Lightning Bolt",
     hero: "zuus",
@@ -58442,6 +58824,7 @@ export const ABILITIES: HeroAbility[] = [
   },
   {
     slug: "zuus-thundergods-wrath",
+    path: "thundergods-wrath",
     gameId: "hd_zuus_thundergods_wrath",
     name: "Thundergod's Wrath",
     hero: "zuus",

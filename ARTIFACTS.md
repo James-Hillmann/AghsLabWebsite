@@ -1,8 +1,12 @@
 # The catalogue
 
-`/artifacts`, `/relics` and `/abilities` are generated from the game's own files, not written
-by hand. The 106 artifacts, 117 relics and 373 hero abilities — their stats, level growth,
-effect text, costs, drop rates and upgrades — are read straight out of the workshop VPK.
+`/artifacts`, `/relics` and every hero's abilities are generated from the game's own files, not
+written by hand. The 106 artifacts, 117 relics and 373 hero abilities — their stats, level
+growth, effect text, costs, drop rates and upgrades — are read straight out of the workshop VPK.
+
+Artifacts and relics are catalogues you browse. Abilities aren't: they belong to a hero, so
+they live at `/heroes/<hero>/<ability>` and are reached from that hero's page. There's no
+abilities tab, and no index of them all.
 
 That means **`lib/artifacts.generated.ts`, `lib/relics.generated.ts` and
 `lib/abilities.generated.ts` are never edited by hand.** Anything you type into them is gone at
@@ -129,6 +133,12 @@ And for `scripts/lib/abilities.mjs`:
 - **Hero display names exist in no game file.** `npc_dota_hero_ursa` is not a localization
   token. Names come from `lib/heroes.ts` in the wrapper, which is the only place the generated
   ability data touches the hand-written roster.
+- **An ability has two identifiers, and they aren't interchangeable.** `slug`
+  (`ursa-earthshock`) is globally unique and is what a comment thread is keyed on in the
+  database, which knows nothing about routes. `path` (`earthshock`) is the segment under the
+  hero and is only unique within that hero. Use `abilityHref()` rather than building either by
+  hand. The prefix is stripped using the game's *directory* name, not the site's hero slug —
+  Sand King's abilities are `hd_sandking_*` while the roster calls him `sand_king`.
 
 ## Known limits
 
@@ -148,8 +158,11 @@ And for `scripts/lib/abilities.mjs`:
   from the text rather than guessed at — substituting the number that *looks* intended would be
   inventing data. Anything not on that list still fails the build.
 - **7 heroes have abilities but no roster entry** in `lib/heroes.ts` (Abaddon, Alchemist, Bane,
-  Drow Ranger, Primal Beast, Vengeful Spirit, Warlock). Their ability pages render the hero name
-  as plain text rather than a dead link. Muerta is the reverse: on the roster, no abilities.
+  Drow Ranger, Primal Beast, Vengeful Spirit, Warlock). Since abilities are reached through
+  their hero and those heroes have no page, their ~34 abilities are now **unreachable by
+  navigation** — the pages render if you type the URL, and nothing links to them. Adding the
+  heroes to `HEROES` fixes it; that's hand-written roster content, so it hasn't been guessed at.
+  Muerta is the reverse: on the roster, no abilities.
 - **A few epic upgrades ship untranslated**, still in Chinese in `addon_english.txt`. They're
   passed through as-is; there's nothing else to show.
 - **The generator needs the game installed.** It's a regeneration step, not a build step — the

@@ -215,7 +215,17 @@ export type AbilityShard = {
 }
 
 export type HeroAbility = {
+  /**
+   * Globally unique, and what a comment thread is keyed on. Distinct from \`path\` on purpose:
+   * this one has to stay stable and collision-free across every hero, because it identifies
+   * the ability in the database, where nothing knows about routes.
+   */
   slug: string
+  /**
+   * The URL segment under the hero -- 'earthshock', not 'ursa-earthshock'. Unique within its
+   * hero, which is all a nested route needs.
+   */
+  path: string
   /** The game's own id, so a row can be traced back to the KV it came from. */
   gameId: string
   name: string

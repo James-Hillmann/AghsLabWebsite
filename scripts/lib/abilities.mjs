@@ -125,6 +125,23 @@ const REDUCED_BY_SHARD = new Set([
 const toSlug = (gameId) => gameId.replace(/^hd_/, '').replace(/_/g, '-')
 
 /**
+ * The URL segment under the hero: 'hd_ursa_earthshock' -> 'earthshock'.
+ *
+ * Stripped using the VPK's own directory name rather than the site's hero slug, because the
+ * two differ where HERO_SLUG_ALIASES applies -- Sand King's six abilities are `hd_sandking_*`
+ * while the site calls the hero `sand_king`, so matching on the slug would leave the prefix on.
+ *
+ * Falls back to the full slug if the id doesn't carry its hero, which keeps the segment unique
+ * rather than guessing. No ability currently needs that.
+ */
+function toPath(gameId, dir) {
+  const prefix = `hd_${dir}_`
+  return gameId.startsWith(prefix)
+    ? gameId.slice(prefix.length).replace(/_/g, '-')
+    : toSlug(gameId)
+}
+
+/**
  * The texture name, reduced to the leaf the CDN keys on.
  *
  * Forty-odd abilities name their art by panorama path rather than by texture --
@@ -471,6 +488,7 @@ export function buildAbilities() {
 
       const ability = {
         slug,
+        path: toPath(gameId, dir),
         gameId,
         name: abilityNames.get(gameId),
         hero,
