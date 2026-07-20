@@ -121,6 +121,20 @@ const REDUCED_BY_SHARD = new Set([
   'AbilityChargeRestoreTime',
 ])
 
+/**
+ * Shard keys whose number is a percentage rather than a flat amount.
+ *
+ * These two are the game's generic cooldown/mana shards, applied across every ability, and
+ * they carry no localization at all -- not under the ability, not standalone -- so nothing in
+ * the files says what the unit is. Two things settle it: the values are far too uniform to be
+ * absolute (`hd_cooldown` is only ever 4, 7, 10, 11 or 12 across 233 shards, on abilities whose
+ * cooldowns range from 3 seconds to 120), and the in-game tooltip reads "-7%".
+ *
+ * Everything else is a key the parent ability also uses, so its unit comes from that ability's
+ * own tooltip label instead -- read, not assumed.
+ */
+const PERCENT_SHARD_KEYS = new Set(['hd_cooldown', 'hd_mana_cost'])
+
 /** 'hd_ursa_earthshock' -> 'ursa-earthshock'. */
 const toSlug = (gameId) => gameId.replace(/^hd_/, '').replace(/_/g, '-')
 
@@ -394,8 +408,9 @@ function readEpics(epicKv, abilityNames, english, problems) {
  * Shards, grouped by the ability they upgrade.
  *
  * These have no localization whatsoever, so every word of their text is derived: the label
- * comes from the parent ability's own tooltip string for that value key, and the direction is
- * inferred from the key. See SHARD_LABELS and REDUCED_BY_SHARD.
+ * comes from the parent ability's own tooltip string for that value key; the direction and, for
+ * the two generic keys, the percent sign are inferred. See SHARD_LABELS, REDUCED_BY_SHARD and
+ * PERCENT_SHARD_KEYS.
  */
 function readShards(shardKv, abilityNames, english, epicIds) {
   const byAbility = {}
@@ -410,10 +425,17 @@ function readShards(shardKv, abilityNames, english, epicIds) {
       if (amount === undefined || amount === 0) continue
 
       const localized = english.get(`DOTA_Tooltip_ability_${target}_${key}`)
+      // A leading % on the parent ability's label is the game's own marker for a percentage,
+      // the same signal readValues uses. The generic hd_* keys have no label to read, so they
+      // come from PERCENT_SHARD_KEYS instead.
+      const isPercent =
+        PERCENT_SHARD_KEYS.has(key) || Boolean(localized?.trimStart().startsWith('%'))
+
       effects.push({
         name: localized ? valueLabel(localized, key) : (SHARD_LABELS[key] ?? titleCase(key)),
         amount,
         direction: REDUCED_BY_SHARD.has(key) ? 'down' : 'up',
+        ...(isPercent ? { unit: '%' } : {}),
       })
     }
     if (!effects.length) continue

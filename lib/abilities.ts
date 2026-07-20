@@ -128,7 +128,8 @@ export function formatCast(values: number[] | undefined): string | null {
   return values.length === 1 ? String(values[0]) : values.join(' / ')
 }
 
-/** "Cooldown −7", the way a shard effect reads. */
+/** "Cooldown −7%", the way a shard effect reads. */
 export function formatShardEffect(effect: AbilityShard['effects'][number]): string {
-  return `${effect.name} ${effect.direction === 'down' ? '−' : '+'}${effect.amount}`
+  const sign = effect.direction === 'down' ? '−' : '+'
+  return `${effect.name} ${sign}${effect.amount}${effect.unit ?? ''}`
 }

@@ -124,10 +124,19 @@ And for `scripts/lib/abilities.mjs`:
 - **Talent numbers live on the ability, not the talent.** A talent row carries no values at all;
   the operand sits in the value it modifies, as `special_bonus_…: "+400"`, and the talent's
   string reads it back through `{s:bonus_<key>}`.
-- **Shard upgrades have no localization whatsoever.** Every word of their text is derived: the
-  label from the parent ability's tooltip string for that value key, and the ± direction
-  *inferred* from the key via `REDUCED_BY_SHARD`. That inference is the one thing on the
-  ability pages the data doesn't actually assert — worth re-checking in game after an update.
+- **Shard upgrades have no localization whatsoever.** Every word of their text is derived. The
+  label and the unit come from the parent ability's own tooltip string for that value key —
+  a leading `%` there is the game's marker for a percentage, same signal `readValues` uses.
+
+  Two things are *inferred* rather than read, and they're the only claims on the ability pages
+  the data doesn't make itself:
+
+  - the ± direction, from `REDUCED_BY_SHARD` — a shard touching a cooldown reduces it.
+  - the unit on `hd_cooldown` and `hd_mana_cost`, the game's generic cooldown/mana shards.
+    Those carry no label anywhere, and `PERCENT_SHARD_KEYS` marks them percentages. The values
+    give it away — `hd_cooldown` is only ever 4, 7, 10, 11 or 12 across 233 shards, on abilities
+    whose cooldowns run from 3 seconds to 120 — and James confirmed "−7%" against the in-game
+    tooltip. Re-check both after a game update; nothing in the files would flag a change.
 - The upgrade file's entry keys are misspelled **`upgade_*`** in the game. Match the typo, same
   rule as `aritfact`.
 - **Hero display names exist in no game file.** `npc_dota_hero_ursa` is not a localization

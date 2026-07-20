@@ -203,10 +203,13 @@ export type AbilityEpic = {
  * These carry no localization at all in the game files, so every word here is derived -- the
  * label from the parent ability's own tooltip string, and \`direction\` inferred from the key,
  * since the data stores a bare magnitude with no sign.
+ *
+ * \`unit\` is read from the parent ability's label where there is one. The game's two generic
+ * cooldown/mana shards have none, and are percentages -- confirmed against the in-game tooltip.
  */
 export type AbilityShard = {
   gameId: string
-  effects: { name: string; amount: number; direction: 'up' | 'down' }[]
+  effects: { name: string; amount: number; direction: 'up' | 'down'; unit?: '%' }[]
   /** How many times it can be taken, when the game caps it. */
   countLimit?: number
   /** Epics this shard feeds, by game id. Only a couple of shards declare one. */
