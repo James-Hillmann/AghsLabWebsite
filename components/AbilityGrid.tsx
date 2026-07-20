@@ -1,9 +1,17 @@
+import Link from 'next/link'
+
 import { abilityIconUrl, type Ability } from '@/lib/heroes'
+
+import { RichText } from './RichText'
 
 /**
  * Icons and names are pre-filled from Dota as scaffolding. Labyrinth reworks a lot of
  * these, so nothing here claims to describe behaviour -- the descriptions are ours to
  * write, and each slot says so until one exists.
+ *
+ * Where a hero has no write-up, the page falls back to the generated catalogue instead, and
+ * those rows arrive with an `href` and a description carrying RichText markers -- which is why
+ * the text goes through RichText rather than being printed directly.
  */
 export function AbilityGrid({ abilities }: { abilities: Ability[] }) {
   return (
@@ -33,9 +41,24 @@ export function AbilityGrid({ abilities }: { abilities: Ability[] }) {
             )}
 
             <div className="min-w-0 pt-1">
-              <h3 className="text-sm font-medium text-frost">{ability.name}</h3>
+              <h3 className="text-sm font-medium text-frost">
+                {ability.href ? (
+                  <Link
+                    href={ability.href}
+                    className="transition-colors duration-200 hover:text-glow"
+                  >
+                    {ability.name}
+                  </Link>
+                ) : (
+                  ability.name
+                )}
+              </h3>
               <p className="mt-1 text-xs leading-relaxed text-muted">
-                {ability.description ?? 'No write-up yet.'}
+                {ability.description ? (
+                  <RichText text={ability.description} />
+                ) : (
+                  'No write-up yet.'
+                )}
               </p>
             </div>
           </li>

@@ -1,4 +1,4 @@
-// The shape of a comment on an artifact or a relic. Deliberately free of any database import
+// The shape of a comment on an artifact, a relic or an ability. Deliberately free of any database import
 // so the cards and the editor -- both client components -- can share these types. Reads and
 // writes live in lib/comments-db.ts, which is server-only.
 //
@@ -8,7 +8,7 @@
 
 import { type Author } from './authors'
 
-export const COMMENT_KINDS = ['artifact', 'relic'] as const
+export const COMMENT_KINDS = ['artifact', 'relic', 'ability'] as const
 
 export type CommentKind = (typeof COMMENT_KINDS)[number]
 

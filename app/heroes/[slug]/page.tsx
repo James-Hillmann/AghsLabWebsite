@@ -9,6 +9,7 @@ import { Section } from '@/components/Section'
 import { SiteHeader } from '@/components/SiteHeader'
 import { TakeCard } from '@/components/TakeCard'
 import { TalentTree } from '@/components/TalentTree'
+import { abilitiesByHero } from '@/lib/abilities'
 import { AUTHORS } from '@/lib/authors'
 import { requireSession } from '@/lib/auth-guard'
 import { ATTRIBUTE_COLOR, getHero } from '@/lib/heroes'
@@ -23,6 +24,17 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
 
   const accent = ATTRIBUTE_COLOR[hero.attribute]
   const takes = await getTakesForHero(hero.slug)
+
+  // The write-ups here are ours and stay the source of truth. What the generated catalogue adds
+  // is a link: about three quarters of the hand-written entries name an ability that exists in
+  // the game files too, and those get a route through to its real numbers. The rest are Dota
+  // abilities Labyrinth doesn't use, and stay plain text.
+  const generated = abilitiesByHero()[hero.slug] ?? []
+  const normalise = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/g, '')
+  const abilities = (hero.abilities ?? []).map((ability) => {
+    const match = generated.find((other) => normalise(other.name) === normalise(ability.name))
+    return match ? { ...ability, href: `/abilities/${match.slug}` } : ability
+  })
 
   return (
     <main className="flex flex-1 flex-col">
@@ -58,8 +70,8 @@ export default async function HeroPage({ params }: { params: Promise<{ slug: str
               codex={
                 <>
                   <Section title="Abilities">
-                    {hero.abilities?.length ? (
-                      <AbilityGrid abilities={hero.abilities} />
+                    {abilities.length ? (
+                      <AbilityGrid abilities={abilities} />
                     ) : (
                       <EmptySlot>No abilities recorded for {hero.name} yet.</EmptySlot>
                     )}

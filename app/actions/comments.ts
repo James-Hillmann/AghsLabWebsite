@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 
+import { getAbility } from '@/lib/abilities'
 import { getArtifact } from '@/lib/artifacts'
 import { requireSession } from '@/lib/auth-guard'
 import { COMMENT_MAX_LENGTH, isCommentKind, type CommentKind } from '@/lib/comments'
@@ -20,7 +21,9 @@ function fail(error: string): CommentState {
 
 /** The subject has to exist in the generated catalogue, or the row is orphaned on write. */
 function subjectExists(kind: CommentKind, slug: string): boolean {
-  return kind === 'artifact' ? Boolean(getArtifact(slug)) : Boolean(getRelic(slug))
+  if (kind === 'artifact') return Boolean(getArtifact(slug))
+  if (kind === 'relic') return Boolean(getRelic(slug))
+  return Boolean(getAbility(slug))
 }
 
 export async function saveComment(
@@ -65,7 +68,8 @@ export async function saveComment(
     return fail("Couldn't save that. Try again in a moment.")
   }
 
-  const section = kindRaw === 'artifact' ? 'artifacts' : 'relics'
+  // Each kind is its own top-level section, and the plural is the route.
+  const section = `${kindRaw}s`
   revalidatePath(`/${section}/${slugRaw}`)
   revalidatePath(`/${section}`)
 

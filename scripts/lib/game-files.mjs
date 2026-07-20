@@ -14,6 +14,11 @@ export const GAME_NAME = "Aghanim's Labyrinth III: Crisis of Infinite Dimensions
 export const SOURCE_FILES = {
   artifacts: 'scripts/npc/items/item_player_artifact.kv',
   relics: 'scripts/npc/spell_modify/spell_modify_relics.kv',
+  // Abilities and their two upgrade systems. The third filename is spelled correctly; the
+  // entry keys inside it are not (upgade_hd_*), same as the artifact icon directory below.
+  abilities: 'scripts/npc/abilities/hero_abilities.kv',
+  abilityEpics: 'scripts/npc/abilities/hero_epic_upgrade.kv',
+  abilityShards: 'scripts/npc/abilities/hero_ability_upgrade.kv',
   english: 'resource/addon_english.txt',
   // The game misspells this directory. Matching the typo is required, not a mistake here.
   iconDir: 'panorama/images/custom_game/aritfact',

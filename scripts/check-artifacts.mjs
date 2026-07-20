@@ -16,6 +16,7 @@ import { fileURLToPath } from 'node:url'
 
 import ts from 'typescript'
 
+import { buildAbilities } from './lib/abilities.mjs'
 import { buildCatalogue } from './lib/catalogue.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -41,6 +42,7 @@ async function loadGenerated(file) {
 
 const { ARTIFACTS, ERAS } = await loadGenerated('lib/artifacts.generated.ts')
 const { RELICS } = await loadGenerated('lib/relics.generated.ts')
+const { ABILITIES } = await loadGenerated('lib/abilities.generated.ts')
 
 // --- artifacts ---------------------------------------------------------------------------
 
@@ -141,6 +143,86 @@ for (const relic of RELICS) {
   }
 }
 
+// --- abilities ---------------------------------------------------------------------------
+
+const abilitySlugs = new Set()
+const epicIds = new Set(ABILITIES.flatMap((ability) => ability.epics.map((epic) => epic.gameId)))
+
+for (const ability of ABILITIES) {
+  const where = `ability ${ability.slug ?? ability.name ?? '<unnamed>'}`
+
+  if (!ability.slug || !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(ability.slug)) {
+    fail(`${where}: slug must be kebab-case`)
+  }
+  if (abilitySlugs.has(ability.slug)) fail(`${where}: duplicate slug`)
+  abilitySlugs.add(ability.slug)
+
+  if (!ability.name) fail(`${where}: missing name`)
+  if (!ability.hero) fail(`${where}: missing hero`)
+  // Deliberately bounded rather than just positive: a 40 here would mean the artifact model
+  // leaked into the ability generator.
+  if (!(ability.maxLevel >= 1 && ability.maxLevel <= 4)) {
+    fail(`${where}: maxLevel is ${ability.maxLevel}, expected 1-4`)
+  }
+  // It becomes a path segment in a CDN url, so it can't carry anything that needs escaping.
+  if (ability.iconName && !/^[a-z0-9_]+$/.test(ability.iconName)) {
+    fail(`${where}: iconName "${ability.iconName}" isn't url-safe`)
+  }
+
+  const talentIds = new Set(ability.talents.map((talent) => talent.id))
+
+  for (const value of ability.values ?? []) {
+    if (!value.name) fail(`${where}: value "${value.key}" has no name`)
+    if (!value.values?.length) fail(`${where}: value "${value.key}" has no numbers`)
+    if (value.values?.some((n) => typeof n !== 'number' || Number.isNaN(n))) {
+      fail(`${where}: value "${value.key}" has a non-numeric entry`)
+    }
+    // One number is flat at every level. More than that is per-level, but the game sometimes
+    // writes fewer than the cap -- Ember Spirit's Immolation is a 4-level ability with three
+    // damage numbers -- and valueAtLevel holds the last one. What can't happen is more numbers
+    // than levels, which would mean the array was read against the wrong cap.
+    if (value.values && value.values.length > ability.maxLevel) {
+      fail(
+        `${where}: value "${value.key}" has ${value.values.length} numbers for ${ability.maxLevel} levels`,
+      )
+    }
+    for (const talent of value.talents ?? []) {
+      if (!talentIds.has(talent.id)) {
+        fail(`${where}: value "${value.key}" cites talent ${talent.id}, which it doesn't carry`)
+      }
+    }
+  }
+
+  // The cross-file joins are what rots first on a game update, so they're checked by name.
+  for (const epic of ability.epics ?? []) {
+    if (!epic.name) fail(`${where}: an epic has no name`)
+    for (const slug of epic.alsoAffects ?? []) {
+      if (!ABILITIES.some((other) => other.slug === slug)) {
+        fail(`${where}: epic ${epic.gameId} also-affects "${slug}", which is not an ability`)
+      }
+    }
+  }
+  for (const shard of ability.shards ?? []) {
+    if (!shard.effects?.length) fail(`${where}: shard ${shard.gameId} changes nothing`)
+    for (const epicId of shard.powers ?? []) {
+      if (!epicIds.has(epicId)) {
+        fail(`${where}: shard ${shard.gameId} feeds "${epicId}", which is not an epic`)
+      }
+    }
+  }
+
+  for (const text of [
+    ability.description,
+    ability.note,
+    ...ability.talents.map((talent) => talent.text),
+    ...ability.epics.flatMap((epic) => [epic.description, epic.simple]),
+  ]) {
+    if (typeof text === 'string' && /%[a-z0-9_]+%|\{[a-z0-9_]+\}/i.test(text)) {
+      fail(`${where}: unresolved placeholder in "${text.slice(0, 60)}..."`)
+    }
+  }
+}
+
 // --- icons -------------------------------------------------------------------------------
 
 // Icons are extracted separately, so missing art is expected on a fresh clone and only worth
@@ -192,6 +274,30 @@ try {
     }
   }
 
+  const liveAbilities = buildAbilities()
+  if (liveAbilities.abilities.length !== ABILITIES.length) {
+    differences.push(
+      `${liveAbilities.abilities.length} abilities in the game vs ${ABILITIES.length} committed`,
+    )
+  }
+
+  const committedAbilities = new Map(ABILITIES.map((ability) => [ability.slug, ability]))
+  for (const ability of liveAbilities.abilities) {
+    const existing = committedAbilities.get(ability.slug)
+    if (!existing) {
+      differences.push(`${ability.slug} exists in the game but not in the committed abilities`)
+      continue
+    }
+    for (const field of ['name', 'hero', 'maxLevel', 'isUltimate', 'requiredLevel']) {
+      if (JSON.stringify(existing[field]) !== JSON.stringify(ability[field])) {
+        differences.push(`${ability.slug}.${field}: committed ${existing[field]}, game says ${ability[field]}`)
+      }
+    }
+    if (JSON.stringify(existing.values) !== JSON.stringify(ability.values)) {
+      differences.push(`${ability.slug}.values differ from the game files`)
+    }
+  }
+
   if (differences.length) {
     fail(`the committed catalogue is out of date -- run npm run catalogue:generate`)
     for (const difference of differences.slice(0, 10)) fail(`  ${difference}`)
@@ -217,7 +323,18 @@ const relicsWithArt = relicsWantingArt.filter((relic) =>
   existsSync(path.join(RELIC_ICONS, `${relic.slug}.png`)),
 ).length
 
-console.log(`${ARTIFACTS.length} artifacts, ${RELICS.length} relics, no problems.`)
+const epicCount = ABILITIES.reduce((total, ability) => total + ability.epics.length, 0)
+const shardCount = ABILITIES.reduce((total, ability) => total + ability.shards.length, 0)
+
+console.log(
+  `${ARTIFACTS.length} artifacts, ${RELICS.length} relics, ${ABILITIES.length} abilities, no problems.`,
+)
+console.log(
+  `       ${epicCount} epic and ${shardCount} shard upgrades across ` +
+    `${new Set(ABILITIES.map((ability) => ability.hero)).size} heroes`,
+)
+// No icon line for abilities: their art is Valve's, served from the CDN, so there's nothing
+// extracted into public/ to count.
 console.log(`icons: ${withArt}/${ARTIFACTS.length} artifacts, ${relicsWithArt}/${relicsWantingArt.length} relics`)
 console.log(
   `       ${RELICS.length - relicsWantingArt.length} relics have no art in the game (attributes)`,

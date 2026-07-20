@@ -1,8 +1,9 @@
-// Regenerates lib/artifacts.generated.ts and lib/relics.generated.ts from the game files.
+// Regenerates the three catalogue files -- artifacts, relics and abilities -- from the game
+// files.
 //
 //   npm run catalogue:generate
 //
-// Both outputs are machine-owned: types and data are emitted together so the dependency runs
+// All outputs are machine-owned: types and data are emitted together so the dependency runs
 // one way (lib/artifacts.ts -> lib/artifacts.generated.ts) with no import cycle. Opinions
 // about artifacts live in the database, not here, so regenerating can never overwrite writing.
 
@@ -10,6 +11,7 @@ import { writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { buildAbilities } from './lib/abilities.mjs'
 import { buildCatalogue } from './lib/catalogue.mjs'
 import { GAME_NAME, WORKSHOP_ID } from './lib/game-files.mjs'
 
@@ -144,6 +146,104 @@ export type Relic = {
 }
 `
 
+const ABILITY_TYPES = `
+/**
+ * One line of an ability's value block.
+ *
+ * Unlike an artifact stat, an ability's number doesn't grow by a formula -- the game writes it
+ * out at each of the ability's levels, so \`values\` is either one number (flat at every level)
+ * or exactly \`maxLevel\` of them.
+ */
+export type AbilityValue = {
+  key: string
+  name: string
+  values: number[]
+  unit?: '%'
+  /** Grows with the run's area-of-effect bonus. */
+  scalesWithAoe?: boolean
+  /** Counted as attack damage rather than spell damage. */
+  isAttackDamage?: boolean
+  /** Talents that change this line. \`id\` indexes into the ability's own \`talents\`. */
+  talents?: { id: string; op: '+' | '='; amount: number }[]
+}
+
+/** The numbers the game prints in the tooltip's footer rather than its body. */
+export type AbilityCast = {
+  cooldown?: number[]
+  manaCost?: number[]
+  castRange?: number[]
+  duration?: number[]
+  channelTime?: number[]
+  charges?: number[]
+  chargeRestore?: number[]
+}
+
+export type AbilityTalent = {
+  id: string
+  text: string
+}
+
+/** A rolled upgrade that changes how an ability behaves. */
+export type AbilityEpic = {
+  gameId: string
+  name: string
+  description: string
+  /** The one-line version the game shows where there's no room for the full text. */
+  simple?: string
+  /** Drop weight within this hero's epic pool. */
+  weight: number
+  iconName: string | null
+  /** Other abilities this epic also modifies, as slugs. */
+  alsoAffects: string[]
+}
+
+/**
+ * A shard upgrade: a flat change to one of the ability's numbers.
+ *
+ * These carry no localization at all in the game files, so every word here is derived -- the
+ * label from the parent ability's own tooltip string, and \`direction\` inferred from the key,
+ * since the data stores a bare magnitude with no sign.
+ */
+export type AbilityShard = {
+  gameId: string
+  effects: { name: string; amount: number; direction: 'up' | 'down' }[]
+  /** How many times it can be taken, when the game caps it. */
+  countLimit?: number
+  /** Epics this shard feeds, by game id. Only a couple of shards declare one. */
+  powers: string[]
+  weight: number
+}
+
+export type HeroAbility = {
+  slug: string
+  /** The game's own id, so a row can be traced back to the KV it came from. */
+  gameId: string
+  name: string
+  /** Valve's internal hero name, which is what lib/heroes.ts keys on. */
+  hero: string
+  /**
+   * Valve's texture name. Resolved to a CDN url at render time -- ability art is Valve's, not
+   * the workshop's, so unlike artifacts and relics there's nothing to extract.
+   */
+  iconName: string | null
+  /** 1, 3 or 4. An ability's cap is not an artifact's. */
+  maxLevel: number
+  isUltimate: boolean
+  /** Hero level the ability unlocks at. */
+  requiredLevel: number
+  levelsBetweenUpgrades: number
+  description: string
+  /** The smaller grey clarification the tooltip prints underneath. */
+  note?: string
+  flavor?: string
+  values: AbilityValue[]
+  cast: AbilityCast
+  talents: AbilityTalent[]
+  epics: AbilityEpic[]
+  shards: AbilityShard[]
+}
+`
+
 function write(file, banner, types, name, type, rows) {
   const body = rows.map((row) => `  ${serialize(row, 1)}`).join(',\n')
   const source = `${banner}${types}\nexport const ${name}: ${type}[] = [\n${body},\n]\n`
@@ -152,6 +252,8 @@ function write(file, banner, types, name, type, rows) {
 }
 
 const { artifacts, relics, eraNames, problems } = buildCatalogue()
+const { abilities, heroes, problems: abilityProblems } = buildAbilities()
+problems.push(...abilityProblems)
 
 // Archive order: era first, then rarest-first inside it, so the grid reads the way the
 // collection actually feels rather than in the KV's arbitrary order.
@@ -161,11 +263,24 @@ artifacts.sort((a, b) => {
 })
 relics.sort((a, b) => Number(a.isAttribute) - Number(b.isAttribute) || a.name.localeCompare(b.name))
 
+// Skill-bar order within a hero: the order the abilities unlock, ultimates last. That's the
+// order a player already has in their head, which beats anything alphabetical.
+abilities.sort(
+  (a, b) =>
+    a.hero.localeCompare(b.hero) ||
+    Number(a.isUltimate) - Number(b.isUltimate) ||
+    a.requiredLevel - b.requiredLevel ||
+    a.name.localeCompare(b.name),
+)
+
 const artifactLines = write(
   'lib/artifacts.generated.ts', BANNER, ARTIFACT_TYPES, 'ARTIFACTS', 'Artifact', artifacts,
 )
 const relicLines = write(
   'lib/relics.generated.ts', BANNER, RELIC_TYPES, 'RELICS', 'Relic', relics,
+)
+const abilityLines = write(
+  'lib/abilities.generated.ts', BANNER, ABILITY_TYPES, 'ABILITIES', 'HeroAbility', abilities,
 )
 
 const byEra = {}
@@ -176,6 +291,15 @@ console.log(
   `  eras: ${Object.entries(byEra).map(([era, n]) => `${eraNames[era]} ${n}`).join(', ')}`,
 )
 console.log(`lib/relics.generated.ts     ${relics.length} relics, ${relicLines} lines`)
+
+const epicCount = abilities.reduce((total, ability) => total + ability.epics.length, 0)
+const shardCount = abilities.reduce((total, ability) => total + ability.shards.length, 0)
+const talentCount = abilities.reduce((total, ability) => total + ability.talents.length, 0)
+
+console.log(`lib/abilities.generated.ts  ${abilities.length} abilities, ${abilityLines} lines`)
+console.log(
+  `  ${heroes.length} heroes, ${epicCount} epics, ${shardCount} shards, ${talentCount} talents`,
+)
 
 const unresolved = problems.filter((problem) => problem.includes('unresolved'))
 const dropped = problems.filter((problem) => problem.includes('dropped'))

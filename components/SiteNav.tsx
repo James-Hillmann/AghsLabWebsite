@@ -8,11 +8,13 @@ import { usePathname } from 'next/navigation'
  * usePathname, and SiteHeader is an async Server Component that reads the session -- keeping
  * the client boundary this small leaves the author badge on the server.
  *
- * Ordered roster, catalogues, tracker: Heroes and the two generated catalogues are reference,
- * Guidance is the thing you actually update as you play.
+ * Ordered roster, catalogues, tracker: Heroes and the three generated catalogues are reference,
+ * Guidance is the thing you actually update as you play. Abilities sits next to Heroes because
+ * it's a facet of the roster rather than something you collect.
  */
 const LINKS = [
   { href: '/heroes', label: 'Heroes' },
+  { href: '/abilities', label: 'Abilities' },
   { href: '/artifacts', label: 'Artifacts' },
   { href: '/relics', label: 'Relics' },
   { href: '/guidance', label: 'Guidance' },

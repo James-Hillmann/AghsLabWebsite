@@ -25,6 +25,8 @@ export type Ability = {
   image?: string
   /** Labyrinth behaviour, written by us -- Valve's wording doesn't apply here. */
   description?: string
+  /** Set when the ability also exists in the generated catalogue, which has the numbers. */
+  href?: string
 }
 
 /**
