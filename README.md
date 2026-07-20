@@ -37,7 +37,7 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
 
 ## How the gate works
 
-- `app/actions/auth.ts` — Server Action. Constant-time compare against `SITE_PASSWORD`, rate
+- `app/actions/auth.ts` — Server Action. Constant-time compare against both passphrases, rate
   limited per IP, then sets a `jose`-signed httpOnly cookie good for 30 days.
 - `proxy.ts` — redirects any route other than `/` to the landing screen without a valid cookie.
   (Next 16 renamed `middleware.ts` to `proxy.ts`.)
@@ -75,10 +75,10 @@ a comment per person per artifact or relic, next to the same per-author takes he
 
 1. Push the repo to GitHub.
 2. Import it in Vercel — the framework preset is detected automatically.
-3. Add `SITE_PASSWORD` and `SESSION_SECRET` under Settings → Environment Variables, for all
-   environments.
+3. Add `SITE_PASSWORD_JAMES`, `SITE_PASSWORD_LIAM` and `SESSION_SECRET` under Settings →
+   Environment Variables, for all environments.
 
-**The site is not protected until those variables exist in Vercel.** Without `SITE_PASSWORD` the
+**The site is not protected until those variables exist in Vercel.** Without both passphrases the
 gate refuses every attempt; without `SESSION_SECRET` pages error. Verify the gate against the live
 URL after the first deploy.
 
