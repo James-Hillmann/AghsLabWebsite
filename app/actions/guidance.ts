@@ -5,7 +5,7 @@ import { revalidatePath } from 'next/cache'
 import { requireSession } from '@/lib/auth-guard'
 import { isDatabaseConfigured } from '@/lib/db'
 import { getTome, type Tome } from '@/lib/guidance'
-import { deleteCode, setActiveTome, upsertCode } from '@/lib/guidance-db'
+import { deleteCode, isMissingTableError, setActiveTome, upsertCode } from '@/lib/guidance-db'
 
 // A 'use server' module can only export async functions, so the initial state for
 // useActionState lives with the form in components/CodeSlot.tsx. Only the type crosses
@@ -16,6 +16,14 @@ const CODE_MAX = 64
 
 function fail(error: string): CodeState {
   return { error, savedAt: null }
+}
+
+/** "Try again" is bad advice when the tables simply aren't there yet. */
+function failFromError(error: unknown, verb: string): CodeState {
+  if (isMissingTableError(error)) {
+    return fail('The guidance tables don’t exist yet. Run db/schema.sql against the database.')
+  }
+  return fail(`Couldn't ${verb} that. Try again in a moment.`)
 }
 
 /** Both actions take the same (tome, slot) pair, and both have to distrust it equally. */
@@ -69,7 +77,7 @@ export async function saveGuidanceCode(_prev: CodeState, formData: FormData): Pr
     })
   } catch (error) {
     console.error('Failed to save guidance code:', error)
-    return fail("Couldn't save that. Try again in a moment.")
+    return failFromError(error, 'save')
   }
 
   revalidate(parsed.tome.slug)
@@ -92,7 +100,7 @@ export async function deleteGuidanceCode(_prev: CodeState, formData: FormData): 
     await deleteCode(parsed.tome.slug, parsed.slot)
   } catch (error) {
     console.error('Failed to delete guidance code:', error)
-    return fail("Couldn't remove that. Try again in a moment.")
+    return failFromError(error, 'remove')
   }
 
   revalidate(parsed.tome.slug)
