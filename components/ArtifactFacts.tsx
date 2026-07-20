@@ -58,7 +58,7 @@ function formatChance(chance: number): string {
 }
 
 export function ArtifactFacts({ artifact }: { artifact: Artifact }) {
-  const { drop, cost, sources, requiredDifficulty, maxLevel } = artifact
+  const { drop, cost, sources, requiredDifficulty } = artifact
 
   return (
     <dl className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3">
@@ -87,18 +87,8 @@ export function ArtifactFacts({ artifact }: { artifact: Artifact }) {
         <Fact label="Cost">
           <span className="tabular-nums">{cost.dust}</span>
           <span className="ml-1.5 text-xs text-muted">dust</span>
-          {cost.platinum !== undefined && (
-            <>
-              <span className="ml-3 tabular-nums">{cost.platinum}</span>
-              <span className="ml-1.5 text-xs text-muted">platinum</span>
-            </>
-          )}
         </Fact>
       )}
-
-      <Fact label="Level cap">
-        <span className="tabular-nums">{maxLevel}</span>
-      </Fact>
 
       {requiredDifficulty !== undefined && (
         <Fact label="Difficulty required">
