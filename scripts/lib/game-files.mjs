@@ -21,14 +21,39 @@ export const SOURCE_FILES = {
 }
 
 /**
- * The two icon sets, and where each lands in public/.
+ * The icon sets, and where each lands in public/.
  *
  * Relic art only covers the main-effect relics -- the attribute ones carry no Icon field,
  * because the game draws them from a generic attribute sprite rather than bespoke art.
+ *
+ * The tooltip sets are the handful of shared pictures descriptions embed inline with
+ * `<img src='file://{images}/...'>`. They're named here rather than derived from the
+ * catalogue, and pulled file by file: these two directories hold the game's entire UI, so a
+ * bulk decompile would spend minutes and hundreds of stray PNGs to find five. Keys must stay
+ * in step with TOOLTIP_ICONS in lib/catalogue.mjs.
  */
 export const ICON_SETS = [
   { kind: 'artifact', source: SOURCE_FILES.iconDir, out: 'artifacts' },
   { kind: 'relic', source: SOURCE_FILES.relicIconDir, out: 'relics' },
+  {
+    kind: 'tooltip',
+    source: 'panorama/images/interface',
+    out: 'tooltip',
+    perFile: true,
+    textures: {
+      aghanims_reward_staff: ['aghs-shard'],
+      aghanims_reward_staff_elite: ['aghs-shard-elite'],
+      aghanims_reward_staff_legendary: ['aghs-shard-legendary'],
+      crate: ['crate'],
+    },
+  },
+  {
+    kind: 'tooltip',
+    source: 'panorama/images/bonus_level',
+    out: 'tooltip',
+    perFile: true,
+    textures: { token_level5: ['neutral-token'] },
+  },
 ]
 
 const DEFAULT_STEAM_PATHS = [

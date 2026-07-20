@@ -56,6 +56,7 @@ diamond rather than a broken image, so the site is usable with zero icons extrac
 | `resource/addon_english.txt` | every name, effect, note and flavour line |
 | `panorama/images/custom_game/aritfact/` | the Archive icons |
 | `panorama/images/custom_game/relic/` | the relic icons |
+| `panorama/images/interface/`, `panorama/images/bonus_level/` | five shared pictures that effect text embeds inline |
 
 A few things worth knowing if you touch `scripts/lib/catalogue.mjs`:
 
@@ -74,6 +75,16 @@ A few things worth knowing if you touch `scripts/lib/catalogue.mjs`:
   extractor maps a texture to a *list* of slugs and writes a copy for each.
 - **33 relics have no art at all.** The attribute ones carry no `Icon` field because the game
   draws them from a generic sprite; there is nothing to extract and the fallback is correct.
+- **Effect text draws pictures inline**, and builds sentences around them — Eden Anvil's
+  "converted into <shard>" reads as "converted into ." if the tag is stripped. `convertIcons`
+  turns the two markups whose art the site has into `[[icon:path]]` markers: the five shared
+  `<img src='file://{images}/...'>` textures, which land in `public/tooltip/`, and
+  `<Panel class='ArtifactIcon …'>` / `RelictIcon` references to another catalogue entry, which
+  reuse art already extracted. Those Panel classes name the entry's *texture*, not its id.
+- **The tooltip textures are named, not derived**, in `ICON_SETS`, and pulled file by file:
+  they sit in directories holding the game's whole UI, where a bulk decompile costs minutes and
+  hundreds of stray PNGs. A new folder under `public/` also needs adding to the `proxy.ts`
+  matcher, or `next/image` fetches it back through the passphrase gate and fails.
 
 ## Known limits
 
@@ -82,9 +93,11 @@ A few things worth knowing if you touch `scripts/lib/catalogue.mjs`:
   nothing today — but it caps what could ever be extracted.
 - **`item_artifact_unknow` is skipped.** It's the game's own placeholder row, which is why the
   catalogue has 106 artifacts and the KV has 107 entries.
-- **23 icon placeholders are dropped** from effect text. They're `<img>` references where the
-  game draws a picture mid-sentence; there's no text to substitute. `npm run
-  catalogue:generate` reports the count.
+- **Generic `<Panel>` sprites are dropped.** Attribute icons, `hd_poison`, `platinum` and
+  ~50 others carry no `src`: the picture lives in a Panorama CSS rule, so recovering one means
+  decompiling stylesheets, parsing `background-position`, cropping sprite sheets, and probably
+  reaching into Dota's own `pak01_dir.vpk`. They're decorative reinforcement of text that reads
+  correctly without them, which is why they stay dropped while the inline pictures do not.
 - **The generator needs the game installed.** It's a regeneration step, not a build step — the
   generated files are committed, so deploys never touch the VPK.
 

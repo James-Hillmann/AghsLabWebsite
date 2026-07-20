@@ -104,14 +104,17 @@ function iconTargets(entries) {
   return bySlug
 }
 
-function extract({ kind, source, out }, bySlug) {
+function extract({ kind, source, out, perFile }, bySlug) {
   // The CLI mirrors the archive's directory structure under the output folder.
   const staged = path.join(staging, ...source.split('/'))
   const outDir = path.join(ROOT, 'public', out)
 
   console.log(`\n${kind}s: extracting ${bySlug.size} icons from ${source} ...`)
 
-  run(source)
+  // A set that names its textures skips the bulk pass and goes straight to the per-file
+  // retry below -- those sets sit in shared UI directories where decompiling everything to
+  // find a few files is all cost and no benefit.
+  if (!perFile) run(source)
 
   const landed = () =>
     new Set(
@@ -128,7 +131,7 @@ function extract({ kind, source, out }, bySlug) {
   // bulk run short while the process still exits 0, so a clean exit proves nothing.
   if (missing.length) {
     // Single-file runs are short-lived enough that the finalizer never gets a chance to fire.
-    console.log(`  bulk pass left ${missing.length}; retrying individually ...`)
+    if (!perFile) console.log(`  bulk pass left ${missing.length}; retrying individually ...`)
     for (const texture of missing) {
       // Textures carry a _png suffix before the extension: the IconName is "eden_anvil",
       // the archive entry is "eden_anvil_png.vtex_c".
@@ -180,7 +183,7 @@ try {
   const entriesFor = { artifact: artifacts, relic: relics }
 
   for (const set of ICON_SETS) {
-    extract(set, iconTargets(entriesFor[set.kind]))
+    extract(set, set.textures ? new Map(Object.entries(set.textures)) : iconTargets(entriesFor[set.kind]))
   }
 } finally {
   rmSync(staging, { recursive: true, force: true })

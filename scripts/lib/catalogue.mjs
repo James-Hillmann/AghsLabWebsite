@@ -53,18 +53,87 @@ const stripTags = (value) => value.replace(/<[^>]*>/g, '').trim()
 const FONT_TAG = /<font\s+color=['"]?(#[0-9a-fA-F]{3,8})['"]?>([\s\S]*?)<\/font>/gi
 
 /**
- * Like `stripTags`, but keeps the one piece of markup the site actually wants: a `<font
- * color>` run, such as `HD_Poison`'s `<font color='#98f698'><Panel .../>Poison</font>`. Each
- * run becomes a `[[color:#hex]]text[[/]]` marker for `RichText` to render as a colored span --
- * anything else inside it (the `<Panel>` icon placeholder) is dropped, same as before. Markers
- * use square brackets specifically so they survive the plain-tag strip that follows, and don't
- * collide with the `%key%`/`{key}` placeholder syntax `resolveTemplate` still has to scan for.
+ * The shared images tooltip text embeds with `<img src='file://{images}/...'>`, mapped to a
+ * path stem under public/ and the label that becomes the picture's alt text.
+ *
+ * Five, across every artifact and relic string in the game -- so naming them beats resolving
+ * paths generically. Keys must stay in step with the `textures` maps in lib/game-files.mjs,
+ * which is what actually pulls these out of the archive.
  */
-function convertMarkup(value) {
-  const withColors = value.replace(FONT_TAG, (_, color, inner) => {
-    const text = stripTags(inner)
-    return text ? `[[color:${color}]]${text}[[/]]` : ''
+const TOOLTIP_ICONS = {
+  'interface/aghanims_reward_staff.png': ['tooltip/aghs-shard', 'Scepter Shard'],
+  'interface/aghanims_reward_staff_elite.png': ['tooltip/aghs-shard-elite', 'Elite Scepter Shard'],
+  'interface/aghanims_reward_staff_legendary.png': [
+    'tooltip/aghs-shard-legendary',
+    'Legendary Scepter Shard',
+  ],
+  'interface/crate.png': ['tooltip/crate', 'Chest'],
+  'bonus_level/token_level5.png': ['tooltip/neutral-token', 'Neutral Item'],
+}
+
+// Both `<img ... />` and `<img ... >` occur in the game's strings; `[^>]*` covers either.
+const IMG_TAG = /<img\b[^>]*\bsrc=['"]file:\/\/\{images\}\/([^'"]+)['"][^>]*>/gi
+
+// `<Panel class='ArtifactIcon eden_anvil'/>` -- a description citing another catalogue entry.
+// `RelictIcon` is the game's spelling, not a typo here.
+const PANEL_ENTRY_ICON = /<Panel\b[^>]*\bclass=['"](ArtifactIcon|RelictIcon)\s+([a-z0-9_]+)['"][^>]*>/gi
+
+const ICON_MARKER = /\[\[icon:[^\]]+\]\][\s\S]*?\[\[\/\]\]/g
+
+/**
+ * Turns the two picture markups whose art the site actually has into `[[icon:path]]` markers.
+ *
+ * The game draws these inline and builds sentences around them -- Eden Anvil's "converted into
+ * <shard>" reads as "converted into ." once the tag is stripped -- so dropping them loses
+ * meaning, not just decoration. Everything else in a `<Panel class>` is a Panorama CSS sprite
+ * with no src to follow; those still fall to `stripTags`, and are only ever decorative
+ * reinforcement of text that reads correctly without them.
+ */
+function convertIcons(value, refs, problems, where) {
+  const withImages = value.replace(IMG_TAG, (_, src) => {
+    const icon = TOOLTIP_ICONS[src.toLowerCase()]
+    if (!icon) {
+      problems.push(`${where}: unknown tooltip image ${src}`)
+      return ''
+    }
+    return `[[icon:${icon[0]}]]${icon[1]}[[/]]`
   })
+
+  return withImages.replace(PANEL_ENTRY_ICON, (_, family, texture) => {
+    const entry = refs.iconLabels?.get(`${family}:${texture}`)
+    if (!entry) {
+      problems.push(`${where}: dropped icon placeholder <Panel class='${family} ${texture}'>`)
+      return ''
+    }
+    const [stem, label] = entry
+    return `[[icon:${stem}]]${label}[[/]]`
+  })
+}
+
+/**
+ * Like `stripTags`, but keeps the markup the site actually wants: the inline pictures
+ * `convertIcons` handles, and a `<font color>` run such as `HD_Poison`'s `<font
+ * color='#98f698'><Panel .../>Poison</font>`. Each run becomes a `[[color:#hex]]text[[/]]`
+ * marker for `RichText` to render as a colored span -- anything else inside it is dropped, same
+ * as before. Markers use square brackets specifically so they survive the plain-tag strip that
+ * follows, and don't collide with the `%key%`/`{key}` placeholder syntax `resolveTemplate`
+ * still has to scan for.
+ *
+ * Order is load-bearing twice over. Icons convert first, before any `stripTags` -- including
+ * the one inside the `<font>` handler, which would otherwise eat an icon sitting in a colored
+ * run. And an icon found inside such a run is lifted out in front of it, because `RichText`
+ * matches markers flat: nested, the icon's `[[/]]` would close the color early and print the
+ * spare terminator on the page.
+ */
+function convertMarkup(value, refs = {}, problems = [], where = '') {
+  const withIcons = convertIcons(value, refs, problems, where)
+
+  const withColors = withIcons.replace(FONT_TAG, (_, color, inner) => {
+    const icons = (inner.match(ICON_MARKER) ?? []).join('')
+    const text = stripTags(inner.replace(ICON_MARKER, ''))
+    return text ? `${icons}[[color:${color}]]${text}[[/]]` : icons
+  })
+
   return stripTags(withColors)
 }
 
@@ -101,11 +170,11 @@ const num = (value) => {
 export function resolveTemplate(template, values, refs, problems, where, depth = 0) {
   if (!template) return undefined
 
-  // Markup comes off first, except a <font color> run, which becomes a [[color:#hex]] marker
-  // -- see convertMarkup. Some tokens only ever appear inside markup -- {images} is a path
-  // variable in <img src='file://{images}/...'/> -- so stripping first means they never
-  // reach the resolver to be reported as missing.
-  let text = convertMarkup(template)
+  // Markup comes off first, except the pictures and <font color> runs convertMarkup keeps as
+  // markers. Some tokens only ever appear inside markup -- {images} is a path variable in
+  // <img src='file://{images}/...'/> -- so handling markup first means they never reach the
+  // resolver to be reported as missing; convertIcons consumes that one a step earlier.
+  let text = convertMarkup(template, refs, problems, where)
 
   // The trailing (%%)? swallows the literal percent sign some templates trail a value with,
   // so "30%" highlights as one unit instead of the number alone.
@@ -126,7 +195,7 @@ export function resolveTemplate(template, values, refs, problems, where, depth =
     // carry markup or further tokens. Bounded so a self-referential pair can't spin.
     const looked = refs.localization?.get(key)
     if (looked !== undefined) {
-      if (depth >= 4) return convertMarkup(looked)
+      if (depth >= 4) return convertMarkup(looked, refs, problems, where)
       return resolveTemplate(looked, values, refs, problems, where, depth + 1) ?? ''
     }
 
@@ -314,6 +383,34 @@ export function buildCatalogue() {
       additionalTitles.get(gameId).set(slot, title)
     }
 
+    // `ArtifactIcon:eden_anvil` -> [path stem, display name], for the
+    // `<Panel class='ArtifactIcon ...'>` references a description can make to another entry.
+    //
+    // Keyed by the entry's *texture* name, because that -- not its id or slug -- is what the
+    // Panel class carries: `<Panel class='RelictIcon acidic_slime'/>` cites the relic whose
+    // Icon is `acidic_slime`, which is `core_main_effect_acidic_slime`. Built ahead of both
+    // loops because a description may cite an entry that hasn't been constructed yet, and
+    // first-wins where a texture is shared, so the choice stays deterministic. Only entries
+    // with art get in: presence doubles as proof a picture was extracted for that slug, and
+    // RichText renders on the server with no way to recover from a missing file.
+    const iconLabels = new Map()
+    const addIconLabel = (family, texture, stem, name) => {
+      const key = `${family}:${texture}`
+      if (texture && !iconLabels.has(key)) iconLabels.set(key, [stem, stripTags(name)])
+    }
+    for (const [gameId, entry] of Object.entries(artifactKv)) {
+      const name = english.get(`DOTA_Tooltip_ability_${gameId}`)
+      if (!name || !ERA_BY_RARITY[entry.rarity] || gameId === 'item_artifact_unknow') continue
+      const texture = entry.IconName ?? entry.AbilityTextureName
+      addIconLabel('ArtifactIcon', texture, `artifacts/${toSlug(gameId, 'item_artifact_')}`, name)
+    }
+    for (const [gameId, entry] of Object.entries(relicKv)) {
+      const name = english.get(gameId)
+      if (!name) continue
+      const slug = gameId.replace(/^core_/, '').replace(/_/g, '-')
+      addIconLabel('RelictIcon', entry.Icon, `relics/${slug}`, name)
+    }
+
     const eraNames = {}
     for (const [rarity, era] of Object.entries(ERA_BY_RARITY)) {
       eraNames[era] = english.get(`Hud_Artifact_Level${rarity}`) ?? era
@@ -333,7 +430,7 @@ export function buildCatalogue() {
       const values = flattenValues(entry.AbilityValues)
       const uniqueName = english.get(`DOTA_Tooltip_ability_${gameId}_main_ability_title`)
 
-      const refs = { localization: english }
+      const refs = { localization: english, iconLabels }
       if (uniqueName) {
         // {ability2} -- and {abilit2}, misspelled in the game's own strings -- both refer back
         // to the artifact's main effect by name. Wrapped as a [[ref]] so it renders underlined,
@@ -420,7 +517,7 @@ export function buildCatalogue() {
       if (!name) continue
 
       const values = flattenRelicValues(entry.AbilityValues)
-      const refs = { localization: english }
+      const refs = { localization: english, iconLabels }
 
       const description = english.get(`${gameId}_des`)
       const special = english.get(`${gameId}_special`)

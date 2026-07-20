@@ -199,7 +199,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 20,
         name: "Essence Reflection",
-        description: "+[[value]]20%[[/]] chance for double drops from",
+        description: "+[[value]]20%[[/]] chance for double drops from [[icon:tooltip/crate]]Chest[[/]]",
       },
       {
         level: 30,
@@ -247,7 +247,7 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Forge",
-      description: "For each [[value]]5[[/]] Selections, one of the selection is converted into .",
+      description: "For each [[value]]5[[/]] [[icon:tooltip/aghs-shard]]Scepter Shard[[/]] Selections, one of the selection is converted into [[icon:tooltip/aghs-shard-elite]]Elite Scepter Shard[[/]].",
     },
     upgrades: [
       {
@@ -258,7 +258,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 20,
         name: "Mythic Forge",
-        description: "Every [[value]]7[[/]] Stages, gain one [[ref]]Ascend[[/]] that converts into .",
+        description: "Every [[value]]7[[/]] Stages, gain one [[ref]]Ascend[[/]] that converts [[icon:tooltip/aghs-shard]]Scepter Shard[[/]] into [[icon:tooltip/aghs-shard-elite]]Elite Scepter Shard[[/]].",
       },
       {
         level: 30,
@@ -397,7 +397,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 40,
         name: "Verdant Growth",
-        description: "After producing [[value]]12[[/]] shrooms, if you are also carrying , it will count as having completed [[value]]2[[/]] stages of growth. If not, each subsequent stage will instead produce an additional [[value]]1[[/]] shrooms per stage.",
+        description: "After producing [[value]]12[[/]] shrooms, if you are also carrying [[icon:artifacts/seed-of-rebirth]]Seed of Rebirth[[/]], it will count as having completed [[value]]2[[/]] stages of growth. If not, each subsequent stage will instead produce an additional [[value]]1[[/]] shrooms per stage.",
       },
     ],
     flavor: "Most poor souls who get infested turn into inhuman monsters. The fungus can take over the host's brain and control them. But a few lucky ones with special physiques have it different. After being infected, shrooms sprout from their arms — and those are premium nutrients.",
@@ -655,7 +655,7 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Chef's Toss",
-      description: "Mushrooms gathered from — Fungal Kingdom — may be stir-fried at the end of each round if left in your inventory, becoming far more potent restorative meals. Adding [Faerie Fire] and [Mango] as seasoning ingredients can create even greater delicacies.",
+      description: "Mushrooms gathered from [[icon:artifacts/fungal-kingdom]]Fungal Realm[[/]] — Fungal Kingdom — may be stir-fried at the end of each round if left in your inventory, becoming far more potent restorative meals. Adding [Faerie Fire] and [Mango] as seasoning ingredients can create even greater delicacies.",
     },
     upgrades: [
       {
@@ -719,7 +719,7 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Omen",
-      description: "Activates after 1 Round. Grants [[value]]1[[/]] Options.",
+      description: "Activates after 1 Round. Grants [[value]]1[[/]] [[icon:tooltip/aghs-shard]]Scepter Shard[[/]] Options.",
     },
     upgrades: [
       {
@@ -730,17 +730,17 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 20,
         name: "Twist of Fate",
-        description: "Grants [[value]]1[[/]] refreshes every [[value]]4[[/]] Stages",
+        description: "Grants [[value]]1[[/]] [[icon:tooltip/aghs-shard]]Scepter Shard[[/]] refreshes every [[value]]4[[/]] Stages",
       },
       {
         level: 30,
         name: "Bias",
-        description: "+[[value]]50%[[/]] chance for to drop rare items",
+        description: "+[[value]]50%[[/]] chance for [[icon:tooltip/crate]]Chest[[/]] to drop rare items",
       },
       {
         level: 40,
         name: "Greater Omen",
-        description: "[[ref]]Omen[[/]]+[[value]]1[[/]] options",
+        description: "[[ref]]Omen[[/]]+[[value]]1[[/]] [[icon:tooltip/aghs-shard-legendary]]Legendary Scepter Shard[[/]] options",
       },
     ],
     flavor: "A candle formed from mysterious matter. As it burns, it reveals a miniature starry sky, within which truth resides.",
@@ -1112,7 +1112,7 @@ export const ARTIFACTS: Artifact[] = [
         level: 40,
         name: "Inner Attunement",
         description: "Every [[value]]2[[/]] stages cleared, Artifacts in [[ref]]Inner Space[[/]] additionally count as having progressed through [[value]]1[[/]] stages. This effect is reduced for certain Artifacts",
-        note: "Affected by this reduction: Eye of the Pharaoh — Royal Interest",
+        note: "Affected by this reduction: [[icon:artifacts/eye-of-the-pharaoh]]Eye of the Pharaoh[[/]] Eye of the Pharaoh — Royal Interest",
       },
     ],
     flavor: "Is not creating that which does not exist the ultimate pursuit of every mage?",
@@ -1442,13 +1442,13 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Cycle",
-      description: "Upgrades the relic [Blabber Guy]. Its effects gain a bonus value equal to [[value]]8%[[/]] of your max HP. Additionally, 's damage is converted into [[color:#98f698]]Poison[[/]] equal to [[value]]150%[[/]] of its damage.",
+      description: "Upgrades the relic [[icon:relics/main-effect-boshman]]Blabber Guy[[/]] [Blabber Guy]. Its effects gain a bonus value equal to [[value]]8%[[/]] of your max HP. Additionally, [[icon:relics/main-effect-boshman]]Blabber Guy[[/]]'s damage is converted into [[color:#98f698]]Poison[[/]] equal to [[value]]150%[[/]] of its damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Accelerated Cycle",
-        description: "-[[value]]1[[/]]s interval",
+        description: "[[icon:relics/main-effect-boshman]]Blabber Guy[[/]]-[[value]]1[[/]]s interval",
       },
       {
         level: 20,
@@ -1458,12 +1458,12 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 30,
         name: "Foul Stench",
-        description: "Each time triggers, it activates [[color:#98f698]]Poison[[/]].Activation Ratio: [[value]]2%[[/]]Activation Damage: [[value]]1500%[[/]]",
+        description: "Each time [[icon:relics/main-effect-boshman]]Blabber Guy[[/]] triggers, it activates [[color:#98f698]]Poison[[/]].Activation Ratio: [[value]]2%[[/]]Activation Damage: [[value]]1500%[[/]]",
       },
       {
         level: 40,
         name: "Another Sip",
-        description: "Each trigger of applies a debuff for [[value]]1.1[[/]] seconds, reducing the target's [[color:#98f698]]Poison Decay[[/]] by [[value]]40%[[/]]. Reapplying the debuff refreshes its duration.",
+        description: "Each trigger of [[icon:relics/main-effect-boshman]]Blabber Guy[[/]] applies a debuff for [[value]]1.1[[/]] seconds, reducing the target's [[color:#98f698]]Poison Decay[[/]] by [[value]]40%[[/]]. Reapplying the debuff refreshes its duration.",
       },
     ],
     flavor: "I ate heartily; it tasted so good.",
@@ -2273,23 +2273,23 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Water",
-      description: "Enhances the ability of the relic [Acidic Slime]. Enemies within its capture range are always considered targets and have [[value]]1[[/]] stacks of a unique debuff, which can only be detected and dispelled by .",
+      description: "Enhances the ability of the relic [[icon:relics/main-effect-acidic-slime]]Acidic Slime[[/]] [Acidic Slime]. Enemies within its capture range are always considered targets and have [[value]]1[[/]] stacks of a unique debuff, which can only be detected and dispelled by [[icon:relics/main-effect-acidic-slime]]Acidic Slime[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Capture I",
-        description: "+[[value]]150[[/]] to ’s capture range",
+        description: "+[[value]]150[[/]] to [[icon:relics/main-effect-acidic-slime]]Acidic Slime[[/]]’s capture range",
       },
       {
         level: 20,
         name: "Capture II",
-        description: "+[[value]]1[[/]] to ’s maximum dissolution count",
+        description: "+[[value]]1[[/]] to [[icon:relics/main-effect-acidic-slime]]Acidic Slime[[/]]’s maximum dissolution count",
       },
       {
         level: 30,
         name: "Capture III",
-        description: "-[[value]]2[[/]] 's dissolution interval",
+        description: "-[[value]]2[[/]] [[icon:relics/main-effect-acidic-slime]]Acidic Slime[[/]]'s dissolution interval",
       },
       {
         level: 40,
@@ -2465,7 +2465,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 20,
         name: "Ascension",
-        description: "When first equipped, gain random [[value]]1[[/]]",
+        description: "When first equipped, gain random [[value]]1[[/]] [[icon:tooltip/aghs-shard]]Scepter Shard[[/]]",
       },
       {
         level: 30,
@@ -2475,7 +2475,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 40,
         name: "Greater Ascension",
-        description: "[[ref]]Ascension[[/]] now grants",
+        description: "[[ref]]Ascension[[/]] now grants [[icon:tooltip/aghs-shard-elite]]Elite Scepter Shard[[/]]",
       },
     ],
     flavor: "Seals away the wearer’s ego, allowing them to wield magic beyond their natural limits. However, forcibly removing it inflicts psychic backlash from the amplified mental force — caution is advised when worn.",
@@ -2863,13 +2863,13 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Celestial Myriad",
-      description: "After each Stage, gain [[value]]5[[/]] Luck. Has a [[value]]15%[[/]] chance to obtain a random Ability . If this effect does not trigger, the chance is doubled for the next attempt.",
+      description: "After each Stage, gain [[value]]5[[/]] Luck. Has a [[value]]15%[[/]] chance to obtain a random Ability [[icon:tooltip/aghs-shard]]Scepter Shard[[/]]. If this effect does not trigger, the chance is doubled for the next attempt.",
     },
     upgrades: [
       {
         level: 10,
         name: "Stargazing",
-        description: "Whenever you obtain any (including temporary ones), +[[value]]2[[/]] Luck",
+        description: "Whenever you obtain any [[icon:tooltip/aghs-shard]]Scepter Shard[[/]] (including temporary ones), +[[value]]2[[/]] Luck",
       },
       {
         level: 20,
@@ -3684,7 +3684,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 30,
         name: "Night Crossing",
-        description: "For every [[value]]3[[/]] Stages ended at Status, gain random [[value]]1[[/]]",
+        description: "For every [[value]]3[[/]] Stages ended at Status, gain random [[value]]1[[/]] [[icon:tooltip/aghs-shard]]Scepter Shard[[/]]",
       },
       {
         level: 40,
@@ -5431,13 +5431,13 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Drifting Moon",
-      description: "During combat, are generated and spin. These blades track enemies within an orbit radius of [[value]]200[[/]] – [[value]]1200[[/]], dealing [[value]]120%[[/]] damage on hit.",
+      description: "During combat, [[icon:artifacts/comets-luna-trail]]Meteor Leap[[/]] are generated and spin. These blades track enemies within an orbit radius of [[value]]200[[/]] – [[value]]1200[[/]], dealing [[value]]120%[[/]] damage on hit.",
     },
     upgrades: [
       {
         level: 10,
         name: "Chasing Moon",
-        description: "rotation speed increases by [[value]]8%[[/]] per second, up to a maximum of [[value]]120%[[/]]. Speed is reduced by [[value]]10%[[/]] upon grazing an enemy.",
+        description: "[[icon:artifacts/comets-luna-trail]]Meteor Leap[[/]] rotation speed increases by [[value]]8%[[/]] per second, up to a maximum of [[value]]120%[[/]]. Speed is reduced by [[value]]10%[[/]] upon grazing an enemy.",
       },
       {
         level: 20,
