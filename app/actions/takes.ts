@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 
 import { requireSession } from '@/lib/auth-guard'
-import { isDatabaseConfigured } from '@/lib/db'
+import { isDatabaseConfigured, isMissingTableError } from '@/lib/db'
 import { getHero } from '@/lib/heroes'
 import { isDifficulty } from '@/lib/takes'
 import { upsertTake } from '@/lib/takes-db'
@@ -93,6 +93,10 @@ export async function saveTake(_prev: TakeState, formData: FormData): Promise<Ta
     })
   } catch (error) {
     console.error('Failed to save take:', error)
+    // "Try again" is bad advice when the tables simply aren't there yet.
+    if (isMissingTableError(error)) {
+      return fail('The takes table doesn’t exist yet. Run db/schema.sql against the database.')
+    }
     return fail("Couldn't save that. Try again in a moment.")
   }
 

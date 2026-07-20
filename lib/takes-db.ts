@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { isAuthor, type Author } from './authors'
-import { isDatabaseConfigured, sql } from './db'
+import { read, sql } from './db'
 import { isDifficulty, type Take } from './takes'
 
 /** snake_case rows stop at this file; the rest of the app only sees Take. */
@@ -36,26 +36,26 @@ function toTake(row: Row): Take | null {
 }
 
 export async function getTakesForHero(heroSlug: string): Promise<Partial<Record<Author, Take>>> {
-  if (!isDatabaseConfigured()) return {}
+  return read(`takes for ${heroSlug}`, {} as Partial<Record<Author, Take>>, async () => {
+    const rows = (await sql()`
+      select * from takes where hero_slug = ${heroSlug}
+    `) as Row[]
 
-  const rows = (await sql()`
-    select * from takes where hero_slug = ${heroSlug}
-  `) as Row[]
-
-  const takes: Partial<Record<Author, Take>> = {}
-  for (const row of rows) {
-    const take = toTake(row)
-    if (take) takes[take.author] = take
-  }
-  return takes
+    const takes: Partial<Record<Author, Take>> = {}
+    for (const row of rows) {
+      const take = toTake(row)
+      if (take) takes[take.author] = take
+    }
+    return takes
+  })
 }
 
 /** Every take on the site, for the coverage dots on the roster grid. */
 export async function getAllTakes(): Promise<Take[]> {
-  if (!isDatabaseConfigured()) return []
-
-  const rows = (await sql()`select * from takes`) as Row[]
-  return rows.map(toTake).filter((take): take is Take => take !== null)
+  return read('takes', [] as Take[], async () => {
+    const rows = (await sql()`select * from takes`) as Row[]
+    return rows.map(toTake).filter((take): take is Take => take !== null)
+  })
 }
 
 export async function upsertTake(take: Omit<Take, 'updatedAt'>): Promise<void> {
