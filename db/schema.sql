@@ -75,3 +75,36 @@ create table if not exists guidance_state (
 insert into guidance_state (id, active_tome)
 values (1, 'tome-of-the-fallen')
 on conflict (id) do nothing;
+
+-- Tier lists. Several per author, each named, each owning its whole board.
+--
+-- The odd one out: the board lives in one jsonb column rather than rows/placements tables.
+-- Every other table here keys so duplicates are impossible, and this one can't -- a single
+-- drag reorders two rows at once, which normalised is a fractional-rank problem plus a
+-- multi-statement write over a driver that costs a round trip per call. As one document it
+-- is a single atomic update, and a hero appearing twice is caught by sanitizeBoard on the
+-- way in rather than by a constraint after the fact.
+--
+--   [{ "id": "a1b2", "label": "S", "color": "#e0654a", "heroes": ["shredder", "axe"] }, ...]
+--
+-- Heroes named in no row are the unassigned tray, derived on read. Deliberately not stored:
+-- storing it would make "in two places at once" representable.
+create table if not exists tier_lists (
+  id         bigint generated always as identity primary key,
+  author     text not null check (author in ('james', 'liam')),
+  name       text not null check (length(name) between 1 and 60),
+  board      jsonb not null default '[]'::jsonb,
+  -- Bumped on every save. A second tab that loaded an older rev matches nothing and gets
+  -- told to reload, rather than silently overwriting the newer board.
+  rev        bigint not null default 0,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
+-- lower(name) so "Patch 7.39" and "patch 7.39" collide, per author.
+create unique index if not exists tier_lists_author_name_idx
+  on tier_lists (author, lower(name));
+
+-- The picker's read: one author's lists, newest first.
+create index if not exists tier_lists_author_idx
+  on tier_lists (author, created_at desc);
