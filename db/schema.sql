@@ -16,3 +16,32 @@ create table if not exists takes (
   updated_at    timestamptz not null default now(),
   primary key (hero_slug, author)
 );
+
+-- Path of Guidance.
+--
+-- One row per (tome, slot), for the same reason takes keys on (hero, author): the composite
+-- primary key makes it structurally impossible to record two different codes for the one
+-- slot, and every save is an upsert.
+
+create table if not exists guidance_codes (
+  tome_slug  text not null,
+  slot       int not null check (slot >= 1),
+  code       text not null,
+  added_by   text not null check (added_by in ('james', 'liam')),
+  updated_at timestamptz not null default now(),
+  primary key (tome_slug, slot)
+);
+
+-- Exactly one tome is activated at a time -- it's the only one that gains a slot when you
+-- win a run. `check (id = 1)` makes "there is one row" a database invariant rather than
+-- something the application has to remember, so activating a tome can't leave two active.
+
+create table if not exists guidance_state (
+  id          int primary key default 1 check (id = 1),
+  active_tome text not null,
+  updated_at  timestamptz not null default now()
+);
+
+insert into guidance_state (id, active_tome)
+values (1, 'tome-of-the-fallen')
+on conflict (id) do nothing;
