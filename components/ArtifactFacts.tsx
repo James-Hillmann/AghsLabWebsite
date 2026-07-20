@@ -21,6 +21,31 @@ function Fact({ label, children }: { label: string; children: React.ReactNode })
 const RARE_THRESHOLD = 0.5
 
 /**
+ * The game shows world difficulty as a letter grade (E through S++, then EX) rather than the
+ * raw RequireDifLevel number. Confirmed against the game's own strings and item data: EX with
+ * no suffix sits at 24 ("Drops... in EX worlds or above" pairs with RequireDifLevel 24), and
+ * FromList tokens like OverLevelEX13 pair with RequireDifLevel 37 -- so EX+N is 24 + N.
+ *
+ * Below 24, the 8 tiers below EX (E through S++) each split into a -/plain/+ sub-grade, which
+ * is 8 * 3 = 24 steps -- exactly the run-up to EX starting at 24. That arithmetic match is the
+ * only evidence for the -/plain/+ ordering within a tier; it isn't independently confirmed
+ * against the game's own strings the way the EX+N part is.
+ */
+const PRE_EX_TIERS = ['E', 'D', 'C', 'B', 'A', 'S', 'S+', 'S++']
+const SUB_GRADES = ['-', '', '+']
+
+function formatDifficulty(level: number): string {
+  if (level >= 24) {
+    const over = level - 24
+    return over === 0 ? 'EX' : `EX+${over}`
+  }
+
+  const tier = PRE_EX_TIERS[Math.floor(level / 3)]
+  const sub = SUB_GRADES[level % 3]
+  return tier ? `${tier}${sub}` : String(level)
+}
+
+/**
  * Three significant figures, trailing zeros trimmed.
  *
  * A fixed number of decimals doesn't work across this range: two would round the rarest
@@ -77,7 +102,9 @@ export function ArtifactFacts({ artifact }: { artifact: Artifact }) {
 
       {requiredDifficulty !== undefined && (
         <Fact label="Difficulty required">
-          <span className="tabular-nums">{requiredDifficulty}</span>
+          <span className="tabular-nums" title={`World Level ${requiredDifficulty}`}>
+            {formatDifficulty(requiredDifficulty)}
+          </span>
         </Fact>
       )}
 
