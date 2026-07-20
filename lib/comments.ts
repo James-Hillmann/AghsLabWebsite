@@ -1,6 +1,6 @@
-// The shape of a comment on an artifact, a relic or an ability. Deliberately free of any database import
-// so the cards and the editor -- both client components -- can share these types. Reads and
-// writes live in lib/comments-db.ts, which is server-only.
+// The shape of a comment on an artifact, a relic or an ability. Deliberately free of any
+// database import so the thread and its composer -- both client components -- can share these
+// types. Reads and writes live in lib/comments-db.ts, which is server-only.
 //
 // This exists because the catalogue is generated: everything in lib/artifacts.generated.ts is
 // the game's own fact, regenerated wholesale on every game update. Anything James or Liam
@@ -20,10 +20,20 @@ export function isCommentKind(value: unknown): value is CommentKind {
 export const COMMENT_MAX_LENGTH = 2000
 
 export type Comment = {
+  /** Surrogate key. A thread can hold several posts by the same person, so this is what
+   *  editing and deleting address -- there's no natural key any more. */
+  id: number
   kind: CommentKind
-  /** The artifact or relic slug this is about. */
+  /** The artifact, relic or ability slug this is about. */
   slug: string
   author: Author
   body: string
+  /** Orders the thread. Independent of updatedAt, so editing an old post doesn't move it. */
+  createdAt: string
   updatedAt: string
+}
+
+/** True once a post has been edited since it was written, to a second's tolerance. */
+export function wasEdited(comment: Comment): boolean {
+  return new Date(comment.updatedAt).getTime() - new Date(comment.createdAt).getTime() > 1000
 }

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { AbilityValues } from '@/components/AbilityValues'
 import { CatalogueIcon } from '@/components/CatalogueIcon'
-import { CommentCard } from '@/components/CommentCard'
+import { CommentThread } from '@/components/CommentThread'
 import { EmptySlot } from '@/components/EmptySlot'
 import { RichText } from '@/components/RichText'
 import { Section } from '@/components/Section'
@@ -17,7 +17,6 @@ import {
   heroInRoster,
   heroName,
 } from '@/lib/abilities'
-import { AUTHORS } from '@/lib/authors'
 import { requireSession } from '@/lib/auth-guard'
 import { getComments } from '@/lib/comments-db'
 
@@ -215,19 +214,13 @@ export default async function AbilityPage({ params }: { params: Promise<{ slug: 
         </Section>
 
         <Section title="What we think">
-          <div className="grid gap-6 md:grid-cols-2">
-            {AUTHORS.map((name) => (
-              <CommentCard
-                key={name}
-                kind="ability"
-                slug={ability.slug}
-                subject={ability.name}
-                author={name}
-                comment={comments[name] ?? null}
-                editable={name === author}
-              />
-            ))}
-          </div>
+          <CommentThread
+            kind="ability"
+            slug={ability.slug}
+            subject={ability.name}
+            author={author}
+            comments={comments}
+          />
         </Section>
 
         {ability.flavor && (

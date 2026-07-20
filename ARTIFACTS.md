@@ -6,7 +6,7 @@ effect text, costs, drop rates and upgrades — are read straight out of the wor
 
 That means **`lib/artifacts.generated.ts`, `lib/relics.generated.ts` and
 `lib/abilities.generated.ts` are never edited by hand.** Anything you type into them is gone at
-the next regeneration. Opinions go in the comments box on each page, which lives in the
+the next regeneration. Opinions go in the comment thread on each page, which lives in the
 database and can't be clobbered.
 
 ## Regenerating

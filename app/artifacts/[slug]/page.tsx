@@ -4,13 +4,12 @@ import { notFound } from 'next/navigation'
 import { ArtifactFacts } from '@/components/ArtifactFacts'
 import { CatalogueIcon } from '@/components/CatalogueIcon'
 import { ArtifactStats } from '@/components/ArtifactStats'
-import { CommentCard } from '@/components/CommentCard'
+import { CommentThread } from '@/components/CommentThread'
 import { EmptySlot } from '@/components/EmptySlot'
 import { RichText } from '@/components/RichText'
 import { Section } from '@/components/Section'
 import { SiteHeader } from '@/components/SiteHeader'
 import { ERA_COLOR, ERA_NAME, getArtifact } from '@/lib/artifacts'
-import { AUTHORS } from '@/lib/authors'
 import { requireSession } from '@/lib/auth-guard'
 import { getComments } from '@/lib/comments-db'
 
@@ -133,19 +132,13 @@ export default async function ArtifactPage({ params }: { params: Promise<{ slug:
         </Section>
 
         <Section title="What we think">
-          <div className="grid gap-6 md:grid-cols-2">
-            {AUTHORS.map((name) => (
-              <CommentCard
-                key={name}
-                kind="artifact"
-                slug={artifact.slug}
-                subject={artifact.name}
-                author={name}
-                comment={comments[name] ?? null}
-                editable={name === author}
-              />
-            ))}
-          </div>
+          <CommentThread
+            kind="artifact"
+            slug={artifact.slug}
+            subject={artifact.name}
+            author={author}
+            comments={comments}
+          />
         </Section>
 
         {artifact.flavor && (

@@ -2,11 +2,10 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { CatalogueIcon } from '@/components/CatalogueIcon'
-import { CommentCard } from '@/components/CommentCard'
+import { CommentThread } from '@/components/CommentThread'
 import { RichText } from '@/components/RichText'
 import { Section } from '@/components/Section'
 import { SiteHeader } from '@/components/SiteHeader'
-import { AUTHORS } from '@/lib/authors'
 import { requireSession } from '@/lib/auth-guard'
 import { getComments } from '@/lib/comments-db'
 import {
@@ -124,19 +123,13 @@ export default async function RelicPage({ params }: { params: Promise<{ slug: st
         )}
 
         <Section title="What we think">
-          <div className="grid gap-6 md:grid-cols-2">
-            {AUTHORS.map((name) => (
-              <CommentCard
-                key={name}
-                kind="relic"
-                slug={relic.slug}
-                subject={relic.name}
-                author={name}
-                comment={comments[name] ?? null}
-                editable={name === author}
-              />
-            ))}
-          </div>
+          <CommentThread
+            kind="relic"
+            slug={relic.slug}
+            subject={relic.name}
+            author={author}
+            comments={comments}
+          />
         </Section>
       </div>
     </main>

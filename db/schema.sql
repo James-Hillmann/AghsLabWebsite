@@ -1,23 +1,38 @@
 -- Run once against the Neon database (SQL editor in the Neon console, or psql).
 --
--- One row per (hero, author). That composite primary key is the whole design: every
--- save is an upsert, there are no surrogate ids, and it's structurally impossible for
--- one person to end up with two takes on the same hero.
-
--- Artifact and relic data is generated from the game files, so it's all fact and none of it
--- is ours. This is where the opinions go instead: one comment per (thing, author), same
--- composite-key upsert design as takes.
+-- `npm run db:push` applies this file, and every statement is `create ... if not exists`, so
+-- it only ever fills in what's missing. Changing the shape of a table that already exists is
+-- a separate, deliberate step -- see db/migrations/.
 --
--- One table rather than two because an artifact comment and a relic comment are the same
--- shape, and subject_kind keeps them from colliding when a slug appears in both catalogues.
+-- Most tables here key on a composite primary key: one row per (hero, author), one per (tome,
+-- slot). That's the design, not an accident -- every save is an upsert and duplicates are
+-- structurally impossible. `comments` is the exception, and says why on itself.
+
+-- Catalogue data is generated from the game files, so it's all fact and none of it is ours.
+-- This is where the opinions go instead: a thread per thing, newest post first, either of us
+-- posting as often as we like.
+--
+-- Unlike takes and guidance_codes above, this one does *not* key on (thing, author). A thread
+-- is a conversation, so the same person posting twice is the point rather than a mistake --
+-- hence a surrogate id, and inserts rather than upserts. Editing keys on that id, with the
+-- author checked in the query so a stray id can't rewrite someone else's post.
+--
+-- One table rather than three because an artifact, relic and ability comment are the same
+-- shape, and subject_kind keeps them from colliding when a slug appears in two catalogues.
 create table if not exists comments (
-  subject_kind text not null check (subject_kind in ('artifact', 'relic')),
+  id           bigint generated always as identity primary key,
+  subject_kind text not null check (subject_kind in ('artifact', 'relic', 'ability')),
   subject_slug text not null,
   author       text not null check (author in ('james', 'liam')),
-  body         text,
-  updated_at   timestamptz not null default now(),
-  primary key (subject_kind, subject_slug, author)
+  -- not null here, unlike the old shape: an empty post is a delete, not a row.
+  body         text not null,
+  created_at   timestamptz not null default now(),
+  updated_at   timestamptz not null default now()
 );
+
+-- The only read the site makes: one subject's thread, newest first.
+create index if not exists comments_thread_idx
+  on comments (subject_kind, subject_slug, created_at desc);
 
 create table if not exists takes (
   hero_slug     text not null,
