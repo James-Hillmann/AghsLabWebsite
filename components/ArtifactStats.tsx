@@ -39,9 +39,12 @@ export function ArtifactStats({
               {stat.unit ?? ''}
             </span>
             <span className="text-sm text-frost">{stat.name}</span>
-            <span className="ml-auto text-xs text-muted tabular-nums">
-              {stat.base}
-              {stat.unit ?? ''} +{stat.perLevel} / level
+            <span className="flex items-baseline gap-x-2 border-l border-[var(--edge)] pl-3 text-xs tabular-nums">
+              <span className="text-glow">
+                +{stat.perLevel}
+                {stat.unit ?? ''}
+              </span>
+              <span className="text-muted">Per Level</span>
             </span>
           </li>
         ))}

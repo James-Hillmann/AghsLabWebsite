@@ -74,10 +74,6 @@ export default async function ArtifactPage({ params }: { params: Promise<{ slug:
           )}
         </Section>
 
-        <Section title="Where it comes from">
-          <ArtifactFacts artifact={artifact} />
-        </Section>
-
         <Section title="Unique effect">
           {artifact.unique ? (
             <div
@@ -127,6 +123,10 @@ export default async function ArtifactPage({ params }: { params: Promise<{ slug:
           ) : (
             <EmptySlot>The level 10, 20, 30 and 40 unlocks go here.</EmptySlot>
           )}
+        </Section>
+
+        <Section title="Where it comes from">
+          <ArtifactFacts artifact={artifact} />
         </Section>
 
         <Section title="What we think">
