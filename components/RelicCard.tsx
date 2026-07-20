@@ -8,6 +8,8 @@ import {
   type Relic,
 } from '@/lib/relics'
 
+import { CatalogueIcon } from './CatalogueIcon'
+
 /**
  * One relic in the list.
  *
@@ -45,14 +47,22 @@ export function RelicCard({
       }`}
       style={{ '--cut': '10px' } as React.CSSProperties}
     >
-      <div className="flex items-baseline gap-2.5">
-        <span aria-hidden className="size-1.5 shrink-0 rotate-45" style={{ backgroundColor: accent }} />
-        <h3 className="font-[family-name:var(--font-display)] text-lg leading-tight text-frost">
-          {relic.name}
-        </h3>
-      </div>
+      <div className="flex gap-3.5">
+        <CatalogueIcon
+          src={relic.icon}
+          accent={accent}
+          size={128}
+          className="shard size-11 shrink-0 object-contain"
+          fallbackClassName="shard size-11 shrink-0"
+        />
 
-      <p className="mt-2 text-sm leading-relaxed text-muted">{relic.description}</p>
+        <div className="min-w-0">
+          <h3 className="font-[family-name:var(--font-display)] text-lg leading-tight text-frost">
+            {relic.name}
+          </h3>
+          <p className="mt-1.5 text-sm leading-relaxed text-muted">{relic.description}</p>
+        </div>
+      </div>
 
       {relic.rolls.length > 0 && tiers > 0 && (
         <dl className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5">

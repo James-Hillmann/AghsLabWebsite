@@ -30,12 +30,21 @@ point `LABYRINTH_VPK` straight at the `.vpk`.
 npm run catalogue:icons
 ```
 
-This is the only step needing an external tool. Artifact art is stored as `.vtex_c` — compiled,
-block-compressed textures — so decoding it needs [Source 2 Viewer](https://s2v.app/). Download
-it and put `Source2Viewer-CLI.exe` on your PATH, in `tools/`, or pointed at by
-`SOURCE2VIEWER_CLI`.
+This is the only step needing an external tool. The art is stored as `.vtex_c` — compiled,
+block-compressed textures — so decoding it needs [Source 2 Viewer](https://s2v.app/), from the
+`cli-windows-x64.zip` asset on its releases page.
 
-Without it everything else still works: artifacts with no art fall back to an era-coloured
+**Extract the whole zip, not just the .exe.** It ships four native DLLs alongside
+`Source2Viewer-CLI.exe`, including `libSkiaSharp.dll`. Without them the tool still runs and
+still writes *some* files, but every texture that needs real decoding fails with a
+`BadImageFormatException` — which looks like a missing-icons problem rather than a missing-DLL
+one. Put the whole folder's contents on your PATH, in `tools/`, or point `SOURCE2VIEWER_CLI`
+at the exe.
+
+One run does both catalogues: 106 artifact icons into `public/artifacts/` and 84 relic icons
+into `public/relics/`.
+
+Without the tool everything else still works — anything with no art falls back to a coloured
 diamond rather than a broken image, so the site is usable with zero icons extracted.
 
 ## Where the data comes from
@@ -46,6 +55,7 @@ diamond rather than a broken image, so the site is usable with zero icons extrac
 | `scripts/npc/spell_modify/spell_modify_relics.kv` | relic roll ranges and weights |
 | `resource/addon_english.txt` | every name, effect, note and flavour line |
 | `panorama/images/custom_game/aritfact/` | the Archive icons |
+| `panorama/images/custom_game/relic/` | the relic icons |
 
 A few things worth knowing if you touch `scripts/lib/catalogue.mjs`:
 
@@ -60,6 +70,10 @@ A few things worth knowing if you touch `scripts/lib/catalogue.mjs`:
   better roll is the smaller number, so those entries have `_min` above `_max`. `formatRoll`
   orders them for display; don't "fix" them in the data.
 - The icon folder is spelled **`aritfact`** in the game. Match the typo.
+- **A texture can serve several entries.** Three relics all draw `one_shot_kill`, so the
+  extractor maps a texture to a *list* of slugs and writes a copy for each.
+- **33 relics have no art at all.** The attribute ones carry no `Icon` field because the game
+  draws them from a generic sprite; there is nothing to extract and the fallback is correct.
 
 ## Known limits
 

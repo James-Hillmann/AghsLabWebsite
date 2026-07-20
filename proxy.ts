@@ -26,17 +26,19 @@ export async function proxy(request: NextRequest) {
 }
 
 /**
- * `artifacts/*.png` is excluded for a non-obvious reason: next/image optimises a local file by
- * fetching it back over HTTP from this same server, and that internal request carries no
+ * The catalogue icons are excluded for a non-obvious reason: next/image optimises a local file
+ * by fetching it back over HTTP from this same server, and that internal request carries no
  * session cookie. Gated, it gets redirected, and the optimiser reports "isn't a valid image".
  *
- * The pattern deliberately ends in `\.png` rather than matching the folder. `artifacts/` alone
- * would also match `/artifacts/eden-anvil`, silently taking every artifact detail page out
- * from behind the passphrase.
+ * The patterns deliberately end in `\.png` rather than matching the folders. `artifacts/`
+ * alone would also match `/artifacts/eden-anvil`, silently taking every artifact detail page
+ * out from behind the passphrase -- and the same for relics.
  *
  * The art itself is game assets with nothing private in it -- the same reasoning that already
  * makes logo.png public.
  */
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|logo.png|artifacts/.*\\.png).*)'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|logo.png|artifacts/.*\\.png|relics/.*\\.png).*)',
+  ],
 }

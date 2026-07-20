@@ -397,8 +397,10 @@ export function buildCatalogue() {
         rolls.push({ key, min, max })
       }
 
+      const slug = gameId.replace(/^core_/, '').replace(/_/g, '-')
+
       relics.push({
-        slug: gameId.replace(/^core_/, '').replace(/_/g, '-'),
+        slug,
         gameId,
         name: stripTags(name),
         description: resolveTemplate(description, values, refs, problems, `${gameId}_des`) ?? '',
@@ -407,7 +409,10 @@ export function buildCatalogue() {
           : {}),
         isAttribute: entry.bIsAttribute === '1',
         weight: num(entry.weight) ?? 0,
-        icon: entry.Icon ?? null,
+        // Attribute relics carry no Icon -- the game draws them from a generic attribute
+        // sprite -- so both fields stay null and the UI falls back to a group diamond.
+        iconName: entry.Icon ?? null,
+        icon: entry.Icon ? `/relics/${slug}.png` : null,
         rolls,
       })
     }

@@ -133,7 +133,13 @@ export type Relic = {
   isAttribute: boolean
   /** Drop weight within the relic pool. */
   weight: number
+  /**
+   * Art, or null. Only main-effect relics have their own icon; the attribute ones are drawn
+   * from a generic sprite in game, so there's nothing to extract for them.
+   */
   icon: string | null
+  /** The texture name inside the VPK, used by the icon extractor to match files up. */
+  iconName: string | null
   rolls: RelicRoll[]
 }
 `

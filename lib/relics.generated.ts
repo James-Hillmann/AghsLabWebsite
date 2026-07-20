@@ -25,7 +25,13 @@ export type Relic = {
   isAttribute: boolean
   /** Drop weight within the relic pool. */
   weight: number
+  /**
+   * Art, or null. Only main-effect relics have their own icon; the attribute ones are drawn
+   * from a generic sprite in game, so there's nothing to extract for them.
+   */
   icon: string | null
+  /** The texture name inside the VPK, used by the icon extractor to match files up. */
+  iconName: string | null
   rolls: RelicRoll[]
 }
 
@@ -38,7 +44,8 @@ export const RELICS: Relic[] = [
     special: "Debuff Status can be counted as 2 states.",
     isAttribute: false,
     weight: 100,
-    icon: "acidic_slime",
+    iconName: "acidic_slime",
+    icon: "/relics/main-effect-acidic-slime.png",
     rolls: [
       {
         key: "attribute_index",
@@ -59,7 +66,8 @@ export const RELICS: Relic[] = [
     special: "Gain 1 Advanced Purification Potions every 2 Stages.",
     isAttribute: false,
     weight: 100,
-    icon: "advanced_purification",
+    iconName: "advanced_purification",
+    icon: "/relics/main-effect-advanced-purification.png",
     rolls: [
       {
         key: "value",
@@ -80,7 +88,8 @@ export const RELICS: Relic[] = [
     special: "Gain 1 Ravage Potions every 2 Rounds.",
     isAttribute: false,
     weight: 100,
-    icon: "advanced_ravage",
+    iconName: "advanced_ravage",
+    icon: "/relics/main-effect-advanced-ravage.png",
     rolls: [
       {
         key: "value",
@@ -101,7 +110,8 @@ export const RELICS: Relic[] = [
     special: "Restores 1 HP Runes upon entering a new Act.",
     isAttribute: false,
     weight: 100,
-    icon: "aegis",
+    iconName: "aegis",
+    icon: "/relics/main-effect-aegis.png",
     rolls: [
       {
         key: "bonus_count",
@@ -143,7 +153,8 @@ export const RELICS: Relic[] = [
     special: "Also applies to self.",
     isAttribute: false,
     weight: 100,
-    icon: "affinity",
+    iconName: "affinity",
+    icon: "/relics/main-effect-affinity.png",
     rolls: [
       {
         key: "value",
@@ -170,7 +181,8 @@ export const RELICS: Relic[] = [
     special: "When calculating effects such as damage, healing, or shields, your Agility calculation result +17% (+)",
     isAttribute: false,
     weight: 100,
-    icon: "agi_man",
+    iconName: "agi_man",
+    icon: "/relics/main-effect-agi-man.png",
     rolls: [],
   },
   {
@@ -180,7 +192,8 @@ export const RELICS: Relic[] = [
     description: "Repels enemies within 400 range. Applies a repelling force of 80–140 units per second.",
     isAttribute: false,
     weight: 0,
-    icon: "one_shot_kill",
+    iconName: "one_shot_kill",
+    icon: "/relics/main-effect-aka.png",
     rolls: [
       {
         key: "value",
@@ -201,7 +214,8 @@ export const RELICS: Relic[] = [
     special: "Bottle no longer has a maximum charge limit.",
     isAttribute: false,
     weight: 100,
-    icon: "bottle_1",
+    iconName: "bottle_1",
+    icon: "/relics/main-effect-bottle-1.png",
     rolls: [
       {
         key: "value",
@@ -228,7 +242,8 @@ export const RELICS: Relic[] = [
     special: "+300 blast radius.",
     isAttribute: false,
     weight: 100,
-    icon: "boshman",
+    iconName: "boshman",
+    icon: "/relics/main-effect-boshman.png",
     rolls: [
       {
         key: "value",
@@ -249,7 +264,8 @@ export const RELICS: Relic[] = [
     special: "When casting an Ability, has a chance to trigger a Blast explosion effect based on the ability's cooldown length. Explosion triggered this way deals only 50% of its full power.",
     isAttribute: false,
     weight: 100,
-    icon: "blasting",
+    iconName: "blasting",
+    icon: "/relics/main-effect-blasting.png",
     rolls: [
       {
         key: "radius",
@@ -288,7 +304,8 @@ export const RELICS: Relic[] = [
     special: "All attack bonus damage +20% (+)",
     isAttribute: false,
     weight: 100,
-    icon: "blood_attack",
+    iconName: "blood_attack",
+    icon: "/relics/main-effect-blood-attack.png",
     rolls: [
       {
         key: "value",
@@ -339,7 +356,8 @@ export const RELICS: Relic[] = [
     special: "Grants Water Terrain Bonus.",
     isAttribute: false,
     weight: 100,
-    icon: "coexist_ring",
+    iconName: "coexist_ring",
+    icon: "/relics/main-effect-coexist-ring.png",
     rolls: [
       {
         key: "value",
@@ -366,7 +384,8 @@ export const RELICS: Relic[] = [
     special: "Grants 10 to all Attributes.",
     isAttribute: false,
     weight: 100,
-    icon: "complex",
+    iconName: "complex",
+    icon: "/relics/main-effect-complex.png",
     rolls: [
       {
         key: "value",
@@ -387,7 +406,8 @@ export const RELICS: Relic[] = [
     special: "Summoned unit gains 1% per second Max HP Regeneration.",
     isAttribute: false,
     weight: 100,
-    icon: "controlled_whip",
+    iconName: "controlled_whip",
+    icon: "/relics/main-effect-controlled-whip.png",
     rolls: [
       {
         key: "bonus_health",
@@ -417,7 +437,8 @@ export const RELICS: Relic[] = [
     special: "20% of the bonus effect is converted into bonus final damage.",
     isAttribute: false,
     weight: 100,
-    icon: "eliminated",
+    iconName: "eliminated",
+    icon: "/relics/main-effect-eliminated.png",
     rolls: [
       {
         key: "bonus_damage",
@@ -438,7 +459,8 @@ export const RELICS: Relic[] = [
     special: "Shield generation interval reduced by 5 seconds.",
     isAttribute: false,
     weight: 100,
-    icon: "dawn_shelter",
+    iconName: "dawn_shelter",
+    icon: "/relics/main-effect-dawn-shelter.png",
     rolls: [
       {
         key: "health_pct",
@@ -459,7 +481,8 @@ export const RELICS: Relic[] = [
     special: "+1 to current/Max HP Runes",
     isAttribute: false,
     weight: 100,
-    icon: "death_overdraft",
+    iconName: "death_overdraft",
+    icon: "/relics/main-effect-death-overdraft.png",
     rolls: [
       {
         key: "value",
@@ -495,7 +518,8 @@ export const RELICS: Relic[] = [
     special: "Maximum permanent retention increased to 5.",
     isAttribute: false,
     weight: 100,
-    icon: "devil_mask",
+    iconName: "devil_mask",
+    icon: "/relics/main-effect-devil-mask.png",
     rolls: [
       {
         key: "value",
@@ -537,7 +561,8 @@ export const RELICS: Relic[] = [
     special: "+200 target gold.",
     isAttribute: false,
     weight: 100,
-    icon: "fat_boy",
+    iconName: "fat_boy",
+    icon: "/relics/main-effect-fat-boy.png",
     rolls: [
       {
         key: "value",
@@ -564,7 +589,8 @@ export const RELICS: Relic[] = [
     special: "For each dead ally, all Attributes gain an additional bonus of 10.",
     isAttribute: false,
     weight: 100,
-    icon: "responsibility",
+    iconName: "responsibility",
+    icon: "/relics/main-effect-responsibility.png",
     rolls: [
       {
         key: "value",
@@ -585,7 +611,8 @@ export const RELICS: Relic[] = [
     special: "+500 search radius.",
     isAttribute: false,
     weight: 100,
-    icon: "incarnation_of_ash",
+    iconName: "incarnation_of_ash",
+    icon: "/relics/main-effect-incarnation-of-ash.png",
     rolls: [
       {
         key: "value",
@@ -612,7 +639,8 @@ export const RELICS: Relic[] = [
     special: "Always retain at least 1 Ember stacks.",
     isAttribute: false,
     weight: 100,
-    icon: "ember",
+    iconName: "ember",
+    icon: "/relics/main-effect-ember.png",
     rolls: [
       {
         key: "pct",
@@ -633,7 +661,8 @@ export const RELICS: Relic[] = [
     special: "Restores Bottle charges every 65 seconds.",
     isAttribute: false,
     weight: 100,
-    icon: "bottle_3",
+    iconName: "bottle_3",
+    icon: "/relics/main-effect-bottle-3.png",
     rolls: [
       {
         key: "value",
@@ -660,7 +689,8 @@ export const RELICS: Relic[] = [
     special: "Activate Poison every 5 attacks.Activation Ratio: 4%Activation Damage: 1500%",
     isAttribute: false,
     weight: 100,
-    icon: "poisonous_enchantment",
+    iconName: "poisonous_enchantment",
+    icon: "/relics/main-effect-poisonous-enchantment.png",
     rolls: [
       {
         key: "agi_pct",
@@ -690,7 +720,8 @@ export const RELICS: Relic[] = [
     special: "+15% trigger chance.",
     isAttribute: false,
     weight: 100,
-    icon: "equilibrium",
+    iconName: "equilibrium",
+    icon: "/relics/main-effect-equilibrium.png",
     rolls: [
       {
         key: "base",
@@ -720,7 +751,8 @@ export const RELICS: Relic[] = [
     special: "30% is converted into final critical strike damage bonus.",
     isAttribute: false,
     weight: 100,
-    icon: "one_shot_kill",
+    iconName: "one_shot_kill",
+    icon: "/relics/main-effect-one-shot-kill.png",
     rolls: [
       {
         key: "value",
@@ -750,7 +782,8 @@ export const RELICS: Relic[] = [
     special: "+10% HP Threshold.",
     isAttribute: false,
     weight: 0,
-    icon: "one_shot_kill",
+    iconName: "one_shot_kill",
+    icon: "/relics/main-effect-one-shot-kill-old.png",
     rolls: [
       {
         key: "value",
@@ -771,7 +804,8 @@ export const RELICS: Relic[] = [
     special: "Also grants 2 free refreshes for Common Scepter Shards.",
     isAttribute: false,
     weight: 100,
-    icon: "aghanim_1",
+    iconName: "aghanim_1",
+    icon: "/relics/main-effect-aghanim-1.png",
     rolls: [
       {
         key: "value",
@@ -792,7 +826,8 @@ export const RELICS: Relic[] = [
     special: "Also grants 1 free refreshes for Common Scepter Shards.",
     isAttribute: false,
     weight: 100,
-    icon: "aghanim_2",
+    iconName: "aghanim_2",
+    icon: "/relics/main-effect-aghanim-2.png",
     rolls: [
       {
         key: "value",
@@ -818,6 +853,7 @@ export const RELICS: Relic[] = [
     description: "Provides 1–3 Common Shard Stats bans.",
     isAttribute: false,
     weight: 0,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -845,7 +881,8 @@ export const RELICS: Relic[] = [
     special: "33% chance to increase combo count by 1.",
     isAttribute: false,
     weight: 100,
-    icon: "double_hit",
+    iconName: "double_hit",
+    icon: "/relics/main-effect-double-hit.png",
     rolls: [
       {
         key: "value",
@@ -872,7 +909,8 @@ export const RELICS: Relic[] = [
     special: "Does not cause death when the effect ends.",
     isAttribute: false,
     weight: 100,
-    icon: "ghost_form",
+    iconName: "ghost_form",
+    icon: "/relics/main-effect-ghost-form.png",
     rolls: [
       {
         key: "duration",
@@ -893,7 +931,8 @@ export const RELICS: Relic[] = [
     special: "+10% Bonus Final Damage.",
     isAttribute: false,
     weight: 100,
-    icon: "glass_cannon",
+    iconName: "glass_cannon",
+    icon: "/relics/main-effect-glass-cannon.png",
     rolls: [
       {
         key: "value",
@@ -935,7 +974,8 @@ export const RELICS: Relic[] = [
     special: "Gain 1000 gold on activation.",
     isAttribute: false,
     weight: 100,
-    icon: "gold_copy",
+    iconName: "gold_copy",
+    icon: "/relics/main-effect-gold-copy.png",
     rolls: [
       {
         key: "base",
@@ -965,7 +1005,8 @@ export const RELICS: Relic[] = [
     special: "25 % of this effect uses total Attributes instead of base Attributes. (Bonus Attributes are not included.)",
     isAttribute: false,
     weight: 100,
-    icon: "tiny_core",
+    iconName: "tiny_core",
+    icon: "/relics/main-effect-grow.png",
     rolls: [
       {
         key: "model_scale",
@@ -995,7 +1036,8 @@ export const RELICS: Relic[] = [
     special: "+70 Max Attack Speed.",
     isAttribute: false,
     weight: 100,
-    icon: "hunting_time",
+    iconName: "hunting_time",
+    icon: "/relics/main-effect-hunting-time.png",
     rolls: [
       {
         key: "pct",
@@ -1022,7 +1064,8 @@ export const RELICS: Relic[] = [
     special: "When calculating effects such as damage, healing, or shields, your Intelligence calculation result +17% (+)",
     isAttribute: false,
     weight: 100,
-    icon: "int_man",
+    iconName: "int_man",
+    icon: "/relics/main-effect-int-man.png",
     rolls: [],
   },
   {
@@ -1033,7 +1076,8 @@ export const RELICS: Relic[] = [
     special: "Shield no longer expires.",
     isAttribute: false,
     weight: 100,
-    icon: "tough_guy",
+    iconName: "tough_guy",
+    icon: "/relics/main-effect-tough-guy.png",
     rolls: [
       {
         key: "str_to_block",
@@ -1063,7 +1107,8 @@ export const RELICS: Relic[] = [
     special: "Max value increased by 20%.",
     isAttribute: false,
     weight: 100,
-    icon: "living_blood",
+    iconName: "living_blood",
+    icon: "/relics/main-effect-living-blood.png",
     rolls: [
       {
         key: "pct",
@@ -1084,7 +1129,8 @@ export const RELICS: Relic[] = [
     special: "Grants at least 1 stacks of Living Water.",
     isAttribute: false,
     weight: 100,
-    icon: "water",
+    iconName: "water",
+    icon: "/relics/main-effect-water.png",
     rolls: [
       {
         key: "pct",
@@ -1105,7 +1151,8 @@ export const RELICS: Relic[] = [
     special: "While active, grants an additional 15% final damage bonus.",
     isAttribute: false,
     weight: 100,
-    icon: "lone_wolf",
+    iconName: "lone_wolf",
+    icon: "/relics/main-effect-lone-wolf.png",
     rolls: [
       {
         key: "radius",
@@ -1150,7 +1197,8 @@ export const RELICS: Relic[] = [
     special: "Grants 15 Bonus Luck.",
     isAttribute: false,
     weight: 100,
-    icon: "lucky_potion",
+    iconName: "lucky_potion",
+    icon: "/relics/main-effect-lucky-potion.png",
     rolls: [
       {
         key: "bonus",
@@ -1177,7 +1225,8 @@ export const RELICS: Relic[] = [
     special: "If Magic Armor is negative when calculating, Vulnerability effect +10%(+)",
     isAttribute: false,
     weight: 100,
-    icon: "deconstruct_magical",
+    iconName: "deconstruct_magical",
+    icon: "/relics/main-effect-deconstruct-magical.png",
     rolls: [
       {
         key: "base",
@@ -1207,7 +1256,8 @@ export const RELICS: Relic[] = [
     special: "Attacks deal 60 + 100% of your Primary Attribute as Orb-type Magical Damage.",
     isAttribute: false,
     weight: 100,
-    icon: "mana_attack",
+    iconName: "mana_attack",
+    icon: "/relics/main-effect-mana-attack.png",
     rolls: [
       {
         key: "bonus_orb_pct",
@@ -1249,7 +1299,8 @@ export const RELICS: Relic[] = [
     special: "+3 seconds Bottle duration.",
     isAttribute: false,
     weight: 100,
-    icon: "bottle_2",
+    iconName: "bottle_2",
+    icon: "/relics/main-effect-bottle-2.png",
     rolls: [
       {
         key: "value",
@@ -1270,7 +1321,8 @@ export const RELICS: Relic[] = [
     special: "+3 seconds delay time.",
     isAttribute: false,
     weight: 100,
-    icon: "drunk",
+    iconName: "drunk",
+    icon: "/relics/main-effect-drunk.png",
     rolls: [
       {
         key: "pct",
@@ -1300,7 +1352,8 @@ export const RELICS: Relic[] = [
     special: "Extends duration by 30 seconds.",
     isAttribute: false,
     weight: 100,
-    icon: "mystery_potion",
+    iconName: "mystery_potion",
+    icon: "/relics/main-effect-mystery-potion.png",
     rolls: [
       {
         key: "value",
@@ -1327,7 +1380,8 @@ export const RELICS: Relic[] = [
     special: "Interval reduced by 4 seconds.",
     isAttribute: false,
     weight: 100,
-    icon: "nature_bless",
+    iconName: "nature_bless",
+    icon: "/relics/main-effect-nature-bless.png",
     rolls: [
       {
         key: "base",
@@ -1365,7 +1419,8 @@ export const RELICS: Relic[] = [
     description: "Damage you deal also reduces the target’s Health Regeneration by 20–35% for 3 seconds.",
     isAttribute: false,
     weight: 0,
-    icon: "necrosis",
+    iconName: "necrosis",
+    icon: "/relics/main-effect-necrosis.png",
     rolls: [
       {
         key: "value",
@@ -1385,6 +1440,7 @@ export const RELICS: Relic[] = [
     description: "Your Refresher Orb starts with a cooldown of 70–140 seconds. Each subsequent use increases the cooldown by 10 seconds until it returns to its original value.",
     isAttribute: false,
     weight: 0,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -1412,7 +1468,8 @@ export const RELICS: Relic[] = [
     special: "Nighttime kills also grant 0.5% Bonus Max HP until the Round ends.",
     isAttribute: false,
     weight: 100,
-    icon: "night_stalker",
+    iconName: "night_stalker",
+    icon: "/relics/main-effect-night-stalker.png",
     rolls: [
       {
         key: "regen_pct",
@@ -1432,7 +1489,8 @@ export const RELICS: Relic[] = [
     description: "When taking lethal damage, fully restore Health and become unable to act for 7–14 seconds. If you survive, fully heal again and reset all Ability cooldowns. Triggers 1 times per Act.",
     isAttribute: false,
     weight: 0,
-    icon: "nirvana",
+    iconName: "nirvana",
+    icon: "/relics/main-effect-nirvana.png",
     rolls: [
       {
         key: "duration",
@@ -1459,7 +1517,8 @@ export const RELICS: Relic[] = [
     special: "When triggered on yourself, duration is increased by 2 seconds.",
     isAttribute: false,
     weight: 100,
-    icon: "nothingness",
+    iconName: "nothingness",
+    icon: "/relics/main-effect-nothingness.png",
     rolls: [
       {
         key: "duration",
@@ -1480,7 +1539,8 @@ export const RELICS: Relic[] = [
     special: "No longer has activation conditions.",
     isAttribute: false,
     weight: 100,
-    icon: "ocen_guard",
+    iconName: "ocen_guard",
+    icon: "/relics/main-effect-ocen-guard.png",
     rolls: [
       {
         key: "res",
@@ -1510,7 +1570,8 @@ export const RELICS: Relic[] = [
     special: "If armor is negative when calculating, Vulnerability effect +10%(+)",
     isAttribute: false,
     weight: 100,
-    icon: "deconstruct",
+    iconName: "deconstruct",
+    icon: "/relics/main-effect-deconstruct.png",
     rolls: [
       {
         key: "base",
@@ -1539,7 +1600,8 @@ export const RELICS: Relic[] = [
     description: "No Relic in this slot. Gold rewarded instead.",
     isAttribute: false,
     weight: 0,
-    icon: "new_player_default1",
+    iconName: "new_player_default1",
+    icon: "/relics/main-effect-new-player-default1.png",
     rolls: [],
   },
   {
@@ -1549,7 +1611,8 @@ export const RELICS: Relic[] = [
     description: "No Relic in this slot. Gold rewarded instead.",
     isAttribute: false,
     weight: 0,
-    icon: "new_player_default2",
+    iconName: "new_player_default2",
+    icon: "/relics/main-effect-new-player-default2.png",
     rolls: [],
   },
   {
@@ -1559,7 +1622,8 @@ export const RELICS: Relic[] = [
     description: "No Relic in this slot. Gold rewarded instead.",
     isAttribute: false,
     weight: 0,
-    icon: "new_player_default3",
+    iconName: "new_player_default3",
+    icon: "/relics/main-effect-new-player-default3.png",
     rolls: [],
   },
   {
@@ -1569,7 +1633,8 @@ export const RELICS: Relic[] = [
     description: "No Relic in this slot. Gold rewarded instead.",
     isAttribute: false,
     weight: 0,
-    icon: "new_player_default4",
+    iconName: "new_player_default4",
+    icon: "/relics/main-effect-new-player-default4.png",
     rolls: [],
   },
   {
@@ -1579,7 +1644,8 @@ export const RELICS: Relic[] = [
     description: "No Relic in this slot. Gold rewarded instead.",
     isAttribute: false,
     weight: 0,
-    icon: "new_player_default5",
+    iconName: "new_player_default5",
+    icon: "/relics/main-effect-new-player-default5.png",
     rolls: [],
   },
   {
@@ -1589,7 +1655,8 @@ export const RELICS: Relic[] = [
     description: "No Relic in this slot. Gold rewarded instead.",
     isAttribute: false,
     weight: 0,
-    icon: "new_player_default6",
+    iconName: "new_player_default6",
+    icon: "/relics/main-effect-new-player-default6.png",
     rolls: [],
   },
   {
@@ -1600,7 +1667,8 @@ export const RELICS: Relic[] = [
     special: "Guaranteed to trigger once every 6 seconds.",
     isAttribute: false,
     weight: 100,
-    icon: "primordial_codex",
+    iconName: "primordial_codex",
+    icon: "/relics/main-effect-primordial-codex.png",
     rolls: [
       {
         key: "pct",
@@ -1621,7 +1689,8 @@ export const RELICS: Relic[] = [
     special: "Summoned unit Attack Speed increased by 40% for the first 3 seconds after being summoned.",
     isAttribute: false,
     weight: 100,
-    icon: "marionette",
+    iconName: "marionette",
+    icon: "/relics/main-effect-marionette.png",
     rolls: [],
   },
   {
@@ -1632,7 +1701,8 @@ export const RELICS: Relic[] = [
     special: "+3 Attacks",
     isAttribute: false,
     weight: 100,
-    icon: "raging_combo",
+    iconName: "raging_combo",
+    icon: "/relics/main-effect-raging-combo.png",
     rolls: [
       {
         key: "value",
@@ -1668,7 +1738,8 @@ export const RELICS: Relic[] = [
     special: "Applies retroactively.",
     isAttribute: false,
     weight: 100,
-    icon: "thick",
+    iconName: "thick",
+    icon: "/relics/main-effect-thick.png",
     rolls: [
       {
         key: "value",
@@ -1698,7 +1769,8 @@ export const RELICS: Relic[] = [
     special: "Insufficient targets allow attacking the same target. Max: 2.",
     isAttribute: false,
     weight: 100,
-    icon: "lantern_of_death",
+    iconName: "lantern_of_death",
+    icon: "/relics/main-effect-lantern-of-death.png",
     rolls: [
       {
         key: "damage_pct",
@@ -1740,7 +1812,8 @@ export const RELICS: Relic[] = [
     special: "Killing any enemy immediately refreshes the cooldown of all Reaper's Scythes.",
     isAttribute: false,
     weight: 100,
-    icon: "reaper_scythe",
+    iconName: "reaper_scythe",
+    icon: "/relics/main-effect-reaper-scythe.png",
     rolls: [
       {
         key: "base_damage",
@@ -1779,7 +1852,8 @@ export const RELICS: Relic[] = [
     special: "Bonus Base Damage = 10 + 3 × [Labyrinth Depth].",
     isAttribute: false,
     weight: 100,
-    icon: "dragon_egg",
+    iconName: "dragon_egg",
+    icon: "/relics/main-effect-dragon-egg.png",
     rolls: [
       {
         key: "radius",
@@ -1809,7 +1883,8 @@ export const RELICS: Relic[] = [
     special: "Duration x 2.",
     isAttribute: false,
     weight: 100,
-    icon: "bottle_5",
+    iconName: "bottle_5",
+    icon: "/relics/main-effect-resurrection.png",
     rolls: [
       {
         key: "value",
@@ -1830,7 +1905,8 @@ export const RELICS: Relic[] = [
     special: "Immediately gain the bonuses from 2 Stages.",
     isAttribute: false,
     weight: 100,
-    icon: "duel",
+    iconName: "duel",
+    icon: "/relics/main-effect-duel.png",
     rolls: [
       {
         key: "value",
@@ -1851,7 +1927,8 @@ export const RELICS: Relic[] = [
     special: "When calculating lost health percentage, the result is increased by 18% (+).",
     isAttribute: false,
     weight: 100,
-    icon: "sacrificial_wheel",
+    iconName: "sacrificial_wheel",
+    icon: "/relics/main-effect-sacrificial-wheel.png",
     rolls: [],
   },
   {
@@ -1862,7 +1939,8 @@ export const RELICS: Relic[] = [
     special: "Bonus gained from leaders lasts until the next Act.",
     isAttribute: false,
     weight: 100,
-    icon: "heart_start",
+    iconName: "heart_start",
+    icon: "/relics/main-effect-heart-start.png",
     rolls: [],
   },
   {
@@ -1873,7 +1951,8 @@ export const RELICS: Relic[] = [
     special: "This Relic no longer disables the active use of the Bottle.",
     isAttribute: false,
     weight: 100,
-    icon: "sealed_bottle",
+    iconName: "sealed_bottle",
+    icon: "/relics/main-effect-sealed-bottle.png",
     rolls: [
       {
         key: "value",
@@ -1915,7 +1994,8 @@ export const RELICS: Relic[] = [
     special: "Interval reduced by 2 seconds.",
     isAttribute: false,
     weight: 100,
-    icon: "secret",
+    iconName: "secret",
+    icon: "/relics/main-effect-secret.png",
     rolls: [
       {
         key: "pct",
@@ -1951,7 +2031,8 @@ export const RELICS: Relic[] = [
     special: "Cooldown: 1 Stages.",
     isAttribute: false,
     weight: 100,
-    icon: "seed_of_nature",
+    iconName: "seed_of_nature",
+    icon: "/relics/main-effect-seed-of-nature.png",
     rolls: [
       {
         key: "value",
@@ -1972,7 +2053,8 @@ export const RELICS: Relic[] = [
     special: "Inherit 50% bonus to the next round, and will not be silenced after reaching full bonus.",
     isAttribute: false,
     weight: 100,
-    icon: "silence_curse",
+    iconName: "silence_curse",
+    icon: "/relics/main-effect-silence-curse.png",
     rolls: [
       {
         key: "int_pct",
@@ -2014,7 +2096,8 @@ export const RELICS: Relic[] = [
     special: "Also restores 5% Mana.",
     isAttribute: false,
     weight: 100,
-    icon: "soul_return",
+    iconName: "soul_return",
+    icon: "/relics/main-effect-soul-return.png",
     rolls: [
       {
         key: "summon_amp",
@@ -2044,7 +2127,8 @@ export const RELICS: Relic[] = [
     special: "When calculating effects such as damage, healing, or shields, your Strength calculation result +17% (+)",
     isAttribute: false,
     weight: 100,
-    icon: "str_man",
+    iconName: "str_man",
+    icon: "/relics/main-effect-str-man.png",
     rolls: [],
   },
   {
@@ -2055,7 +2139,8 @@ export const RELICS: Relic[] = [
     special: "Maximum block rate increased by 30% (+)",
     isAttribute: false,
     weight: 100,
-    icon: "thick_shell",
+    iconName: "thick_shell",
+    icon: "/relics/main-effect-thick-shell.png",
     rolls: [
       {
         key: "base",
@@ -2112,7 +2197,8 @@ export const RELICS: Relic[] = [
     special: "-15% Lifesteal Decay against normal enemies.",
     isAttribute: false,
     weight: 100,
-    icon: "thirsty",
+    iconName: "thirsty",
+    icon: "/relics/main-effect-thirsty.png",
     rolls: [
       {
         key: "value",
@@ -2154,7 +2240,8 @@ export const RELICS: Relic[] = [
     special: "Grants 50% effect even when restoration conditions are not met.",
     isAttribute: false,
     weight: 100,
-    icon: "blood_of_the_troll",
+    iconName: "blood_of_the_troll",
+    icon: "/relics/main-effect-blood-of-the-troll.png",
     rolls: [
       {
         key: "value",
@@ -2181,7 +2268,8 @@ export const RELICS: Relic[] = [
     special: "Gain +4 to all attributes for every 1 unspent ability points.",
     isAttribute: false,
     weight: 100,
-    icon: "unity",
+    iconName: "unity",
+    icon: "/relics/main-effect-unity.png",
     rolls: [
       {
         key: "value",
@@ -2208,7 +2296,8 @@ export const RELICS: Relic[] = [
     special: "Digests 1 additional targets.",
     isAttribute: false,
     weight: 0,
-    icon: "gullet_of_greed",
+    iconName: "gullet_of_greed",
+    icon: "/relics/main-effect-gullet-of-greed.png",
     rolls: [
       {
         key: "pct",
@@ -2229,7 +2318,8 @@ export const RELICS: Relic[] = [
     special: "The slow effect no longer decays, and enemies affected by it take 10% bonus damage.",
     isAttribute: false,
     weight: 100,
-    icon: "stranger_things",
+    iconName: "stranger_things",
+    icon: "/relics/main-effect-stranger-things.png",
     rolls: [
       {
         key: "value",
@@ -2286,7 +2376,8 @@ export const RELICS: Relic[] = [
     special: "Has 20% effect on Ultimates.",
     isAttribute: false,
     weight: 100,
-    icon: "void_codex",
+    iconName: "void_codex",
+    icon: "/relics/main-effect-void-codex.png",
     rolls: [
       {
         key: "cooldown",
@@ -2307,7 +2398,8 @@ export const RELICS: Relic[] = [
     special: "Removes the application range limit, allowing the Bottle to be used globally. Unlocks the ability to use the Bottle on other units in Endless Mode.",
     isAttribute: false,
     weight: 100,
-    icon: "bottle_4",
+    iconName: "bottle_4",
+    icon: "/relics/main-effect-bottle-4.png",
     rolls: [
       {
         key: "value",
@@ -2327,6 +2419,7 @@ export const RELICS: Relic[] = [
     description: "+5–15% Spell Amplification",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2347,6 +2440,7 @@ export const RELICS: Relic[] = [
     description: "+8–12% Lifesteal",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2367,6 +2461,7 @@ export const RELICS: Relic[] = [
     description: "+75–180 Cast Range",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2387,6 +2482,7 @@ export const RELICS: Relic[] = [
     description: "+4–12 Agility",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2407,6 +2503,7 @@ export const RELICS: Relic[] = [
     description: "+8–16% Buff Duration",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2427,6 +2524,7 @@ export const RELICS: Relic[] = [
     description: "+10–20 Luck",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2447,6 +2545,7 @@ export const RELICS: Relic[] = [
     description: "+15–40 Attack Speed",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2467,6 +2566,7 @@ export const RELICS: Relic[] = [
     description: "+1–16% Cast Speed",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2493,6 +2593,7 @@ export const RELICS: Relic[] = [
     description: "+5–10% Summon AMP",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2513,6 +2614,7 @@ export const RELICS: Relic[] = [
     description: "+8–16% Debuff Duration",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2533,6 +2635,7 @@ export const RELICS: Relic[] = [
     description: "+0.3–1 All Attributes per Level",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2553,6 +2656,7 @@ export const RELICS: Relic[] = [
     description: "+10–25 Basic Attack Damage",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2573,6 +2677,7 @@ export const RELICS: Relic[] = [
     description: "+50–125 Ranged Attack Range",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2593,6 +2698,7 @@ export const RELICS: Relic[] = [
     description: "+15–40 Movement Speed",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2613,6 +2719,7 @@ export const RELICS: Relic[] = [
     description: "+5–12% Stage Gold Rewards",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2633,6 +2740,7 @@ export const RELICS: Relic[] = [
     description: "+2–8 Armor",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2653,6 +2761,7 @@ export const RELICS: Relic[] = [
     description: "+4–12 Intelligence",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2673,6 +2782,7 @@ export const RELICS: Relic[] = [
     description: "+25–80 Melee Attack Range",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2693,6 +2803,7 @@ export const RELICS: Relic[] = [
     description: "+80–240 Max MP",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2713,6 +2824,7 @@ export const RELICS: Relic[] = [
     description: "+2–6 Mana Regeneration",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2733,6 +2845,7 @@ export const RELICS: Relic[] = [
     description: "+5–15% Mana Regeneration",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2753,6 +2866,7 @@ export const RELICS: Relic[] = [
     description: "+4–12 Strength",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2773,6 +2887,7 @@ export const RELICS: Relic[] = [
     description: "+5–10% Healing Effect",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2793,6 +2908,7 @@ export const RELICS: Relic[] = [
     description: "+6–15 Magic Armor",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2813,6 +2929,7 @@ export const RELICS: Relic[] = [
     description: "Gold + 500",
     isAttribute: true,
     weight: 0,
+    iconName: null,
     icon: null,
     rolls: [],
   },
@@ -2823,6 +2940,7 @@ export const RELICS: Relic[] = [
     description: "Gold + 1000",
     isAttribute: true,
     weight: 0,
+    iconName: null,
     icon: null,
     rolls: [],
   },
@@ -2833,6 +2951,7 @@ export const RELICS: Relic[] = [
     description: "Gold + 2000",
     isAttribute: true,
     weight: 0,
+    iconName: null,
     icon: null,
     rolls: [],
   },
@@ -2843,6 +2962,7 @@ export const RELICS: Relic[] = [
     description: "+4–12 Health Regeneration",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2863,6 +2983,7 @@ export const RELICS: Relic[] = [
     description: "+5–15% Health Regeneration",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2883,6 +3004,7 @@ export const RELICS: Relic[] = [
     description: "+100–300 Max HP",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {
@@ -2903,6 +3025,7 @@ export const RELICS: Relic[] = [
     description: "+5–10% AoE",
     isAttribute: true,
     weight: 100,
+    iconName: null,
     icon: null,
     rolls: [
       {

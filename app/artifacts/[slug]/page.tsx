@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import { ArtifactFacts } from '@/components/ArtifactFacts'
-import { ArtifactIcon } from '@/components/ArtifactIcon'
+import { CatalogueIcon } from '@/components/CatalogueIcon'
 import { ArtifactStats } from '@/components/ArtifactStats'
 import { CommentCard } from '@/components/CommentCard'
 import { EmptySlot } from '@/components/EmptySlot'
@@ -36,8 +36,9 @@ export default async function ArtifactPage({ params }: { params: Promise<{ slug:
         </Link>
 
         <header className="mt-6 flex items-start gap-5">
-          <ArtifactIcon
-            artifact={artifact}
+          <CatalogueIcon
+            src={artifact.icon}
+            accent={accent}
             size={256}
             className="shard shard-edge size-20 shrink-0 object-cover sm:size-24"
           />

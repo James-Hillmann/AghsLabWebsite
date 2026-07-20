@@ -20,6 +20,7 @@ import { buildCatalogue } from './lib/catalogue.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const ICONS = path.join(ROOT, 'public', 'artifacts')
+const RELIC_ICONS = path.join(ROOT, 'public', 'relics')
 
 const problems = []
 const fail = (message) => problems.push(message)
@@ -117,6 +118,14 @@ for (const relic of RELICS) {
   if (relicSlugs.has(relic.slug)) fail(`relic ${where}: duplicate slug`)
   relicSlugs.add(relic.slug)
 
+  // A null icon is expected -- attribute relics have no art in the game at all.
+  if (relic.icon && relic.icon !== `/relics/${relic.slug}.png`) {
+    fail(`relic ${where}: icon should be /relics/${relic.slug}.png`)
+  }
+  if (relic.icon && !relic.iconName) {
+    fail(`relic ${where}: has an icon path but no source texture name`)
+  }
+
   for (const roll of relic.rolls ?? []) {
     if (roll.min.length !== roll.max.length) {
       fail(`relic ${where}: roll "${roll.key}" has ${roll.min.length} minimums and ${roll.max.length} maximums`)
@@ -136,11 +145,17 @@ for (const relic of RELICS) {
 
 // Icons are extracted separately, so missing art is expected on a fresh clone and only worth
 // reporting. An icon nothing references is different -- that's a real mismatch.
-if (existsSync(ICONS)) {
-  for (const file of readdirSync(ICONS)) {
+for (const [dir, known, kind] of [
+  [ICONS, slugs, 'artifact'],
+  [RELIC_ICONS, relicSlugs, 'relic'],
+]) {
+  if (!existsSync(dir)) continue
+  for (const file of readdirSync(dir)) {
     if (!file.endsWith('.png')) continue
     const slug = file.replace(/\.png$/, '')
-    if (!slugs.has(slug)) fail(`public/artifacts/${file}: no artifact has the slug "${slug}"`)
+    if (!known.has(slug)) {
+      fail(`${path.relative(ROOT, dir)}/${file}: no ${kind} has the slug "${slug}"`)
+    }
   }
 }
 
@@ -197,7 +212,14 @@ if (problems.length) {
 }
 
 const withArt = ARTIFACTS.filter((a) => existsSync(path.join(ICONS, `${a.slug}.png`))).length
+const relicsWantingArt = RELICS.filter((relic) => relic.icon)
+const relicsWithArt = relicsWantingArt.filter((relic) =>
+  existsSync(path.join(RELIC_ICONS, `${relic.slug}.png`)),
+).length
 
 console.log(`${ARTIFACTS.length} artifacts, ${RELICS.length} relics, no problems.`)
-console.log(`icons: ${withArt}/${ARTIFACTS.length} extracted`)
+console.log(`icons: ${withArt}/${ARTIFACTS.length} artifacts, ${relicsWithArt}/${relicsWantingArt.length} relics`)
+console.log(
+  `       ${RELICS.length - relicsWantingArt.length} relics have no art in the game (attributes)`,
+)
 console.log(`drift: ${drift}`)

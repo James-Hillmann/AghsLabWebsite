@@ -1,22 +1,16 @@
-'use client'
-
-import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
 
 import { ERA_COLOR, type Artifact } from '@/lib/artifacts'
+
+import { CatalogueIcon } from './CatalogueIcon'
 
 /**
  * One pedestal in the Archive. Square rather than the hero tile's portrait ratio, because
  * that's the shape the icons get extracted at.
  *
- * Unlike HeroTile, these go through the image optimizer -- they're our own 256px files, not
- * something Valve already serves at display size.
- *
- * Client-side because of the missing-icon fallback: the catalogue is generated from the game
- * files, but the icons are a separate extraction step, so a fresh checkout has data for 106
- * artifacts and art for none of them. Falling back to an era diamond keeps the grid readable
- * in between rather than showing 106 broken images.
+ * Unlike HeroTile, these go through the image optimizer -- they're our own 512px files, not
+ * something Valve already serves at display size. That requires artifacts/*.png to sit
+ * outside the proxy's matcher; see the comment there for why.
  */
 export function ArtifactTile({
   artifact,
@@ -28,9 +22,6 @@ export function ArtifactTile({
   /** Searching dims everything except the one lit artifact. A dimmed tile is still a link. */
   isDimmed?: boolean
 }) {
-  const [hasIcon, setHasIcon] = useState(true)
-  const accent = ERA_COLOR[artifact.era]
-
   return (
     <Link
       href={`/artifacts/${artifact.slug}`}
@@ -51,23 +42,12 @@ export function ArtifactTile({
         }`}
         style={{ '--cut': '10px' } as React.CSSProperties}
       >
-        {hasIcon ? (
-          <Image
-            src={artifact.icon}
-            alt=""
-            width={256}
-            height={256}
-            loading="lazy"
-            onError={() => setHasIcon(false)}
-            className="h-full w-full object-cover brightness-[0.9] transition duration-200 group-hover:brightness-110"
-          />
-        ) : (
-          <span
-            aria-hidden
-            className="size-5 rotate-45 opacity-30 transition-opacity duration-200 group-hover:opacity-60"
-            style={{ backgroundColor: accent }}
-          />
-        )}
+        <CatalogueIcon
+          src={artifact.icon}
+          accent={ERA_COLOR[artifact.era]}
+          size={256}
+          className="h-full w-full object-cover brightness-[0.9] transition duration-200 group-hover:brightness-110"
+        />
       </span>
 
       <span

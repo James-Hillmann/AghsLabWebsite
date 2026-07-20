@@ -1,24 +1,31 @@
-// Extracts artifact icons out of the game files into public/artifacts/.
+// Extracts artifact and relic icons out of the game files into public/.
 //
 //   npm run catalogue:icons
 //
-// This is the one step that needs an external tool. Artifact art is stored as .vtex_c --
+// This is the one step that needs an external tool. The art is stored as .vtex_c --
 // compiled, block-compressed textures -- so decoding it means Source 2 Viewer's CLI rather
 // than anything reasonable to write here.
 //
 // Everything else in the pipeline is plain Node against the VPK; only pictures need this.
 
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, mkdtempSync, readdirSync, renameSync, rmSync } from 'node:fs'
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  renameSync,
+  rmSync,
+} from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { buildCatalogue } from './lib/catalogue.mjs'
-import { findGameVpk, SOURCE_FILES } from './lib/game-files.mjs'
+import { findGameVpk, ICON_SETS } from './lib/game-files.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const OUT = path.join(ROOT, 'public', 'artifacts')
 
 const DOWNLOAD = 'https://s2v.app/'
 
@@ -60,9 +67,6 @@ if (!cli) {
 const vpk = findGameVpk()
 const staging = mkdtempSync(path.join(tmpdir(), 'aghslab-icons-'))
 
-// The CLI mirrors the archive's directory structure under the output folder.
-const extracted = path.join(staging, ...SOURCE_FILES.iconDir.split('/'))
-
 /**
  * Runs the CLI and reports whether it completed, without throwing.
  *
@@ -83,79 +87,100 @@ function run(filter) {
   }
 }
 
-try {
-  // Files come out named after the texture, e.g. the_hat_of_moiret_png.png. The catalogue
-  // knows each artifact's texture name, so this maps them onto slugs.
+/**
+ * Texture name -> the slugs that use it. Entries without art are skipped.
+ *
+ * A list rather than a single slug because sharing happens: three relics all draw the
+ * `one_shot_kill` texture, and mapping texture->slug one-to-one silently left two of them
+ * without a file.
+ */
+function iconTargets(entries) {
   const bySlug = new Map()
-  for (const artifact of buildCatalogue().artifacts) {
-    if (artifact.iconName) bySlug.set(artifact.iconName, artifact.slug)
+  for (const entry of entries) {
+    if (!entry.iconName) continue
+    if (!bySlug.has(entry.iconName)) bySlug.set(entry.iconName, [])
+    bySlug.get(entry.iconName).push(entry.slug)
   }
+  return bySlug
+}
 
-  console.log(`extracting ${bySlug.size} icons from ${SOURCE_FILES.iconDir} ...`)
+function extract({ kind, source, out }, bySlug) {
+  // The CLI mirrors the archive's directory structure under the output folder.
+  const staged = path.join(staging, ...source.split('/'))
+  const outDir = path.join(ROOT, 'public', out)
 
-  // One bulk pass for speed, since it usually gets most of the way.
-  const clean = run(SOURCE_FILES.iconDir)
+  console.log(`\n${kind}s: extracting ${bySlug.size} icons from ${source} ...`)
+
+  run(source)
 
   const landed = () =>
     new Set(
-      existsSync(extracted)
-        ? readdirSync(extracted)
+      existsSync(staged)
+        ? readdirSync(staged)
             .filter((file) => file.endsWith('.png'))
             .map((file) => file.replace(/_png\.png$/, '').replace(/\.png$/, ''))
         : [],
     )
 
-  let have = landed()
-  const missing = [...bySlug.keys()].filter((texture) => !have.has(texture))
+  const missing = [...bySlug.keys()].filter((texture) => !landed().has(texture))
 
-  if (!clean && missing.length) {
+  // Retried on what's missing rather than on the exit status: the finalizer crash can cut a
+  // bulk run short while the process still exits 0, so a clean exit proves nothing.
+  if (missing.length) {
     // Single-file runs are short-lived enough that the finalizer never gets a chance to fire.
-    console.log(`bulk pass ended early; retrying ${missing.length} individually ...`)
+    console.log(`  bulk pass left ${missing.length}; retrying individually ...`)
     for (const texture of missing) {
-      // Textures are stored with a _png suffix before the extension: the artifact's IconName
-      // is "eden_anvil", the archive entry is "eden_anvil_png.vtex_c".
-      run(`${SOURCE_FILES.iconDir}/${texture}_png.vtex_c`)
+      // Textures carry a _png suffix before the extension: the IconName is "eden_anvil",
+      // the archive entry is "eden_anvil_png.vtex_c".
+      run(`${source}/${texture}_png.vtex_c`)
     }
-    have = landed()
   }
 
-  if (!existsSync(extracted)) {
-    throw new Error(`the CLI wrote nothing to ${extracted} -- has the icon path changed?`)
+  if (!existsSync(staged)) {
+    throw new Error(`the CLI wrote nothing to ${staged} -- has the ${kind} icon path changed?`)
   }
 
-  mkdirSync(OUT, { recursive: true })
+  mkdirSync(outDir, { recursive: true })
 
   let written = 0
-  const unmatched = []
+  let unmatched = 0
 
-  for (const file of readdirSync(extracted)) {
+  for (const file of readdirSync(staged)) {
     if (!file.endsWith('.png')) continue
 
     const texture = file.replace(/_png\.png$/, '').replace(/\.png$/, '')
-    const slug = bySlug.get(texture)
+    const slugs = bySlug.get(texture)
 
-    if (!slug) {
-      unmatched.push(file)
+    // Not an error: these folders also hold UI chrome nothing in the catalogue references.
+    if (!slugs) {
+      unmatched++
       continue
     }
 
-    renameSync(path.join(extracted, file), path.join(OUT, `${slug}.png`))
-    written++
+    // Copy for every slug but the last, then move -- shared textures need one file each.
+    const from = path.join(staged, file)
+    slugs.slice(0, -1).forEach((slug) => copyFileSync(from, path.join(outDir, `${slug}.png`)))
+    renameSync(from, path.join(outDir, `${slugs[slugs.length - 1]}.png`))
+    written += slugs.length
   }
 
-  console.log(`\n${written} icons -> public/artifacts/`)
+  const stillMissing = [...bySlug.values()]
+    .flat()
+    .filter((slug) => !existsSync(path.join(outDir, `${slug}.png`)))
 
-  const stillMissing = [...bySlug.values()].filter(
-    (slug) => !existsSync(path.join(OUT, `${slug}.png`)),
-  )
+  console.log(`  ${written} icons -> public/${out}/`)
   if (stillMissing.length) {
-    console.log(
-      `${stillMissing.length} artifacts still have no art: ${stillMissing.slice(0, 8).join(', ')}`,
-    )
+    console.log(`  ${stillMissing.length} without art: ${stillMissing.slice(0, 6).join(', ')}`)
   }
-  if (unmatched.length) {
-    // Not an error: the folder also holds UI chrome that no artifact references.
-    console.log(`${unmatched.length} extracted files matched no artifact and were skipped.`)
+  if (unmatched) console.log(`  ${unmatched} extracted files matched nothing and were skipped.`)
+}
+
+try {
+  const { artifacts, relics } = buildCatalogue()
+  const entriesFor = { artifact: artifacts, relic: relics }
+
+  for (const set of ICON_SETS) {
+    extract(set, iconTargets(entriesFor[set.kind]))
   }
 } finally {
   rmSync(staging, { recursive: true, force: true })

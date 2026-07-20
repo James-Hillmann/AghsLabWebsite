@@ -17,7 +17,19 @@ export const SOURCE_FILES = {
   english: 'resource/addon_english.txt',
   // The game misspells this directory. Matching the typo is required, not a mistake here.
   iconDir: 'panorama/images/custom_game/aritfact',
+  relicIconDir: 'panorama/images/custom_game/relic',
 }
+
+/**
+ * The two icon sets, and where each lands in public/.
+ *
+ * Relic art only covers the main-effect relics -- the attribute ones carry no Icon field,
+ * because the game draws them from a generic attribute sprite rather than bespoke art.
+ */
+export const ICON_SETS = [
+  { kind: 'artifact', source: SOURCE_FILES.iconDir, out: 'artifacts' },
+  { kind: 'relic', source: SOURCE_FILES.relicIconDir, out: 'relics' },
+]
 
 const DEFAULT_STEAM_PATHS = [
   'C:/Program Files (x86)/Steam',

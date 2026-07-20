@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { CatalogueIcon } from '@/components/CatalogueIcon'
 import { CommentCard } from '@/components/CommentCard'
 import { Section } from '@/components/Section'
 import { SiteHeader } from '@/components/SiteHeader'
@@ -40,16 +41,28 @@ export default async function RelicPage({ params }: { params: Promise<{ slug: st
           &larr; All relics
         </Link>
 
-        <div className="mt-6 flex items-center gap-3">
-          <span aria-hidden className="size-2 rotate-45" style={{ backgroundColor: accent }} />
-          <span className="label text-[0.65rem]" style={{ color: accent }}>
-            {RELIC_GROUP_NAME[group]}
-          </span>
-        </div>
+        <header className="mt-6 flex items-start gap-5">
+          <CatalogueIcon
+            src={relic.icon}
+            accent={accent}
+            size={128}
+            className="shard shard-edge size-20 shrink-0 object-contain"
+            fallbackClassName="shard shard-edge size-20 shrink-0"
+          />
 
-        <h1 className="mt-3 font-[family-name:var(--font-display)] text-4xl leading-tight font-light text-frost sm:text-5xl">
-          {relic.name}
-        </h1>
+          <div className="min-w-0">
+            <div className="flex items-center gap-3">
+              <span aria-hidden className="size-2 rotate-45" style={{ backgroundColor: accent }} />
+              <span className="label text-[0.65rem]" style={{ color: accent }}>
+                {RELIC_GROUP_NAME[group]}
+              </span>
+            </div>
+
+            <h1 className="mt-3 font-[family-name:var(--font-display)] text-4xl leading-tight font-light text-frost sm:text-5xl">
+              {relic.name}
+            </h1>
+          </div>
+        </header>
 
         <p className="mt-5 text-sm leading-relaxed text-frost">{relic.description}</p>
 
