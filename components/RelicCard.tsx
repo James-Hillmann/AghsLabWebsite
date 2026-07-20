@@ -9,6 +9,7 @@ import {
 } from '@/lib/relics'
 
 import { CatalogueIcon } from './CatalogueIcon'
+import { RichText } from './RichText'
 
 /**
  * One relic in the list.
@@ -60,7 +61,9 @@ export function RelicCard({
           <h3 className="font-[family-name:var(--font-display)] text-lg leading-tight text-frost">
             {relic.name}
           </h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted">{relic.description}</p>
+          <p className="mt-1.5 text-sm leading-relaxed text-muted">
+            <RichText text={relic.description} />
+          </p>
         </div>
       </div>
 

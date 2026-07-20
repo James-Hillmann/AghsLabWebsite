@@ -84,23 +84,23 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Slice and Dice",
-      description: "Melee attacks cleave nearby enemies, dealing 15% damage.",
+      description: "Melee attacks cleave nearby enemies, dealing [[value]]15%[[/]] damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Bloodthirst",
-        description: "+8% Attack Lifesteal",
+        description: "+[[value]]8%[[/]] Attack Lifesteal",
       },
       {
         level: 20,
         name: "Weakness Exploit",
-        description: "Damage dealt against common enemies increased by 20%",
+        description: "Damage dealt against common enemies increased by [[value]]20%[[/]]",
       },
       {
         level: 40,
         name: "Malice",
-        description: "After 4 Rounds, remove this Artifact and gain all its bonuses.",
+        description: "After [[value]]4[[/]] Rounds, remove this Artifact and gain all its bonuses.",
       },
     ],
     flavor: "The infamous weapon once wielded by a notorious murderer. The resentment of its victims clings to the blades, and over time has granted them a faint, malevolent power.",
@@ -130,28 +130,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "True Sight",
-      description: "Grants True Sight within a 500 radius.",
+      description: "Grants True Sight within a [[value]]500[[/]] radius.",
     },
     upgrades: [
       {
         level: 10,
         name: "Dispel",
-        description: "Enemies within True Sight range have their Armor reduced by 5 and Magic Armor reduced by 10.",
+        description: "Enemies within True Sight range have their Armor reduced by [[value]]5[[/]] and Magic Armor reduced by [[value]]10[[/]].",
       },
       {
         level: 20,
         name: "Recovery",
-        description: "Applies a basic dispel to enemies within the True Sight radius, each dispelled debuff bring a 7 second cooldown before it can be dispelled again on the same target",
+        description: "Applies a basic dispel to enemies within the [[ref]]True Sight[[/]] radius, each dispelled debuff bring a [[value]]7[[/]] second cooldown before it can be dispelled again on the same target",
       },
       {
         level: 30,
         name: "Extension",
-        description: "True Sight radius increased by 10% of your vision range",
+        description: "[[ref]]True Sight[[/]] radius increased by [[value]]10%[[/]] of your vision range",
       },
       {
         level: 40,
         name: "Reversion",
-        description: "Recovery can be applied to allies",
+        description: "[[ref]]Recovery[[/]] can be applied to allies",
       },
     ],
     flavor: "A necklace that symbolizes truth before which all falsehoods are revealed and every lie is exposed.",
@@ -194,22 +194,22 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 10,
         name: "Celestial Shield",
-        description: "At the start of each Stage, gain [Stage Depth] × 200",
+        description: "At the start of each Stage, gain [Stage Depth] × [[value]]200[[/]]",
       },
       {
         level: 20,
         name: "Essence Reflection",
-        description: "+20% chance for double drops from",
+        description: "+[[value]]20%[[/]] chance for double drops from",
       },
       {
         level: 30,
         name: "Flux Mirror",
-        description: "After 15 seconds without taking damage, recover 5% %Celestial Shield per 1 seconds. Caps at 50%.",
+        description: "After [[value]]15[[/]] seconds without taking damage, recover [[value]]5%[[/]] %[[ref]]Celestial Shield[[/]] per [[value]]1[[/]] seconds. Caps at [[value]]50%[[/]].",
       },
       {
         level: 40,
         name: "Celestial Revelation",
-        description: "Reveal the entire map at the start of each Stage for 60 seconds (Stackable)",
+        description: "Reveal the entire map at the start of each Stage for [[value]]60[[/]] seconds (Stackable)",
       },
     ],
     flavor: "Starlight resonates, compresses, and merges with fragments of sages’ wandering souls and the ever-shifting geometry of the corridor itself, eventually cooling and solidifying into a Celestial Mirror neither metal nor jade.",
@@ -247,28 +247,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Forge",
-      description: "For each 5 Selections, one of the selection is converted into .",
+      description: "For each [[value]]5[[/]] Selections, one of the selection is converted into .",
     },
     upgrades: [
       {
         level: 10,
         name: "Rare Forge",
-        description: "+8% chance to trigger Forge",
+        description: "+[[value]]8%[[/]] chance to trigger [[ref]]Forge[[/]]",
       },
       {
         level: 20,
         name: "Mythic Forge",
-        description: "Every 7 Stages, gain one that converts into .",
+        description: "Every [[value]]7[[/]] Stages, gain one that converts into .",
       },
       {
         level: 30,
         name: "Immortal Forge",
-        description: "When Forge is triggered, permanently gain 2 Armor.",
+        description: "When [[ref]]Forge[[/]] is triggered, permanently gain [[value]]2[[/]] Armor.",
       },
       {
         level: 40,
         name: "Legendary Forge",
-        description: "Upon first retrieval, gain 1 .",
+        description: "Upon first retrieval, gain [[value]]1[[/]] .",
       },
     ],
     flavor: "A legendary anvil said to be capable of forging something powerful.",
@@ -312,28 +312,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Greed Up",
-      description: "Each Stage, 18% of the gold from the reward is stored. If at least 200/500 gold is stored each time, this Artifact grants an additional 1/2 all Attributes.",
+      description: "Each Stage, [[value]]18%[[/]] of the gold from the reward is stored. If at least [[value]]200[[/]]/[[value]]500[[/]] gold is stored each time, this Artifact grants an additional [[value]]1[[/]]/[[value]]2[[/]] all Attributes.",
     },
     upgrades: [
       {
         level: 10,
         name: "Minimum Standard",
-        description: "Store at least 200 gold each time. If insufficient, the remaining amount is deducted from gold held.",
+        description: "Store at least [[value]]200[[/]] gold each time. If insufficient, the remaining amount is deducted from gold held.",
       },
       {
         level: 20,
         name: "Fair Exchange",
-        description: "For every 1000 gold stored, gain an Attribute Tome related to Primary Attributes.",
+        description: "For every [[value]]1000[[/]] gold stored, gain an Attribute Tome related to Primary Attributes.",
       },
       {
         level: 30,
         name: "Royal Interest",
-        description: "Each Stage passed increases stored gold by 20%.",
+        description: "Each Stage passed increases stored gold by [[value]]20%[[/]].",
       },
       {
         level: 40,
         name: "Withdraw Fund",
-        description: "When purchasing items from visitors at the relay station—[Misfortune Teller], [Immortal Authority], [Astral Alchemist]—priority is given to using the gold accumulated by Greed Up.",
+        description: "When purchasing items from visitors at the relay station—[Misfortune Teller], [Immortal Authority], [Astral Alchemist]—priority is given to using the gold accumulated by [[ref]]Greed Up[[/]].",
       },
     ],
     flavor: "They believed this eye could see everything for the king—lies, shadows, and the betrayal lurking beneath the throne. However, with the dynasty's fall, this ring was lost in the endless sea of sand.",
@@ -382,7 +382,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 10,
         name: "Ah. Nutrients.",
-        description: "This Artifact can be activated to spend 550 and increase mushroom yield. Can be used up to 2 times per stage.",
+        description: "This Artifact can be activated to spend [[value]]550[[/]] and increase mushroom yield. Can be used up to [[value]]2[[/]] times per stage.",
       },
       {
         level: 20,
@@ -392,12 +392,12 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 30,
         name: "Good for one is good. Good for all is best.",
-        description: "Eating a shroom grants your allies 33% of its bonus.",
+        description: "Eating a shroom grants your allies [[value]]33%[[/]] of its bonus.",
       },
       {
         level: 40,
         name: "Verdant Growth",
-        description: "After producing 12 shrooms, if you are also carrying , it will count as having completed 2 stages of growth. If not, each subsequent stage will instead produce an additional 1 shrooms per stage.",
+        description: "After producing [[value]]12[[/]] shrooms, if you are also carrying , it will count as having completed [[value]]2[[/]] stages of growth. If not, each subsequent stage will instead produce an additional [[value]]1[[/]] shrooms per stage.",
       },
     ],
     flavor: "Most poor souls who get infested turn into inhuman monsters. The fungus can take over the host's brain and control them. But a few lucky ones with special physiques have it different. After being infected, shrooms sprout from their arms — and those are premium nutrients.",
@@ -435,13 +435,13 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Outcome Focus",
-      description: "Artifact XP gained increased by 20%.",
+      description: "Artifact XP gained increased by [[value]]20%[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Metric",
-        description: "After Act II, Outcome Focus effect increased by 20%.",
+        description: "After Act II, [[ref]]Outcome Focus[[/]] effect increased by [[value]]20%[[/]].",
       },
       {
         level: 20,
@@ -451,12 +451,12 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 30,
         name: "Null Defiance",
-        description: "Metric activates after Act 1",
+        description: "[[ref]]Metric[[/]] activates after Act 1",
       },
       {
         level: 40,
         name: "Galactic Beacon",
-        description: "Every 60 seconds, an other equipped Artifact gain 30 flat Artifact XP.",
+        description: "Every [[value]]60[[/]] seconds, an other equipped Artifact gain [[value]]30[[/]] flat Artifact XP.",
         note: "The Artifact XP gained is a fixed value and is not affected or modified by any effects.",
       },
     ],
@@ -486,29 +486,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Arena Champion",
-      description: "Gain 1 stacks of Arena Champion for every 1 stages cleared. Each stack grants +40 maximum health and +0.6% maximum health. Lose 50% of your stacks each time you die.",
+      description: "Gain [[value]]1[[/]] stacks of [[ref]]Arena Champion[[/]] for every [[value]]1[[/]] stages cleared. Each stack grants +[[value]]40[[/]] maximum health and +[[value]]0.6%[[/]] maximum health. Lose [[value]]50%[[/]] of your stacks each time you die.",
     },
     upgrades: [
       {
         level: 10,
         name: "Arena Bout",
-        description: "Each stack of Arena Champion additionally grants +1 to all attributes",
+        description: "Each stack of [[ref]]Arena Champion[[/]] additionally grants +[[value]]1[[/]] to all attributes",
       },
       {
         level: 20,
         name: "Unyielding",
-        description: "Up to 1 times, if you can be revived after dying, you will not lose the bonuses from Arena Champion",
+        description: "Up to [[value]]1[[/]] times, if you can be revived after dying, you will not lose the bonuses from [[ref]]Arena Champion[[/]]",
       },
       {
         level: 30,
         name: "Undisputed Champion",
-        description: "During a Stage, if you deal more than 50% of your team's total damage, gain an additional 2 stacks of Arena Champion",
+        description: "During a Stage, if you deal more than [[value]]50%[[/]] of your team's total damage, gain an additional [[value]]2[[/]] stacks of [[ref]]Arena Champion[[/]]",
       },
       {
         level: 40,
         name: "Declaration of Victory",
-        description: "This Artifact can be activated. You take 75% additional damage and your final damage is reduced by 40%. For the next 2 combat stages, you must contribute more than 40% of your team's total damage without dying. Upon fulfilling these conditions, permanently extract the bonuses currently accumulated by Arena Champion",
-        note: "After completing Declaration of Victory, dying will not cause the extracted bonuses to be lost. There is no penalty for failing the declaration",
+        description: "This Artifact can be activated. You take [[value]]75%[[/]] additional damage and your final damage is reduced by [[value]]40%[[/]]. For the next [[value]]2[[/]] combat stages, you must contribute more than [[value]]40%[[/]] of your team's total damage without dying. Upon fulfilling these conditions, permanently extract the bonuses currently accumulated by [[ref]]Arena Champion[[/]]",
+        note: "After completing [[ref]]Declaration of Victory[[/]], dying will not cause the extracted bonuses to be lost. There is no penalty for failing the declaration",
       },
     ],
     flavor: "This is the great Belt of Omex, the pinnacle of gladiatorial skill and a wellspring of fighting spirit.",
@@ -539,28 +539,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "[Curse]Shackles of Greed",
-      description: "Upon entering a Stage, if your gold is less than (400 + Hero Level × 100), the base bonus does not take effect.",
+      description: "Upon entering a Stage, if your gold is less than ([[value]]400[[/]] + Hero Level × [[value]]100[[/]]), the base bonus does not take effect.",
     },
     upgrades: [
       {
         level: 10,
         name: "Obsession",
-        description: "Gain 150 bonus Gold per Stage",
+        description: "Gain [[value]]150[[/]] bonus Gold per Stage",
       },
       {
         level: 20,
         name: "Proliferation of Greed",
-        description: "After [Curse]Shackles of Greed triggers, bonus and gold requirement are increased by 4%",
+        description: "After [[ref]][Curse]Shackles of Greed[[/]] triggers, bonus and gold requirement are increased by [[value]]4%[[/]]",
       },
       {
         level: 30,
         name: "Resistance to Greed",
-        description: "Once every 3 Rounds, when [Curse]Shackles of Greed triggers, the base bonus will take effect still",
+        description: "Once every [[value]]3[[/]] Rounds, when [[ref]][Curse]Shackles of Greed[[/]] triggers, the base bonus will take effect still",
       },
       {
         level: 40,
         name: "Satisfaction of Greed",
-        description: "After holding 10000 gold, remove this Artifact and gain all of its effects.",
+        description: "After holding [[value]]10000[[/]] gold, remove this Artifact and gain all of its effects.",
       },
     ],
     flavor: "Snakes are known as creatures of great avarice, devouring prey even larger than themselves by swallowing them whole.If one's shackles are cause for discontent, perhaps it is time for some old-fashioned greed.",
@@ -590,13 +590,13 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Bottle Enchantment",
-      description: "+1 Bottle max chargesThe Bottle's target gains 15% Spell AMP, stacking independently for 40 seconds.",
+      description: "[[color:#ffa764]]+[[value]]1[[/]] Bottle max charges[[/]]The Bottle's target gains [[value]]15%[[/]] Spell AMP, stacking independently for [[value]]40[[/]] seconds.",
     },
     upgrades: [
       {
         level: 10,
         name: "Phase",
-        description: "Bottle Enchantment grants Phase movement and +40% MS",
+        description: "[[ref]]Bottle Enchantment[[/]] grants Phase movement and +[[value]]40%[[/]] MS",
       },
       {
         level: 20,
@@ -606,12 +606,12 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 30,
         name: "Perfect",
-        description: "The target can completely negate one instance of damage that exceeds 20% of Max HP.",
+        description: "The target can completely negate one instance of damage that exceeds [[value]]20%[[/]] of Max HP.",
       },
       {
         level: 40,
         name: "Flawless",
-        description: "When the Bottle has at least 4 charges its restoration effect becomes 135%.",
+        description: "When the Bottle has at least [[value]]4[[/]] charges its restoration effect becomes [[value]]135%[[/]].",
       },
     ],
     flavor: "This silvery liquid is meticulously extracted from contact with starlight within black holes, and sounds in the vacuum. When left to rest, it forms a swirling spiral galaxy. Remarkably, the liquid replenishes itself even after some of it is consumed.",
@@ -719,28 +719,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Omen",
-      description: "Activates after 1 Round. Grants 1 Options.",
+      description: "Activates after 1 Round. Grants [[value]]1[[/]] Options.",
     },
     upgrades: [
       {
         level: 10,
         name: "Fated Preference",
-        description: "+50% XP Gained from this Artifact",
+        description: "+[[value]]50%[[/]] XP Gained from this Artifact",
       },
       {
         level: 20,
         name: "Twist of Fate",
-        description: "Grants 1 refreshes every 4 Stages",
+        description: "Grants [[value]]1[[/]] refreshes every [[value]]4[[/]] Stages",
       },
       {
         level: 30,
         name: "Bias",
-        description: "+50% chance for to drop rare items",
+        description: "+[[value]]50%[[/]] chance for to drop rare items",
       },
       {
         level: 40,
         name: "Greater Omen",
-        description: "Omen+1 options",
+        description: "[[ref]]Omen[[/]]+[[value]]1[[/]] options",
       },
     ],
     flavor: "A candle formed from mysterious matter. As it burns, it reveals a miniature starry sky, within which truth resides.",
@@ -769,7 +769,7 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Lesser Decay",
-      description: "Your next attack releases Decay, dealing [50 + 75% of your Strength] damage to enemies within the range. Each trigger grants 2 temporary Strength. Stacks independently and lasts 30 seconds.",
+      description: "Your next attack releases Decay, dealing [[[value]]50[[/]] + [[value]]75%[[/]] of your Strength] damage to enemies within the range. Each trigger grants [[value]]2[[/]] temporary Strength. Stacks independently and lasts [[value]]30[[/]] seconds.",
     },
     upgrades: [],
     flavor: "The right hand of the Immortal, hosting the power of death...Guide death once more. Whether it's the death of the living, or the true death of the already dead.",
@@ -806,28 +806,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Hatching Dragon Egg",
-      description: "After 2 Stages, hatch a Young Red Dragon to aid you in combat.",
+      description: "After [[value]]2[[/]] Stages, hatch a Young Red Dragon to aid you in combat.",
     },
     upgrades: [
       {
         level: 10,
         name: "Grow",
-        description: "Every 1 Stages, additionally inherits 9% Attributes",
+        description: "Every [[value]]1[[/]] Stages, additionally inherits [[value]]9%[[/]] Attributes",
       },
       {
         level: 20,
         name: "Juvenile Red Dragon",
-        description: "After 3 Grow, attacks deal 40% splash damage within a 300 radius",
+        description: "After [[value]]3[[/]] [[ref]]Grow[[/]], attacks deal [[value]]40%[[/]] splash damage within a [[value]]300[[/]] radius",
       },
       {
         level: 30,
         name: "Sky Tyrant",
-        description: "After 5 Grow, increases Attack Range by 400",
+        description: "After [[value]]5[[/]] [[ref]]Grow[[/]], increases Attack Range by [[value]]400[[/]]",
       },
       {
         level: 40,
         name: "Adult Red Dragon",
-        description: "After 7 Grow, every 6 attacks unleash a dash strike, dealing magic damage equal to 300% of Attack Damage",
+        description: "After [[value]]7[[/]] [[ref]]Grow[[/]], every [[value]]6[[/]] attacks unleash a dash strike, dealing magic damage equal to [[value]]300%[[/]] of Attack Damage",
       },
     ],
     flavor: "A dragon egg still in its infancy, radiating a faint warmth. With proper care, it may one day hatch into a true dragon.",
@@ -864,28 +864,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Rebirth",
-      description: "Revives you 60 seconds after death. All effects are lost when Rebirth charges are depleted.",
+      description: "Revives you [[value]]60[[/]] seconds after death. All effects are lost when Rebirth charges are depleted.",
     },
     upgrades: [
       {
         level: 10,
         name: "Germinate",
-        description: "After 3 consecutive Stages without Rebirth, Health Regeneration granted by this Artifact is increased by 100%.",
+        description: "After [[value]]3[[/]] consecutive Stages without [[ref]]Rebirth[[/]], Health Regeneration granted by this Artifact is increased by [[value]]100%[[/]].",
       },
       {
         level: 20,
         name: "Sapling",
-        description: "After 2 consecutive Stages without Rebirth, grants 1 permanent growth.",
+        description: "After [[value]]2[[/]] consecutive Stages without [[ref]]Rebirth[[/]], grants [[value]]1[[/]] permanent growth.",
       },
       {
         level: 30,
         name: "Blossom",
-        description: "After 2 consecutive Stages without Rebirth, each new Stage entered thereafter grants 1 permanent bonus level(s).",
+        description: "After [[value]]2[[/]] consecutive Stages without [[ref]]Rebirth[[/]], each new Stage entered thereafter grants [[value]]1[[/]] permanent bonus level(s).",
       },
       {
         level: 40,
         name: "Fruit",
-        description: "After 2 consecutive stages without Rebirth, this Artifact is removed. Grants 1 current and max HP Runes.Permanently grants all effects except Rebirth.",
+        description: "After [[value]]2[[/]] consecutive stages without [[ref]]Rebirth[[/]], this Artifact is removed. Grants [[value]]1[[/]] current and max HP Runes.Permanently grants all effects except [[ref]]Rebirth[[/]].",
       },
     ],
     flavor: "Some of us die. Others are born anew.",
@@ -919,23 +919,23 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Reserve Mana",
-      description: "At the start of each Stage, regain 100% [Stage Depth] + 300 points of Reserve Mana, which automatically restores when Mana falls below 70%.",
+      description: "At the start of each Stage, regain [[value]]100%[[/]] [Stage Depth] + [[value]]300[[/]] points of Reserve Mana, which automatically restores when Mana falls below [[value]]70%[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Transposition",
-        description: "After casting a spell, heal for 25% of the Mana consumed.",
+        description: "After casting a spell, heal for [[value]]25%[[/]] of the Mana consumed.",
       },
       {
         level: 20,
         name: "Efficient Casting",
-        description: "-10% Mana Cost",
+        description: "-[[value]]10%[[/]] Mana Cost",
       },
       {
         level: 40,
         name: "Fusion",
-        description: "While carrying this Artifact, after the Hero levels up 7 times, this Artifact is removed and all its bonuses are permanently granted.",
+        description: "While carrying this Artifact, after the Hero levels up [[value]]7[[/]] times, this Artifact is removed and all its bonuses are permanently granted.",
       },
     ],
     flavor: "For young mages who have not yet mastered vast mana, this pendant is the most reliable companion. It quietly absorbs the ambient arcane aura, transforming it into a subtle yet persistent echo that slowly replenishes the wearer's mana. Many renowned archmages once relied on such a humble artifact.",
@@ -973,28 +973,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "The Worthless",
-      description: "Reduces damage dealt to gain 20% bonus XP.",
+      description: "Reduces damage dealt to gain [[value]]20%[[/]] bonus XP.",
     },
     upgrades: [
       {
         level: 10,
         name: "The Defiant",
-        description: "Upon Rebirth, gain +15% this Stage",
+        description: "Upon Rebirth, gain +[[value]]15%[[/]] this Stage",
       },
       {
         level: 20,
         name: "The Ascended",
-        description: "+0.8 Growth",
+        description: "+[[value]]0.8[[/]] Growth",
       },
       {
         level: 30,
         name: "The Breaker",
-        description: "Upon first retrieval, its level is increased to 2",
+        description: "Upon first retrieval, its level is increased to [[value]]2[[/]]",
       },
       {
         level: 40,
         name: "The Unbound",
-        description: "Can be actively used by spending 2000 gold to remove this Artifact and permanently grant +20% XP gain and +0.8 Growth.",
+        description: "Can be actively used by spending [[value]]2000[[/]] gold to remove this Artifact and permanently grant +[[value]]20%[[/]] XP gain and +[[value]]0.8[[/]] Growth.",
         note: "Reacquiring this Artifact does not stack the bonuses.",
       },
     ],
@@ -1039,28 +1039,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Absolute Initiative",
-      description: "The first 2 instances of damage an enemy deals to you are evaded. Each evasion steals 8 gold, up to 300 per Stage.",
+      description: "The first [[value]]2[[/]] instances of damage an enemy deals to you are evaded. Each evasion steals [[value]]8[[/]] gold, up to [[value]]300[[/]] per Stage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Early Warning",
-        description: "Damage within 20% vision range: 10% chance to evade and trigger Absolute Initiative steal.",
+        description: "Damage within [[value]]20%[[/]] vision range: [[value]]10%[[/]] chance to evade and trigger [[ref]]Absolute Initiative[[/]] steal.",
       },
       {
         level: 20,
         name: "Seize",
-        description: "Your first instance of damage against an enemy triggers steal effect from Absolute Initiative",
+        description: "Your first instance of damage against an enemy triggers steal effect from [[ref]]Absolute Initiative[[/]]",
       },
       {
         level: 30,
         name: "Grand Larceny",
-        description: "Each instance of damage also has a 7% chance to trigger steal effect from Absolute Initiative.",
+        description: "Each instance of damage also has a [[value]]7%[[/]] chance to trigger steal effect from [[ref]]Absolute Initiative[[/]].",
       },
       {
         level: 40,
         name: "Momentum",
-        description: "Seize's maximum steal attempts increases by 750 and the value per Stage increases to 1000. Additionally, damage evasion is no longer limited to this Artifact — any evasion can trigger the effect.",
+        description: "[[ref]]Seize[[/]]'s maximum steal attempts increases by [[value]]750[[/]] and the value per Stage increases to [[value]]1000[[/]]. Additionally, damage evasion is no longer limited to this Artifact — any evasion can trigger the effect.",
       },
     ],
     flavor: "A parrot assembled from precision machinery, previously the pet of a bearded pirate. Although a construct, magic has granted it limited intelligence, allowing it to recognize your commands.",
@@ -1090,28 +1090,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Inner Space",
-      description: "Creates 1 dedicated slots for Origin Artifact. The non-economic base attributes provided by Artifacts in these slots are increased by 100%.",
+      description: "Creates [[value]]1[[/]] dedicated slots for Origin Artifact. The non-economic base attributes provided by Artifacts in these slots are increased by [[value]]100%[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Initial Attunement",
-        description: "+50% bonus Attributes from Inner Space",
+        description: "+[[value]]50%[[/]] bonus Attributes from [[ref]]Inner Space[[/]]",
       },
       {
         level: 20,
         name: "Initial Expansion",
-        description: "Adds 1 dedicated Origin Artifact slot to Inner Space. Artifacts in this slot gain 50% bonus attributes",
+        description: "Adds [[value]]1[[/]] dedicated Origin Artifact slot to [[ref]]Inner Space[[/]]. Artifacts in this slot gain [[value]]50%[[/]] bonus attributes",
       },
       {
         level: 30,
         name: "Further Attunement",
-        description: "Origin Artifact in the slot provided by Initial Expansion gains the same attribute amplification as those in the first slot",
+        description: "Origin Artifact in the slot provided by [[ref]]Initial Expansion[[/]] gains the same attribute amplification as those in the first slot",
       },
       {
         level: 40,
         name: "Inner Attunement",
-        description: "Every 2 stages cleared, Artifacts in Inner Space additionally count as having progressed through 1 stages. This effect is reduced for certain Artifacts",
+        description: "Every [[value]]2[[/]] stages cleared, Artifacts in [[ref]]Inner Space[[/]] additionally count as having progressed through [[value]]1[[/]] stages. This effect is reduced for certain Artifacts",
         note: "Affected by this reduction: Eye of the Pharaoh — Royal Interest",
       },
     ],
@@ -1142,29 +1142,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Dimensional Anchor",
-      description: "1 times per Stage, negate lethal damage and become invulnerable for 4 seconds. During this period, dimensions are locked, and non-boss enemies cannot act.",
+      description: "[[value]]1[[/]] times per Stage, negate lethal damage and become invulnerable for [[value]]4[[/]] seconds. During this period, dimensions are locked, and non-boss enemies cannot act.",
     },
     upgrades: [
       {
         level: 10,
         name: "Slow Field",
-        description: "After Dimensional Anchor ends, reduce enemy Movement Speed by 60% for 3 seconds.",
+        description: "After [[ref]]Dimensional Anchor[[/]] ends, reduce enemy Movement Speed by [[value]]60%[[/]] for [[value]]3[[/]] seconds.",
       },
       {
         level: 20,
         name: "Folded Field",
-        description: "After Dimensional Anchor ends, gain equal to 30% of damage dealt during the duration.",
-        note: "Shield value is capped at 150% of your max HP/MP whichever is higher",
+        description: "After [[ref]]Dimensional Anchor[[/]] ends, gain equal to [[value]]30%[[/]] of damage dealt during the duration.",
+        note: "Shield value is capped at [[value]]150%[[/]] of your max HP/MP whichever is higher",
       },
       {
         level: 30,
         name: "Dimensional Lock",
-        description: "Increases Dimensional Anchor duration by 2 seconds.",
+        description: "Increases [[ref]]Dimensional Anchor[[/]] duration by [[value]]2[[/]] seconds.",
       },
       {
         level: 40,
         name: "Dimensional Convergence",
-        description: "Dimensional Anchor can trigger again. 180 seconds cooldown.",
+        description: "[[ref]]Dimensional Anchor[[/]] can trigger again. [[value]]180[[/]] seconds cooldown.",
       },
     ],
     flavor: "The bracers worn by Aghanim as he traversed different dimensions. The core is a gem forged by layering aether through dimensional power. Even in lightless worlds, it breaks the limits of natural law to emit a faint glow. The field emitted by this artifact protects its contents from erosion by the forces within multidimensional passages.",
@@ -1203,29 +1203,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Dark Energy",
-      description: "Your next melee attack releases a horizontal slash which explodes after 2 seconds, dealing damage equal to 25% max MP to enemies within the slashed area.",
+      description: "Your next melee attack releases a horizontal slash which explodes after [[value]]2[[/]] seconds, dealing damage equal to [[value]]25%[[/]] max MP to enemies within the slashed area.",
     },
     upgrades: [
       {
         level: 10,
         name: "Gravity",
-        description: "Dark Energy applies a 60% MS slow",
+        description: "[[ref]]Dark Energy[[/]] applies a [[value]]60%[[/]] MS slow",
       },
       {
         level: 20,
         name: "Mass Reversion",
-        description: "Dark Energy restores MP equal to 30% of the highest single-target damage dealt",
+        description: "[[ref]]Dark Energy[[/]] restores MP equal to [[value]]30%[[/]] of the highest single-target damage dealt",
       },
       {
         level: 30,
         name: "Phase Change",
-        description: "After Mass Reversion restores Mana, gain 50% of the restored amount as bonus Max Mana. This effect stacks independently and lasts for 20 seconds.",
-        note: "Max bonus is 10000.",
+        description: "After [[ref]]Mass Reversion[[/]] restores Mana, gain [[value]]50%[[/]] of the restored amount as bonus Max Mana. This effect stacks independently and lasts for [[value]]20[[/]] seconds.",
+        note: "Max bonus is [[value]]10000[[/]].",
       },
       {
         level: 40,
         name: "Mass Ray",
-        description: "Ranged attacks can also trigger Dark Energy, converting it into an instant ray, but Gravity no longer take effect.",
+        description: "Ranged attacks can also trigger [[ref]]Dark Energy[[/]], converting it into an instant ray, but [[ref]]Gravity[[/]] no longer take effect.",
       },
     ],
     flavor: "Born from a dying star whose remnants became a meteor, it shattered after colliding with an unfortunate elder dragon in the atmosphere. Fragments of the meteor were later reforged into several weapons, capable of channeling the power of their progenitor star, now collapsed into a black hole, to impose overwhelming gravity.",
@@ -1266,28 +1266,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "HP Storage",
-      description: "Can store up to 2 HP Runes.",
+      description: "Can store up to [[value]]2[[/]] HP Runes.",
     },
     upgrades: [
       {
         level: 10,
         name: "Imperfect Rewind",
-        description: "Active: Convert stored HP into 400 gold.",
+        description: "Active: Convert stored HP into [[value]]400[[/]] gold.",
       },
       {
         level: 20,
         name: "Reversal",
-        description: "If you lose at least 2 HP Runes due to death in a single Stage, restore 1 upon completing the Stage.",
+        description: "If you lose at least [[value]]2[[/]] HP Runes due to death in a single Stage, restore [[value]]1[[/]] upon completing the Stage.",
       },
       {
         level: 30,
         name: "Perfect Rewind",
-        description: "+250 Imperfect Rewind Gold converted",
+        description: "+[[value]]250[[/]] [[ref]]Imperfect Rewind[[/]] Gold converted",
       },
       {
         level: 40,
         name: "Echoes Rebuilt",
-        description: "Generates 1 HP Runes every 3 Stages",
+        description: "Generates [[value]]1[[/]] HP Runes every [[value]]3[[/]] Stages",
         note: "HP Runes can still drop on the ground when at maximum capacity.",
       },
     ],
@@ -1330,29 +1330,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Moon Phase",
-      description: "Spell AMP increases over time, reaching a maximum of 30% after 15 seconds. Upon dealing any spell damage, the bonus lingers for 1.5 seconds, then resets to 0%.",
+      description: "Spell AMP increases over time, reaching a maximum of [[value]]30%[[/]] after [[value]]15[[/]] seconds. Upon dealing any spell damage, the bonus lingers for [[value]]1.5[[/]] seconds, then resets to 0%.",
     },
     upgrades: [
       {
         level: 10,
         name: "Waning Moon",
-        description: "Moon Phase return value increased to 10%",
-        note: "Spell AMP now returns to 10% instead of 0%",
+        description: "[[ref]]Moon Phase[[/]] return value increased to [[value]]10%[[/]]",
+        note: "Spell AMP now returns to [[value]]10%[[/]] instead of 0%",
       },
       {
         level: 20,
         name: "Crescent Moon",
-        description: "Moon Phase linger duration increased to 4 seconds. Each kill during this period extends the duration by an additional 0.5 seconds.",
+        description: "[[ref]]Moon Phase[[/]] linger duration increased to [[value]]4[[/]] seconds. Each kill during this period extends the duration by an additional [[value]]0.5[[/]] seconds.",
       },
       {
         level: 30,
         name: "Full Moon",
-        description: "Allied units within 500 gain 30% bonus Mana RegenertionWhen Moon Phase returns, release Cold Moon at the optimal point within 1000, dealing magic damage to enemies within 400. Damage equals 60% of the highest total damage dealt to a single enemy during this Moon Phase linger duration.",
+        description: "Allied units within [[value]]500[[/]] gain [[value]]30%[[/]] bonus Mana RegenertionWhen [[ref]]Moon Phase[[/]] returns, release Cold Moon at the optimal point within [[value]]1000[[/]], dealing magic damage to enemies within [[value]]400[[/]]. Damage equals [[value]]60%[[/]] of the highest total damage dealt to a single enemy during this [[ref]]Moon Phase[[/]] linger duration.",
       },
       {
         level: 40,
         name: "New Moon",
-        description: "Once per Sage, completing a full Moon Phase cycle with full bonuses grants: 1% permanent Spell AMP+2% maximum Moon Phase bonus",
+        description: "Once per Sage, completing a full [[ref]]Moon Phase[[/]] cycle with full bonuses grants: [[value]]1%[[/]] permanent Spell AMP+[[value]]2%[[/]] maximum [[ref]]Moon Phase[[/]] bonus",
         note: "Removing the Artifact resets accumulated Moon Phase bonuses, but permanent spell AMP bonuses are retained.",
       },
     ],
@@ -1392,28 +1392,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Umbral Dome",
-      description: "Up to 2 times per Stage, create a dome that covers an area with a radius of 500 for 8 seconds. Allied units within the area cannot be detected by enemies.",
+      description: "Up to [[value]]2[[/]] times per Stage, create a dome that covers an area with a radius of [[value]]500[[/]] for [[value]]8[[/]] seconds. Allied units within the area cannot be detected by enemies.",
     },
     upgrades: [
       {
         level: 10,
         name: "Slow Field",
-        description: "During Umbral Dome, enemy Movement Speed reduced by 40%.",
+        description: "During [[ref]]Umbral Dome[[/]], enemy Movement Speed reduced by [[value]]40%[[/]].",
       },
       {
         level: 20,
         name: "Folded Field",
-        description: "+200 Umbral Dome range",
+        description: "+[[value]]200[[/]] [[ref]]Umbral Dome[[/]] range",
       },
       {
         level: 30,
         name: "Agnosticism",
-        description: "Increases Umbral Dome duration by 2 seconds.",
+        description: "Increases [[ref]]Umbral Dome[[/]] duration by [[value]]2[[/]] seconds.",
       },
       {
         level: 40,
         name: "Time Dilation Effect",
-        description: "During Umbral Dome, Cooldown Speed increased by 140%.",
+        description: "During [[ref]]Umbral Dome[[/]], Cooldown Speed increased by [[value]]140%[[/]].",
       },
     ],
     flavor: "A peculiar ring with a miniature black hole housed at its center. When your finger passes through the band, the black hole hovers above your fingertip.",
@@ -1442,28 +1442,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Cycle",
-      description: "Upgrades the relic [Blabber Guy]. Its effects gain a bonus value equal to 8% of your max HP. Additionally, 's damage is converted into Poison equal to 150% of its damage.",
+      description: "Upgrades the relic [Blabber Guy]. Its effects gain a bonus value equal to [[value]]8%[[/]] of your max HP. Additionally, 's damage is converted into [[color:#98f698]]Poison[[/]] equal to [[value]]150%[[/]] of its damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Accelerated Cycle",
-        description: "-1s interval",
+        description: "-[[value]]1[[/]]s interval",
       },
       {
         level: 20,
         name: "High-Quality Cycle",
-        description: "+Cycle4% bonus maximum HP",
+        description: "+[[ref]]Cycle[[/]][[value]]4%[[/]] bonus maximum HP",
       },
       {
         level: 30,
         name: "Foul Stench",
-        description: "Each time triggers, it activates Poison.Activation Ratio: 2%Activation Damage: 1500%",
+        description: "Each time triggers, it activates [[color:#98f698]]Poison[[/]].Activation Ratio: [[value]]2%[[/]]Activation Damage: [[value]]1500%[[/]]",
       },
       {
         level: 40,
         name: "Another Sip",
-        description: "Each trigger of applies a debuff for 1.1 seconds, reducing the target's Poison Decay by 40%. Reapplying the debuff refreshes its duration.",
+        description: "Each trigger of applies a debuff for [[value]]1.1[[/]] seconds, reducing the target's [[color:#98f698]]Poison Decay[[/]] by [[value]]40%[[/]]. Reapplying the debuff refreshes its duration.",
       },
     ],
     flavor: "I ate heartily; it tasted so good.",
@@ -1494,28 +1494,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Cycle Begins",
-      description: "Cannot be equipped after Act 3. Grants 2 rebirth charges. Each time a rebirth is consumed, all Attribute bonus granted is multiplied by 0.15. If death occurs when rebirth is unavailable, this Artifact is disabled.",
+      description: "[[color:#fe5b37]]Cannot be equipped after Act 3.[[/]] Grants [[value]]2[[/]] rebirth charges. Each time a rebirth is consumed, all Attribute bonus granted is multiplied by [[value]]0.15[[/]]. If death occurs when rebirth is unavailable, this Artifact is disabled.",
     },
     upgrades: [
       {
         level: 10,
         name: "Cycle Three",
-        description: "+1 Cycle Begins Rebirths",
+        description: "+[[value]]1[[/]] [[ref]]Cycle Begins[[/]] Rebirths",
       },
       {
         level: 20,
         name: "Eternal Existence",
-        description: "Cycle Begins rebirth invulnerability duration increased by 4 seconds. During this period, gain 30% .",
+        description: "[[ref]]Cycle Begins[[/]] rebirth invulnerability duration increased by [[value]]4[[/]] seconds. During this period, gain [[value]]30%[[/]] .",
       },
       {
         level: 30,
         name: "Unified Minds",
-        description: "Equipment level requirement of other Artifacts reduced by 1",
+        description: "Equipment level requirement of other Artifacts reduced by [[value]]1[[/]]",
       },
       {
         level: 40,
         name: "Cycle Again",
-        description: "If the Artifact remains disabled for 3 Rounds, dying with no rebirth charges left will automatically remove it.",
+        description: "If the Artifact remains disabled for [[value]]3[[/]] Rounds, dying with no rebirth charges left will automatically remove it.",
       },
     ],
     flavor: "Be he Sage or Buddha, the dawn has yet to be brought, just like the mantra. Through memory and obsession, a new journey to the west can be embarked upon.",
@@ -1558,30 +1558,30 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Temporal Aid",
-      description: "+2 Levels worth of .",
+      description: "+[[value]]2[[/]] Levels worth of .",
     },
     upgrades: [
       {
         level: 10,
         name: "Further Beyond",
-        description: "Upon leveling up, there is a 18% chance to increase Temporal Aid bonus level by 1.",
-        note: "Guaranteed to succeed after every 5 failures.",
+        description: "Upon leveling up, there is a [[value]]18%[[/]] chance to increase [[ref]]Temporal Aid[[/]] bonus level by [[value]]1[[/]].",
+        note: "Guaranteed to succeed after every [[value]]5[[/]] failures.",
       },
       {
         level: 20,
         name: "Divine Blessing",
-        description: "Each time you encounter [Relay Station Visitor - Misfortune Teller], Temporal Aid bonus level is increased by 1.",
+        description: "Each time you encounter [[color:#5e4ef0]][Relay Station Visitor - Misfortune Teller][[/]], [[ref]]Temporal Aid[[/]] bonus level is increased by [[value]]1[[/]].",
       },
       {
         level: 30,
         name: "Fatebound Visitor",
-        description: "After 2 Stages, the Artifact can be actively used in regular combat Stages to summon [Misfortune Teller]Can be used 1 times per Act.",
+        description: "After [[value]]2[[/]] Stages, the Artifact can be actively used in regular combat Stages to summon [Misfortune Teller]Can be used [[value]]1[[/]] times per Act.",
         note: "All players share this usage limit.",
       },
       {
         level: 40,
         name: "Favor of the Oracle",
-        description: "After 2 Stages, gain a 50% discount at the [Misfortune Teller]",
+        description: "After [[value]]2[[/]] Stages, gain a [[value]]50%[[/]] discount at the [Misfortune Teller]",
       },
     ],
     flavor: "Many time-related spells are generally classified as forbidden magic, with only a small few ever being learned. Even so, fools often trigger paradoxes, causing disturbances in the magical field of an entire area.",
@@ -1616,31 +1616,31 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Soul Rip",
-      description: "Grants 13% attack lifesteal and 13% spell lifesteal.",
+      description: "Grants [[value]]13%[[/]] attack lifesteal and [[value]]13%[[/]] spell lifesteal.",
     },
     upgrades: [
       {
         level: 10,
         name: "Devour",
-        description: "Each time you steal 100% HP with Soul Rip, grants 1% maximum HP.",
-        note: "Max HP bonus: 10%",
+        description: "Each time you steal [[value]]100%[[/]] HP with [[ref]]Soul Rip[[/]], grants [[value]]1%[[/]] maximum HP.",
+        note: "Max HP bonus: [[value]]10%[[/]]",
       },
       {
         level: 20,
         name: "Potent Absorption",
-        description: "Lifesteal reduction against non-boss enemies reduced by 18%",
+        description: "Lifesteal reduction against non-boss enemies reduced by [[value]]18%[[/]]",
       },
       {
         level: 30,
         name: "Evolution",
-        description: "Each time Soul Rip drains 120% HP, grants permanent 2 bonus Attack Damage.",
-        note: "Max Bonus: 300",
+        description: "Each time [[ref]]Soul Rip[[/]] drains [[value]]120%[[/]] HP, grants permanent [[value]]2[[/]] bonus Attack Damage.",
+        note: "Max Bonus: [[value]]300[[/]]",
       },
       {
         level: 40,
         name: "Feast",
-        description: "Attacks have bonus lifesteal equal to 1% of the target’s current HP, which is also counted as bonus damage. This bonus cannot exceed 50% of your base Attack Damage.",
-        note: "This will be included in Devour and Evolution",
+        description: "Attacks have bonus lifesteal equal to [[value]]1%[[/]] of the target’s current HP, which is also counted as bonus damage. This bonus cannot exceed [[value]]50%[[/]] of your base Attack Damage.",
+        note: "This will be included in [[ref]]Devour[[/]] and [[ref]]Evolution[[/]]",
       },
     ],
     flavor: "Ghouls are generally considered a low-tier undead, but there exist special individuals with extremely powerful strength, such as the formidable Nyx. This life form can infest any living creature and control them, then tear their flesh from within when they become useless, achieving a feast.",
@@ -1677,28 +1677,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Poison Sacrifice",
-      description: "Passively gain 10 stacks of Poison Sacrifice every 5 seconds. Stacks are reset at the start of each stage.",
+      description: "Passively gain [[value]]10[[/]] stacks of [[ref]]Poison Sacrifice[[/]] every [[value]]5[[/]] seconds. Stacks are reset at the start of each stage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Sandstorm",
-        description: "Every 5 seconds, applying stun to an enemy adds 10 stacks of Poison Sacrifice.When consuming Poison Sacrifice, apply Poison equal to 5% of the target's Max HP.",
+        description: "Every [[value]]5[[/]] seconds, applying stun to an enemy adds [[value]]10[[/]] stacks of [[ref]]Poison Sacrifice[[/]].When consuming [[ref]]Poison Sacrifice[[/]], apply [[color:#98f698]]Poison[[/]] equal to [[value]]5%[[/]] of the target's Max HP.",
       },
       {
         level: 20,
         name: "Harvest Day",
-        description: "Restores 1 stacks of Poison Sacrifice on enemy kill.",
+        description: "Restores [[value]]1[[/]] stacks of [[ref]]Poison Sacrifice[[/]] on enemy kill.",
       },
       {
         level: 30,
         name: "Black Sand Envoy",
-        description: "Attach 6 envoys initially, gaining an additional 1 per stage. Every 4.5 seconds, they launch a round of attacks that activate Poison.Activation Ratio: 0.75%Activation Damage: 1500%",
+        description: "Attach [[value]]6[[/]] envoys initially, gaining an additional [[value]]1[[/]] per stage. Every [[value]]4.5[[/]] seconds, they launch a round of attacks that activate [[color:#98f698]]Poison[[/]].Activation Ratio: [[value]]0.75%[[/]]Activation Damage: [[value]]1500%[[/]]",
       },
       {
         level: 40,
         name: "Eternal Festival",
-        description: "The artifact can be switched, allowing you to sacrifice beetles through different attacks or abilities. Additionally, each Black Sand Envoy grants a 0.8% Max HP bonus.",
+        description: "The artifact can be switched, allowing you to sacrifice beetles through different attacks or abilities. Additionally, each [[ref]]Black Sand Envoy[[/]] grants a [[value]]0.8%[[/]] Max HP bonus.",
       },
     ],
     flavor: "The God of Black Sand craves sacrifices. The lost lure fragile beetles with poison, spilling their blood in ritual slaughter—each drop transformed into the fangs and blessings of the god’s envoys.",
@@ -1737,28 +1737,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Pustule",
-      description: "Your next attack applies Poison equal to 150% of your Primary Attribute and adds 1 stacks of Pustule, activating Poison once per second. After each activation, Pustule performs a check with a 80% chance to succeed; on failure, it is destroyed. The check's sprimary attributesuccess chance is halved for every 1 damage activations by Pustule.Activation Ratio: 1%Activation Damage: 500%",
+      description: "Your next attack applies [[color:#98f698]]Poison[[/]] equal to [[value]]150%[[/]] of your Primary Attribute and adds [[value]]1[[/]] stacks of [[ref]]Pustule[[/]], activating [[color:#98f698]]Poison[[/]] once per second. After each activation, [[ref]]Pustule[[/]] performs a check with a [[value]]80%[[/]] chance to succeed; on failure, it is destroyed. The check's sprimary attributesuccess chance is halved for every [[value]]1[[/]] damage activations by [[ref]]Pustule[[/]].Activation Ratio: [[value]]1%[[/]]Activation Damage: [[value]]500%[[/]]",
     },
     upgrades: [
       {
         level: 10,
         name: "Proliferation",
-        description: "Each time Pustule triggers, Poison increases by 2%, up to a maximum of 60% of your primary attribute.",
+        description: "Each time [[ref]]Pustule[[/]] triggers, [[color:#98f698]]Poison[[/]] increases by [[value]]2[[/]]%, up to a maximum of [[value]]60[[/]]% of your primary attribute.",
       },
       {
         level: 20,
         name: "Spare Magazine",
-        description: "+1 Pustule Charges",
+        description: "+[[value]]1[[/]] [[ref]]Pustule[[/]] Charges",
       },
       {
         level: 30,
         name: "Poison Charges",
-        description: "Each time Poison Damage is dealt, the bullet with the longest remaining charge is accelerated by 0.1 seconds.",
+        description: "Each time [[color:#98f698]]Poison Damage[[/]] is dealt, the bullet with the longest remaining charge is accelerated by [[value]]0.1[[/]] seconds.",
       },
       {
         level: 40,
         name: "Spore Magazine",
-        description: "When a bullet finishes charging, all other charging bullets have their recharge time reduced by 10%.",
+        description: "When a bullet finishes charging, all other charging bullets have their recharge time reduced by [[value]]10%[[/]].",
       },
     ],
     flavor: "A pistol crafted from special biomass. It looks somewhat disgusting, but don’t worry—it won’t harm the wielder.",
@@ -1801,31 +1801,31 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Insect Wielder",
-      description: "Minimum Attack Range increased by 300.Attacks apply a 50% MS slow for 0.3 seconds.",
+      description: "Minimum Attack Range increased by [[value]]300[[/]].Attacks apply a [[value]]50%[[/]] MS slow for [[value]]0.3[[/]] seconds.",
     },
     upgrades: [
       {
         level: 10,
         name: "Leash",
-        description: "Attacks leash the target for 4 seconds.",
-        note: "Can only leash one target at a time. A target that has been leashed cannot be leashed again for 30 seconds.",
+        description: "Attacks leash the target for [[value]]4[[/]] seconds.",
+        note: "Can only leash one target at a time. A target that has been leashed cannot be leashed again for [[value]]30[[/]] seconds.",
       },
       {
         level: 20,
         name: "Acid Gland",
-        description: "Leash reduces Armor by 7",
-        note: "Effect lingers for 10 seconds after the leash ends.",
+        description: "[[ref]]Leash[[/]] reduces Armor by [[value]]7[[/]]",
+        note: "Effect lingers for [[value]]10[[/]] seconds after the leash ends.",
       },
       {
         level: 30,
         name: "Metamorphosis",
-        description: "Increases minimum Attack Range by 100 per Act completed",
+        description: "Increases minimum Attack Range by [[value]]100[[/]] per Act completed",
         note: "Removing the Artifact resets this bonus.",
       },
       {
         level: 40,
         name: "Sentient Weapon",
-        description: "When not actively attacking enemies, attack enemies within your minimum Attack Range every 3 seconds.",
+        description: "When not actively attacking enemies, attack enemies within your minimum Attack Range every [[value]]3[[/]] seconds.",
       },
     ],
     flavor: "Grasp its tail as a handle, and it becomes a living whip capable of tearing the horizon apart.",
@@ -1868,28 +1868,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Immolation",
-      description: "Activates when HP is above 95%, deactivates when below 70%.Deals damage per second to enemies within 400 equal to 100% of HP Regeneration. While active, consumes 2% HP per second, increasing by 0.2% per second.",
+      description: "Activates when HP is above [[value]]95%[[/]], deactivates when below [[value]]70%[[/]].Deals damage per second to enemies within [[value]]400[[/]] equal to [[value]]100%[[/]] of HP Regeneration. While active, consumes [[value]]2%[[/]] HP per second, increasing by [[value]]0.2%[[/]] per second.",
     },
     upgrades: [
       {
         level: 10,
         name: "Revival",
-        description: "+50% rebirth invulnerability duration. Health Regeneration from this Artifact is multiplied by 2 during this period.",
+        description: "+[[value]]50%[[/]] rebirth invulnerability duration. Health Regeneration from this Artifact is multiplied by [[value]]2[[/]] during this period.",
       },
       {
         level: 20,
         name: "Eastern Rise",
-        description: "After maintaining HP above 95% for 3 seconds, gain 80% %Immolation range.",
+        description: "After maintaining HP above [[value]]95%[[/]] for [[value]]3[[/]] seconds, gain [[value]]80[[/]]% %[[ref]]Immolation[[/]] range.",
       },
       {
         level: 30,
         name: "Western Fall",
-        description: "At low HP, Immolation damage to enemies is not disabled, but reduced by 60%.",
+        description: "At low HP, [[ref]]Immolation[[/]] damage to enemies is not disabled, but reduced by [[value]]60%[[/]].",
       },
       {
         level: 40,
         name: "Nirvana",
-        description: "Consuming HP Runes to rebirth grants permanent 4",
+        description: "Consuming HP Runes to rebirth grants permanent [[value]]4[[/]]",
       },
     ],
     flavor: "A ring forged from the blazing flames born of a phoenix’s nirvana.",
@@ -1927,29 +1927,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Grip Master",
-      description: "Summons Attack Speed increased by 25%.",
+      description: "Summons Attack Speed increased by [[value]]25%[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Delicate Handling",
-        description: "If the number of controlled units is less than or equal to 3, then Grip Master gains an additional 15% bonus effect.",
+        description: "If the number of controlled units is less than or equal to [[value]]3[[/]], then [[ref]]Grip Master[[/]] gains an additional [[value]]15%[[/]] bonus effect.",
       },
       {
         level: 20,
         name: "Void Glance",
-        description: "Each basic attack from a puppet has a 20% chance to deal 140% critical strike.",
+        description: "Each basic attack from a puppet has a [[value]]20%[[/]] chance to deal [[value]]140%[[/]] critical strike.",
       },
       {
         level: 30,
         name: "Coordinated Strike",
-        description: "After a controlled unit attacks, all other controlled units gain a 0.5% bonus attack damage. This effect stacks independently and lasts 8 seconds, up to 100%.",
+        description: "After a controlled unit attacks, all other controlled units gain a [[value]]0.5%[[/]] bonus attack damage. This effect stacks independently and lasts [[value]]8[[/]] seconds, up to [[value]]100%[[/]].",
         note: "Considered as applied by you",
       },
       {
         level: 40,
         name: "Total Command",
-        description: "Can be activated to increase the bonus attack speed of Grip Master to 100%. During this time, you are disarmed. Duration: 10 seconds. Cooldown: 25 seconds.",
+        description: "Can be activated to increase the bonus attack speed of [[ref]]Grip Master[[/]] to [[value]]100%[[/]]. During this time, you are disarmed. Duration: [[value]]10[[/]] seconds. Cooldown: [[value]]25[[/]] seconds.",
       },
     ],
     flavor: "An ordinary puppeteer can only control one unit; it is not an easy task to control a unit using five fingers. Usually, a puppeteer releases magical energy from their fingers to connect to the individual being controlled. The area a single thread can cover is limited. To control a larger individual, or to perform more delicate operations, more detailed information transmission is required, thus more fingers are needed for coordination. However, this is not absolute; at least that master could issue complex commands to an individual using just one finger.",
@@ -1987,28 +1987,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Lightning Strike",
-      description: "Your next attack deals bonus damage equal to 200% and gains +300 Attack Range. After the attack lands, gain bonus Attack Damage equal to 20% for 15 seconds. This effect stacks independently.",
+      description: "Your next attack deals bonus damage equal to [[value]]200%[[/]] and gains +[[value]]300[[/]] Attack Range. After the attack lands, gain bonus Attack Damage equal to [[value]]20%[[/]] for [[value]]15[[/]] seconds. This effect stacks independently.",
     },
     upgrades: [
       {
         level: 10,
         name: "Extension",
-        description: "+150 Lightning Strike Attack Range",
+        description: "+[[value]]150[[/]] [[ref]]Lightning Strike[[/]] Attack Range",
       },
       {
         level: 20,
         name: "Double Strike",
-        description: "Lightning Strike attacks also perform an additional attack dealing 40% damage.",
+        description: "[[ref]]Lightning Strike[[/]] attacks also perform an additional attack dealing [[value]]40%[[/]] damage.",
       },
       {
         level: 30,
         name: "Stored Energy",
-        description: "-1 seconds Lightning Strike cooldown",
+        description: "-[[value]]1[[/]] seconds [[ref]]Lightning Strike[[/]] cooldown",
       },
       {
         level: 40,
         name: "Lightning Whip",
-        description: "Lightning Strike stores up to 5 charges, releasing all effects on attack.",
+        description: "[[ref]]Lightning Strike[[/]] stores up to [[value]]5[[/]] charges, releasing all effects on attack.",
       },
     ],
     flavor: "A whip that crackles with lightning. In skilled hands, it can deliver five strikes in an instant.",
@@ -2046,28 +2046,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Unequal Exchange",
-      description: "After each stage, gain an buff. Press Alt + Left Mouse on the buff to exchange 6 all attributes for 550. After every 1 stages cleared, 1 of the attributes deducted by this exchange are restored, provided you contributed at least 40% of the total damage during that stage. Can be exchanged up to 3 times per stage.",
+      description: "After each stage, gain an buff. Press Alt + Left Mouse on the buff to exchange [[value]]6[[/]] all attributes for [[value]]550[[/]]. After every [[value]]1[[/]] stages cleared, [[value]]1[[/]] of the attributes deducted by this exchange are restored, provided you contributed at least [[value]]40%[[/]] of the total damage during that stage. Can be exchanged up to [[value]]3[[/]] times per stage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Regular Customer",
-        description: "-1 all-attribute cost for Unequal Exchange",
+        description: "-[[value]]1[[/]] all-attribute cost for [[ref]]Unequal Exchange[[/]]",
       },
       {
         level: 20,
         name: "Rebate",
-        description: "After using all exchanges available during a stage, gain an additional 300 when the attributes deducted by that set of exchanges are restored",
+        description: "After using all exchanges available during a stage, gain an additional [[value]]300[[/]] when the attributes deducted by that set of exchanges are restored",
       },
       {
         level: 30,
         name: "Dissolution",
-        description: "Press Alt + Left Mouse on the Cost Debuff to spend at a 130% ratio and regain the attributes.",
+        description: "Press Alt + Left Mouse on the Cost Debuff to spend at a [[value]]130%[[/]] ratio and regain the attributes.",
       },
       {
         level: 40,
         name: "Cost Conversion",
-        description: "This Artifact can be activated to increase all attributes by 35% for the current stage. At the end of the stage, you are afflicted with a debuff that permanently reduces all attributes by 10%. Press Alt + Left Mouse on the debuff and spend 3500 could remove it",
+        description: "This Artifact can be activated to increase all attributes by [[value]]35%[[/]] for the current stage. At the end of the stage, you are afflicted with a debuff that permanently reduces all attributes by [[value]]10%[[/]]. Press Alt + Left Mouse on the debuff and spend [[value]]3500[[/]] could remove it",
       },
     ],
     flavor: "Most exchanges are never truly equal. You may give much and receive little in return—in love as in business.",
@@ -2102,28 +2102,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Secondary Core",
-      description: "Upon each cast, 30% of its mana cost is stored. When the stored amount reaches 100% of maximum mana, an explosion occurs, dealing 100% of the stored amount as damage to enemies within 800 range. When current mana falls below 50%, mana is restored from the backup reserve.",
+      description: "Upon each cast, [[value]]30%[[/]] of its mana cost is stored. When the stored amount reaches [[value]]100%[[/]] of maximum mana, an explosion occurs, dealing [[value]]100%[[/]] of the stored amount as damage to enemies within [[value]]800[[/]] range. When current mana falls below [[value]]50%[[/]], mana is restored from the backup reserve.",
     },
     upgrades: [
       {
         level: 10,
         name: "Kinetic Power",
-        description: "Grants 1% charges for every 700 distance moved.",
+        description: "Grants [[value]]1%[[/]] charges for every [[value]]700[[/]] distance moved.",
       },
       {
         level: 20,
         name: "Solar Charging",
-        description: "Grants 1% charges every 2 seconds while in Status state.",
+        description: "Grants [[value]]1%[[/]] charges every [[value]]2[[/]] seconds while in Status state.",
       },
       {
         level: 30,
         name: "Charge Expansion",
-        description: "Can be toggled to a different effect. When used, the maximum stored amount of Secondary Core is increased to 300%. This causes both Kinetic Power and Solar Charging to also charge based on the expanded capacity.",
+        description: "Can be toggled to a different effect. When used, the maximum stored amount of [[ref]]Secondary Core[[/]] is increased to [[value]]300%[[/]]. This causes both [[ref]]Kinetic Power[[/]] and [[ref]]Solar Charging[[/]] to also charge based on the expanded capacity.",
       },
       {
         level: 40,
         name: "Concussive Charge",
-        description: "After Secondary Core explodes, 35% of the highest single-instance damage caused by the explosion is converted into restored charges. However, the amount restored cannot exceed 75% of the original consumed amount.",
+        description: "After [[ref]]Secondary Core[[/]] explodes, [[value]]35%[[/]] of the highest single-instance damage caused by the explosion is converted into restored charges. However, the amount restored cannot exceed [[value]]75%[[/]] of the original consumed amount.",
       },
     ],
     flavor: "Most living things have a single energy flow. Constructs? They cheat. One core runs the show. Break that core and the unit drops — heartbreak style. However, some upgraded constructs carry a second energy source. When primary dies, they flip to secondary core and stay in the fight.",
@@ -2166,28 +2166,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Chosen Ritual",
-      description: "Each attack consumes 40% of Mana based on Primary Attribute, converting it into bonus damage. After dealing damage, the consumed Mana is restored over 5 seconds as Mana Regeneration, up to a maximum of 10% of the damage dealt.",
+      description: "Each attack consumes [[value]]40%[[/]] of Mana based on Primary Attribute, converting it into bonus damage. After dealing damage, the consumed Mana is restored over [[value]]5[[/]] seconds as Mana Regeneration, up to a maximum of [[value]]10%[[/]] of the damage dealt.",
     },
     upgrades: [
       {
         level: 10,
         name: "Divine Gift",
-        description: "Chosen Ritual restores 105% of Mana consumed.",
+        description: "[[ref]]Chosen Ritual[[/]] restores [[value]]105%[[/]] of Mana consumed.",
       },
       {
         level: 20,
         name: "Divine Wings",
-        description: "When initiating an attack, grants 500 Movement Speed and charge towards the target.",
+        description: "When initiating an attack, grants [[value]]500[[/]] Movement Speed and charge towards the target.",
       },
       {
         level: 30,
         name: "Divine Slash",
-        description: "Move at least 500 with Divine Wings: next attack ignores 30 Armor.",
+        description: "Move at least [[value]]500[[/]] with [[ref]]Divine Wings[[/]]: next attack ignores [[value]]30[[/]] Armor.",
       },
       {
         level: 40,
         name: "Divine Guardian",
-        description: "Unlock two different forms. Activate this Artifact to switch between them.1. Divine Favor: Chosen Ritual Mana cost increased by 50%. Gain bonus Attack Damage equal to 100% of the Mana Regeneration it provides.Guardian: Gain an all-damage shield every second equal to 15% of your Mana Regeneration, lasting 10 seconds. This shield cannot exceed 200% of your Max HP or MP, whichever is higher.",
+        description: "Unlock two different forms. Activate this Artifact to switch between them.1. Divine Favor: [[ref]]Chosen Ritual[[/]] Mana cost increased by [[value]]50%[[/]]. Gain bonus Attack Damage equal to [[value]]100%[[/]] of the Mana Regeneration it provides.Guardian: Gain an all-damage shield every second equal to [[value]]15%[[/]] of your Mana Regeneration, lasting [[value]]10[[/]] seconds. This shield cannot exceed [[value]]200%[[/]] of your Max HP or MP, whichever is higher.",
       },
     ],
     flavor: "Throughout history, the battlefield has been dominated by male heroes. However, Empress Selyana of the Empire defied this norm. During the Tide of Madness, she single-handedly held off attacks from thousands of sub-humans. In an Empire teeming with heroes, the Empress had no need to go to the front lines, yet she still used her strength to protect the Empire's people. Over time, the people bestowed upon their Empress a new title: Guardian of the Empire. — Ninth World: Atlus, Official History.",
@@ -2222,28 +2222,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Apocalypse",
-      description: "At the start of a Stage, gain 20 stacks of Apocalypse. Dealing damage consumes 1 stack(s) to boost final damage by 30%. Restores 1 stack every 8 seconds.",
+      description: "At the start of a Stage, gain [[value]]20[[/]] stacks of [[ref]]Apocalypse[[/]]. Dealing damage consumes [[value]]1[[/]] stack(s) to boost final damage by [[value]]30%[[/]]. Restores 1 stack every [[value]]8[[/]] seconds.",
     },
     upgrades: [
       {
         level: 10,
         name: "Divine Gift",
-        description: "-1s Apocalypse cooldown",
+        description: "-[[value]]1[[/]]s [[ref]]Apocalypse[[/]] cooldown",
       },
       {
         level: 20,
         name: "Divine Retribution",
-        description: "Damage amplified by Apocalypse causes a 20% splash in a 200 radius.",
+        description: "Damage amplified by [[ref]]Apocalypse[[/]] causes a [[value]]20%[[/]] splash in a [[value]]200[[/]] radius.",
       },
       {
         level: 30,
         name: "Divine Will",
-        description: "Restores 1 / 5 stack(s) of Apocalypse upon killing normal/leader enemies.",
+        description: "Restores [[value]]1[[/]] / [[value]]5[[/]] stack(s) of [[ref]]Apocalypse[[/]] upon killing normal/leader enemies.",
       },
       {
         level: 40,
         name: "Sky Crossing",
-        description: "Once per day, after clearing Act III with this Artifact, permanently gain 30 bonus HP. This effect reaches its maximum after 30 stacks.",
+        description: "Once per day, after clearing Act III with this Artifact, permanently gain [[value]]30[[/]] bonus HP. This effect reaches its maximum after [[value]]30[[/]] stacks.",
       },
     ],
     flavor: "Born from the final fire of the Star-Forging Furnace in the Seventh Heaven. When the Star Chart of Creation dimmed, Archangel Gabriel plucked his own light-wings and forged them into this helmet, bearing the mission of redemption.",
@@ -2273,23 +2273,23 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Water",
-      description: "Enhances the ability of the relic [Acidic Slime]. Enemies within its capture range are always considered targets and have 1 stacks of a unique debuff, which can only be detected and dispelled by .",
+      description: "Enhances the ability of the relic [Acidic Slime]. Enemies within its capture range are always considered targets and have [[value]]1[[/]] stacks of a unique debuff, which can only be detected and dispelled by .",
     },
     upgrades: [
       {
         level: 10,
         name: "Capture I",
-        description: "+150 to ’s capture range",
+        description: "+[[value]]150[[/]] to ’s capture range",
       },
       {
         level: 20,
         name: "Capture II",
-        description: "+1 to ’s maximum dissolution count",
+        description: "+[[value]]1[[/]] to ’s maximum dissolution count",
       },
       {
         level: 30,
         name: "Capture III",
-        description: "-2 's dissolution interval",
+        description: "-[[value]]2[[/]] 's dissolution interval",
       },
       {
         level: 40,
@@ -2324,29 +2324,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Soul Vessel",
-      description: "Killing a Regular/Leader enemy collects 1/5 stacks of souls, each stack grants 0.5 Attack Damage.",
+      description: "Killing a Regular/Leader enemy collects [[value]]1[[/]]/[[value]]5[[/]] stacks of souls, each stack grants [[value]]0.5[[/]] Attack Damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Soul Searchlight",
-        description: "At 20/80/200 stacks, summon a Soul Cluster that automatically seeks out enemies.",
+        description: "At [[value]]20[[/]]/[[value]]80[[/]]/[[value]]200[[/]] stacks, summon a Soul Cluster that automatically seeks out enemies.",
       },
       {
         level: 20,
         name: "Soul Harvest",
-        description: "After dealing damage exceeding 25% of a target’s max HP, souls are collected without requiring you to land the killing blow.",
+        description: "After dealing damage exceeding [[value]]25%[[/]] of a target’s max HP, souls are collected without requiring you to land the killing blow.",
       },
       {
         level: 30,
         name: "Soul Redemption",
-        description: "Minimum Soul Searchlight +15 per Stage",
-        note: "At the end of each Stage, automatically replenish souls up to 15 stacks.",
+        description: "Minimum Soul Searchlight +[[value]]15[[/]] per Stage",
+        note: "At the end of each Stage, automatically replenish souls up to [[value]]15[[/]] stacks.",
       },
       {
         level: 40,
         name: "Soul Requisition",
-        description: "Removing the Artifact retains 50% of souls",
+        description: "Removing the Artifact retains [[value]]50%[[/]] of souls",
       },
     ],
     flavor: "The lantern hangs empty, unlit within. Only by drinking souls does it burn, only by devouring life does it shine. The dead become fuel, its edge grows ever colder. As souls gather and shadows deepen, spectral servants arise. When others fade, this lantern may steal their light. On the battlefield, souls are thin; in empty valleys, it harvests by force. The lantern may be cast aside, but the soul brand never fades. Half is offered as sacrifice, bound forever to the mantle of war.",
@@ -2390,28 +2390,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Distant Astrology",
-      description: "Gain 3 charges at the start of a Stage. Killing a boss or elite enemy restores 1 charges.Maximum charges: 3.When taking damage exceeding 15 % of your maximum HP, consume 1 charge(s) to evade that damage.",
+      description: "Gain [[value]]3[[/]] charges at the start of a Stage. Killing a boss or elite enemy restores [[value]]1[[/]] charges.Maximum charges: [[value]]3[[/]].When taking damage exceeding [[value]]15[[/]] % of your maximum HP, consume [[value]]1[[/]] charge(s) to evade that damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Foreseen Motion",
-        description: "+10% chance to not consume charges when Distant Astrology triggers",
+        description: "+[[value]]10%[[/]] chance to not consume charges when [[ref]]Distant Astrology[[/]] triggers",
       },
       {
         level: 20,
         name: "Stellar Rewind",
-        description: "When charges are consumed, restore 15% HP and apply a strong dispel",
+        description: "When charges are consumed, restore [[value]]15%[[/]] HP and apply a strong dispel",
       },
       {
         level: 30,
         name: "Omniscience",
-        description: "For every 2 damage instances evaded by Distant Astrology, gain 1 permanent luck, up to 20;For every 10 luck gained, gain 1 Distant Astrology charges.",
+        description: "For every [[value]]2[[/]] damage instances evaded by [[ref]]Distant Astrology[[/]], gain [[value]]1[[/]] permanent luck, up to [[value]]20[[/]];For every [[value]]10[[/]] luck gained, gain 1 [[ref]]Distant Astrology[[/]] charges.",
       },
       {
         level: 40,
         name: "Divine Ordinance",
-        description: "When Distant Astrology has no charges, restore 1 charge every 20 seconds.",
+        description: "When [[ref]]Distant Astrology[[/]] has no charges, restore 1 charge every [[value]]20[[/]] seconds.",
       },
     ],
     flavor: "The current whereabouts of the Artifact remain unknown, and there has been no sign of the deity choosing a new champion since the Second Chaos Insurgency. Even so, the goddess’s followers believe that somewhere out there, the Thousand Leagues Astrologer is guiding a new Stellar Watcher through the dark, starry night.",
@@ -2454,28 +2454,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Maximum Mana Amplification",
-      description: "+10% Spell AMP+1% per Stage.",
+      description: "+[[value]]10%[[/]] Spell AMP+[[value]]1%[[/]] per Stage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Immunity",
-        description: "Dispels 1 debuffs every 15 seconds",
+        description: "Dispels [[value]]1[[/]] debuffs every [[value]]15[[/]] seconds",
       },
       {
         level: 20,
         name: "Ascension",
-        description: "When first equipped, gain random 1",
+        description: "When first equipped, gain random [[value]]1[[/]]",
       },
       {
         level: 30,
         name: "Greater Immunity",
-        description: "Immunity dispels additional 1 debuffsMaximum Mana Amplification now lasts only 2 Stages",
+        description: "[[ref]]Immunity[[/]] dispels additional [[value]]1[[/]] debuffs[[ref]]Maximum Mana Amplification[[/]] now lasts only [[value]]2[[/]] Stages",
       },
       {
         level: 40,
         name: "Greater Ascension",
-        description: "Ascension now grants",
+        description: "[[ref]]Ascension[[/]] now grants",
       },
     ],
     flavor: "Seals away the wearer’s ego, allowing them to wield magic beyond their natural limits. However, forcibly removing it inflicts psychic backlash from the amplified mental force — caution is advised when worn.",
@@ -2509,29 +2509,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Skyveil Guard",
-      description: "When MP is above 30%, consume Mana to block 60% damage. Each point of MP blocks 1.5 damage.",
+      description: "When MP is above [[value]]30%[[/]], consume Mana to block [[value]]60%[[/]] damage. Each point of MP blocks [[value]]1.5[[/]] damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Mana Maintenance",
-        description: "Every 5 seconds, restore 2% of Mana consumed",
+        description: "Every [[value]]5[[/]] seconds, restore [[value]]2%[[/]] of Mana consumed",
       },
       {
         level: 20,
         name: "Dense Field",
-        description: "+0.5 damage blocked /MP of Skyveil Guard",
+        description: "+[[value]]0.5[[/]] damage blocked /MP of [[ref]]Skyveil Guard[[/]]",
       },
       {
         level: 30,
         name: "Precision Control",
-        description: "Skyveil Guard consumes up to (300 + 15% of Max MP) Mana per use.",
+        description: "[[ref]]Skyveil Guard[[/]] consumes up to ([[value]]300[[/]] + [[value]]15%[[/]] of Max MP) Mana per use.",
       },
       {
         level: 40,
         name: "Skyveil",
-        description: "Can be activated to convert 50% of your Max MP into a separate Mana PoolThe Mana Pool has 100% independent MP Regeneration, and Skyveil Guard consumes Mana only from this pool.",
-        note: "As expected, all Abilities now affect only the separate Mana Pool, and the 30% restriction no longer applies.",
+        description: "Can be activated to convert [[value]]50%[[/]] of your Max MP into a separate Mana PoolThe Mana Pool has [[value]]100%[[/]] independent MP Regeneration, and [[ref]]Skyveil Guard[[/]] consumes Mana only from this pool.",
+        note: "As expected, all Abilities now affect only the separate Mana Pool, and the [[value]]30%[[/]] restriction no longer applies.",
       },
     ],
     flavor: "Using the supreme techniques of the arcane schools, mana is woven into an absolute shield.",
@@ -2569,28 +2569,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Azure Reflux",
-      description: "+1% Max Mana Regeneration per second, with 150% effect while in Water Terrain.",
+      description: "+[[value]]1%[[/]] Max Mana Regeneration per second, with [[value]]150%[[/]] effect while in Water Terrain.",
     },
     upgrades: [
       {
         level: 10,
         name: "Current Growth",
-        description: "When MP is above 95%, the Mana cost per second for Azure Reflux increases to 2%",
+        description: "When MP is above [[value]]95%[[/]], the Mana cost per second for [[ref]]Azure Reflux[[/]] increases to [[value]]2%[[/]]",
       },
       {
         level: 20,
         name: "Ebb and Flow",
-        description: "The lower your MP, the higher the Mana Regeneration provided by Azure Reflux, up to an additional 50%",
+        description: "The lower your MP, the higher the Mana Regeneration provided by [[ref]]Azure Reflux[[/]], up to an additional [[value]]50%[[/]]",
       },
       {
         level: 30,
         name: "Current Echo",
-        description: "Mana consumed by Azure Reflux is converted into 100% damage dealt to enemies within a 500 radius",
+        description: "Mana consumed by [[ref]]Azure Reflux[[/]] is converted into [[value]]100%[[/]] damage dealt to enemies within a [[value]]500[[/]] radius",
       },
       {
         level: 40,
         name: "Underflow",
-        description: "Can be activated to increase Azure Reflux ’s cost by 300% and remove its drain limit. Additionally, 50% of the Mana drained is converted into temporary Max Mana bonus. This effect stacks independently and lasts for 10 seconds.",
+        description: "Can be activated to increase [[ref]]Azure Reflux[[/]] ’s cost by [[value]]300%[[/]] and remove its drain limit. Additionally, [[value]]50%[[/]] of the Mana drained is converted into temporary Max Mana bonus. This effect stacks independently and lasts for [[value]]10[[/]] seconds.",
       },
     ],
     flavor: "The Dark Reef is not merely a prison; its lengthy labyrinth actually has two branches—one leads to the most dangerous cells, the other to the hidden treasury of the ocean empire. Many overconfident thieves come here, unaware that the warden has already prepared cages for them, waiting for them to walk right into the trap.",
@@ -2626,13 +2626,13 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Enigma",
-      description: "Start with 3 Gravity Spheres. When a nearby enemy within 500 range tries to land an attack, one sphere fires off, shoving them toward the outer rim. That sphere then sinks into the ground and creates a small gravity field, largely slows for 6 seconds. Each ready sphere increases your bonus radius by 30. Each active sphere grants you 6% damage reduction.",
+      description: "Start with [[value]]3[[/]] Gravity Spheres. When a nearby enemy within [[value]]500[[/]] range tries to land an attack, one sphere fires off, shoving them toward the outer rim. That sphere then sinks into the ground and creates a small gravity field, largely slows for [[value]]6[[/]] seconds. Each ready sphere increases your bonus radius by [[value]]30[[/]]. Each active sphere grants you [[value]]6[[/]]% damage reduction.",
     },
     upgrades: [
       {
         level: 10,
         name: "Nested Rings",
-        description: "+1 Enigma Gravity Spheres",
+        description: "+[[value]]1[[/]] [[ref]]Enigma[[/]] Gravity Spheres",
       },
       {
         level: 20,
@@ -2642,13 +2642,13 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 30,
         name: "Collapse",
-        description: "While the gravity field from Enigma is active, if you cast a spell while inside its area, or target a point inside it with an ability, the field collapses. It pulls in all enemies within 500 toward the center and stuns them for 2 seconds. When the stun ends, they take damage equal to 30% of the damage they received during the stun. After collapsing, the Gravity Sphere resets 5 seconds later. During that delay, no field is generated.",
-        note: "The bonus damage cannot exceed 600% of your primary attribute. Any damage flagged as life loss, retaliate, or similar is ignored for the calculation.",
+        description: "While the gravity field from [[ref]]Enigma[[/]] is active, if you cast a spell while inside its area, or target a point inside it with an ability, the field collapses. It pulls in all enemies within [[value]]500[[/]] toward the center and stuns them for [[value]]2[[/]] seconds. When the stun ends, they take damage equal to [[value]]30[[/]]% of the damage they received during the stun. After collapsing, the Gravity Sphere resets [[value]]5[[/]] seconds later. During that delay, no field is generated.",
+        note: "The bonus damage cannot exceed [[value]]600[[/]]% of your primary attribute. Any damage flagged as life loss, retaliate, or similar is ignored for the calculation.",
       },
       {
         level: 40,
         name: "Binary Star",
-        description: "Toggles active effect. While the active is on, Enigma uses two Gravity Spheres to pull enemies, and immediately triggers Collapse when the push-off is finished. This means you need at least two ready spheres for it to work. Additionally, while active, if your total percentage-based radius bonuses exceed 60%, gain +10% Final Damage Bonus.",
+        description: "Toggles active effect. While the active is on, [[ref]]Enigma[[/]] uses two Gravity Spheres to pull enemies, and immediately triggers [[ref]]Collapse[[/]] when the push-off is finished. This means you need at least two ready spheres for it to work. Additionally, while active, if your total percentage-based radius bonuses exceed [[value]]60%[[/]], gain +[[value]]10%[[/]] Final Damage Bonus.",
       },
     ],
     flavor: "Gaia's land is just one corner of the world. By human measure, this planet is already huge. Many spend their whole lives without ever leaving home. But the world is vast. Between realms you've got the void and the aether. Star-clouds drifting out there — no one's mapped them all.",
@@ -2683,28 +2683,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Judgement",
-      description: "After the same unit attacks you 6 times, an echo is triggered centered on that unit, dealing [120 + 270% ] damage to other enemies within 400 radius.Each unit has a 5 seconds cooldown.",
+      description: "After the same unit attacks you [[value]]6[[/]] times, an echo is triggered centered on that unit, dealing [[[value]]120[[/]] + [[value]]270%[[/]] ] damage to other enemies within [[value]]400[[/]] radius.Each unit has a [[value]]5[[/]] seconds cooldown.",
     },
     upgrades: [
       {
         level: 10,
         name: "Arcane Totem",
-        description: "Your attacks generate 2 Judgement attack count",
+        description: "Your attacks generate [[value]]2[[/]] [[ref]]Judgement[[/]] attack count",
       },
       {
         level: 20,
         name: "Arcane Resonance",
-        description: "The primary target that triggers Judgement also takes 1 instances of damage",
+        description: "The primary target that triggers [[ref]]Judgement[[/]] also takes [[value]]1[[/]] instances of damage",
       },
       {
         level: 30,
         name: "Echoes Beyond",
-        description: "For each target affected by Judgement, gain 1% bonus Strength, stacking independently for 30 seconds, up to 20 stacks",
+        description: "For each target affected by [[ref]]Judgement[[/]], gain [[value]]1%[[/]] bonus Strength, stacking independently for [[value]]30[[/]] seconds, up to [[value]]20[[/]] stacks",
       },
       {
         level: 40,
         name: "Arcane Echo",
-        description: "Your spell damage also generates 2 Judgement attack counts",
+        description: "Your spell damage also generates [[value]]2[[/]] [[ref]]Judgement[[/]] attack counts",
       },
     ],
     flavor: "Earthshaker cannot restore life to those who perished in the destruction of his sister earth, but he can wield a fragment born from her demise to mete out justice upon those responsible.",
@@ -2739,28 +2739,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Agony Recompense",
-      description: "After taking cumulative damage equal to 10% of your maximum health, release a slowly spreading that affects enemies up to 800 units away. Enemies that touch are immediately afflicted with Poison equal to 15% of their maximum health. While within its area, they are afflicted with an additional 3% of their maximum health as Poison each second. lasts 3 seconds.",
+      description: "After taking cumulative damage equal to [[value]]10%[[/]] of your maximum health, release a slowly spreading that affects enemies up to [[value]]800[[/]] units away. Enemies that touch are immediately afflicted with [[color:#98f698]]Poison[[/]] equal to [[value]]15%[[/]] of their maximum health. While within its area, they are afflicted with an additional [[value]]3%[[/]] of their maximum health as [[color:#98f698]]Poison[[/]] each second. lasts [[value]]3[[/]] seconds.",
     },
     upgrades: [
       {
         level: 10,
         name: "Spell Recompense",
-        description: "50% of your spell costs also count toward Agony Recompense, whether paid with mana or health",
+        description: "[[value]]50%[[/]] of your spell costs also count toward [[ref]]Agony Recompense[[/]], whether paid with mana or health",
       },
       {
         level: 20,
         name: "Foul Recompense",
-        description: "Releasing also applies a weak dispel to yourself. If any debuff is dispelled, gains 40% potency, plus an additional 5% for each debuff dispelled",
+        description: "Releasing also applies a weak dispel to yourself. If any debuff is dispelled, gains [[value]]40%[[/]] potency, plus an additional [[value]]5%[[/]] for each debuff dispelled",
       },
       {
         level: 30,
         name: "Concurrent Recompense",
-        description: "gains 10% potency for each Poison Target on the battlefield",
+        description: "gains [[value]]10%[[/]] potency for each [[color:#98f698]]Poison Target[[/]] on the battlefield",
       },
       {
         level: 40,
         name: "Origin of Plague",
-        description: "An area of 300 around you constantly produces the effect of at the highest potency it has reached during the current stage",
+        description: "An area of [[value]]300[[/]] around you constantly produces the effect of at the highest potency it has reached during the current stage",
       },
     ],
     flavor: "Every wound, every brush with death, and every curse dispelled is refined into pestilent miasma.",
@@ -2803,28 +2803,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Cloudstep",
-      description: "Has 2 charge(s). When you use a teleport or blink Ability, this Artifact goes on cooldown instead, with a cooldown time equal to 140% of the original.",
+      description: "Has [[value]]2[[/]] charge(s). When you use a teleport or blink Ability, this Artifact goes on cooldown instead, with a cooldown time equal to [[value]]140%[[/]] of the original.",
     },
     upgrades: [
       {
         level: 10,
         name: "Feather Rush",
-        description: "After Cloudstep, gain 20% bonus MS, stacking independently for 10 seconds",
+        description: "After [[ref]]Cloudstep[[/]], gain [[value]]20%[[/]] bonus MS, stacking independently for [[value]]10[[/]] seconds",
       },
       {
         level: 20,
         name: "Sky Treader",
-        description: "-25%Cloudstep cooldown time replaced",
+        description: "-[[value]]25%[[/]][[ref]]Cloudstep[[/]] cooldown time replaced",
       },
       {
         level: 30,
         name: "The Third Wings",
-        description: "+1 max Cloudstep charges",
+        description: "+[[value]]1[[/]] max [[ref]]Cloudstep[[/]] charges",
       },
       {
         level: 40,
         name: "Sky Walker",
-        description: "+150/300 min/max MS",
+        description: "+[[value]]150[[/]]/[[value]]300[[/]] min/max MS",
       },
     ],
     flavor: "The bodies of humanoid creatures are surprisingly resilient. Even a fall from high ground is unlikely to kill you outright. More often, your ribs snap like branches, puncturing your lungs and leaving you to slowly and painfully suffocate in your own blood. So when you wear these boots… it’s best not to look down.",
@@ -2863,29 +2863,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Celestial Myriad",
-      description: "After each Stage, gain 5 Luck. Has a 15% chance to obtain a random Ability . If this effect does not trigger, the chance is doubled for the next attempt.",
+      description: "After each Stage, gain [[value]]5[[/]] Luck. Has a [[value]]15%[[/]] chance to obtain a random Ability . If this effect does not trigger, the chance is doubled for the next attempt.",
     },
     upgrades: [
       {
         level: 10,
         name: "Stargazing",
-        description: "Whenever you obtain any (including temporary ones), +2 Luck",
+        description: "Whenever you obtain any (including temporary ones), +[[value]]2[[/]] Luck",
       },
       {
         level: 20,
         name: "Celestial Insight",
-        description: "Has a 30% chance (Luck × 15) to negate incoming damage",
+        description: "Has a [[value]]30%[[/]] chance (Luck × [[value]]15[[/]]) to negate incoming damage",
       },
       {
         level: 30,
         name: "Wheel of Fate",
-        description: "Up to 3 times per Stage, when taking lethal damage, consume 20 Luck to survive and become invulnerable for 1s. Lost Luck is restored at the end of the Stage.",
+        description: "Up to [[value]]3[[/]] times per Stage, when taking lethal damage, consume [[value]]20[[/]] Luck to survive and become invulnerable for [[value]]1[[/]]s. Lost Luck is restored at the end of the Stage.",
         note: "Does not trigger if you lack sufficient Luck.",
       },
       {
         level: 40,
         name: "Starpath",
-        description: "Each day, after clearing a Stage with this Artifact, it grants additional 8 Luck for the day. This bonus decreases by 1 each time",
+        description: "Each day, after clearing a Stage with this Artifact, it grants additional [[value]]8[[/]] Luck for the day. This bonus decreases by [[value]]1[[/]] each time",
       },
     ],
     flavor: "A robe embodying the legacy of legendary pioneers, granting fleeting visions of its power only to those whose sight reaches the farthest horizons. In ages long past, only a handful of true relics existed, their names etched upon the very pinnacle of the Constellation — [Aeili][肥宅快乐浪][四棱][李狗蛋][无色无味]. In later eras, countless imitations emerged. Though lacking the full divine might of the originals, they still bear the honored name of the Constellation Relic.",
@@ -2920,28 +2920,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Kiss of Thorns",
-      description: "Critical damage is increased by 60%. Each time you trigger a critical strike, you take backlash damage equal to 15% of that damage, capped at 10% of your Max HP.",
+      description: "Critical damage is increased by [[value]]60%[[/]]. Each time you trigger a critical strike, you take backlash damage equal to [[value]]15%[[/]] of that damage, capped at [[value]]10%[[/]] of your Max HP.",
     },
     upgrades: [
       {
         level: 10,
         name: "Kiss of Death",
-        description: "+20% critical damage",
+        description: "+[[value]]20%[[/]] critical damage",
       },
       {
         level: 20,
         name: "Kiss of Blood",
-        description: "+10% critical strike lifesteal",
+        description: "+[[value]]10%[[/]] critical strike lifesteal",
       },
       {
         level: 30,
         name: "Kiss of Madness",
-        description: "After trigger a critical strike, the next 2 attacks gain additional 100 (an max) Attack Speed",
+        description: "After trigger a critical strike, the next [[value]]2[[/]] attacks gain additional [[value]]100[[/]] (an max) Attack Speed",
       },
       {
         level: 50,
         name: "Final Kiss",
-        description: "Each attack has a 30% chance to roll 1 additional critical strikes, using the highest result as the final critical damage",
+        description: "Each attack has a [[value]]30%[[/]] chance to roll [[value]]1[[/]] additional critical strikes, using the highest result as the final critical damage",
         note: "Different critical strike mechanics interact differently. For example, Chaos Strike does not increase critical strike chance, but if it triggers, it rolls twice and uses the higher critical damage. If a critical strike is produced as a secondary effect of another mechanic, this effect will not take effect.",
       },
     ],
@@ -2984,28 +2984,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Ocean Erosion",
-      description: "Gradually reduces armor of enemies within 900 range, permanently reducing armor by 1 every second, up to a maximum of 15. If the wielder is in Water Terrain, then every 5 seconds, the maximum reduction is increased by 1 (but up to a maximum of 27). Leave Water Terrain and the extra cap disappears. Already reduced armor stays reduced, but it won't go past the active cap.",
+      description: "Gradually reduces armor of enemies within [[value]]900[[/]] range, permanently reducing armor by [[value]]1[[/]] every second, up to a maximum of [[value]]15[[/]]. If the wielder is in Water Terrain, then every [[value]]5[[/]] seconds, the maximum reduction is increased by [[value]]1[[/]] (but up to a maximum of [[value]]27[[/]]). Leave Water Terrain and the extra cap disappears. Already reduced armor stays reduced, but it won't go past the active cap.",
     },
     upgrades: [
       {
         level: 10,
         name: "Current Expansion",
-        description: "Ocean Erosion's radius increases by an amount equal to 100% of your own armor.",
+        description: "Ocean Erosion's radius increases by an amount equal to [[value]]100[[/]]% of your own armor.",
       },
       {
         level: 20,
         name: "Depth Warden",
-        description: "Grants bonus armor equal to 50% of the total armor reduced by Ocean Erosion. (The closest enemy counts for 100%, while all other enemies count for only 20%.)",
+        description: "Grants bonus armor equal to [[value]]50[[/]]% of the total armor reduced by Ocean Erosion. (The closest enemy counts for [[value]]100%[[/]], while all other enemies count for only [[value]]20%[[/]].)",
       },
       {
         level: 30,
         name: "Soaked",
-        description: "Enter Water Terrain and the Ocean Erosion bonus remains for 10 seconds even if briefly leaving.",
+        description: "Enter Water Terrain and the [[ref]]Ocean Erosion[[/]] bonus remains for [[value]]10[[/]] seconds even if briefly leaving.",
       },
       {
         level: 40,
         name: "Great Cleansing",
-        description: "Physical damage you deal behaves as though Ocean Erosion has already been running for 1 seconds.",
+        description: "Physical damage you deal behaves as though Ocean Erosion has already been running for [[value]]1[[/]] seconds.",
       },
     ],
     flavor: "Many currents meet here, and the heavy stuff gets pulled in too. Dark Reef holds plenty of high-risk criminals and a good pile of treasure. The warden thought no one and nothing could ever slip out. But he didn't count on one slippery convict making off with a chunk of his stash.",
@@ -3052,28 +3052,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Body of Ymir",
-      description: "30% of damage taken is converted into energy. Over the next 10s, 10% of this energy is converted into every 1 seconds. The shield lasts 15 seconds.",
+      description: "[[value]]30%[[/]] of damage taken is converted into energy. Over the next [[value]]10[[/]]s, [[value]]10%[[/]] of this energy is converted into every [[value]]1[[/]] seconds. The shield lasts [[value]]15[[/]] seconds.",
     },
     upgrades: [
       {
         level: 10,
         name: "Frozen Bloodline",
-        description: "While the Body of Ymir shield is active, gain additional 20% physical damage reduction",
+        description: "While the [[ref]]Body of Ymir[[/]] shield is active, gain additional [[value]]20%[[/]] physical damage reduction",
       },
       {
         level: 20,
         name: "Frost Resistance",
-        description: "While the Body of Ymir shield is active, gain additional 60% slow resistance",
+        description: "While the [[ref]]Body of Ymir[[/]] shield is active, gain additional [[value]]60%[[/]] slow resistance",
       },
       {
         level: 30,
         name: "Frozen",
-        description: "Once per Stage, when HP falls below 40%, you become invulnerable and receive a strong dispel for 5 seconds, restoring 10% HP and MP every second. After 1 seconds, you can end the effect early with a stop command (S/H).",
+        description: "Once per Stage, when HP falls below [[value]]40%[[/]], you become invulnerable and receive a strong dispel for [[value]]5[[/]] seconds, restoring [[value]]10%[[/]] HP and MP every second. After [[value]]1[[/]] seconds, you can end the effect early with a stop command (S/H).",
       },
       {
         level: 40,
         name: "Embrace of Frost",
-        description: "Gains a Body of Ymir shield equal to 50% of Armor/Magic Armor (whichever is higher) per second",
+        description: "Gains a [[ref]]Body of Ymir[[/]] shield equal to [[value]]50%[[/]] of Armor/Magic Armor (whichever is higher) per second",
       },
     ],
     flavor: "In the beginning lived the giant Ymir. There was no sand, no sea, no cool waves; no earth beneath, no sky above. Only the yawning abyss existed, and no grass grew. Then the sons of Borr raised the land and shaped radiant Midgard. — Poetic Edda, Völuspá, Verses 3–4",
@@ -3114,28 +3114,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Glintstone Sorcery",
-      description: "+100% MP cost and 45 min MP costEvery 3 casts, lanuch a glintstone beam at a random enemy within 1000 range, dealing 100% of the total MP spent across those 3 casts as damage.",
+      description: "+[[value]]100%[[/]] MP cost and [[value]]45[[/]] min MP costEvery [[value]]3[[/]] casts, lanuch a glintstone beam at a random enemy within [[value]]1000[[/]] range, dealing [[value]]100%[[/]] of the total MP spent across those [[value]]3[[/]] casts as damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Efficient Conversion",
-        description: "Glintstone Sorcery conversion damage increased to 140%.",
+        description: "[[ref]]Glintstone Sorcery[[/]] conversion damage increased to [[value]]140%[[/]].",
       },
       {
         level: 20,
         name: "Mana Fracture",
-        description: "+15% of your max MP to Glintstone Sorcery's damage",
+        description: "+[[value]]15%[[/]] of your max MP to [[ref]]Glintstone Sorcery[[/]]'s damage",
       },
       {
         level: 30,
         name: "Glintstone Surge",
-        description: "Glintstone Sorcery deals damage withn 300 range",
+        description: "[[ref]]Glintstone Sorcery[[/]] deals damage withn [[value]]300[[/]] range",
       },
       {
         level: 40,
         name: "Singularity Ascension",
-        description: "Can be toggled. While active: Your Abilities consume additional MP equal to 10% of your current MP.You can accumulate 5 casts. Glintstone Surge's radius increases to 500. If all casts are the same Abilities, its cooldown is reset when triggered.",
+        description: "Can be toggled. While active: Your Abilities consume additional MP equal to [[value]]10%[[/]] of your current MP.You can accumulate [[value]]5[[/]] casts. [[ref]]Glintstone Surge[[/]]'s radius increases to [[value]]500[[/]]. If all casts are the same Abilities, its cooldown is reset when triggered.",
       },
     ],
     flavor: "The distinction between comet and meteor magic always felt rather otiose to me. One produces horizontal beams. Another causes vertical blasts. Both hurt all the same. My colleagues insisted there was more nuance to it, however—so to prove them wrong, I mastered both.— Lusata Zur, wizardly prodigy.",
@@ -3170,29 +3170,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Floral Offering",
-      description: "The Poison you apply is reduced by 30%, with the reduced stacks absorbed by Floral Offering as nourishment. Once the nourishment reaches 1000% of your Primary Attribute, Floral Offering gains a level. Each time the requirement doubles thereafter, it gains 1 levels",
+      description: "The [[color:#98f698]]Poison[[/]] you apply is reduced by [[value]]30%[[/]], with the reduced stacks absorbed by [[ref]]Floral Offering[[/]] as nourishment. Once the nourishment reaches [[value]]1000%[[/]] of your Primary Attribute, [[ref]]Floral Offering[[/]] gains a level. Each time the requirement doubles thereafter, it gains [[value]]1[[/]] levels",
     },
     upgrades: [
       {
         level: 10,
         name: "Rotten Soil",
-        description: "When an enemy dies with Poison while within the area of Floral Offering, immediately gain nourishment equal to 30% of its remaining Poison",
-        note: "If multiple instances of Floral Offering are present, only the nearest one absorbs the nourishment",
+        description: "When an enemy dies with [[color:#98f698]]Poison[[/]] while within the area of [[ref]]Floral Offering[[/]], immediately gain nourishment equal to [[value]]30%[[/]] of its remaining [[color:#98f698]]Poison[[/]]",
+        note: "If multiple instances of [[ref]]Floral Offering[[/]] are present, only the nearest one absorbs the nourishment",
       },
       {
         level: 20,
         name: "Violet Heart",
-        description: "When Floral Offering reaches level 5, Poison Decay is slowed by 20% for enemies within its area",
+        description: "When [[ref]]Floral Offering[[/]] reaches level [[value]]5[[/]], [[color:#98f698]]Poison Decay[[/]] is slowed by [[value]]20%[[/]] for enemies within its area",
       },
       {
         level: 30,
         name: "Bloom",
-        description: "When Floral Offering reaches level 7, any Poison you apply has a 20% chance to be applied again after 1s",
+        description: "When [[ref]]Floral Offering[[/]] reaches level [[value]]7[[/]], any [[color:#98f698]]Poison[[/]] you apply has a [[value]]20%[[/]] chance to be applied again after [[value]]1[[/]]s",
       },
       {
         level: 40,
         name: "Unfading",
-        description: "When the stage resets, Floral Offering from Floral Offering is no longer cleared and instead loses only 2 levels",
+        description: "When the stage resets, [[ref]]Floral Offering[[/]] from [[ref]]Floral Offering[[/]] is no longer cleared and instead loses only [[value]]2[[/]] levels",
       },
     ],
     flavor: "Do not mourn the withering dead. Some flowers bloom eternal only upon their remains.",
@@ -3236,20 +3236,20 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Enslave Undead",
-      description: "Units you kill are raised as undead. Every 8 seconds, they unleash a 350 radius area attack, dealing 100% damage.Lasts 15 seconds. Maximum enslaved units: 2.",
+      description: "Units you kill are raised as undead. Every [[value]]8[[/]] seconds, they unleash a [[value]]350[[/]] radius area attack, dealing [[value]]100%[[/]] damage.Lasts [[value]]15[[/]] seconds. Maximum enslaved units: [[value]]2[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Trap Force",
-        description: "+2s to all summon durations",
+        description: "+[[value]]2[[/]]s to all summon durations",
         note: "Applies to summons from other sources, but some summons are not affected",
       },
       {
         level: 20,
         name: "Tethering Force",
-        description: "When Enslave Undead reaches its max count, a random undead has its attack cooldown reduced by 2s, and its next attack deals additional 30% damage",
-        note: "An undead bound by souls does not expire until it makes an attack or you die, and its next attack will occur no sooner than 1 seconds later",
+        description: "When [[ref]]Enslave Undead[[/]] reaches its max count, a random undead has its attack cooldown reduced by [[value]]2[[/]]s, and its next attack deals additional [[value]]30%[[/]] damage",
+        note: "An undead bound by souls does not expire until it makes an attack or you die, and its next attack will occur no sooner than [[value]]1[[/]] seconds later",
       },
       {
         level: 30,
@@ -3260,7 +3260,7 @@ export const ARTIFACTS: Artifact[] = [
         level: 40,
         name: "Tribute to the Black Fertility Mother",
         description: "Killing a boss enemy spawns a more powerful undead.Increases the maximum number of enslaved units by one. This undead becomes a permanent boss-level follower that resets at the start of each round.",
-        note: "Leader undead additionally inherit 30% of Attack Damage. If the max is already reached, it replaces a normal undead.",
+        note: "Leader undead additionally inherit [[value]]30%[[/]] of Attack Damage. If the max is already reached, it replaces a normal undead.",
       },
     ],
     flavor: "Fear not the grim shepherd, for it is they who tend your flock. You may not see them, nor know that they are there, but when your final bleating cries are heard, they will be there to guide you unto grander pastures.",
@@ -3297,28 +3297,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Hawk-Eye Insight",
-      description: "+30% final critical damage",
+      description: "+[[value]]30%[[/]] final critical damage",
     },
     upgrades: [
       {
         level: 10,
         name: "Reveal",
-        description: "+25% vision radius. Grants unobstructed vision within 450 range.",
+        description: "+[[value]]25%[[/]] vision radius. Grants unobstructed vision within [[value]]450[[/]] range.",
       },
       {
         level: 20,
         name: "Hawk Vision",
-        description: "After critical strike, gain True Sight on the target for 15s",
+        description: "After critical strike, gain True Sight on the target for [[value]]15[[/]]s",
       },
       {
         level: 30,
         name: "Exposure",
-        description: "Every 15s, mark the nearest enemy within 1000 radius, causing it to take additional 40% final critical damage",
+        description: "Every [[value]]15[[/]]s, mark the nearest enemy within [[value]]1000[[/]] radius, causing it to take additional [[value]]40%[[/]] final critical damage",
       },
       {
         level: 40,
         name: "Fusion",
-        description: "Once only, consume this Artifact to permanently gain 15% final critical damage",
+        description: "Once only, consume this Artifact to permanently gain [[value]]15%[[/]] final critical damage",
       },
     ],
     flavor: "A ring passed down in the name of Gough the Eagle Eye, one of the Four Knights who served Gwyn, the Lord of the First Flame.",
@@ -3360,29 +3360,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Charged Sniping",
-      description: "+700 minimum Attack Range. Converts attacks into beams, firing one beam every 6 seconds at the target. Each beam hits all enemies in its path, dealing (200% + 100% ) damage.",
+      description: "+[[value]]700[[/]] minimum Attack Range. Converts attacks into beams, firing one beam every [[value]]6[[/]] seconds at the target. Each beam hits all enemies in its path, dealing ([[value]]200%[[/]] + [[value]]100%[[/]] ) damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Hyper-Energy Penetration",
-        description: "-10% Charged Sniping damage decay",
+        description: "-[[value]]10%[[/]] [[ref]]Charged Sniping[[/]] damage decay",
       },
       {
         level: 20,
         name: "Hyper-Energy Piercing",
-        description: "+16 Charged Sniping Armor Reduction",
+        description: "+[[value]]16[[/]] [[ref]]Charged Sniping[[/]] Armor Reduction",
       },
       {
         level: 30,
         name: "Overcharged",
-        description: "After each cooldown cycle of Charged Sniping, gain additional 20% Attack Damage inheritance and 50 minimum Attack Range",
-        note: "Up to 10 stacks",
+        description: "After each cooldown cycle of [[ref]]Charged Sniping[[/]], gain additional [[value]]20%[[/]] Attack Damage inheritance and [[value]]50[[/]] minimum Attack Range",
+        note: "Up to [[value]]10[[/]] stacks",
       },
       {
         level: 40,
         name: "Energy Overload",
-        description: "-1 seconds to minimum/maximum charge time. While at least 3 stacks of Overcharged, Charged Sniping gains additional 100 beam width and damage no longer decays.",
+        description: "-[[value]]1[[/]] seconds to minimum/maximum charge time. While at least [[value]]3[[/]] stacks of [[ref]]Overcharged[[/]], [[ref]]Charged Sniping[[/]] gains additional [[value]]100[[/]] beam width and damage no longer decays.",
       },
     ],
     flavor: "Strictly speaking, it is neither a cannon nor particularly 'giant'. Yet its first shot pierced an entire mountain, and amid gasps of awe, the name stuck.",
@@ -3426,28 +3426,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Lens",
-      description: "For targeted abilities, final damage is increased by 3% for every 100 distance between you and the target.",
+      description: "For targeted abilities, final damage is increased by [[value]]3%[[/]] for every [[value]]100[[/]] distance between you and the target.",
     },
     upgrades: [
       {
         level: 10,
         name: "Point-Blank Aim",
-        description: "Lens always gains at least the bonus of 400 distance.",
+        description: "[[ref]]Lens[[/]] always gains at least the bonus of [[value]]400[[/]] distance.",
       },
       {
         level: 20,
         name: "Long-Range Aim",
-        description: "If the target is farther than 80% of the cast range, Lens treats the target as being an additional 400 units away",
+        description: "If the target is farther than [[value]]80%[[/]] of the cast range, [[ref]]Lens[[/]] treats the target as being an additional [[value]]400[[/]] units away",
       },
       {
         level: 30,
         name: "Aiming Assist",
-        description: "Increases the cast range of targeted abilities by 20%.",
+        description: "Increases the cast range of targeted abilities by [[value]]20%[[/]].",
       },
       {
         level: 40,
         name: "Focus",
-        description: "Consecutively casting unit-targeted abilities on the same target grants Lens bonus distance for its final distance calculation. Each cast adds 150 units, stacking up to 10 casts",
+        description: "Consecutively casting unit-targeted abilities on the same target grants [[ref]]Lens[[/]] bonus distance for its final distance calculation. Each cast adds [[value]]150[[/]] units, stacking up to [[value]]10[[/]] casts",
       },
     ],
     flavor: "The Keen are always inventing strange new gadgets. This scope, for instance, can spot the fuzz on a target’s face from three thousand yards away.",
@@ -3483,30 +3483,30 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Rite of Light",
-      description: "During Status, buff Duration granted by this Artifact have a 30% chance to gain 200% effectiveness.",
+      description: "During Status, buff Duration granted by this Artifact have a [[value]]30%[[/]] chance to gain [[value]]200%[[/]] effectiveness.",
     },
     upgrades: [
       {
         level: 10,
         name: "Gift of Dawn",
-        description: "Up to 1 time per Stage, when turns into , gain additional 2 After Act 3, each stack additionally grants 1",
+        description: "Up to [[value]]1[[/]] time per Stage, when turns into , gain additional [[value]]2[[/]] After Act [[value]]3[[/]], each stack additionally grants [[value]]1[[/]]",
       },
       {
         level: 20,
         name: "Blessing of Dawn",
-        description: "When Rite of Light triggers, the target gains 18% damage reduction until the applied effect expires",
+        description: "When [[ref]]Rite of Light[[/]] triggers, the target gains [[value]]18%[[/]] damage reduction until the applied effect expires",
       },
       {
         level: 30,
         name: "Shield of Tomorrow",
-        description: "For each active Blessing of Dawn on allied Heroes, you gain 15 per second",
-        note: "The shield lasts until the end of the current Stage and can accumulate up to 25% of your Max HP",
+        description: "For each active [[ref]]Blessing of Dawn[[/]] on allied Heroes, you gain [[value]]15[[/]] per second",
+        note: "The shield lasts until the end of the current Stage and can accumulate up to [[value]]25%[[/]] of your Max HP",
       },
       {
         level: 40,
         name: "Step into Tomorrow",
-        description: "Can be used to grant Status for this StageCooldown: 2 Stages",
-        note: "This also affects other Abilities and can trigger Gift of Dawn, regardless of whether it is currently night",
+        description: "Can be used to grant Status for this StageCooldown: [[value]]2[[/]] Stages",
+        note: "This also affects other Abilities and can trigger [[ref]]Gift of Dawn[[/]], regardless of whether it is currently night",
       },
     ],
     flavor: "All blessings granted by daylight can be forged into armor of light, and at the end of the long night, dawn shall always come.",
@@ -3544,28 +3544,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Inject Frenzy",
-      description: "The artifact can be toggled on or off. While active, it applies Burn to yourself each second equal to 185% of your primary attribute, while granting 50% Burn Resistance. Whenever you take Burn Damage, the prevented portion is emitted as Burn to enemies within 600 radius.",
+      description: "The artifact can be toggled on or off. While active, it applies [[color:#ff9b4a]]Burn[[/]] to yourself each second equal to [[value]]185%[[/]] of your primary attribute, while granting [[value]]50%[[/]] [[color:#ff9b4a]]Burn Resistance[[/]]. Whenever you take [[color:#ff9b4a]]Burn Damage[[/]], the prevented portion is emitted as [[color:#ff9b4a]]Burn[[/]] to enemies within [[value]]600[[/]] radius.",
     },
     upgrades: [
       {
         level: 10,
         name: "Tier One Resistance",
-        description: "+10% Burn Resistance while Inject Frenzy is active",
+        description: "+[[value]]10%[[/]] [[color:#ff9b4a]]Burn Resistance[[/]] while [[ref]]Inject Frenzy[[/]] is active",
       },
       {
         level: 20,
         name: "Tier Two Resistance",
-        description: "Grants 30% Burn Resistance even while Inject Frenzy is inactive.",
+        description: "Grants [[value]]30%[[/]] [[color:#ff9b4a]]Burn Resistance[[/]] even while [[ref]]Inject Frenzy[[/]] is inactive.",
       },
       {
         level: 30,
         name: "Tier Three Resistance",
-        description: "Blocks Burn Damage equal to 2% of your Max Health.",
+        description: "Blocks [[color:#ff9b4a]]Burn Damage[[/]] equal to [[value]]2%[[/]] of your Max Health.",
       },
       {
         level: 40,
         name: "Devotion",
-        description: "The artifact can be activated a second time. All Burn applied to yourself and enemies is increased by 60%. Additionally, when your Burn Stacks exceeds 80% of your Max Health, gain an additional 25% Burn Resistance.",
+        description: "The artifact can be activated a second time. All Burn applied to yourself and enemies is increased by [[value]]60%[[/]]. Additionally, when your [[color:#ff9b4a]]Burn Stacks[[/]] exceeds [[value]]80%[[/]] of your Max Health, gain an additional [[value]]25%[[/]] [[color:#ff9b4a]]Burn Resistance[[/]].",
       },
     ],
     flavor: "Why did he set himself on fire? I don't know. Maybe for the cause he believed in.",
@@ -3608,28 +3608,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Frostmist",
-      description: "Enemies within 800 range have their MS reduced by 20% and their Magic Armor reduced by 18.",
+      description: "Enemies within [[value]]800[[/]] range have their MS reduced by [[value]]20%[[/]] and their Magic Armor reduced by [[value]]18[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Encasing Frost",
-        description: "Magic Armor reduction of Frostmist is increased by 0.3× against Frozen or Stunned enemies.",
+        description: "Magic Armor reduction of [[ref]]Frostmist[[/]] is increased by [[value]]0.3[[/]]× against Frozen or Stunned enemies.",
       },
       {
         level: 20,
         name: "Breath of Yulsaria",
-        description: "Enemies entering Frostmist are Frozen for 2 seconds, each target has a 20 seconds cooldown",
+        description: "Enemies entering [[ref]]Frostmist[[/]] are Frozen for [[value]]2[[/]] seconds, each target has a [[value]]20[[/]] seconds cooldown",
       },
       {
         level: 30,
         name: "Permafrost",
-        description: "For every 500 Max MP, Frostmist gains additional 1 Magic Armor reduction, up to a maximum of 30.",
+        description: "For every [[value]]500[[/]] Max MP, [[ref]]Frostmist[[/]] gains additional [[value]]1[[/]] Magic Armor reduction, up to a maximum of [[value]]30[[/]].",
       },
       {
         level: 40,
         name: "Great Frostseal",
-        description: "Can be toggled. While active, Frostmist radius increases by 400 and Magic Armor reduction increases to 40, consuming 5% MP per second.",
+        description: "Can be toggled. While active, [[ref]]Frostmist[[/]] radius increases by [[value]]400[[/]] and Magic Armor reduction increases to [[value]]40[[/]], consuming [[value]]5%[[/]] MP per second.",
       },
     ],
     flavor: "In an age now lost to time, the Frozen Witch Yulsaria ruled the whitelands, summoning blizzards and hail storms upon those who displeased her, while an army of ice golems roamed the lands to snuff out all warmth. In time, her southward expansion angered the Eldwurm Slyrak who, in his terrible rage, melted Yulsaria's armies with his endless flame before conquering the Frozen Witch herself. Now, centuries later, shifts in the ice have uncovered yet another shard of her empire: her frosty mantle.",
@@ -3668,28 +3668,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Scatter Reforge",
-      description: "Killing an enemy restores 8% HP and 3% MP, reduces the cooldown of a random Ability by 0.75 seconds.Effect is multiplied by 2 during Status.",
+      description: "Killing an enemy restores [[value]]8%[[/]] HP and [[value]]3%[[/]] MP, reduces the cooldown of a random Ability by [[value]]0.75[[/]] seconds.Effect is multiplied by [[value]]2[[/]] during Status.",
     },
     upgrades: [
       {
         level: 10,
         name: "Dark Vision",
-        description: "+500 night vision",
+        description: "+[[value]]500[[/]] night vision",
       },
       {
         level: 20,
         name: "Dark Harmony",
-        description: "During Status, gain +30% HP Regeneration and 10%",
+        description: "During Status, gain +[[value]]30%[[/]] HP Regeneration and [[value]]10%[[/]]",
       },
       {
         level: 30,
         name: "Night Crossing",
-        description: "For every 3 Stages ended at Status, gain random 1",
+        description: "For every [[value]]3[[/]] Stages ended at Status, gain random [[value]]1[[/]]",
       },
       {
         level: 40,
         name: "Night Reign",
-        description: "an be activated, usable 3 times per day, granting permanentStatus this game. Further uses require after reaching the daily limit.",
+        description: "an be activated, usable [[value]]3[[/]] times per day, granting permanentStatus this game. Further uses require after reaching the daily limit.",
         note: "This also affects other abilities, and the effect persists even if the artifact is removed.",
       },
     ],
@@ -3728,28 +3728,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Sea Return",
-      description: "Your next attack deals a 230% Critical Strike and cleaves enemies in a large area in front for 100% damage. While in Water Terrain, this attack gains 40% Armor Penetration.",
+      description: "Your next attack deals a [[value]]230%[[/]] Critical Strike and cleaves enemies in a large area in front for [[value]]100%[[/]] damage. While in Water Terrain, this attack gains [[value]]40%[[/]] Armor Penetration.",
     },
     upgrades: [
       {
         level: 10,
         name: "Dominance",
-        description: "-2 seconds Sea Return's cooldown",
+        description: "-[[value]]2[[/]] seconds [[ref]]Sea Return[[/]]'s cooldown",
       },
       {
         level: 20,
         name: "No Recall",
-        description: "Armor Penetration gained from Sea Return persists temporarily, decaying over 4 seconds.",
+        description: "Armor Penetration gained from [[ref]]Sea Return[[/]] persists temporarily, decaying over [[value]]4[[/]] seconds.",
       },
       {
         level: 30,
         name: "Calamity Shift",
-        description: "If under Water Terrain, No Recall applied to the primary target is propagated to enemies affected by the cleave prior to the cleave damage.",
+        description: "If under Water Terrain, [[ref]]No Recall[[/]] applied to the primary target is propagated to enemies affected by the cleave prior to the cleave damage.",
       },
       {
         level: 40,
         name: "Present Break",
-        description: "Sea Return creates a lingering slash line. After 1.5 seconds, enemies along the line are struck again for the same damage. This effect can hit the original target. Enemies within the slash path are Stalled while the effect persists.",
+        description: "[[ref]]Sea Return[[/]] creates a lingering slash line. After [[value]]1.5[[/]] seconds, enemies along the line are struck again for the same damage. This effect can hit the original target. Enemies within the slash path are Stalled while the effect persists.",
       },
     ],
     flavor: "If any blade could symbolize mastery over the ocean, it would be this one.",
@@ -3784,29 +3784,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Stoneskin",
-      description: "As solid as bedrock, -130 Movement Speed, but gain 40% physical damage reduction and immunity to physical damage below 100.",
+      description: "As solid as bedrock, -[[value]]130[[/]] Movement Speed, but gain [[value]]40%[[/]] physical damage reduction and immunity to physical damage below [[value]]100[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Earth Attunement",
-        description: "+25% model scale. For every 5% additional model scale, gain 1% Max HP",
+        description: "+[[value]]25%[[/]] model scale. For every [[value]]5%[[/]] additional model scale, gain [[value]]1%[[/]] Max HP",
       },
       {
         level: 20,
         name: "Highlands",
-        description: "+40% slow resistance",
+        description: "+[[value]]40%[[/]] slow resistance",
       },
       {
         level: 30,
         name: "Earth Stomp",
-        description: "Every 6s, deal damage equal to 10% of your Max HP to enemies within a 350 radius beneath you",
+        description: "Every [[value]]6[[/]]s, deal damage equal to [[value]]10%[[/]] of your Max HP to enemies within a [[value]]350[[/]] radius beneath you",
         note: "Damage is further increased based on your model scale",
       },
       {
         level: 40,
         name: "Assimilation",
-        description: "After Stoneskin takes effect, gain an additional 25% model scale. Stoneskin is replaced by , no longer reduces MS, and now can block 150 physical damage",
+        description: "After [[ref]]Stoneskin[[/]] takes effect, gain an additional [[value]]25%[[/]] model scale. [[ref]]Stoneskin[[/]] is replaced by , no longer reduces MS, and now can block [[value]]150[[/]] physical damage",
       },
     ],
     flavor: "You must understand—he is a myth. There has never been any proof, and it is not unreasonable to think it all a mess of foolish assumptions. So when the blasting slurry detonated ahead of schedule, shattering the supports, every crewman knew we were finished. The cavern groaned under its own weight; there was nowhere to go but down. Then the ground split. Jagged crystals burst from the fissures, rising toward the ceiling. We fled without shame—most with only minor wounds. I was the last to leave. And when I looked back… I will never forget that diamond-bright smile at the end of the tunnel, before the crystal faded and everything collapsed. No one else saw it, but… I know it was no illusion. He is still down there, somewhere. I know it. And while he remains, I will do all I can to repay him. — Report of a miner’s encounter with Tyre Gallem, from Planar Exiles",
@@ -3844,29 +3844,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Sanctuary",
-      description: "Gain (100 + Hero level × 30) .The shield is restored 40 seconds after it is broken.",
+      description: "Gain ([[value]]100[[/]] + Hero level × [[value]]30[[/]]) .The shield is restored [[value]]40[[/]] seconds after it is broken.",
     },
     upgrades: [
       {
         level: 10,
         name: "Undying",
-        description: "-10 seconds Sanctuary restoration time",
+        description: "-[[value]]10[[/]] seconds [[ref]]Sanctuary[[/]] restoration time",
       },
       {
         level: 20,
         name: "Dissent",
-        description: "Enemy deaths within a 1000 radius increase the current Sanctuary shield value by 10%",
-        note: "The shield value can be increased up to 300% of its initial value",
+        description: "Enemy deaths within a [[value]]1000[[/]] radius increase the current [[ref]]Sanctuary[[/]] shield value by [[value]]10%[[/]]",
+        note: "The shield value can be increased up to [[value]]300%[[/]] of its initial value",
       },
       {
         level: 30,
         name: "Guardian Soul",
-        description: "Once per Stage, block lethal damage and fully restore the Sanctuary shield",
+        description: "Once per Stage, block lethal damage and fully restore the [[ref]]Sanctuary[[/]] shield",
       },
       {
         level: 40,
         name: "Providence",
-        description: "Increase the Sanctuary shield value equal to (25% Max HP)/(25% Max MP)",
+        description: "Increase the [[ref]]Sanctuary[[/]] shield value equal to ([[value]]25%[[/]] Max HP)/([[value]]25%[[/]] Max MP)",
         note: "The higher value is applied",
       },
     ],
@@ -3910,7 +3910,7 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Poor Man's Rose",
-      description: "Plants a rose at the target location that continuously releases toxic fumes, reducing the Magic Armor of nearby enemies and dealing damage over time.Duration: 15 secondsRadius: 500Magic Armor Reduction: 25Damage per Second: [300% + 8% Max Mana]",
+      description: "Plants a rose at the target location that continuously releases toxic fumes, reducing the Magic Armor of nearby enemies and dealing damage over time.Duration: [[value]]15[[/]] secondsRadius: [[value]]500[[/]]Magic Armor Reduction: [[value]]25[[/]]Damage per Second: [[[value]]300%[[/]] + [[value]]8%[[/]] Max Mana]",
     },
     upgrades: [],
     flavor: "The Poor Man’s Rose is a low-cost miniature weapon of mass destruction. Cheap to produce and devastating in effect, it is beloved by petty dictators and desperate nations alike.",
@@ -3953,28 +3953,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Crimson Curse",
-      description: "+20% to all damageWhile in combat, gain 3 stacks of Crimson Decay per second. Killing an enemy removes 10 stacks. Death clears all stacks. Damage dealt per stack of Decay: 0.1%Extra damage taken per stack: 0.5%Maximum stacks: 300",
+      description: "+[[value]]20%[[/]] to all damageWhile in combat, gain [[value]]3[[/]] stacks of Crimson Decay per second. Killing an enemy removes [[value]]10[[/]] stacks. Death clears all stacks. [[color:#4f4f4f]]Damage dealt per stack of Decay: [[value]]0.1%[[/]]Extra damage taken per stack: [[value]]0.5%[[/]]Maximum stacks: [[value]]300[[/]][[/]]",
     },
     upgrades: [
       {
         level: 10,
         name: "Curse Resistance",
-        description: "-0.15% additional damage taken per stack of Crimson Curse",
+        description: "-[[value]]0.15%[[/]] [[color:#4f4f4f]]additional damage taken per stack of [[ref]]Crimson Curse[[/]][[/]]",
       },
       {
         level: 20,
         name: "Decaying Blossom",
-        description: "1 times per Stage, when you take lethal damage, if Crimson Curse stacks exceed 100, remove all stacks, block this damage, and restore HP to 50%",
+        description: "[[value]]1[[/]] times per Stage, when you take lethal damage, if [[ref]]Crimson Curse[[/]] stacks exceed [[value]]100[[/]], remove all stacks, block this damage, and restore HP to [[value]]50%[[/]]",
       },
       {
         level: 30,
         name: "Oath",
-        description: "When HP falls below 25%, restore 10% HP, and increase the maximum stacks of Crimson Curse by 50%, stacking independently for 120sCooldown 5s",
+        description: "When HP falls below [[value]]25%[[/]], restore [[value]]10%[[/]] HP, and increase the maximum stacks of [[ref]]Crimson Curse[[/]] by [[value]]50%[[/]], stacking independently for [[value]]120[[/]]sCooldown [[value]]5[[/]]s",
       },
       {
         level: 40,
         name: "Obsession",
-        description: "At the start of the Stage, gain 10 charges. Gain 1 Charge every 3 seconds. When you take damage, you may consume 1 Charge to negate the increased damage of Crimson Curse.",
+        description: "At the start of the Stage, gain [[value]]10[[/]] charges. Gain 1 Charge every [[value]]3[[/]] seconds. When you take damage, you may consume 1 Charge to negate the increased damage of [[ref]]Crimson Curse[[/]].",
       },
     ],
     flavor: "The Valkyries swore solemn oaths to oppose the spread of the God of Rot’s influence at any cost. The first true trial of their devotion was to draw the scarlet plague into their own bodies, wielding its unfathomable power to fight its very source.",
@@ -4015,28 +4015,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Overture",
-      description: "Odd-numbered attacks trigger , consuming 5% of your current HP and converting it into 150% bonus Attack Damage. Even-numbered attacks trigger , healing you for 20% of the attack's damage. When your HP is below 50%, both effects are amplified by 100%.Every 4 attack cycles, gain 1 stacks of Overture. The cycles required for each subsequent gain increase by 1.",
+      description: "Odd-numbered attacks trigger , consuming [[value]]5%[[/]] of your current HP and converting it into [[value]]150%[[/]] bonus Attack Damage. Even-numbered attacks trigger , healing you for [[value]]20%[[/]] of the attack's damage. When your HP is below [[value]]50%[[/]], both effects are amplified by [[value]]100%[[/]].Every [[value]]4[[/]] attack cycles, gain [[value]]1[[/]] stacks of [[ref]]Overture[[/]]. The cycles required for each subsequent gain increase by [[value]]1[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Interlude",
-        description: "+1% Attack Damage for every 3 stacks of Overture",
+        description: "+[[value]]1%[[/]] Attack Damage for every [[value]]3[[/]] stacks of [[ref]]Overture[[/]]",
       },
       {
         level: 20,
         name: "Main Theme",
-        description: "When Overture reaches 15 stacks, your base attack time is reduced by 0.1s",
+        description: "When [[ref]]Overture[[/]] reaches [[value]]15[[/]] stacks, your base attack time is reduced by [[value]]0.1[[/]]s",
       },
       {
         level: 30,
         name: "Variation",
-        description: "splatters blood, sending Blood Mark to nearby enemies. Hitting a marked enemy with transfers 1 stacks of to another nearby enemy and deals bonus damage equal to Blood Mark Stacks × 10% of your Attack Damage. stacks independently and lasts 7s",
+        description: "splatters blood, sending [[color:#ff3321]]Blood Mark[[/]] to nearby enemies. Hitting a marked enemy with transfers [[value]]1[[/]] stacks of to another nearby enemy and deals bonus damage equal to [[color:#ff3321]]Blood Mark Stacks[[/]] × [[value]]10%[[/]] of your Attack Damage. stacks independently and lasts [[value]]7[[/]]s",
       },
       {
         level: 40,
         name: "Finale",
-        description: "Taking lethal damage grants [Finale] for 3 seconds. During [Finale], you are immune to all damage, and attacks trigger both Amplifying Melodies. Once per stage.Fake Death can also trigger [Finale]. If already active, its duration is refreshed and extended. [Finale] can last up to 30 seconds per stage and cannot be extended while more than 6s remain",
+        description: "Taking lethal damage grants [Finale] for [[value]]3[[/]] seconds. During [Finale], you are immune to all damage, and attacks trigger both Amplifying Melodies. Once per stage.Fake Death can also trigger [Finale]. If already active, its duration is refreshed and extended. [Finale] can last up to [[value]]30[[/]] seconds per stage and cannot be extended while more than [[value]]6[[/]]s remain",
       },
     ],
     flavor: "A bloodstained saint who murdered the very god she worshipped. Kind, selfless, and pure, she was deceived by a false god’s lies—only to be condemned by another, more hypocritical deity. Punished for the crime of deicide, she was twisted into an inhuman abomination...",
@@ -4071,28 +4071,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Rebirth",
-      description: "2 available per Match, 5 available per day. Spend 1800 gold to revive a Hero.",
+      description: "[[value]]2[[/]] available per Match, [[value]]5[[/]] available per day. Spend [[value]]1800[[/]] gold to revive a Hero.",
     },
     upgrades: [
       {
         level: 10,
         name: "Restored State",
-        description: "Rebirth refreshes all Ability and item cooldowns of the target",
+        description: "[[ref]]Rebirth[[/]] refreshes all Ability and item cooldowns of the target",
       },
       {
         level: 20,
         name: "Blessing of Immortality",
-        description: "Rebirth grants the target 15 until death",
+        description: "[[ref]]Rebirth[[/]] grants the target [[value]]15[[/]] until death",
       },
       {
         level: 30,
         name: "Authority of the Highborn",
-        description: "Rebirth daily uses are increased to 10, and this Artifact no longer consumes Chrono Dust",
+        description: "[[ref]]Rebirth[[/]] daily uses are increased to [[value]]10[[/]], and this Artifact no longer consumes Chrono Dust",
       },
       {
         level: 40,
         name: "Grace of the Sacred King",
-        description: "The first 2 uses of Rebirth each day do not consume gold",
+        description: "The first [[value]]2[[/]] uses of [[ref]]Rebirth[[/]] each day do not consume gold",
       },
     ],
     flavor: "The scepter whispers a requiem of a forgotten dynasty. Once the supreme symbol of the Twin Thrones, its power does not grant life, but reverses the flow of the River of Death, dragging souls back to their bodies.",
@@ -4135,28 +4135,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Abyssal Idol",
-      description: "When you active Teleport/Blink-type Ability, release a fiery blast at the destination within a 400 radius, applying burning effect equal to (300 + 200% of Primary Attribute).",
+      description: "When you active Teleport/Blink-type Ability, release a fiery blast at the destination within a [[value]]400[[/]] radius, applying burning effect equal to ([[value]]300[[/]] + [[value]]200%[[/]] of Primary Attribute).",
     },
     upgrades: [
       {
         level: 10,
         name: "Abyssal Boon",
-        description: "+15% cast range for Teleport/Blink-type Abilities",
+        description: "+[[value]]15%[[/]] cast range for Teleport/Blink-type Abilities",
       },
       {
         level: 20,
         name: "Abyssal Swiftness",
-        description: "-15% cooldown for Teleport/Blink-type Abilities",
+        description: "-[[value]]15%[[/]] cooldown for Teleport/Blink-type Abilities",
       },
       {
         level: 30,
         name: "Abyssal Ember",
-        description: "Abyssal Idol leaves a burning zone on the ground for 4s, reducing burn damage decay by 65% within the area",
+        description: "[[ref]]Abyssal Idol[[/]] leaves a burning zone on the ground for [[value]]4[[/]]s, reducing burn damage decay by [[value]]65%[[/]] within the area",
       },
       {
         level: 40,
         name: "Abyssal Decay",
-        description: "Can be toggled. While active, Abyssal Ember duration is increased by 10s, and you are also afflicted with burning damage.This effect can be disabled at any time, otherwise it lasts until the end of the Stage. The Artifact is disabled for 1 Stages after this effect ends.",
+        description: "Can be toggled. While active, [[ref]]Abyssal Ember[[/]] duration is increased by [[value]]10[[/]]s, and you are also afflicted with burning damage.This effect can be disabled at any time, otherwise it lasts until the end of the Stage. The Artifact is disabled for [[value]]1[[/]] Stages after this effect ends.",
       },
     ],
     flavor: "When the winged serpent’s eyes glow yellow, the seal still holds. When that light fades, you would do well to run, pray, or beg, even though none of it will save you.",
@@ -4190,28 +4190,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Reverse",
-      description: "Your final healing effect is reduced by 40%. Additionally, each time you heal, an energy wave with a radius of 350 is triggered centered on your heal target, dealing 125% of that heal amount as damage.",
+      description: "Your final healing effect is reduced by [[value]]40%[[/]]. Additionally, each time you heal, an energy wave with a radius of [[value]]350[[/]] is triggered centered on your heal target, dealing [[value]]125%[[/]] of that heal amount as damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Never Die",
-        description: "The healing reduction imposed by Reverse is weakened on low-health targets.",
+        description: "The healing reduction imposed by [[ref]]Reverse[[/]] is weakened on low-health targets.",
       },
       {
         level: 20,
         name: "False Shield",
-        description: "While healing, generates equal to 20% of healing amount, lasting until the end of the stage, up to 150% of max HP.",
+        description: "While healing, generates equal to [[value]]20%[[/]] of healing amount, lasting until the end of the stage, up to [[value]]150%[[/]] of max HP.",
       },
       {
         level: 30,
         name: "Living Undeath",
-        description: "Can be used to reduce your HP to 1, preventing death for the next 6 seconds. Cooldown: 60 seconds. Triggers a Fake Death upon activation, which can be used to trigger certain death effects.",
+        description: "Can be used to reduce your HP to [[value]]1[[/]], preventing death for the next [[value]]6[[/]] seconds. Cooldown: [[value]]60[[/]] seconds. Triggers a Fake Death upon activation, which can be used to trigger certain death effects.",
       },
       {
         level: 40,
         name: "Undead March",
-        description: "Each time you heal, there is a chance based on the healing amount to trigger on the target hero. Base chance: 10%. Each trigger reduces the chance by half, stacking independently for 70s.",
+        description: "Each time you heal, there is a chance based on the healing amount to trigger on the target hero. Base chance: [[value]]10%[[/]]. Each trigger reduces the chance by half, stacking independently for [[value]]70[[/]]s.",
       },
     ],
     flavor: "A set meant for anyone trying to break reality's script. A former friend recalls the wearer as once being totally gentle. Chances are, the Abyss Sovereign's dirty work is behind it all.",
@@ -4248,28 +4248,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Hyper-Energy Blast",
-      description: "The next attack deals 150%damage to enemies in a line, and hit enemies take an additional 25% damage after 5 seconds.",
+      description: "The next attack deals [[value]]150%[[/]]damage to enemies in a line, and hit enemies take an additional [[value]]25%[[/]] damage after [[value]]5[[/]] seconds.",
     },
     upgrades: [
       {
         level: 10,
         name: "Precision Correction",
-        description: "For every 100 distance from you, deal additional 3% bonus damage.",
+        description: "For every [[value]]100[[/]] distance from you, deal additional [[value]]3%[[/]] bonus damage.",
       },
       {
         level: 20,
         name: "Shock Reset",
-        description: "Hyper-Energy Blast damage on the target permanently increases by 5% each time, up to 60%",
+        description: "[[ref]]Hyper-Energy Blast[[/]] damage on the target permanently increases by [[value]]5%[[/]] each time, up to [[value]]60%[[/]]",
       },
       {
         level: 30,
         name: "Light Strike",
-        description: "Each attack has a 10% chance to trigger the Hyper-Energy Blast effect",
+        description: "Each attack has a [[value]]10%[[/]] chance to trigger the [[ref]]Hyper-Energy Blast[[/]] effect",
       },
       {
         level: 40,
         name: "Overload",
-        description: "Can be activated, reducing Hyper-Energy Blast cooldown by 40%, increasing Light Strike trigger chance by 15%, but the generated rays have divergence",
+        description: "Can be activated, reducing [[ref]]Hyper-Energy Blast[[/]] cooldown by [[value]]40%[[/]], increasing [[ref]]Light Strike[[/]] trigger chance by [[value]]15%[[/]], but the generated rays have divergence",
       },
     ],
     flavor: "An energy weapon crafted from the ore of Thunder Mountain. Its pitch-black barrel possesses APEX energy conductivity, allowing energy to be output and radiated with almost no loss. The creator is unknown; it is said to be a deity, but there is no evidence to substantiate this—perhaps it is merely the self-deception of those dwarf craftsmen...",
@@ -4299,7 +4299,7 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Tyranny",
-      description: "For every 1 Stage carried, provides an additional 4 Primary Attributes bonus.",
+      description: "For every [[value]]1[[/]] Stage carried, provides an additional [[value]]4[[/]] Primary Attributes bonus.",
     },
     upgrades: [
       {
@@ -4310,18 +4310,18 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 20,
         name: "Eternal Reign",
-        description: "Even after removing the Artifact, retains 50% of the bonus from Tyranny",
+        description: "Even after removing the Artifact, retains [[value]]50%[[/]] of the bonus from [[ref]]Tyranny[[/]]",
       },
       {
         level: 30,
         name: "Sovereign’s Rule",
-        description: "The secondary bonuses granted by each point of your Primary Attribute are increased by 30%",
+        description: "The secondary bonuses granted by each point of your Primary Attribute are increased by [[value]]30%[[/]]",
         note: "Does not grant Spell Amplification",
       },
       {
         level: 40,
         name: "Soothe Obsession",
-        description: "Can be used, each time consuming 2000 gold to permanently gain secondary bonus from 5% Primary Attributes, after reaching 5 times it is no longer affected by Tyranny, and can be removed/used at any times.",
+        description: "Can be used, each time consuming [[value]]2000[[/]] gold to permanently gain secondary bonus from [[value]]5%[[/]] Primary Attributes, after reaching [[value]]5[[/]] times it is no longer affected by [[ref]]Tyranny[[/]], and can be removed/used at any times.",
       },
     ],
     flavor: "The Hidden Church's collection is truly diverse... they even managed to acquire the mantle of a former tyrant king. Although that tyrant has vanished into the river of history, his former subjects would never allow 'commoners' to touch their king's belongings. But the Hidden Church cares not for such things; these items all flow into their black market.",
@@ -4352,28 +4352,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Voiceless Glimmer",
-      description: "This Artifact can be toggled, forcing you into silence. While active, it deals damage equal to 8% of your maximum mana each second to enemies within 700 range. Once activated, it cannot be deactivated for 15 seconds unless you die.",
+      description: "This Artifact can be toggled, forcing you into silence. While active, it deals damage equal to [[value]]8%[[/]] of your maximum mana each second to enemies within [[value]]700[[/]] range. Once activated, it cannot be deactivated for [[value]]15[[/]] seconds unless you die.",
     },
     upgrades: [
       {
         level: 10,
         name: "Farsighted Gaze",
-        description: "Increases the radius of Voiceless Glimmer to 20% of your vision range",
+        description: "Increases the radius of [[ref]]Voiceless Glimmer[[/]] to [[value]]20%[[/]] of your vision range",
       },
       {
         level: 20,
         name: "Nearsighted Gaze",
-        description: "Voiceless Glimmer deals 40% increased damage to the target you are attacking",
+        description: "[[ref]]Voiceless Glimmer[[/]] deals [[value]]40%[[/]] increased damage to the target you are attacking",
       },
       {
         level: 30,
         name: "Fleeting Glimpse",
-        description: "Upon entering a stage, gain 1500 vision range. This bonus decays over time",
+        description: "Upon entering a stage, gain [[value]]1500[[/]] vision range. This bonus decays over time",
       },
       {
         level: 40,
         name: "Insight",
-        description: "Voiceless Glimmer additionally affects the 2 lowest-health enemies within your vision range, treating them as targets of Nearsighted Gaze. If these targets are also within its normal radius, they are hit multiple times.",
+        description: "[[ref]]Voiceless Glimmer[[/]] additionally affects the [[value]]2[[/]] lowest-health enemies within your vision range, treating them as targets of [[ref]]Nearsighted Gaze[[/]]. If these targets are also within its normal radius, they are hit multiple times.",
       },
     ],
     flavor: "Silence does not mean having nothing to say; sometimes, silence itself speaks with deafening force.",
@@ -4412,28 +4412,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Void Return",
-      description: "Every 10 seconds, deals damage equal to 25% of your highest single Ability damage in this Stage to up to 2 enemies within 900 radius.",
+      description: "Every [[value]]10[[/]] seconds, deals damage equal to [[value]]25%[[/]] of your highest single Ability damage in this Stage to up to [[value]]2[[/]] enemies within [[value]]900[[/]] radius.",
     },
     upgrades: [
       {
         level: 10,
         name: "Void Penetration",
-        description: "Void Return damage ignores 25% Armor/Magic Armor Reduction",
+        description: "[[ref]]Void Return[[/]] damage ignores [[value]]25%[[/]] Armor/Magic Armor Reduction",
       },
       {
         level: 20,
         name: "Void Annihilation",
-        description: "Void Return deals 50% splash damage within 260 radius",
+        description: "[[ref]]Void Return[[/]] deals [[value]]50%[[/]] splash damage within [[value]]260[[/]] radius",
       },
       {
         level: 30,
         name: "Void Creation",
-        description: "Once per Stage, this Artifact can be used to create a Void Anchor at a targeted location. Every 15 seconds, it applies Void Return to the nearest 1 visible enemies within 1800 range.",
+        description: "Once per Stage, this Artifact can be used to create a Void Anchor at a targeted location. Every [[value]]15[[/]] seconds, it applies [[ref]]Void Return[[/]] to the nearest [[value]]1[[/]] visible enemies within [[value]]1800[[/]] range.",
       },
       {
         level: 40,
         name: "Void Fusion",
-        description: "Void Return gains cooldown reduction equal to 40% of the last trigger’s source Ability cooldown reduction.",
+        description: "[[ref]]Void Return[[/]] gains cooldown reduction equal to [[value]]40%[[/]] of the last trigger’s source Ability cooldown reduction.",
       },
     ],
     flavor: "Void Shard is a substance formed from aether, lacking a fixed form and influenced by the user's characteristics; depending on the user, it exhibits entirely different properties. In this regard, this weapon has not fully utilized the advantages of Void Shard. Nevertheless, the creator of this weapon is a rare forge master, so this fixed property has been maximized.",
@@ -4475,30 +4475,30 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Abyssal Maw",
-      description: "Attacks slow the target's MS by 30% and reduce Armor by 8 for 4 seconds. While in Water Terrain, this Artifact grants 100% bonus Melee Attack Range.",
+      description: "Attacks slow the target's MS by [[value]]30%[[/]] and reduce Armor by [[value]]8[[/]] for [[value]]4[[/]] seconds. While in Water Terrain, this Artifact grants [[value]]100%[[/]] bonus [[color:#61a5fe]]Melee Attack Range[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Tidal Erosion",
-        description: "Grants 3 seconds Abyssal Maw duration. Armor reduction increases by 1 /2 seconds, up to 10.",
+        description: "Grants [[value]]3[[/]] seconds [[ref]]Abyssal Maw[[/]] duration. Armor reduction increases by [[value]]1[[/]] /[[value]]2[[/]] seconds, up to [[value]]10[[/]].",
       },
       {
         level: 20,
         name: "Abyssal Prison",
-        description: "The first attack against an enemy grants 10 seconds to Abyssal Maw debuff duration and creates a water sphere that traps the target, preventing movement for 3 seconds. If the target dies while trapped, you gain for 15 sceconds.",
+        description: "The first attack against an enemy grants [[value]]10[[/]] seconds to [[ref]]Abyssal Maw[[/]] debuff duration and creates a water sphere that traps the target, preventing movement for [[value]]3[[/]] seconds. If the target dies while trapped, you gain for [[value]]15[[/]] sceconds.",
       },
       {
         level: 30,
         name: "Tidal Dominion",
-        description: "While in , attacking enemies affected by Abyssal Maw shares 20% of the damage dealt with other enemies with the same debuff.",
-        note: "This shared damage is applied once every 1 seconds.",
+        description: "While in , attacking enemies affected by [[ref]]Abyssal Maw[[/]] shares [[value]]20%[[/]] of the damage dealt with other enemies with the same debuff.",
+        note: "This shared damage is applied once every [[value]]1[[/]] seconds.",
       },
       {
         level: 40,
         name: "Abyssal Descent",
-        description: "2 times per day. Activate to assume a massive sea monster form. In this form:· +50% Max HP, +30% Base Strength and Base Agility· Your attacks are always melee and deal 50% splash damage within 300 range· Intelligence reduced by 50%· No other transformations allowed· Leaving disables bonuses for 15 seconds",
-        note: "Base Attack Range is set to 250. Removing this Artifact also removes this effect.",
+        description: "[[value]]2[[/]] times per day. Activate to assume a massive sea monster form. In this form:· +[[value]]50%[[/]] Max HP, +[[value]]30%[[/]] Base Strength and Base Agility· Your attacks are always melee and deal [[value]]50%[[/]] splash damage within [[value]]300[[/]] range[[color:#fe6161]]· Intelligence reduced by [[value]]50%[[/]]· No other transformations allowed· Leaving disables bonuses for [[value]]15[[/]] seconds[[/]]",
+        note: "Base Attack Range is set to [[value]]250[[/]]. Removing this Artifact also removes this effect.",
       },
     ],
     flavor: "Your soul is but a single droplet within the boundless ocean of my power. Offer it willingly, be reborn within the abyssal vortex, and let your enemies find their doom therein.",
@@ -4541,28 +4541,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Blighttouch Parasite",
-      description: "Enemies you afflict with Poison are marked by a Parasite. If a marked enemy maintains the highest Poison stacks for 3s, the Parasite awakens, pulling up to 4 marked enemies within 400 toward it.Affected enemies gain for 3s, slowing movement by 20% and Poison Decay by 15%, and activating Poison once. Secondary targets consume no Poison Stacks and use the primary target's stack count.Activation Ratio: 5%Activation Damage: 1200%",
+      description: "Enemies you afflict with [[color:#98f698]]Poison[[/]] are marked by a Parasite. If a marked enemy maintains the highest [[color:#98f698]]Poison[[/]] stacks for [[value]]3[[/]]s, the Parasite awakens, pulling up to [[value]]4[[/]] marked enemies within [[value]]400[[/]] toward it.Affected enemies gain for [[value]]3[[/]]s, slowing movement by [[value]]20%[[/]] and [[color:#98f698]]Poison Decay[[/]] by [[value]]15%[[/]], and activating [[color:#98f698]]Poison[[/]] once. Secondary targets consume no [[color:#98f698]]Poison Stacks[[/]] and use the primary target's stack count.Activation Ratio: [[value]]5%[[/]]Activation Damage: [[value]]1200%[[/]]",
     },
     upgrades: [
       {
         level: 10,
         name: "Deep Roots",
-        description: "Entangled secondary targets transfer 5% of their Poison stacks to the primary target",
+        description: "Entangled secondary targets transfer [[value]]5%[[/]] of their [[color:#98f698]]Poison[[/]] stacks to the primary target",
       },
       {
         level: 20,
         name: "Twisted Knots",
-        description: "Tentacles bounce from secondary targets at an angle 1 times",
+        description: "Tentacles bounce from secondary targets at an angle [[value]]1[[/]] times",
       },
       {
         level: 30,
         name: "Strangulation",
-        description: "While lasts, activates Poison every 1s.Activation Ratio: 2%Activation Damage: 700%",
+        description: "While lasts, activates [[color:#98f698]]Poison[[/]] every [[value]]1[[/]]s.Activation Ratio: [[value]]2%[[/]]Activation Damage: [[value]]700%[[/]]",
       },
       {
         level: 40,
         name: "Breeding Ground",
-        description: "When the primary target dies, 30% of its remaining Poison stacks are distributed among entangled targets",
+        description: "When the primary target dies, [[value]]30%[[/]] of its remaining [[color:#98f698]]Poison[[/]] stacks are distributed among entangled targets",
       },
     ],
     flavor: "That fell venom shall not merely abide within the flesh. It shall take root and blossom, seeking out the soul most grievously corrupted, and drawing all other wretches into the very heart of decay.",
@@ -4605,28 +4605,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Blood Barrier",
-      description: "When HP is above 90%, excess blood is stored. When HP falls below 50%, stored blood is consumed to restore HP. Can store up to 500% of Max HP as blood. Resets at the start of each Stage.",
+      description: "When HP is above [[value]]90%[[/]], excess blood is stored. When HP falls below [[value]]50%[[/]], stored blood is consumed to restore HP. Can store up to [[value]]500%[[/]] of Max HP as blood. Resets at the start of each Stage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Blood Cushion",
-        description: "For every 100% of Max HP stored as blood, gain 3 Armor",
+        description: "For every [[value]]100%[[/]] of Max HP stored as blood, gain [[value]]3[[/]] Armor",
       },
       {
         level: 20,
         name: "Autonomous Assault",
-        description: "For every 100% of Max HP stored as blood, gain 1 Autonomous Assault. Each attacks once every 7 seconds, dealing 3% of current stored blood as damage.",
+        description: "For every [[value]]100%[[/]] of Max HP stored as blood, gain 1 [[ref]]Autonomous Assault[[/]]. Each attacks once every [[value]]7[[/]] seconds, dealing [[value]]3%[[/]] of current stored blood as damage.",
       },
       {
         level: 30,
         name: "Blood Compression",
-        description: "Max storage increased to 1000%, and at the start of a Stage, grants blood equal to 40% Max HP",
+        description: "Max storage increased to [[value]]1000%[[/]], and at the start of a Stage, grants blood equal to [[value]]40%[[/]] Max HP",
       },
       {
         level: 40,
         name: "Pure Bloodbound",
-        description: "Reduces 30% cost when Blood Barrier restores life. Each time blood is consumed, reduce the attack cooldown of all Autonomous Assault by 0.5 seconds, but attacks have a minimum cooldown of 1.5 seconds.",
+        description: "Reduces [[value]]30%[[/]] cost when [[ref]]Blood Barrier[[/]] restores life. Each time blood is consumed, reduce the attack cooldown of all [[ref]]Autonomous Assault[[/]] by [[value]]0.5[[/]] seconds, but attacks have a minimum cooldown of [[value]]1.5[[/]] seconds.",
       },
     ],
     flavor: "An artificial symbiote derived from a demonic core. Through an intricate process of arcane manipulation and bio-engineering, the Grand Archive’s Biotics Division succeeded in creating a symbiotic slime core, allowing a host creature to bond with it and generate endoplasm and an exoskeletal layer, protecting both the slime and its core from harm.",
@@ -4669,30 +4669,30 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Cosmic Warden",
-      description: "Summon the Guardian, which possesses various special abilities. Until the wielder reaches level 17, this Artifact provides only 40% of its base bonuses, and the Guardian's attributes are reduced to 35% as well.",
+      description: "Summon the Guardian, which possesses various special abilities. Until the wielder reaches level [[value]]17[[/]], this Artifact provides only [[value]]40%[[/]] of its base bonuses, and the Guardian's attributes are reduced to [[value]]35%[[/]] as well.",
     },
     upgrades: [
       {
         level: 10,
         name: "Immortal Ascension",
-        description: "Each time the Warden dies, its attributes are increased by 10%, up to 10 times.",
+        description: "Each time the Warden dies, its attributes are increased by [[value]]10%[[/]], up to [[value]]10[[/]] times.",
       },
       {
         level: 20,
         name: "Cosmic Reversal",
-        description: "The respawn time of Cosmic Warden is reduced to 13s. The first death in each stage will respawn with no delay",
+        description: "The respawn time of [[ref]]Cosmic Warden[[/]] is reduced to [[value]]13[[/]]s. The first death in each stage will respawn with no delay",
       },
       {
         level: 30,
         name: "Interstellar Voyage",
-        description: "After taking damage equal to 10% of its max HP, the Guardian reverts to its state 3s prior, dealing 15% of max HP as damage to enemies in range. Each time it recovers 60% of max HP by this effect, it counts as Immortal Ascension once",
-        note: "Has a trigger interval of 5s",
+        description: "After taking damage equal to [[value]]10%[[/]] of its max HP, the Guardian reverts to its state [[value]]3[[/]]s prior, dealing [[value]]15%[[/]] of max HP as damage to enemies in range. Each time it recovers [[value]]60%[[/]] of max HP by this effect, it counts as [[ref]]Immortal Ascension[[/]] once",
+        note: "Has a trigger interval of [[value]]5[[/]]s",
       },
       {
         level: 40,
         name: "Cosmic Mystery",
-        description: "After Immortal Ascension reaches its cap, it can continue to gain attribute bonuses, but each subsequent bonus gain is reduced to 4%.",
-        note: "Max Bonus: 100%",
+        description: "After [[ref]]Immortal Ascension[[/]] reaches its cap, it can continue to gain attribute bonuses, but each subsequent bonus gain is reduced to [[value]]4%[[/]].",
+        note: "Max Bonus: [[value]]100%[[/]]",
       },
     ],
     flavor: "For centuries, stargazers have been trying to explore the mysteries of the cosmos, and astrological research has also made rapid progress. During a routine assignment, a student at the Calatos Observatory spotted a strange creature. It looked like Roshan, but it could move freely through space.",
@@ -4732,28 +4732,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Blood Price",
-      description: "3% of the spell damage you deal is converted into Negative Energy, stacking independently for 15 seconds. When your HP/MP falls below 70%, you can use Negative Energy to restore.",
+      description: "[[value]]3%[[/]] of the spell damage you deal is converted into Negative Energy, stacking independently for [[value]]15[[/]] seconds. When your HP/MP falls below [[value]]70%[[/]], you can use Negative Energy to restore.",
     },
     upgrades: [
       {
         level: 10,
         name: "Blood Hunt",
-        description: "Converts an additional 30% Negative Energy when dealing damage to enemies with HP above 80%",
+        description: "Converts an additional [[value]]30%[[/]] Negative Energy when dealing damage to enemies with HP above [[value]]80%[[/]]",
       },
       {
         level: 20,
         name: "Essence Conversion",
-        description: "When Negative Energy decays naturally, each point restores 0.25 HP/MP",
+        description: "When Negative Energy decays naturally, each point restores [[value]]0.25[[/]] HP/MP",
       },
       {
         level: 30,
         name: "Negative Energy Release",
-        description: "Locks onto up to 3 enemies within 1000 range, dealing 10% of accumulated Negative Energy as damage per second to them.",
+        description: "Locks onto up to [[value]]3[[/]] enemies within [[value]]1000[[/]] range, dealing [[value]]10%[[/]] of accumulated Negative Energy as damage per second to them.",
       },
       {
         level: 40,
         name: "Primordial Blood",
-        description: "Negative Energy does not expire, but for portions exceeding × 30 , it decays by 8% per second",
+        description: "Negative Energy does not expire, but for portions exceeding × [[value]]30[[/]] , it decays by [[value]]8%[[/]] per second",
       },
     ],
     flavor: "A lingering stream of negative energy flows within this robe. Whenever powerful magic is channeled through it, the robe expels this energy in the form of dark smoke with scarlet veins.",
@@ -4793,30 +4793,30 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Darkmoon Shackles",
-      description: "Manifest two arms that grasp enemies within a 1100 radius. Slows Movement Speed by 40 and deals 180 + 150% of your damage per second.",
+      description: "Manifest two arms that grasp enemies within a [[value]]1100[[/]] radius. Slows Movement Speed by [[value]]40[[/]] and deals [[value]]180[[/]] + [[value]]150%[[/]] of your damage per second.",
     },
     upgrades: [
       {
         level: 10,
         name: "Eclipsing Breath",
-        description: "Darkmoon Shackles gains 12% bonus damage per 1 seconds, up to 60%. This bonus resets when switching targets.",
+        description: "[[ref]]Darkmoon Shackles[[/]] gains [[value]]12%[[/]] bonus damage per [[value]]1[[/]] seconds, up to [[value]]60%[[/]]. This bonus resets when switching targets.",
       },
       {
         level: 20,
         name: "Moonshadow Spread",
-        description: "Darkmoon Shackles radius is increased by an amount equal to 100%",
+        description: "[[ref]]Darkmoon Shackles[[/]] radius is increased by an amount equal to [[value]]100%[[/]]",
       },
       {
         level: 30,
         name: "Lunar Resonance",
-        description: "Each Ability cast triggers Darkmoon Shackles, causing the arms to immediately deal 3 seconds worth of damage to grasp targets",
-        note: "The cooldown applied by the triggering Ability cannot be reduced below 1 seconds",
+        description: "Each Ability cast triggers [[ref]]Darkmoon Shackles[[/]], causing the arms to immediately deal [[value]]3[[/]] seconds worth of damage to grasp targets",
+        note: "The cooldown applied by the triggering Ability cannot be reduced below [[value]]1[[/]] seconds",
       },
       {
         level: 40,
         name: "Lunar Crossing",
-        description: "Darkmoon Shackles arms can now grasp the same target. Casting a single-target Ability creates 1 additional arm acting on the target.Duration: (4 + 75% of the Ability's base cooldown)",
-        note: "A single target can be grasped by up to 5 additional arms, and the slow effect does not stack.",
+        description: "[[ref]]Darkmoon Shackles[[/]] arms can now grasp the same target. Casting a single-target Ability creates 1 additional arm acting on the target.Duration: ([[value]]4[[/]] + [[value]]75%[[/]] of the Ability's base cooldown)",
+        note: "A single target can be grasped by up to [[value]]5[[/]] additional arms, and the slow effect does not stack.",
       },
     ],
     flavor: "An extra pair of arms can be incredibly useful—unfortunately, they are terribly bad at hugging or shaking hands, unless you happen to enjoy the sensation of a thousand ice cubes slowly sliding down your spine.",
@@ -4850,28 +4850,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "The First Tome: Time Lockdown",
-      description: "Has a 30 second quota. After each cast, the Ability's remaining cooldown is instantly reduced by 40%, and 175% of this portion is transferred for the Artifact to bear instead.",
+      description: "Has a [[value]]30[[/]] second quota. After each cast, the Ability's remaining cooldown is instantly reduced by [[value]]40%[[/]], and [[value]]175%[[/]] of this portion is transferred for the Artifact to bear instead.",
     },
     upgrades: [
       {
         level: 10,
         name: "The Second Tome: Sacred Echo",
-        description: "The more cooldown The First Tome: Time Lockdown bears, the faster its cooldown speed, up to 25% faster",
+        description: "The more cooldown [[ref]]The First Tome: Time Lockdown[[/]] bears, the faster its cooldown speed, up to [[value]]25%[[/]] faster",
       },
       {
         level: 20,
         name: "The Third Tome: Endless Path",
-        description: "+5s The First Tome: Time Lockdown duration. Restores 75% mana per ability cooldown completed.",
+        description: "+[[value]]5[[/]]s [[ref]]The First Tome: Time Lockdown[[/]] duration. Restores [[value]]75%[[/]] mana per ability cooldown completed.",
       },
       {
         level: 30,
         name: "The Fourth Tome: Eternal Flame Wings",
-        description: "+5 seconds to The First Tome: Time Lockdown duration. 1 times per stage, when taking fatal damage, fully restores HP and mana.",
+        description: "+[[value]]5[[/]] seconds to [[ref]]The First Tome: Time Lockdown[[/]] duration. [[value]]1[[/]] times per stage, when taking fatal damage, fully restores HP and mana.",
       },
       {
         level: 40,
         name: "The Fifth Tome: Perfect Casting",
-        description: "When The First Tome: Time Lockdown is off cooldown, +20% area radius. Otherwise, +20% spell amplification.",
+        description: "When [[ref]]The First Tome: Time Lockdown[[/]] is off cooldown, +[[value]]20%[[/]] area radius. Otherwise, +[[value]]20%[[/]] spell amplification.",
       },
     ],
     flavor: "This is a spear and also a special key, possessing a unique ability to open a small spiritual gate, allowing the wielder to temporarily summon a tome from a designated area of the Hall of Enlightenment. These tomes contain powerful sacred magic, capable of manifesting the essence of the knowledge or stories they carry. This manifestation may be a blessing applied to the wielder or a magical phenomenon affecting the surrounding area.",
@@ -4905,28 +4905,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Dreamweaving",
-      description: "Creates a following dream illusion that attacks every 2.5 seconds, dealing 160% damage. The illusion is disabled while you are silenced or banished.",
+      description: "Creates a following dream illusion that attacks every [[value]]2.5[[/]] seconds, dealing [[value]]160%[[/]] damage. The illusion is disabled while you are silenced or banished.",
     },
     upgrades: [
       {
         level: 10,
         name: "Lost Domain",
-        description: "The illusion’s attacks reduce 3 Magic Armor, stacking independently for 20 seconds",
+        description: "The illusion’s attacks reduce [[value]]3[[/]] Magic Armor, stacking independently for [[value]]20[[/]] seconds",
       },
       {
         level: 20,
         name: "Sharp Sense",
-        description: "Attacks and casts have a 20/100% chance to command the illusion to attack",
+        description: "Attacks and casts have a [[value]]20[[/]]/[[value]]100%[[/]] chance to command the illusion to attack",
       },
       {
         level: 30,
         name: "Dual Dream",
-        description: "Creates No.2 illusion",
+        description: "Creates No.[[value]]2[[/]] illusion",
       },
       {
         level: 40,
         name: "Fallen Dreamscape",
-        description: "While you are silenced or banished, the illusion no longer disappears and now creates 2 additional illusions.",
+        description: "While you are silenced or banished, the illusion no longer disappears and now creates [[value]]2[[/]] additional illusions.",
       },
     ],
     flavor: "From the bow comes a deeper chill and drowsiness—the echo of sinking into the dream realm.",
@@ -4968,28 +4968,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Realm Breaker",
-      description: "Your attack speed is reduced by 60%, but your attack damage is increased by 35%. Additionally, each attack emits a field that deals 75% split damage to up to 3 nearby enemies.",
+      description: "Your attack speed is reduced by [[value]]60%[[/]], but your attack damage is increased by [[value]]35%[[/]]. Additionally, each attack emits a field that deals [[value]]75%[[/]] split damage to up to [[value]]3[[/]] nearby enemies.",
     },
     upgrades: [
       {
         level: 10,
         name: "Wex Strike",
-        description: "Every 6 seconds, increase your next attack damage by 50%.",
+        description: "Every [[value]]6[[/]] seconds, increase your next attack damage by [[value]]50%[[/]].",
       },
       {
         level: 20,
         name: "Truth",
-        description: "Wex Strike increases Realm Breaker radius by 200 and splits all enemies.",
+        description: "[[ref]]Wex Strike[[/]] increases [[ref]]Realm Breaker[[/]] radius by [[value]]200[[/]] and splits all enemies.",
       },
       {
         level: 30,
         name: "Loyalty",
-        description: "Wex Strike is modified by base . For every 25 Strength, your attacks have a 1% chance to trigger its effect.",
+        description: "[[ref]]Wex Strike[[/]] is modified by base . For every [[value]]25[[/]] Strength, your attacks have a [[value]]1%[[/]] chance to trigger its effect.",
       },
       {
         level: 40,
         name: "Millennial Glory",
-        description: "Forged through countless battles, this war hammer grows stronger over time. For every 10 bosses killed, the damage bonus of Wex Strike permanently increases by 1%(+). Stacks up to 260%.",
+        description: "Forged through countless battles, this war hammer grows stronger over time. For every [[value]]10[[/]] bosses killed, the damage bonus of [[ref]]Wex Strike[[/]] permanently increases by [[value]]1%[[/]](+). Stacks up to [[value]]260%[[/]].",
       },
     ],
     flavor: "A product of technology at its peak. It stands as a symbol of loyalty made real.",
@@ -5024,28 +5024,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Terrain Reshape",
-      description: "Passively creates an earthquake zone within 500 range. This zone slowly moves toward enemy areas at 200 units per second. Every second, it deals damage to enemies inside equal to 14% of their max mana and slows their movement speed by 30%.",
+      description: "Passively creates an earthquake zone within [[value]]500[[/]] range. This zone slowly moves toward enemy areas at [[value]]200[[/]] units per second. Every second, it deals damage to enemies inside equal to [[value]]14%[[/]] of their max mana and slows their movement speed by [[value]]30%[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Gravity Tweak",
-        description: "Each time you cast a spell, the earthquake zone becomes harder to move through. Movement slow increases by an additional 5%, stacking independently for 8 seconds, up to 20%.",
+        description: "Each time you cast a spell, the earthquake zone becomes harder to move through. Movement slow increases by an additional [[value]]5%[[/]], stacking independently for [[value]]8[[/]] seconds, up to [[value]]20%[[/]].",
       },
       {
         level: 20,
         name: "Gravity",
-        description: "Movement slow of Terrain Reshape lingers for an extra 4 seconds. When enemies are outside the zone, gravity pulls them in at 150 units per second.",
+        description: "Movement slow of Terrain Reshape lingers for an extra [[value]]4[[/]] seconds. When enemies are outside the zone, gravity pulls them in at [[value]]150[[/]] units per second.",
       },
       {
         level: 30,
         name: "Companion Star",
-        description: "Creates a companion star that orbits you in an ellipse. Used for gravity effects, it can pull in enemies within 500 range. When it gets near an earthquake zone, it triggers a much stronger quake, increasing that zone's damage by up to 100%.",
+        description: "Creates a companion star that orbits you in an ellipse. Used for gravity effects, it can pull in enemies within [[value]]500[[/]] range. When it gets near an earthquake zone, it triggers a much stronger quake, increasing that zone's damage by up to [[value]]100%[[/]].",
       },
       {
         level: 40,
         name: "Astral Grip",
-        description: "Consumes 5% of max mana per trigger and the companion star gets a 50 pull speed toward the quake's core. Independent stack, lasts 10 seconds. Keep the star within 100 of the center and the quake zone grows by 300%. Also, the longer hold that position, the harder the quake hits.",
+        description: "Consumes [[value]]5[[/]]% of max mana per trigger and the companion star gets a [[value]]50[[/]] pull speed toward the quake's core. Independent stack, lasts [[value]]10[[/]] seconds. Keep the star within [[value]]100[[/]] of the center and the quake zone grows by [[value]]300[[/]]%. Also, the longer hold that position, the harder the quake hits.",
       },
     ],
     flavor: "A massive sickle forged from the horn of a Moonhorn. Every few decades, the Moonhorn's horn naturally sheds to allow a larger new horn to grow. For generations, local residents have collected these horns to Forge sacred weapons and present them to heroes.",
@@ -5087,28 +5087,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Wrath of Strife",
-      description: "Reduces 35% of frontal physical damage taken from close range. After the total mitigated damage reaches [400 + 20% of your Max HP], petrifies enemies in front of you for 3.5 seconds and increase the Physical Damage they take by 70%.",
+      description: "Reduces [[value]]35%[[/]] of frontal physical damage taken from close range. After the total mitigated damage reaches [[color:#f0ad4e]][[[value]]400[[/]] + [[value]]20%[[/]] of your Max HP][[/]], petrifies enemies in front of you for [[value]]3.5[[/]] seconds and increase the Physical Damage they take by [[value]]70%[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Hypocrisy",
-        description: "+100 petrification width and +300 length",
+        description: "+[[value]]100[[/]] petrification width and +[[value]]300[[/]] length",
       },
       {
         level: 20,
         name: "Face Off",
-        description: "Increases the angle considered as frontal by 20. Also affects judgment for other abilities.",
+        description: "Increases the angle considered as frontal by [[value]]20[[/]]. Also affects judgment for other abilities.",
       },
       {
         level: 30,
         name: "Divine Retribution",
-        description: "After Wrath of Strife petrifies enemies, apply a 260% Critical Strike. This attack gains 160% bonus Attack Damage.",
+        description: "After [[ref]]Wrath of Strife[[/]] petrifies enemies, apply a [[value]]260%[[/]] Critical Strike. This attack gains [[value]]160%[[/]] bonus Attack Damage.",
       },
       {
         level: 40,
         name: "Trial",
-        description: "Attacking enemies within the affected area of Wrath of Strife also triggers its effect. Cooldown: 15 seconds.",
+        description: "Attacking enemies within the affected area of [[ref]]Wrath of Strife[[/]] also triggers its effect. Cooldown: [[value]]15[[/]] seconds.",
       },
     ],
     flavor: "Trust not in the mercy of gods, for many find it more fearsome than mortal spite.",
@@ -5137,18 +5137,18 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Godslayer",
-      description: "+20 Attack Armor Reduction",
+      description: "+[[value]]20[[/]] Attack Armor Reduction",
     },
     upgrades: [
       {
         level: 10,
         name: "Inevitable",
-        description: "The first attack against an enemy gains an additional 350 Attack Damage",
+        description: "The first attack against an enemy gains an additional [[value]]350[[/]] Attack Damage",
       },
       {
         level: 20,
         name: "Inescapable",
-        description: "The first attack against an enemy always hits and applies Break, disabling passives for 3 seconds.",
+        description: "The first attack against an enemy always hits and applies Break, disabling passives for [[value]]3[[/]] seconds.",
       },
       {
         level: 30,
@@ -5158,7 +5158,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 40,
         name: "Irrevocable",
-        description: "The first attack resets after 15 seconds",
+        description: "The first attack resets after [[value]]15[[/]] seconds",
       },
     ],
     flavor: "It is the sharpest of blades, capable of cleaving through enchanted armor. Even defenses reinforced to their absolute limits are stripped away before its edge.",
@@ -5188,31 +5188,31 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Foresight of Fate",
-      description: "Spell damage has a 20% chance to be increased to 140%.",
+      description: "Spell damage has a [[value]]20%[[/]] chance to be increased to [[value]]140%[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Revelation of Fate",
-        description: "Every 10 seconds, reveals an enemy and reduces its Magic Armor by 20 for 10 seconds",
+        description: "Every [[value]]10[[/]] seconds, reveals an enemy and reduces its Magic Armor by [[value]]20[[/]] for [[value]]10[[/]] seconds",
         note: "Boss units are prioritized",
       },
       {
         level: 20,
         name: "Shear of Fate",
-        description: "When dealing higher spell damage, the trigger chance of Foresight of Fate is increased to 50%",
+        description: "When dealing higher spell damage, the trigger chance of [[ref]]Foresight of Fate[[/]] is increased to [[value]]50%[[/]]",
         note: "This comparison uses values before spell amplification is applied",
       },
       {
         level: 30,
         name: "Favor of the Three",
-        description: "The next failed chance-based event is converted into a success. Cooldown: 3–60 seconds, based on the chance.",
+        description: "The next failed chance-based event is converted into a success. Cooldown: [[value]]3[[/]]–[[value]]60[[/]] seconds, based on the chance.",
         note: "Not all chance-based events are affected, including this Artifact itself. The base chance of the target event must be at least 1%.",
       },
       {
         level: 40,
         name: "Omnivision",
-        description: "Can be activated to increase its base bonus to 200% for the current Stage. After the effect ends, the Artifact is disabled for 1 Stages.",
+        description: "Can be activated to increase its base bonus to [[value]]200%[[/]] for the current Stage. After the effect ends, the Artifact is disabled for [[value]]1[[/]] Stages.",
       },
     ],
     flavor: "A hat blessed by Three Fates, granting its wearer the ability to glimpse a fleeting future.",
@@ -5255,29 +5255,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Tyranny",
-      description: "Every 7 seconds, generate up to 5 lightning strikes hitting enemies within 1000 range, dealing 6% maximum HP damage. The lower the current HP, the shorter the strike interval.",
+      description: "Every [[value]]7[[/]] seconds, generate up to [[value]]5[[/]] lightning strikes hitting enemies within [[value]]1000[[/]] range, dealing [[value]]6%[[/]] maximum HP damage. The lower the current HP, the shorter the strike interval.",
     },
     upgrades: [
       {
         level: 10,
         name: "Berserk",
-        description: "For every 10% HP lost, increases Health Regeneration by 3%",
+        description: "For every [[value]]10%[[/]] HP lost, increases Health Regeneration by [[value]]3%[[/]]",
       },
       {
         level: 20,
         name: "Tenacity",
-        description: "For every 10% HP lost, grants 2% damage reduction",
+        description: "For every [[value]]10%[[/]] HP lost, grants [[value]]2%[[/]] damage reduction",
       },
       {
         level: 30,
         name: "Furious Destroyer",
-        description: "After each instance of damage taken, accelerates the next Tyranny by 0.1 seconds",
+        description: "After each instance of damage taken, accelerates the next [[ref]]Tyranny[[/]] by [[value]]0.1[[/]] seconds",
         note: "There is still a minimum trigger interval",
       },
       {
         level: 40,
         name: "Wyrm's Wrath",
-        description: "Can be activated to grant an additional 20% Max Health bonus, but your Max Health is capped at 30%.",
+        description: "Can be activated to grant an additional [[value]]20%[[/]] Max Health bonus, but your Max Health is capped at [[value]]30%[[/]].",
       },
     ],
     flavor: "A-Ahhhhhh… B...Bayle… You shall know...fear yet...Graaaaaargh! Bayle the Dread! You shall haunt me no longer!",
@@ -5319,28 +5319,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Solar Strike",
-      description: "Attacks fire into the sky. After 3s, they fall on enemies within 200% attack range at a rate of 5 arrows/s. deals 150% damage. When many are stored, their consumption speed and damage are increased.",
+      description: "Attacks fire into the sky. After [[value]]3[[/]]s, they fall on enemies within [[value]]200%[[/]] attack range at a rate of [[value]]5[[/]] arrows/s. deals [[value]]150%[[/]] damage. When many are stored, their consumption speed and damage are increased.",
     },
     upgrades: [
       {
         level: 10,
         name: "Volley of Arrows",
-        description: "Fires 8 when attacking a target for the first time.",
+        description: "Fires [[value]]8[[/]] when attacking a target for the first time.",
       },
       {
         level: 20,
         name: "Set Ablaze",
-        description: "applies Burn equal to 80%",
+        description: "applies [[color:#ff9b4a]]Burn[[/]] equal to [[value]]80%[[/]]",
       },
       {
         level: 30,
         name: "Sun Chaser",
-        description: "During Status, +25% Burn application, and fall faster",
+        description: "During Status, +[[value]]25%[[/]] [[color:#ff9b4a]]Burn[[/]] application, and fall faster",
       },
       {
         level: 40,
         name: "Solar Radiance",
-        description: "While under Status, the attack range bonus from Houyi's Bow is increased by +75% and you gain 2 passive effects:·When any enemy dies under Burn State, gain Status for 8s.·When Burn Stacks on any enemy within attack range reaches 20% of their max HP, gain Status",
+        description: "While under Status, the attack range bonus from Houyi's Bow is increased by +[[value]]75%[[/]] and you gain 2 passive effects:·When any enemy dies under [[color:#ff9b4a]]Burn State[[/]], gain Status for [[value]]8[[/]]s.·When [[color:#ff9b4a]]Burn Stacks[[/]] on any enemy within attack range reaches [[value]]20%[[/]] of their max HP, gain Status",
       },
     ],
     flavor: "Since the dawn of creation, there were once ten suns in the sky. Hou Yi drew his bow and shot down nine fiery crows, leaving only a single Golden Sun—the true flame of the sun itself.",
@@ -5375,28 +5375,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Verdant Bite",
-      description: "Attacks apply Poison equal to 300 + 150% .",
+      description: "Attacks apply [[color:#98f698]]Poison[[/]] equal to [[value]]300[[/]] + [[value]]150%[[/]] .",
     },
     upgrades: [
       {
         level: 10,
         name: "Resistance Break",
-        description: "Every 10 seconds, your next attack reduces the target's Poison decay by 50% for 5 seconds",
+        description: "Every [[value]]10[[/]] seconds, your next attack reduces the target's [[color:#98f698]]Poison[[/]] decay by [[value]]50%[[/]] for [[value]]5[[/]] seconds",
       },
       {
         level: 20,
         name: "Backstab",
-        description: "When attacking from behind, Verdant Bite applies an additional 200% of Poison.",
+        description: "When attacking from behind, [[ref]]Verdant Bite[[/]] applies an additional [[value]]200%[[/]] of [[color:#98f698]]Poison[[/]].",
       },
       {
         level: 30,
         name: "Funeral Rite",
-        description: "When attacking an enemy from behind, activate Poison once. This effect has a 2-s cooldown per enemy.Activation Ratio: 7.5%Activation Damage: 2000%",
+        description: "When attacking an enemy from behind, activate [[color:#98f698]]Poison[[/]] once. This effect has a [[value]]2[[/]]-s cooldown per enemy.Activation Ratio: [[value]]7.5%[[/]]Activation Damage: [[value]]2000%[[/]]",
       },
       {
         level: 40,
         name: "Marked Weakness",
-        description: "+25 angle considered as back",
+        description: "+[[value]]25[[/]] angle considered as back",
       },
     ],
     flavor: "Many say the Jade Assembly are merely hired killers... But that is too simplistic a view. Lorlin Lasan's spy network offers many services — as long as the client can pay. Assassinations are merely the most popular among them.",
@@ -5431,28 +5431,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Drifting Moon",
-      description: "During combat, are generated and spin. These blades track enemies within an orbit radius of 200 – 1200, dealing 120% damage on hit.",
+      description: "During combat, are generated and spin. These blades track enemies within an orbit radius of [[value]]200[[/]] – [[value]]1200[[/]], dealing [[value]]120%[[/]] damage on hit.",
     },
     upgrades: [
       {
         level: 10,
         name: "Chasing Moon",
-        description: "rotation speed increases by 8% per second, up to a maximum of 120%. Speed is reduced by 10% upon grazing an enemy.",
+        description: "rotation speed increases by [[value]]8%[[/]] per second, up to a maximum of [[value]]120%[[/]]. Speed is reduced by [[value]]10%[[/]] upon grazing an enemy.",
       },
       {
         level: 20,
         name: "Aegis Moon",
-        description: "Each full revolution of Moon Glaives grants 2% damage reduction, up to a maximum of 50%. Each time damage is negated, this bonus is reduced by 10%.",
+        description: "Each full revolution of Moon Glaives grants [[value]]2%[[/]] damage reduction, up to a maximum of [[value]]50%[[/]]. Each time damage is negated, this bonus is reduced by [[value]]10%[[/]].",
       },
       {
         level: 30,
         name: "Reclining Moon",
-        description: "Before each full revolution, the first 1 instances of damage inherit attack effects.",
+        description: "Before each full revolution, the first [[value]]1[[/]] instances of damage inherit attack effects.",
       },
       {
         level: 40,
         name: "New Moon",
-        description: "Additional Moon Glaives are generated every 15 attacks or on each spell cast. Extra Glaives last 7 seconds, up to a maximum of 2.",
+        description: "Additional Moon Glaives are generated every [[value]]15[[/]] attacks or on each spell cast. Extra Glaives last [[value]]7[[/]] seconds, up to a maximum of [[value]]2[[/]].",
         note: "Extra Moon Glaives always orbit on an outer layer beyond the primary glaive and do not overlap.",
       },
     ],
@@ -5496,29 +5496,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Mighty Physique",
-      description: "Increases Strength by 15%, reduces Agility by 20%. Damage instances below 100% of your Strength are reduced by 40%.",
+      description: "Increases Strength by [[value]]15%[[/]], reduces Agility by [[value]]20%[[/]]. Damage instances below [[value]]100%[[/]] of your Strength are reduced by [[value]]40%[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Might",
-        description: "+10% Max HP, +15% Health Regeneration",
+        description: "+[[value]]10%[[/]] Max HP, +[[value]]15%[[/]] Health Regeneration",
       },
       {
         level: 20,
         name: "Mighty Force",
-        description: "Every 3 seconds, deal 250% damage to enemies within 300 radius",
+        description: "Every [[value]]3[[/]] seconds, deal [[value]]250%[[/]] damage to enemies within [[value]]300[[/]] radius",
         note: "The effect radius also increases with your model size",
       },
       {
         level: 30,
         name: "Mighty Strength",
-        description: "+2% of your Max HP as Mighty Force damage",
+        description: "+[[value]]2%[[/]] of your Max HP as [[ref]]Mighty Force[[/]] damage",
       },
       {
         level: 40,
         name: "Grand Might",
-        description: "After not attacking for 20 seconds, trigger interval of Mighty Force is reduced by 1 seconds, Strength is increased by 20%",
+        description: "After not attacking for [[value]]20[[/]] seconds, trigger interval of [[ref]]Mighty Force[[/]] is reduced by [[value]]1[[/]] seconds, Strength is increased by [[value]]20%[[/]]",
       },
     ],
     flavor: "Those who wield the strength to move mountains will eventually become part of them. Your heartbeat echoes the pulse of the earth, and your breath turns into the gales that sweep the mountain passes.",
@@ -5560,28 +5560,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Carian Sword Arts",
-      description: "For every 5% Spell AMP, grants 3% bonus Attack Damage.",
+      description: "For every [[value]]5%[[/]] Spell AMP, grants [[value]]3%[[/]] bonus Attack Damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Moonlight",
-        description: "Every 8 attacks, grants 30% of Max MP to your next attack damage",
+        description: "Every [[value]]8[[/]] attacks, grants [[value]]30%[[/]] of Max MP to your next attack damage",
       },
       {
         level: 20,
         name: "Flame Scorch",
-        description: "From attack 4 onward, every 8 attacks deals 75% splash damage in 300 radius.",
+        description: "From attack [[value]]4[[/]] onward, every [[value]]8[[/]] attacks deals [[value]]75%[[/]] splash damage in [[value]]300[[/]] radius.",
       },
       {
         level: 30,
         name: "Mutual Genesis",
-        description: "During Status, Moonlight has a 30% chance to also trigger Flame Scorch. During Status, Flame Scorch has the same chance to trigger Moonlight.",
+        description: "During Status, [[ref]]Moonlight[[/]] has a [[value]]30%[[/]] chance to also trigger [[ref]]Flame Scorch[[/]]. During Status, [[ref]]Flame Scorch[[/]] has the same chance to trigger [[ref]]Moonlight[[/]].",
       },
       {
         level: 40,
         name: "Moonfire Stance",
-        description: "When Moonlight and Flame Scorch trigger simultaneously, both effects are amplified by 100%.",
+        description: "When [[ref]]Moonlight[[/]] and [[ref]]Flame Scorch[[/]] trigger simultaneously, both effects are amplified by [[value]]100%[[/]].",
       },
     ],
     flavor: "A Carian greatsword inlaid with glintstone. Moon and flame reside within, forever inseparable.",
@@ -5616,18 +5616,18 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Paradox Space",
-      description: "Creates a remnant from another timeline that remains at its current location. Whenever you teleport or blink, the remnant casts Paradox Space to move to your previous position.",
+      description: "Creates a remnant from another timeline that remains at its current location. Whenever you teleport or blink, the remnant casts [[ref]]Paradox Space[[/]] to move to your previous position.",
     },
     upgrades: [
       {
         level: 10,
         name: "Void Break",
-        description: "Paradox Space deals 120% Critical Damage.",
+        description: "[[ref]]Paradox Space[[/]] deals [[value]]120%[[/]] Critical Damage.",
       },
       {
         level: 20,
         name: "Shadow Break",
-        description: "Repeated Paradox Space hits increase the armor reduction by 3. Stacks independently for 4 seconds.",
+        description: "Repeated [[ref]]Paradox Space[[/]] hits increase the armor reduction by [[value]]3[[/]]. Stacks independently for [[value]]4[[/]] seconds.",
       },
       {
         level: 30,
@@ -5637,7 +5637,7 @@ export const ARTIFACTS: Artifact[] = [
       {
         level: 40,
         name: "Realm Break",
-        description: "You also cast Paradox Space toward the target.",
+        description: "You also cast [[ref]]Paradox Space[[/]] toward the target.",
       },
     ],
     flavor: "Going into another timeline is risky… but it’s only for a few seconds here. And it’s never hurt anyone I didn’t intend to.",
@@ -5672,30 +5672,30 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Surging Flow",
-      description: "While in Water Terrain, you and allied units within 300 gain 35% MS.",
+      description: "While in Water Terrain, you and allied units within [[value]]300[[/]] gain [[value]]35%[[/]] MS.",
     },
     upgrades: [
       {
         level: 10,
         name: "Riptide",
-        description: "While in , you can command water currents to attack enemies, striking 3 targets once, or 1 targets with 2 hits. Cooldown: 6 seconds.",
-        note: "Damage equals 1000% of your Armor. For every 3 Magic Armor you have, this damage increases by 1%.",
+        description: "While in , you can command water currents to attack enemies, striking [[value]]3[[/]] targets once, or [[value]]1[[/]] targets with [[value]]2[[/]] hits. Cooldown: [[value]]6[[/]] seconds.",
+        note: "Damage equals [[value]]1000%[[/]] of your Armor. For every [[value]]3[[/]] Magic Armor you have, this damage increases by [[value]]1%[[/]].",
       },
       {
         level: 20,
         name: "Myriad Forms",
-        description: "At the end of each Stage, gain 20% damage resistance against the damage type that dealt the most damage to you during that Stage.",
+        description: "At the end of each Stage, gain [[value]]20%[[/]] damage resistance against the damage type that dealt the most damage to you during that Stage.",
         note: "Damage types: Physical / Magic / Pure",
       },
       {
         level: 30,
         name: "All Are One",
-        description: "While in , Myriad Forms applies as all-damage reduction.",
+        description: "While in , [[ref]]Myriad Forms[[/]] applies as all-damage reduction.",
       },
       {
         level: 40,
         name: "Surging Flow",
-        description: "4 times per day, this Artifact can be activated to permanently gain Status. After reaching the daily limit, further uses require .",
+        description: "[[value]]4[[/]] times per day, this Artifact can be activated to permanently gain Status. After reaching the daily limit, further uses require .",
         note: "This also affects other skill effects. The bonus persists even if the Artifact is removed.",
       },
     ],
@@ -5739,28 +5739,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Sun Ray",
-      description: "Create a 600 heat zone which deals Burn damage equal to 12% of your max HP Burn. Closer enemies gain more stacks. This artifact can be activated to increase Burn damage by 75%, but you will also suffer 50% of that damage as burn effect.",
+      description: "Create a [[value]]600[[/]] heat zone which deals [[color:#ff9b4a]]Burn[[/]] damage equal to [[value]]12%[[/]] of your max HP [[color:#ff9b4a]]Burn[[/]]. Closer enemies gain more stacks. This artifact can be activated to increase [[color:#ff9b4a]]Burn[[/]] damage by [[value]]75%[[/]], but you will also suffer [[value]]50%[[/]] of that damage as burn effect.",
     },
     upgrades: [
       {
         level: 10,
         name: "Scorching Healing",
-        description: "Burn damage you take heals other allies within range for 30% of that damage.",
+        description: "[[color:#ff9b4a]]Burn[[/]] damage you take heals other allies within range for [[value]]30%[[/]] of that damage.",
       },
       {
         level: 20,
         name: "Falling Feather",
-        description: "After taking a total of 250% of your max HP in damage from Burn, restore 1 HP Runes. Can occur up to 1 times every 2 stages. Damage still accumulates normally even during cooldown.",
+        description: "After taking a total of [[value]]250%[[/]] of your max HP in damage from [[color:#ff9b4a]]Burn[[/]], restore [[value]]1[[/]] HP Runes. Can occur up to [[value]]1[[/]] times every [[value]]2[[/]] stages. Damage still accumulates normally even during cooldown.",
       },
       {
         level: 30,
         name: "Advanced Nirvana",
-        description: "Consume a Health Rune to respawn. Permanently gain +8 All Attributes.",
+        description: "Consume a Health Rune to respawn. Permanently gain +[[value]]8[[/]] All Attributes.",
       },
       {
         level: 40,
         name: "Phoenix Remnant",
-        description: "At the start of each stage, summon a Phoenix Remnant. The remnant casts Solar Beam toward the nearest visible enemy, applying Sun Ray Burn effect. The remnant is considered as a summon and inherits 150% of your health. It does not cost health to maintain. When a target attacked by the remnant dies, you are healed for 10% of your maximum health.",
+        description: "At the start of each stage, summon a Phoenix Remnant. The remnant casts Solar Beam toward the nearest visible enemy, applying [[ref]]Sun Ray[[/]] [[color:#ff9b4a]]Burn[[/]] effect. The remnant is considered as a summon and inherits [[value]]150%[[/]] of your health. It does not cost health to maintain. When a target attacked by the remnant dies, you are healed for [[value]]10%[[/]] of your maximum health.",
       },
     ],
     flavor: "The darkest hour is just before dawn. And right before that tide-turning final stand, the despair hits hardest. One sacrifice can change the future. This blade almost begs its wielder to make that call.",
@@ -5803,28 +5803,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Unstable Casting",
-      description: "Grants 20%–40% additional cooldown. 20% of spell damage dealt is stored. After a 10 seconds delay, the next cast releases a radial shockwave, damaging enemies up to 800 away.",
+      description: "Grants [[value]]20%[[/]]–[[value]]40%[[/]] additional cooldown. [[value]]20%[[/]] of spell damage dealt is stored. After a [[value]]10[[/]] seconds delay, the next cast releases a radial shockwave, damaging enemies up to [[value]]800[[/]] away.",
     },
     upgrades: [
       {
         level: 10,
         name: "Inertial Field",
-        description: "Unstable Casting applies a 50% Movement Speed slow for 2 seconds.",
+        description: "[[ref]]Unstable Casting[[/]] applies a [[value]]50%[[/]] Movement Speed slow for [[value]]2[[/]] seconds.",
       },
       {
         level: 20,
         name: "Dark Insight",
-        description: "Unstable Casting grants unobstructed vision for 10 seconds and applies a permanent 15 Magic Armor reduction, once per enemy.",
+        description: "[[ref]]Unstable Casting[[/]] grants unobstructed vision for [[value]]10[[/]] seconds and applies a permanent [[value]]15[[/]] Magic Armor reduction, once per enemy.",
       },
       {
         level: 30,
         name: "Dark Repulsion",
-        description: "After Unstable Casting, you gain 80% damage reduction for 2 seconds",
+        description: "After [[ref]]Unstable Casting[[/]], you gain [[value]]80%[[/]] damage reduction for [[value]]2[[/]] seconds",
       },
       {
         level: 40,
         name: "Primordial Singularity",
-        description: "Can be activated to mark a location. Unstable Casting then converges on this location and pulls enemies toward it. The effect has a radius of 1200.",
+        description: "Can be activated to mark a location. [[ref]]Unstable Casting[[/]] then converges on this location and pulls enemies toward it. The effect has a radius of [[value]]1200[[/]].",
         note: "Activating the Artifact again will remove the mark",
       },
     ],
@@ -5868,29 +5868,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Bloodlust",
-      description: "Gain 30% lifesteal on attack, and 20% of excess lifesteal becomes a physical damage shield.",
+      description: "Gain [[value]]30%[[/]] lifesteal on attack, and [[value]]20%[[/]] of excess lifesteal becomes a physical damage shield.",
     },
     upgrades: [
       {
         level: 10,
         name: "Frenzy",
-        description: "After stealing health equal to 50% of your Max Health, gain +50 Max Attack Speed. Resets at the end of the stage.",
+        description: "After stealing health equal to [[value]]50%[[/]] of your Max Health, gain +[[value]]50[[/]] Max Attack Speed. Resets at the end of the stage.",
       },
       {
         level: 20,
         name: "Bloodthirst",
-        description: "Bloodlust gains 100%(x) increased lifesteal on the first 3 hits against each enemy.",
+        description: "[[ref]]Bloodlust[[/]] gains [[value]]100%[[/]](x) increased lifesteal on the first [[value]]3[[/]] hits against each enemy.",
       },
       {
         level: 30,
         name: "Blood Frenzy",
-        description: "Gain bonus Attack Damage equal to 5% of Lifesteal dealt in the last 10 seconds.",
-        note: "Cannot exceed 500% of your Base Attack Damage.",
+        description: "Gain bonus Attack Damage equal to [[value]]5%[[/]] of Lifesteal dealt in the last [[value]]10[[/]] seconds.",
+        note: "Cannot exceed [[value]]500%[[/]] of your Base Attack Damage.",
       },
       {
         level: 40,
         name: "Blood Bath",
-        description: "Artifact can be switched. Activates Blood Bath. Drains 15% of Max Health per second. Frenzy grants +100 Max Attack Speed and 30% status resistance. Bloodlust lifesteal is increased to 60%.",
+        description: "Artifact can be switched. Activates [[ref]]Blood Bath[[/]]. Drains [[value]]15%[[/]] of Max Health per second. [[ref]]Frenzy[[/]] grants +[[value]]100[[/]] Max Attack Speed and [[value]]30%[[/]] status resistance. [[ref]]Bloodlust[[/]] lifesteal is increased to [[value]]60%[[/]].",
       },
     ],
     flavor: "A colossal lance forged in the likeness of a syringe. Its spearhead drinks the blood of those it impales, storing it within the hollow shaft before channeling it back to the wielder through embedded tubes.",
@@ -5926,28 +5926,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Gravity Enchant",
-      description: "Every 10 attacks, your next attack deals 180% splash damage within a 425 radius, pulls enemies toward the center, and slows Movement Speed by 50% for 1.5 seconds.",
+      description: "Every [[value]]10[[/]] attacks, your next attack deals [[value]]180%[[/]] splash damage within a [[value]]425[[/]] radius, pulls enemies toward the center, and slows Movement Speed by [[value]]50%[[/]] for [[value]]1.5[[/]] seconds.",
     },
     upgrades: [
       {
         level: 10,
         name: "Weighted",
-        description: "After Gravity Enchant triggers, gain complete slow resistance for 2 seconds",
+        description: "After [[ref]]Gravity Enchant[[/]] triggers, gain complete slow resistance for [[value]]2[[/]] seconds",
       },
       {
         level: 20,
         name: "Gravity Aftermath",
-        description: "Gravity Enchant creates a gravity field. Enemies within the area have their Movement Speed slowed by 20% and take 20% additional damage.",
+        description: "[[ref]]Gravity Enchant[[/]] creates a gravity field. Enemies within the area have their Movement Speed slowed by [[value]]20%[[/]] and take [[value]]20%[[/]] additional damage.",
       },
       {
         level: 30,
         name: "Imbalance",
-        description: "Gravity Enchant attack counts continue to accumulate while on cooldown. Auto reload after 10 seconds without attacking.",
+        description: "[[ref]]Gravity Enchant[[/]] attack counts continue to accumulate while on cooldown. Auto reload after [[value]]10[[/]] seconds without attacking.",
       },
       {
         level: 40,
         name: "Star Shatter",
-        description: "Every 24 seconds, summon a gravity meteor that deals damage to enemies within 345 range. The damage is equal to 100% of the highest damage instance triggered by Gravity Enchant this run.",
+        description: "Every [[value]]24[[/]] seconds, summon a gravity meteor that deals damage to enemies within [[value]]345[[/]] range. The damage is equal to [[value]]100%[[/]] of the highest damage instance triggered by [[ref]]Gravity Enchant[[/]] this run.",
       },
     ],
     flavor: "A low, pulsating gravitational hum whispers like the heartbeat of distant stars.",
@@ -5984,29 +5984,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Stellar Energy",
-      description: "Draws energy from the sun, moon, and stars. Each Stage grants +3% Attack Damage.",
+      description: "Draws energy from the sun, moon, and stars. Each Stage grants +[[value]]3%[[/]] Attack Damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Steel Cleaver",
-        description: "+30% Positive Armor Reduction",
+        description: "+[[value]]30%[[/]] Positive Armor Reduction",
       },
       {
         level: 20,
         name: "Energy Discharge",
-        description: "Your next attack strikes up to 2 targets within 300 radius. Cooldown: 4 seconds.",
+        description: "Your next attack strikes up to [[value]]2[[/]] targets within [[value]]300[[/]] radius. Cooldown: [[value]]4[[/]] seconds.",
       },
       {
         level: 30,
         name: "Stellar Radiance",
-        description: "In Stages that start at , Stellar Energy growth is increased by 100%",
+        description: "In Stages that start at , [[ref]]Stellar Energy[[/]] growth is increased by [[value]]100%[[/]]",
         note: "Status cannot trigger this effect",
       },
       {
         level: 40,
         name: "Resonance",
-        description: "2 times per day. When the Hero reaches level 5, activate to unlock 50% of its capabilities in advance. After reaching the daily limit, further uses require",
+        description: "[[value]]2[[/]] times per day. When the Hero reaches level [[value]]5[[/]], activate to unlock [[value]]50%[[/]] of its capabilities in advance. After reaching the daily limit, further uses require",
         note: "Growth earned before reaching the unlock level is restored when fully unlocked.",
       },
     ],
@@ -6042,29 +6042,29 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Soul Confluence",
-      description: "After a summon takes lethal damage, it remains invulnerable for 5 seconds",
+      description: "After a summon takes lethal damage, it remains invulnerable for [[value]]5[[/]] seconds",
     },
     upgrades: [
       {
         level: 10,
         name: "Soul Endurance",
-        description: "For each enemy that dies within 1000 radius around you, the duration of active Soul Confluence is extended by 1 seconds, up to 10 seconds.",
+        description: "For each enemy that dies within [[value]]1000[[/]] radius around you, the duration of active [[ref]]Soul Confluence[[/]] is extended by [[value]]1[[/]] seconds, up to [[value]]10[[/]] seconds.",
       },
       {
         level: 20,
         name: "Death Dominion",
-        description: "Undead summons deal 30% additional damage, and summons under Soul Confluence are considered undead.",
+        description: "Undead summons deal [[value]]30%[[/]] additional damage, and summons under [[ref]]Soul Confluence[[/]] are considered undead.",
       },
       {
         level: 30,
         name: "Legion of the Dead",
-        description: "When an enemy dies within 1000 range of you, spawn a Death Warrior that lasts for 60 seconds, inheriting 50% of your Attack Damage. Up to 4 Death Warriors can exist at the same time.",
+        description: "When an enemy dies within [[value]]1000[[/]] range of you, spawn a Death Warrior that lasts for [[value]]60[[/]] seconds, inheriting [[value]]50%[[/]] of your Attack Damage. Up to [[value]]4[[/]] Death Warriors can exist at the same time.",
         note: "Death Warriors are uncontrollable, have no HP, take no damage, and do not trigger effects based on HP",
       },
       {
         level: 40,
         name: "Soul Convergence",
-        description: "Legion of the Dead at max: empowers all Skeleton Warriors. Duration +5 seconds, Attack Damage +5% (max 150%).",
+        description: "[[ref]]Legion of the Dead[[/]] at max: empowers all Skeleton Warriors. Duration +[[value]]5[[/]] seconds, Attack Damage +[[value]]5%[[/]] (max [[value]]150%[[/]]).",
       },
     ],
     flavor: "Souls are like bubbles cast from the vast current of the world. Though they differ in size, all souls share the same nature.",
@@ -6098,28 +6098,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Lightning Call",
-      description: "Attack additionally deals 600% damage.",
+      description: "Attack additionally deals [[value]]600%[[/]] damage.",
     },
     upgrades: [
       {
         level: 10,
         name: "Primal Decree",
-        description: "Gain 1 Attack Speed per point of Spell AMP",
+        description: "Gain [[value]]1[[/]] Attack Speed per point of Spell AMP",
       },
       {
         level: 20,
         name: "Thunderclap",
-        description: "Lightning Call becomes a 300 area effect.",
+        description: "[[ref]]Lightning Call[[/]] becomes a [[value]]300[[/]] area effect.",
       },
       {
         level: 30,
         name: "Static Field",
-        description: "Any Spell Damage deals additional damage equal to 8% of the target’s current HP (Bosses: 5%), capped at 1000% . Each Spell has a 3 seconds cooldown per target.",
+        description: "Any Spell Damage deals additional damage equal to [[value]]8%[[/]] of the target’s [[color:#f0ad4e]]current HP[[/]] ([[color:#f0ad4e]]Bosses[[/]]: [[value]]5%[[/]]), capped at [[value]]1000%[[/]] . Each Spell has a [[value]]3[[/]] seconds cooldown per target.",
       },
       {
         level: 40,
         name: "Tempest Wrath",
-        description: "Lightning Call has a 30% chance to deal pure damage and deal 30% bonus damage.",
+        description: "[[ref]]Lightning Call[[/]] has a [[value]]30%[[/]] chance to deal pure damage and deal [[value]]30%[[/]] bonus damage.",
       },
     ],
     flavor: "Striding through the clouds and leaping between storms, the True Thunderbolt roams the skies, ever ready to smite the unjust in Zeus’s eyes.",
@@ -6153,28 +6153,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Waterfowl Dance",
-      description: "Final Attack Damage reduced by 50%, grants 35% base Agility bonus.",
+      description: "Final Attack Damage reduced by [[value]]50%[[/]], grants [[value]]35%[[/]] base Agility bonus.",
     },
     upgrades: [
       {
         level: 10,
         name: "Restorative Reprisal",
-        description: "When attacked, there is a 20% chance to counterattack with a strike",
+        description: "When attacked, there is a [[value]]20%[[/]] chance to counterattack with a strike",
       },
       {
         level: 20,
         name: "Corruption",
-        description: "After Waterfowl Dance triggers, target gains additional 3% Waterfowl Dance vulnerability, up to 30%",
+        description: "After [[ref]]Waterfowl Dance[[/]] triggers, target gains additional [[value]]3%[[/]] [[ref]]Waterfowl Dance[[/]] vulnerability, up to [[value]]30%[[/]]",
       },
       {
         level: 30,
         name: "Blood Piercer",
-        description: "Attack has a 10% chance to detonate Waterfowl Dance, removing only 30% of its accumulated value",
+        description: "Attack has a [[value]]10%[[/]] chance to detonate [[ref]]Waterfowl Dance[[/]], removing only [[value]]30%[[/]] of its accumulated value",
       },
       {
         level: 40,
         name: "Crimson Incarnation",
-        description: "Every 7 seconds, an avatar splits off to attack enemies on a random path. Attack Speed affects this trigger interval.",
+        description: "Every [[value]]7[[/]] seconds, an avatar splits off to attack enemies on a random path. Attack Speed affects this trigger interval.",
       },
     ],
     flavor: "In the endless struggle against the Crimson Rot, Valkyries often lose their limbs to its deadly plague. Forged of pure gold, these prosthetics are bestowed upon those who fight on through pain, allowing them to return to the battlefield with renewed fervor and formidable new weapons.",
@@ -6217,28 +6217,28 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Pyre of Cremation",
-      description: "When the summon disappears, it deals damage equal to the summon's 400 + 100% of its max health to enemies within 450.",
+      description: "When the summon disappears, it deals damage equal to the summon's [[value]]400[[/]] + [[value]]100%[[/]] of its max health to enemies within [[value]]450[[/]].",
     },
     upgrades: [
       {
         level: 10,
         name: "Ashes of Death",
-        description: "After Pyre of Cremation triggers, the cooldown of the summoning ability is reduced by 20%",
+        description: "After [[ref]]Pyre of Cremation[[/]] triggers, the cooldown of the summoning ability is reduced by [[value]]20%[[/]]",
       },
       {
         level: 20,
         name: "Flame of Vigil",
-        description: "Within the area affected by Pyre of Cremation, your summons gain a shield that absorbs damage equal to 50% of their HP.",
+        description: "Within the area affected by [[ref]]Pyre of Cremation[[/]], your summons gain a shield that absorbs damage equal to [[value]]50%[[/]] of their HP.",
       },
       {
         level: 30,
         name: "Fire of Rebirth",
-        description: "For the first 2 seconds after being summoned, summons gain 70% damage reduction",
+        description: "For the first [[value]]2[[/]] seconds after being summoned, summons gain [[value]]70%[[/]] damage reduction",
       },
       {
         level: 40,
         name: "Vigil of Death",
-        description: "Can be activated. While active, summons lose 20% of their Max HP every 2 seconds and trigger Pyre of Cremation at 60% effectiveness. This also applies to invulnerable summons, but the interval is increased to 4 seconds.",
+        description: "Can be activated. While active, summons lose [[value]]20%[[/]] of their Max HP every [[value]]2[[/]] seconds and trigger [[ref]]Pyre of Cremation[[/]] at [[value]]60%[[/]] effectiveness. This also applies to invulnerable summons, but the interval is increased to [[value]]4[[/]] seconds.",
       },
     ],
     flavor: "From the very first day of our existence, she was already there. Leaning against a silver-plated skull, she helped us find rebirth.She brought aid to the ailing. Not light, not brightness, not glory — but like embers, she shielded us from the cold of death. For those on the verge of dying, she offered a gentle farewell. The departed, under her care, left with a ring of sparkling embers, adorned with immaculate dignity. Others brought death — she burned it away. A practitioner’s wound, left on the dark blade; the scars she excised no longer troubled us. And so we lived, grew, and passed on under her watch, she bearing a double burden — both of penance and of solace. Who better to guard life than one who holds its end? Who better to reap life than one who knows its worth? — The Planar Exile",
@@ -6281,30 +6281,30 @@ export const ARTIFACTS: Artifact[] = [
     ],
     unique: {
       name: "Soulbind Legion",
-      description: "Losing 30% HP to summon Vile Soul which inherits 100% HP Lost, and its Attack Damage equal to 50% of its Max HP.Attack Interval: 4s. Damage:150%Attack Effect: -5 Magic Armor, stacking independently for 10s, up to 100%.Max Summons: 2Souls are invincible and persist until the end of the Stage (And the lost HP will be returned).",
+      description: "Losing [[value]]30%[[/]] HP to summon Vile Soul which inherits [[value]]100%[[/]] HP Lost, and its Attack Damage equal to [[value]]50%[[/]] of its Max HP.Attack Interval: [[value]]4[[/]]s. Damage:[[value]]150%[[/]]Attack Effect: -[[value]]5[[/]] Magic Armor, stacking independently for [[value]]10[[/]]s, up to [[value]]100%[[/]].Max Summons: [[value]]2[[/]]Souls are invincible and persist until the end of the Stage (And the lost HP will be returned).",
     },
     upgrades: [
       {
         level: 10,
         name: "Soulbind",
-        description: "When Vile Soul kills an enemy, it absorbs 1% of the target’s Max HP, up to 5% summoner’s Max HP per absorption.",
+        description: "When Vile Soul kills an enemy, it absorbs [[value]]1%[[/]] of the target’s Max HP, up to [[value]]5%[[/]] summoner’s Max HP per absorption.",
         note: "This increases Vile Soul's Max hp, thereby increasing its Attack Damage.",
       },
       {
         level: 20,
         name: "Affliction",
-        description: "2% of damage dealt by Souls is converted into temporary HP for the summoner, up to a maximum of 3000, lasting until the end of the Round.",
+        description: "[[value]]2%[[/]] of damage dealt by Souls is converted into temporary HP for the summoner, up to a maximum of [[value]]3000[[/]], lasting until the end of the Round.",
       },
       {
         level: 30,
         name: "Shackles",
-        description: "Souls within 300 receive 50% of temporary HP gained from Affliction.",
+        description: "Souls within [[value]]300[[/]] receive [[value]]50%[[/]] of temporary HP gained from [[ref]]Affliction[[/]].",
       },
       {
         level: 40,
         name: "Unshackle",
-        description: "+1 max Vile Souls. You may continue summoning beyond the max; doing so will remove the oldest Vile Soul, then consumes HP again to summon a new one.",
-        note: "New Vile Souls inherit the maximum HP gained by the previous Vile Soul through Shackles.",
+        description: "+[[value]]1[[/]] max Vile Souls. You may continue summoning beyond the max; doing so will remove the oldest Vile Soul, then consumes HP again to summon a new one.",
+        note: "New Vile Souls inherit the maximum HP gained by the previous Vile Soul through [[ref]]Shackles[[/]].",
       },
     ],
     flavor: "Forged from the bones and wreckage of battlefields where tens of thousands perished. The halberd’s shaft is entwined with the dry bones and shattered weapons of fallen soldiers, while the ghostly war banner hanging from its side is woven from the souls of the defeated, whispering dirges of war and death. The weapon pulses with the agony of bound spirits, glowing with a blood-red spectral light.",

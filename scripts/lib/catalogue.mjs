@@ -50,6 +50,24 @@ const STANDARD_LABELS = {
 
 const stripTags = (value) => value.replace(/<[^>]*>/g, '').trim()
 
+const FONT_TAG = /<font\s+color=['"]?(#[0-9a-fA-F]{3,8})['"]?>([\s\S]*?)<\/font>/gi
+
+/**
+ * Like `stripTags`, but keeps the one piece of markup the site actually wants: a `<font
+ * color>` run, such as `HD_Poison`'s `<font color='#98f698'><Panel .../>Poison</font>`. Each
+ * run becomes a `[[color:#hex]]text[[/]]` marker for `RichText` to render as a colored span --
+ * anything else inside it (the `<Panel>` icon placeholder) is dropped, same as before. Markers
+ * use square brackets specifically so they survive the plain-tag strip that follows, and don't
+ * collide with the `%key%`/`{key}` placeholder syntax `resolveTemplate` still has to scan for.
+ */
+function convertMarkup(value) {
+  const withColors = value.replace(FONT_TAG, (_, color, inner) => {
+    const text = stripTags(inner)
+    return text ? `[[color:${color}]]${text}[[/]]` : ''
+  })
+  return stripTags(withColors)
+}
+
 const titleCase = (key) =>
   key
     .replace(/^bonus_/, '')
@@ -68,8 +86,9 @@ const num = (value) => {
 /**
  * Resolves a description template against an artifact's values.
  *
- *   %chance%%%       -> "20%"   -- the named value, then %% collapsing to a literal sign
- *   {main_ability}   -> the artifact's own effect title
+ *   %chance%%%       -> "[[value]]20[[/]]%"   -- the named value highlighted, %% collapsing
+ *                                                 to a literal sign
+ *   {main_ability}   -> the artifact's own effect title, as an underlined [[ref]]
  *   {HD_GoldIcon}    -> another localization token, resolved recursively
  *
  * Order matters: `%chance%%%` is `%chance%` followed by `%%`, so named values must be
@@ -82,18 +101,21 @@ const num = (value) => {
 export function resolveTemplate(template, values, refs, problems, where, depth = 0) {
   if (!template) return undefined
 
-  // Markup comes off first. Some tokens only ever appear inside it -- {images} is a path
+  // Markup comes off first, except a <font color> run, which becomes a [[color:#hex]] marker
+  // -- see convertMarkup. Some tokens only ever appear inside markup -- {images} is a path
   // variable in <img src='file://{images}/...'/> -- so stripping first means they never
   // reach the resolver to be reported as missing.
-  let text = stripTags(template)
+  let text = convertMarkup(template)
 
-  text = text.replace(/%([a-z0-9_]+)%/gi, (whole, key) => {
+  // The trailing (%%)? swallows the literal percent sign some templates trail a value with,
+  // so "30%" highlights as one unit instead of the number alone.
+  text = text.replace(/%([a-z0-9_]+)%(%%)?/gi, (whole, key, pct) => {
     const value = values[key]
     if (value === undefined) {
       problems.push(`${where}: unresolved %${key}%`)
       return whole
     }
-    return String(value)
+    return `[[value]]${value}${pct ? '%' : ''}[[/]]`
   })
 
   text = text.replace(/\{([a-z0-9_:]+)\}/gi, (whole, key) => {
@@ -104,7 +126,7 @@ export function resolveTemplate(template, values, refs, problems, where, depth =
     // carry markup or further tokens. Bounded so a self-referential pair can't spin.
     const looked = refs.localization?.get(key)
     if (looked !== undefined) {
-      if (depth >= 4) return stripTags(looked)
+      if (depth >= 4) return convertMarkup(looked)
       return resolveTemplate(looked, values, refs, problems, where, depth + 1) ?? ''
     }
 
@@ -298,15 +320,16 @@ export function buildCatalogue() {
       const refs = { localization: english }
       if (uniqueName) {
         // {ability2} -- and {abilit2}, misspelled in the game's own strings -- both refer back
-        // to the artifact's main effect by name.
-        refs.main_ability = stripTags(uniqueName)
+        // to the artifact's main effect by name. Wrapped as a [[ref]] so it renders underlined,
+        // matching the game's own self-referential-link styling.
+        refs.main_ability = `[[ref]]${stripTags(uniqueName)}[[/]]`
         refs.ability2 = refs.main_ability
         refs.abilit2 = refs.main_ability
       }
       // Some upgrades refer to each other by slot, e.g. Galaxy Compass's lv30 cites its lv10.
       UPGRADE_LEVEL_KEYS.forEach((_, index) => {
         const title = english.get(`DOTA_Tooltip_ability_${gameId}_additional_${index + 1}_title`)
-        if (title) refs[`additional_${index + 1}`] = stripTags(title)
+        if (title) refs[`additional_${index + 1}`] = `[[ref]]${stripTags(title)}[[/]]`
       })
 
       const uniqueText = english.get(`DOTA_Tooltip_ability_${gameId}_main_ability`)

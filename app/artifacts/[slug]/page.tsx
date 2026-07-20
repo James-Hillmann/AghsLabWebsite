@@ -6,6 +6,7 @@ import { CatalogueIcon } from '@/components/CatalogueIcon'
 import { ArtifactStats } from '@/components/ArtifactStats'
 import { CommentCard } from '@/components/CommentCard'
 import { EmptySlot } from '@/components/EmptySlot'
+import { RichText } from '@/components/RichText'
 import { Section } from '@/components/Section'
 import { SiteHeader } from '@/components/SiteHeader'
 import { ERA_COLOR, ERA_NAME, getArtifact } from '@/lib/artifacts'
@@ -84,7 +85,7 @@ export default async function ArtifactPage({ params }: { params: Promise<{ slug:
                 {artifact.unique.name}
               </h3>
               <p className="mt-1.5 text-sm leading-relaxed text-frost">
-                {artifact.unique.description}
+                <RichText text={artifact.unique.description} />
               </p>
             </div>
           ) : (
@@ -110,11 +111,13 @@ export default async function ArtifactPage({ params }: { params: Promise<{ slug:
                       <span className="font-medium" style={{ color: accent }}>
                         [{upgrade.name}]
                       </span>{' '}
-                      {upgrade.description}
+                      <RichText text={upgrade.description} />
                     </p>
                     {/* The smaller grey clarification the tooltip prints under some rows. */}
                     {upgrade.note && (
-                      <p className="mt-1.5 text-xs leading-relaxed text-muted">{upgrade.note}</p>
+                      <p className="mt-1.5 text-xs leading-relaxed text-muted">
+                        <RichText text={upgrade.note} />
+                      </p>
                     )}
                   </div>
                 </li>

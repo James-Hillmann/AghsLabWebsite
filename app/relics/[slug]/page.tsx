@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 
 import { CatalogueIcon } from '@/components/CatalogueIcon'
 import { CommentCard } from '@/components/CommentCard'
+import { RichText } from '@/components/RichText'
 import { Section } from '@/components/Section'
 import { SiteHeader } from '@/components/SiteHeader'
 import { AUTHORS } from '@/lib/authors'
@@ -64,7 +65,9 @@ export default async function RelicPage({ params }: { params: Promise<{ slug: st
           </div>
         </header>
 
-        <p className="mt-5 text-sm leading-relaxed text-frost">{relic.description}</p>
+        <p className="mt-5 text-sm leading-relaxed text-frost">
+          <RichText text={relic.description} />
+        </p>
 
         {relic.special && (
           <div
@@ -74,7 +77,9 @@ export default async function RelicPage({ params }: { params: Promise<{ slug: st
             <h2 className="label text-[0.55rem]" style={{ color: accent }}>
               At higher tiers
             </h2>
-            <p className="mt-1.5 text-sm leading-relaxed text-frost">{relic.special}</p>
+            <p className="mt-1.5 text-sm leading-relaxed text-frost">
+              <RichText text={relic.special} />
+            </p>
           </div>
         )}
 
