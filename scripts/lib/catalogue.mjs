@@ -155,6 +155,30 @@ function readStats(gameId, entry, english, variableLabels) {
   return stats
 }
 
+/**
+ * A named effect block: title, body, and the optional grey clarification under it.
+ *
+ * Two of these exist per artifact. `main_ability` is the unique effect every artifact page
+ * leads with; `ability2` is a second named effect that 16 artifacts also define. Nothing in
+ * the KV predicts which -- SpecialBonus in particular does not -- so presence is driven off
+ * the localization alone, and an entry with no title or no body is treated as absent.
+ */
+function readEffect(gameId, key, english, values, refs, problems) {
+  const name = english.get(`DOTA_Tooltip_ability_${gameId}_${key}_title`)
+  const description = english.get(`DOTA_Tooltip_ability_${gameId}_${key}`)
+  if (!name || !description) return undefined
+
+  const note = english.get(`DOTA_Tooltip_ability_${gameId}_${key}_Note0`)
+
+  return {
+    name: stripTags(name),
+    description: resolveTemplate(description, values, refs, problems, `${gameId} ${key}`) ?? '',
+    ...(note
+      ? { note: resolveTemplate(note, values, refs, problems, `${gameId} ${key} note`) }
+      : {}),
+  }
+}
+
 function readUpgrades(gameId, entry, english, values, refs, problems) {
   const upgrades = []
 
@@ -318,7 +342,8 @@ export function buildCatalogue() {
         refs[`additional_${slot}`] = `[[ref]]${stripTags(title)}[[/]]`
       }
 
-      const uniqueText = english.get(`DOTA_Tooltip_ability_${gameId}_main_ability`)
+      const unique = readEffect(gameId, 'main_ability', english, values, refs, problems)
+      const second = readEffect(gameId, 'ability2', english, values, refs, problems)
       const flavor = english.get(`DOTA_Tooltip_ability_${gameId}_Lore`)
 
       const weight = num(entry.weight)
@@ -335,15 +360,8 @@ export function buildCatalogue() {
         maxLevel: num(entry.MaxLevel) ?? 40,
         heroLevel: num(entry.RequireLevel) ?? 0,
         stats: readStats(gameId, entry, english, variableLabels),
-        ...(uniqueName && uniqueText
-          ? {
-              unique: {
-                name: stripTags(uniqueName),
-                description:
-                  resolveTemplate(uniqueText, values, refs, problems, `${gameId} main_ability`) ?? '',
-              },
-            }
-          : {}),
+        ...(unique ? { unique } : {}),
+        ...(second ? { second } : {}),
         upgrades: readUpgrades(gameId, entry, english, values, refs, problems),
         ...(flavor ? { flavor: stripTags(flavor) } : {}),
         ...(entry.DropPool && weight !== undefined

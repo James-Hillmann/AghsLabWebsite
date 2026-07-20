@@ -9,7 +9,7 @@ import { ARTIFACTS, ERAS, type Artifact, type ArtifactStat, type Era } from './a
 
 export { ARTIFACTS, ERAS }
 export type { Artifact, ArtifactStat, Era }
-export type { ArtifactUpgrade } from './artifacts.generated'
+export type { ArtifactEffect, ArtifactUpgrade } from './artifacts.generated'
 
 /** The Archive rail's own names, as the game writes them. */
 export const ERA_NAME: Record<Era, string> = {

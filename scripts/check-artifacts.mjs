@@ -82,6 +82,9 @@ for (const artifact of ARTIFACTS) {
   // An unresolved placeholder means the generator shipped raw template syntax to the site.
   for (const text of [
     artifact.unique?.description,
+    artifact.unique?.note,
+    artifact.second?.description,
+    artifact.second?.note,
     ...(artifact.upgrades ?? []).flatMap((upgrade) => [upgrade.description, upgrade.note]),
   ]) {
     if (typeof text === 'string' && /%[a-z0-9_]+%|\{[a-z0-9_]+\}/i.test(text)) {

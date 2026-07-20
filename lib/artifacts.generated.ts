@@ -31,6 +31,14 @@ export type ArtifactUpgrade = {
   note?: string
 }
 
+/** A named effect block on an artifact: a title, its text, and an optional clarification. */
+export type ArtifactEffect = {
+  name: string
+  description: string
+  /** The smaller grey mechanical detail the tooltip prints underneath. */
+  note?: string
+}
+
 export type Artifact = {
   slug: string
   /** The game's own id, so a row can be traced back to the KV it came from. */
@@ -45,7 +53,9 @@ export type Artifact = {
   /** Required hero level. */
   heroLevel: number
   stats: ArtifactStat[]
-  unique?: { name: string; description: string }
+  unique?: ArtifactEffect
+  /** A second named effect, which only some artifacts define. */
+  second?: ArtifactEffect
   upgrades: ArtifactUpgrade[]
   flavor?: string
   /**
@@ -377,6 +387,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Mana Shroom",
       description: "At the end of each stage, harvest points appear.Alt + Left Mouse the status icon to pick the mushrooms.Mushrooms grant permanent attributes. Their quality and quantity are based on the mana cost during the stage. Yield scales with mana spent.",
+      note: "Yield scales with mana spent compared to your max mana. Once you eat a certain type of shroom, that shroom type becomes more likely to spawn in future harvests.",
     },
     upgrades: [
       {
@@ -545,6 +556,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "[Curse]Shackles of Greed",
       description: "Upon entering a Stage, if your gold is less than ([[value]]400[[/]] + Hero Level × [[value]]100[[/]]), the base bonus does not take effect.",
+      note: "If this Artifact is equipped during a Stage, the judgment triggers immediately.",
     },
     upgrades: [
       {
@@ -812,6 +824,12 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Hatching Dragon Egg",
       description: "After [[value]]2[[/]] Stages, hatch a Young Red Dragon to aid you in combat.",
+      note: "The Red Dragon follows you but is uncontrollable. Base Attack Damage:[[value]]40[[/]]. Each point of your all Attributes increases its base attack damage by [[value]]0.5[[/]]. Health: equal to [[value]]100%[[/]] of your Mana. Invulnerable. Resummoned at the start of each stage.",
+    },
+    second: {
+      name: "Scar of the Sky Tyrant",
+      description: "This Artifact can be upgraded to the [Prestige] Realm without Awakening.",
+      note: "Can be upgraded to level 100.",
     },
     upgrades: [
       {
@@ -885,6 +903,11 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Rebirth",
       description: "Revives you [[value]]60[[/]] seconds after death. All effects are lost when Rebirth charges are depleted.",
+      note: "Deaths in Trap Stages do not trigger this effect.",
+    },
+    second: {
+      name: "Flourish",
+      description: "+[[value]]1[[/]] Growth",
     },
     upgrades: [
       {
@@ -1060,6 +1083,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Absolute Initiative",
       description: "The first [[value]]2[[/]] instances of damage an enemy deals to you are evaded. Each evasion steals [[value]]8[[/]] gold, up to [[value]]300[[/]] per Stage.",
+      note: "Gain up to [[value]]1750[[/]] gold.",
     },
     upgrades: [
       {
@@ -1111,6 +1135,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Inner Space",
       description: "Creates [[value]]1[[/]] dedicated slots for Origin Artifact. The non-economic base attributes provided by Artifacts in these slots are increased by [[value]]100%[[/]].",
+      note: "If the Ring is unequipped, this ability will be permanently disabled, and all Artifacts in the additional slots will be forcibly unequipped.",
     },
     upgrades: [
       {
@@ -1287,6 +1312,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "HP Storage",
       description: "Can store up to [[value]]2[[/]] HP Runes.",
+      note: "Removing this Artifact temporarily removes stored HP Runes until the Artifact is obtained again.",
     },
     upgrades: [
       {
@@ -1516,6 +1542,10 @@ export const ARTIFACTS: Artifact[] = [
       name: "Cycle Begins",
       description: "[[color:#fe5b37]]Cannot be equipped after Act 3.[[/]] Grants [[value]]2[[/]] rebirth charges. Each time a rebirth is consumed, all Attribute bonus granted is multiplied by [[value]]0.15[[/]]. If death occurs when rebirth is unavailable, this Artifact is disabled.",
     },
+    second: {
+      name: "Constraint",
+      description: "This Artifact cannot be removed.",
+    },
     upgrades: [
       {
         level: 10,
@@ -1699,6 +1729,11 @@ export const ARTIFACTS: Artifact[] = [
       name: "Poison Sacrifice",
       description: "Passively gain [[value]]10[[/]] stacks of [[ref]]Poison Sacrifice[[/]] every [[value]]5[[/]] seconds. Stacks are reset at the start of each stage.",
     },
+    second: {
+      name: "Lost Offering",
+      description: "When dealing damage, consumes stacks of [[ref]]Poison Sacrifice[[/]]. After consuming [[value]]5[[/]] stacks, summons [[value]]3[[/]] sacrificial beetles. The beetles are instantly slain by your damage to perform the sacrifice, granting you [[value]]1%[[/]] [[color:#98f698]]Poison Damage[[/]], stacking independently for [[value]]15[[/]] seconds.",
+      note: "[[color:#cd00cd]]Poison Sacrifice[[/]] can only be consumed once every [[value]]0.2[[/]] seconds.",
+    },
     upgrades: [
       {
         level: 10,
@@ -1758,6 +1793,10 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Pustule",
       description: "Your next attack applies [[color:#98f698]]Poison[[/]] equal to [[value]]150%[[/]] of your Primary Attribute and adds [[value]]1[[/]] stacks of [[ref]]Pustule[[/]], activating [[color:#98f698]]Poison[[/]] once per second. After each activation, [[ref]]Pustule[[/]] performs a check with a [[value]]80%[[/]] chance to succeed; on failure, it is destroyed. The check's sprimary attributesuccess chance is halved for every [[value]]1[[/]] damage activations by [[ref]]Pustule[[/]].Activation Ratio: [[value]]1%[[/]]Activation Damage: [[value]]500%[[/]]",
+    },
+    second: {
+      name: "Magazine",
+      description: "Has [[value]]4[[/]] charges. Each charge recharges independently in [[value]]6[[/]] seconds.",
     },
     upgrades: [
       {
@@ -2008,6 +2047,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Lightning Strike",
       description: "Your next attack deals bonus damage equal to [[value]]200%[[/]] and gains +[[value]]300[[/]] Attack Range. After the attack lands, gain bonus Attack Damage equal to [[value]]20%[[/]] for [[value]]15[[/]] seconds. This effect stacks independently.",
+      note: "Max bonus is [[value]]300%[[/]] .",
     },
     upgrades: [
       {
@@ -2350,6 +2390,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Soul Vessel",
       description: "Killing a Regular/Leader enemy collects [[value]]1[[/]]/[[value]]5[[/]] stacks of souls, each stack grants [[value]]0.5[[/]] Attack Damage.",
+      note: "Maximum of [[value]]30[[/]] souls gained per Round.",
     },
     upgrades: [
       {
@@ -2481,6 +2522,10 @@ export const ARTIFACTS: Artifact[] = [
       name: "Maximum Mana Amplification",
       description: "+[[value]]10%[[/]] Spell AMP+[[value]]1%[[/]] per Stage.",
     },
+    second: {
+      name: "[Curse] Psychic Backlash",
+      description: "Removing this Artifact permanently reduces Intelligence by [[value]]50%[[/]] of the bonus granted by this Artifact.",
+    },
     upgrades: [
       {
         level: 10,
@@ -2595,6 +2640,10 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Azure Reflux",
       description: "+[[value]]1%[[/]] Max Mana Regeneration per second, with [[value]]150%[[/]] effect while in Water Terrain.",
+    },
+    second: {
+      name: "Azure Current",
+      description: "When MP is above [[value]]80%[[/]], consumes [[value]]1%[[/]] MP per second to increase Spell Amp, granting [[value]]10%[[/]]/[[value]]30%[[/]]/[[value]]75%[[/]] Spell Amp at [[value]]5[[/]]/[[value]]75[[/]]/[[value]]300[[/]] consumption respectively.",
     },
     upgrades: [
       {
@@ -2765,6 +2814,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Agony Recompense",
       description: "After taking cumulative damage equal to [[value]]10%[[/]] of your maximum health, release a slowly spreading [[ref]]Poison Mist[[/]] that affects enemies up to [[value]]800[[/]] units away. Enemies that touch [[ref]]Poison Mist[[/]] are immediately afflicted with [[color:#98f698]]Poison[[/]] equal to [[value]]15%[[/]] of their maximum health. While within its area, they are afflicted with an additional [[value]]3%[[/]] of their maximum health as [[color:#98f698]]Poison[[/]] each second. [[ref]]Poison Mist[[/]] lasts [[value]]3[[/]] seconds.",
+      note: "[[ref]]Poison Mist[[/]] can be released once every [[value]]5[[/]]s. Damage taken during the cooldown still accumulates. When triggered, its potency increases based on the accumulated damage.",
     },
     upgrades: [
       {
@@ -2889,6 +2939,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Celestial Myriad",
       description: "After each Stage, gain [[value]]5[[/]] Luck. Has a [[value]]15%[[/]] chance to obtain a random Ability [[icon:tooltip/aghs-shard]]Scepter Shard[[/]]. If this effect does not trigger, the chance is doubled for the next attempt.",
+      note: "Removing the relic will also remove all granted bonuses.",
     },
     upgrades: [
       {
@@ -3201,6 +3252,11 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Floral Offering",
       description: "The [[color:#98f698]]Poison[[/]] you apply is reduced by [[value]]30%[[/]], with the reduced stacks absorbed by [[ref]]Floral Offering[[/]] as nourishment. Once the nourishment reaches [[value]]1000%[[/]] of your Primary Attribute, [[ref]]Floral Offering[[/]] gains a level. Each time the requirement doubles thereafter, it gains [[value]]1[[/]] levels",
+      note: "[[color:#98f698]]Poison[[/]] applied by [[ref]]Floral Offering[[/]] is not affected by this reduction.",
+    },
+    second: {
+      name: "Bud Level",
+      description: "Each second, [[ref]]Floral Offering[[/]] applies [[color:#98f698]]Poison[[/]] based on your Primary Attribute to enemies within its area:Level 1: [[value]]500[[/]] radius, [[value]]100%[[/]] Primary AttributeLevel 2: [[value]]600[[/]] radius, [[value]]120%[[/]] Primary AttributeLevel 3: [[value]]700[[/]] radius, [[value]]150%[[/]] Primary AttributeThereafter: Each level applies an additional [[value]]10%[[/]] of your Primary Attribute as [[color:#98f698]]Poison[[/]]",
     },
     upgrades: [
       {
@@ -3267,6 +3323,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Enslave Undead",
       description: "Units you kill are raised as undead. Every [[value]]8[[/]] seconds, they unleash a [[value]]350[[/]] radius area attack, dealing [[value]]100%[[/]] damage.Lasts [[value]]15[[/]] seconds. Maximum enslaved units: [[value]]2[[/]].",
+      note: "Undead have an attack range of [[value]]1000[[/]], are considered your summons, inherit [[value]]40%[[/]] of your Attack Damage. They are invulnerable, have no HP, and thus do not trigger effects based on HP.",
     },
     upgrades: [
       {
@@ -3391,6 +3448,11 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Charged Sniping",
       description: "+[[value]]700[[/]] minimum Attack Range. Converts attacks into beams, firing one beam every [[value]]6[[/]] seconds at the target. Each beam hits all enemies in its path, dealing ([[value]]200%[[/]] + [[value]]100%[[/]] ) damage.",
+      note: "Attack Speed affects charge rate. Each enemy hit causes damage to decay by [[value]]20%[[/]].",
+    },
+    second: {
+      name: "Limited Effect",
+      description: "All effects only apply to ranged attackers.",
     },
     upgrades: [
       {
@@ -3816,6 +3878,11 @@ export const ARTIFACTS: Artifact[] = [
       name: "Stoneskin",
       description: "As solid as bedrock, -[[value]]130[[/]] Movement Speed, but gain [[value]]40%[[/]] physical damage reduction and immunity to physical damage below [[value]]100[[/]].",
     },
+    second: {
+      name: "[Curse] Petrification",
+      description: "After equipping this Artifact [[value]]3[[/]] times within the same day, you will be cursed. Each time you enter the labyrinth, this Artifact is automatically equipped and can only be removed by spending .",
+      note: "Requires a certain level to activate. If there is insufficient Dust at the start, it will not be equipped.",
+    },
     upgrades: [
       {
         level: 10,
@@ -4047,6 +4114,10 @@ export const ARTIFACTS: Artifact[] = [
       name: "Overture",
       description: "Odd-numbered attacks trigger [[ref]]Blood Rhythm[[/]], consuming [[value]]5%[[/]] of your current HP and converting it into [[value]]150%[[/]] bonus Attack Damage. Even-numbered attacks trigger [[ref]]Holy Rhythm[[/]], healing you for [[value]]20%[[/]] of the attack's damage. When your HP is below [[value]]50%[[/]], both effects are amplified by [[value]]100%[[/]].Every [[value]]4[[/]] attack cycles, gain [[value]]1[[/]] stacks of [[ref]]Overture[[/]]. The cycles required for each subsequent gain increase by [[value]]1[[/]].",
     },
+    second: {
+      name: "Saintblood Melody",
+      description: "+ [[value]]2[[/]] all attributes/Stacks. Resets at the start of each stage.",
+    },
     upgrades: [
       {
         level: 10,
@@ -4102,6 +4173,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Rebirth",
       description: "[[value]]2[[/]] available per Match, [[value]]5[[/]] available per day. Spend [[value]]1800[[/]] gold to revive a Hero.",
+      note: "Revives the closest target to the cast point",
     },
     upgrades: [
       {
@@ -4279,6 +4351,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Hyper-Energy Blast",
       description: "The next attack deals [[value]]150%[[/]]damage to enemies in a line, and hit enemies take an additional [[value]]25%[[/]] damage after [[value]]5[[/]] seconds.",
+      note: "Debuff Status is applied before dealing damage.",
     },
     upgrades: [
       {
@@ -4330,6 +4403,11 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Tyranny",
       description: "For every [[value]]1[[/]] Stage carried, provides an additional [[value]]4[[/]] Primary Attributes bonus.",
+      note: "Universal Hero splits the bonus equally.",
+    },
+    second: {
+      name: "[Curse]Tyrant's Obsession",
+      description: "Removing this Artifact permanently takes an additional [[value]]50%[[/]] damage.",
     },
     upgrades: [
       {
@@ -4448,6 +4526,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Void Return",
       description: "Every [[value]]10[[/]] seconds, deals damage equal to [[value]]25%[[/]] of your highest single Ability damage in this Stage to up to [[value]]2[[/]] enemies within [[value]]900[[/]] radius.",
+      note: "Damage cannot exceed [[value]]2000%[[/]] of Primary Attributes. Damage type will match the recorded damage.",
     },
     upgrades: [
       {
@@ -4582,6 +4661,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Blighttouch Parasite",
       description: "Enemies you afflict with [[color:#98f698]]Poison[[/]] are marked by a Parasite. If a marked enemy maintains the highest [[color:#98f698]]Poison[[/]] stacks for [[value]]3[[/]]s, the Parasite awakens, pulling up to [[value]]4[[/]] marked enemies within [[value]]400[[/]] toward it.Affected enemies gain [[ref]]Blighttouch[[/]] for [[value]]3[[/]]s, slowing movement by [[value]]20%[[/]] and [[color:#98f698]]Poison Decay[[/]] by [[value]]15%[[/]], and activating [[color:#98f698]]Poison[[/]] once. Secondary targets consume no [[color:#98f698]]Poison Stacks[[/]] and use the primary target's stack count.Activation Ratio: [[value]]5%[[/]]Activation Damage: [[value]]1200%[[/]]",
+      note: "The pull and activation repeat every [[value]]3[[/]]s",
     },
     upgrades: [
       {
@@ -4710,6 +4790,11 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Cosmic Warden",
       description: "Summon the Guardian, which possesses various special abilities. Until the wielder reaches level [[value]]17[[/]], this Artifact provides only [[value]]40%[[/]] of its base bonuses, and the Guardian's attributes are reduced to [[value]]35%[[/]] as well.",
+      note: "Uncontrollable Guardian follows you. ATK: [[value]]200[[/]] + [[value]]1[[/]]x all-attribute. HP= [[value]]150%[[/]] of your Mana. Resummoned at stage start.",
+    },
+    second: {
+      name: "Aegis of the Immortal",
+      description: "The Guardian has Debuff immunity and [[value]]20[[/]]s auto respawn.",
     },
     upgrades: [
       {
@@ -4901,6 +4986,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "The First Tome: Time Lockdown",
       description: "Has a [[value]]30[[/]] second quota. After each cast, the Ability's remaining cooldown is instantly reduced by [[value]]40%[[/]], and [[value]]175%[[/]] of this portion is transferred for the Artifact to bear instead.",
+      note: "Does not affect on Abilities that cannot be refreshed.",
     },
     upgrades: [
       {
@@ -4961,6 +5047,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Dreamweaving",
       description: "Creates a following dream illusion that attacks every [[value]]2.5[[/]] seconds, dealing [[value]]160%[[/]] damage. The illusion is disabled while you are silenced or banished.",
+      note: "The illusion has the same attack range as you, with a minimum of [[value]]600[[/]]",
     },
     upgrades: [
       {
@@ -5024,6 +5111,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Realm Breaker",
       description: "Your attack speed is reduced by [[value]]60%[[/]], but your attack damage is increased by [[value]]35%[[/]]. Additionally, each attack emits a field that deals [[value]]75%[[/]] split damage to up to [[value]]3[[/]] nearby enemies.",
+      note: "Attacks that cannot trigger Splash cannot trigger this effect, but they still benefit from its attack damage bonus.",
     },
     upgrades: [
       {
@@ -5148,6 +5236,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Wrath of Strife",
       description: "Reduces [[value]]35%[[/]] of frontal physical damage taken from close range. After the total mitigated damage reaches [[color:#f0ad4e]][[[value]]400[[/]] + [[value]]20%[[/]] of your Max HP][[/]], petrifies enemies in front of you for [[value]]3.5[[/]] seconds and increase the Physical Damage they take by [[value]]70%[[/]].",
+      note: "The petrification area is a cone-shaped zone with a width of [[value]]350[[/]] and a length of [[value]]500[[/]].",
     },
     upgrades: [
       {
@@ -5507,6 +5596,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Drifting Moon",
       description: "During combat, [[icon:artifacts/comets-luna-trail]]Meteor Leap[[/]] are generated and spin. These blades track enemies within an orbit radius of [[value]]200[[/]] – [[value]]1200[[/]], dealing [[value]]120%[[/]] damage on hit.",
+      note: "Moon Glaives speed increases with Agility",
     },
     upgrades: [
       {
@@ -5693,6 +5783,10 @@ export const ARTIFACTS: Artifact[] = [
       name: "Paradox Space",
       description: "Creates a remnant from another timeline that remains at its current location. Whenever you teleport or blink, the remnant casts [[ref]]Paradox Space[[/]] to move to your previous position.",
     },
+    second: {
+      name: "Space Slash",
+      description: "Slashes toward the target location, dealing [[value]]125%[[/]] attack damage to enemies along the path and reducing their armor by [[value]]10[[/]] for [[value]]9[[/]] seconds.",
+    },
     upgrades: [
       {
         level: 10,
@@ -5816,6 +5910,10 @@ export const ARTIFACTS: Artifact[] = [
       name: "Sun Ray",
       description: "Create a [[value]]600[[/]] heat zone which deals [[color:#ff9b4a]]Burn[[/]] damage equal to [[value]]12%[[/]] of your max HP [[color:#ff9b4a]]Burn[[/]]. Closer enemies gain more stacks. This artifact can be activated to increase [[color:#ff9b4a]]Burn[[/]] damage by [[value]]75%[[/]], but you will also suffer [[value]]50%[[/]] of that damage as burn effect.",
     },
+    second: {
+      name: "Nirvana",
+      description: "On every death, max Health Rune storage goes up by [[value]]1[[/]], up to [[value]]3[[/]] total bonus.",
+    },
     upgrades: [
       {
         level: 10,
@@ -5879,6 +5977,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Unstable Casting",
       description: "Grants [[value]]20%[[/]]–[[value]]40%[[/]] additional cooldown. [[value]]20%[[/]] of spell damage dealt is stored. After a [[value]]10[[/]] seconds delay, the next cast releases a radial shockwave, damaging enemies up to [[value]]800[[/]] away.",
+      note: "Does not affect equipments. Damage is only recorded when a spell triggers an additional cooldown or when you actively cast a spell. After the delay ends, damage accumulation stops until the next spell cast. Stored damage is capped at [[value]]50[[/]] % of your Primary Attribute.",
     },
     upgrades: [
       {
@@ -5944,6 +6043,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Bloodlust",
       description: "Gain [[value]]30%[[/]] lifesteal on attack, and [[value]]20%[[/]] of excess lifesteal becomes a physical damage shield.",
+      note: "Maximum shield value: [[value]]1000%[[/]] of Max Health.",
     },
     upgrades: [
       {
@@ -6118,6 +6218,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Soul Confluence",
       description: "After a summon takes lethal damage, it remains invulnerable for [[value]]5[[/]] seconds",
+      note: "Summons still die when their duration expires.",
     },
     upgrades: [
       {
@@ -6229,6 +6330,10 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Waterfowl Dance",
       description: "Final Attack Damage reduced by [[value]]50%[[/]], grants [[value]]35%[[/]] base Agility bonus.",
+    },
+    second: {
+      name: "Blood Burst",
+      description: "Attack applies a curse of [[value]]50%[[/]] to the enemy, exploding after [[value]]5[[/]] seconds, dealing Physical Damage.",
     },
     upgrades: [
       {
@@ -6357,6 +6462,7 @@ export const ARTIFACTS: Artifact[] = [
     unique: {
       name: "Soulbind Legion",
       description: "Losing [[value]]30%[[/]] HP to summon Vile Soul which inherits [[value]]100%[[/]] HP Lost, and its Attack Damage equal to [[value]]50%[[/]] of its Max HP.Attack Interval: [[value]]4[[/]]s. Damage:[[value]]150%[[/]]Attack Effect: -[[value]]5[[/]] Magic Armor, stacking independently for [[value]]10[[/]]s, up to [[value]]100%[[/]].Max Summons: [[value]]2[[/]]Souls are invincible and persist until the end of the Stage (And the lost HP will be returned).",
+      note: "Attack Speed affects the attack interval of Souls. Damage dealt by Souls is considered as dealt by the summoner and thus triggers damage reflection. This Artifact cannot be removed if a Vile Soul exists.",
     },
     upgrades: [
       {

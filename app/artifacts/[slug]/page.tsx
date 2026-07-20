@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { ArtifactEffect } from '@/components/ArtifactEffect'
 import { ArtifactFacts } from '@/components/ArtifactFacts'
 import { CatalogueIcon } from '@/components/CatalogueIcon'
 import { ArtifactStats } from '@/components/ArtifactStats'
@@ -74,18 +75,12 @@ export default async function ArtifactPage({ params }: { params: Promise<{ slug:
           )}
         </Section>
 
-        <Section title="Unique effect">
+        {/* Most artifacts have one named effect; some define a second alongside it. */}
+        <Section title={artifact.second ? 'Unique effects' : 'Unique effect'}>
           {artifact.unique ? (
-            <div
-              className="shard shard-edge bg-[color-mix(in_srgb,var(--ice-deep)_55%,transparent)] px-5 py-4"
-              style={{ '--cut': '10px' } as React.CSSProperties}
-            >
-              <h3 className="font-[family-name:var(--font-display)] text-lg" style={{ color: accent }}>
-                {artifact.unique.name}
-              </h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-frost">
-                <RichText text={artifact.unique.description} />
-              </p>
+            <div className="space-y-3">
+              <ArtifactEffect effect={artifact.unique} accent={accent} />
+              {artifact.second && <ArtifactEffect effect={artifact.second} accent={accent} />}
             </div>
           ) : (
             <EmptySlot>{artifact.name}&apos;s unique effect goes here.</EmptySlot>

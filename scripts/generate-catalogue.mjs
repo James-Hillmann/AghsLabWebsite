@@ -78,6 +78,14 @@ export type ArtifactUpgrade = {
   note?: string
 }
 
+/** A named effect block on an artifact: a title, its text, and an optional clarification. */
+export type ArtifactEffect = {
+  name: string
+  description: string
+  /** The smaller grey mechanical detail the tooltip prints underneath. */
+  note?: string
+}
+
 export type Artifact = {
   slug: string
   /** The game's own id, so a row can be traced back to the KV it came from. */
@@ -92,7 +100,9 @@ export type Artifact = {
   /** Required hero level. */
   heroLevel: number
   stats: ArtifactStat[]
-  unique?: { name: string; description: string }
+  unique?: ArtifactEffect
+  /** A second named effect, which only some artifacts define. */
+  second?: ArtifactEffect
   upgrades: ArtifactUpgrade[]
   flavor?: string
   /**
