@@ -9,7 +9,7 @@ import { type Author } from './authors'
  * run was actually won on -- a 9/10 cleared on E is a very different claim from a 9/10
  * cleared on EX, and the pair is the interesting part.
  */
-export const DIFFICULTIES = ['EX', 'S++', 'S+', 'S', 'A', 'B', 'C', 'D', 'E'] as const
+export const DIFFICULTIES = ['EX', 'SSS', 'SS', 'S', 'A', 'B', 'C', 'D', 'E'] as const
 
 export type Difficulty = (typeof DIFFICULTIES)[number]
 

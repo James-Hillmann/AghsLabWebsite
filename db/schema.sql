@@ -38,7 +38,7 @@ create table if not exists takes (
   hero_slug     text not null,
   author        text not null check (author in ('james', 'liam')),
   rating        int check (rating between 1 and 10),
-  difficulty    text check (difficulty in ('EX', 'S++', 'S+', 'S', 'A', 'B', 'C', 'D', 'E')),
+  difficulty    text check (difficulty in ('EX', 'SSS', 'SS', 'S', 'A', 'B', 'C', 'D', 'E')),
   verdict       text,
   build_notes   text,
   key_abilities text[] not null default '{}',
