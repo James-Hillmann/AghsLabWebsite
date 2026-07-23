@@ -22,6 +22,7 @@ import { buildCatalogue } from './lib/catalogue.mjs'
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const ICONS = path.join(ROOT, 'public', 'artifacts')
 const RELIC_ICONS = path.join(ROOT, 'public', 'relics')
+const ITEM_ICONS = path.join(ROOT, 'public', 'items')
 
 const problems = []
 const fail = (message) => problems.push(message)
@@ -43,6 +44,7 @@ async function loadGenerated(file) {
 const { ARTIFACTS, ERAS } = await loadGenerated('lib/artifacts.generated.ts')
 const { RELICS } = await loadGenerated('lib/relics.generated.ts')
 const { ABILITIES } = await loadGenerated('lib/abilities.generated.ts')
+const { ITEMS, ITEM_CATEGORIES } = await loadGenerated('lib/items.generated.ts')
 
 // --- artifacts ---------------------------------------------------------------------------
 
@@ -237,13 +239,59 @@ for (const ability of ABILITIES) {
   }
 }
 
+// --- items -------------------------------------------------------------------------------
+
+const itemSlugs = new Set()
+
+for (const item of ITEMS) {
+  const where = `item ${item.slug ?? item.name ?? '<unnamed>'}`
+
+  if (!item.slug || !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(item.slug)) {
+    fail(`${where}: slug must be kebab-case`)
+  }
+  if (itemSlugs.has(item.slug)) fail(`${where}: duplicate slug`)
+  itemSlugs.add(item.slug)
+
+  if (!item.name) fail(`${where}: missing name`)
+  if (!ITEM_CATEGORIES.includes(item.category)) {
+    fail(`${where}: category "${item.category}" is not one of ${ITEM_CATEGORIES}`)
+  }
+
+  // A local icon comes from extraction, so its path is fixed; a null one means the art is on
+  // Valve's CDN instead, and either way the source texture name has to be there to resolve it.
+  if (item.icon && item.icon !== `/items/${item.slug}.png`) {
+    fail(`${where}: icon should be /items/${item.slug}.png`)
+  }
+  if (item.icon && !item.iconName) fail(`${where}: has a local icon but no source texture name`)
+
+  for (const value of item.values ?? []) {
+    if (!value.name) fail(`${where}: value "${value.key}" has no name`)
+    if (typeof value.value !== 'number' && typeof value.value !== 'string') {
+      fail(`${where}: value "${value.key}" is neither a number nor a string`)
+    }
+    if (typeof value.value === 'number' && Number.isNaN(value.value)) {
+      fail(`${where}: value "${value.key}" is NaN`)
+    }
+  }
+
+  for (const text of [item.description, item.note]) {
+    if (typeof text === 'string' && /%[a-z0-9_]+%|\{[a-z0-9_]+\}/i.test(text)) {
+      fail(`${where}: unresolved placeholder in "${text.slice(0, 60)}..."`)
+    }
+  }
+}
+
 // --- icons -------------------------------------------------------------------------------
 
 // Icons are extracted separately, so missing art is expected on a fresh clone and only worth
-// reporting. An icon nothing references is different -- that's a real mismatch.
+// reporting. An icon nothing references is different -- that's a real mismatch. Items are
+// checked only against the slugs that actually carry a local icon: the reforged Dota items draw
+// from the CDN and have no file here, so their slugs would otherwise read as orphaned art.
+const itemArtSlugs = new Set(ITEMS.filter((item) => item.icon).map((item) => item.slug))
 for (const [dir, known, kind] of [
   [ICONS, slugs, 'artifact'],
   [RELIC_ICONS, relicSlugs, 'relic'],
+  [ITEM_ICONS, itemArtSlugs, 'item'],
 ]) {
   if (!existsSync(dir)) continue
   for (const file of readdirSync(dir)) {
@@ -269,6 +317,9 @@ try {
   if (live.relics.length !== RELICS.length) {
     differences.push(`${live.relics.length} relics in the game vs ${RELICS.length} committed`)
   }
+  if (live.items.length !== ITEMS.length) {
+    differences.push(`${live.items.length} items in the game vs ${ITEMS.length} committed`)
+  }
 
   const committed = new Map(ARTIFACTS.map((artifact) => [artifact.slug, artifact]))
   for (const artifact of live.artifacts) {
@@ -285,6 +336,23 @@ try {
     }
     if (JSON.stringify(existing.stats) !== JSON.stringify(artifact.stats)) {
       differences.push(`${artifact.slug}.stats differ from the game files`)
+    }
+  }
+
+  const committedItems = new Map(ITEMS.map((item) => [item.slug, item]))
+  for (const item of live.items) {
+    const existing = committedItems.get(item.slug)
+    if (!existing) {
+      differences.push(`${item.slug} exists in the game but not in the committed items`)
+      continue
+    }
+    for (const field of ['name', 'category', 'cost', 'quality']) {
+      if (JSON.stringify(existing[field]) !== JSON.stringify(item[field])) {
+        differences.push(`${item.slug}.${field}: committed ${existing[field]}, game says ${item[field]}`)
+      }
+    }
+    if (JSON.stringify(existing.values) !== JSON.stringify(item.values)) {
+      differences.push(`${item.slug}.values differ from the game files`)
     }
   }
 
@@ -338,12 +406,17 @@ const relicsWantingArt = RELICS.filter((relic) => relic.icon)
 const relicsWithArt = relicsWantingArt.filter((relic) =>
   existsSync(path.join(RELIC_ICONS, `${relic.slug}.png`)),
 ).length
+const itemsWantingArt = ITEMS.filter((item) => item.icon)
+const itemsWithArt = itemsWantingArt.filter((item) =>
+  existsSync(path.join(ITEM_ICONS, `${item.slug}.png`)),
+).length
 
 const epicCount = ABILITIES.reduce((total, ability) => total + ability.epics.length, 0)
 const shardCount = ABILITIES.reduce((total, ability) => total + ability.shards.length, 0)
 
 console.log(
-  `${ARTIFACTS.length} artifacts, ${RELICS.length} relics, ${ABILITIES.length} abilities, no problems.`,
+  `${ARTIFACTS.length} artifacts, ${RELICS.length} relics, ${ITEMS.length} items, ` +
+    `${ABILITIES.length} abilities, no problems.`,
 )
 console.log(
   `       ${epicCount} epic and ${shardCount} shard upgrades across ` +
@@ -351,8 +424,14 @@ console.log(
 )
 // No icon line for abilities: their art is Valve's, served from the CDN, so there's nothing
 // extracted into public/ to count.
-console.log(`icons: ${withArt}/${ARTIFACTS.length} artifacts, ${relicsWithArt}/${relicsWantingArt.length} relics`)
+console.log(
+  `icons: ${withArt}/${ARTIFACTS.length} artifacts, ${relicsWithArt}/${relicsWantingArt.length} relics, ` +
+    `${itemsWithArt}/${itemsWantingArt.length} items`,
+)
 console.log(
   `       ${RELICS.length - relicsWantingArt.length} relics have no art in the game (attributes)`,
+)
+console.log(
+  `       ${ITEMS.length - itemsWantingArt.length} items draw from Valve's CDN (reforged Dota items)`,
 )
 console.log(`drift: ${drift}`)

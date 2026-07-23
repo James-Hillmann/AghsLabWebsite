@@ -19,10 +19,21 @@ export const SOURCE_FILES = {
   abilities: 'scripts/npc/abilities/hero_abilities.kv',
   abilityEpics: 'scripts/npc/abilities/hero_epic_upgrade.kv',
   abilityShards: 'scripts/npc/abilities/hero_ability_upgrade.kv',
+  // The shop items, in four files the game keeps them in. `override` reforges Dota's own items
+  // for the mode (the "Advanced"/"Greater" versions); `treasure` is the run's consumables and
+  // drops; `aghanim` and `custom` hold a handful of one-off shop and encounter items.
+  itemsAdvanced: 'scripts/npc/items/item_original_item_override.kv',
+  itemsConsumable: 'scripts/npc/items/item_aghanim_treasure.kv',
+  itemsAghanim: 'scripts/npc/items/item_aghanim.kv',
+  itemsEncounter: 'scripts/npc/items/item_hd_custom.kv',
   english: 'resource/addon_english.txt',
   // The game misspells this directory. Matching the typo is required, not a mistake here.
   iconDir: 'panorama/images/custom_game/aritfact',
   relicIconDir: 'panorama/images/custom_game/relic',
+  // Item art, unlike the artifact and relic directories, holds only the mode's own custom
+  // textures -- the potions, books and mushrooms. The reforged Dota items reuse Valve's stock
+  // item art, which isn't in this VPK at all; the site resolves those from Valve's CDN instead.
+  itemIconDir: 'panorama/images/items',
 }
 
 /**
@@ -40,6 +51,7 @@ export const SOURCE_FILES = {
 export const ICON_SETS = [
   { kind: 'artifact', source: SOURCE_FILES.iconDir, out: 'artifacts' },
   { kind: 'relic', source: SOURCE_FILES.relicIconDir, out: 'relics' },
+  { kind: 'item', source: SOURCE_FILES.itemIconDir, out: 'items' },
   {
     kind: 'tooltip',
     source: 'panorama/images/interface',

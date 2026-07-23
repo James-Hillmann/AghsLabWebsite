@@ -32,14 +32,14 @@ export async function proxy(request: NextRequest) {
  *
  * The patterns deliberately end in `\.png` rather than matching the folders. `artifacts/`
  * alone would also match `/artifacts/eden-anvil`, silently taking every artifact detail page
- * out from behind the passphrase -- and the same for relics. `tooltip/` holds the shared
- * pictures descriptions embed inline, which reach the optimiser the same way.
+ * out from behind the passphrase -- and the same for relics and items. `tooltip/` holds the
+ * shared pictures descriptions embed inline, which reach the optimiser the same way.
  *
  * The art itself is game assets with nothing private in it -- the same reasoning that already
  * makes logo.png public.
  */
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|logo.png|artifacts/.*\\.png|relics/.*\\.png|tooltip/.*\\.png).*)',
+    '/((?!_next/static|_next/image|favicon.ico|logo.png|artifacts/.*\\.png|relics/.*\\.png|items/.*\\.png|tooltip/.*\\.png).*)',
   ],
 }

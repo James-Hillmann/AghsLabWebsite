@@ -1,24 +1,33 @@
 # The catalogue
 
-`/artifacts`, `/relics` and every hero's abilities are generated from the game's own files, not
-written by hand. The 106 artifacts, 117 relics and 373 hero abilities — their stats, level
-growth, effect text, costs, drop rates and upgrades — are read straight out of the workshop VPK.
+`/artifacts`, `/relics`, `/items` and every hero's abilities are generated from the game's own
+files, not written by hand. The 106 artifacts, 117 relics, 72 items and 373 hero abilities —
+their stats, level growth, effect text, costs, drop rates and upgrades — are read straight out
+of the workshop VPK.
 
-Artifacts and relics are catalogues you browse. Abilities aren't: they belong to a hero, so
-they live at `/heroes/<hero>/<ability>` and are reached from that hero's page. There's no
+Artifacts, relics and items are catalogues you browse. Abilities aren't: they belong to a hero,
+so they live at `/heroes/<hero>/<ability>` and are reached from that hero's page. There's no
 abilities tab, and no index of them all.
 
-That means **`lib/artifacts.generated.ts`, `lib/relics.generated.ts` and
-`lib/abilities.generated.ts` are never edited by hand.** Anything you type into them is gone at
-the next regeneration. Opinions go in the comment thread on each page, which lives in the
-database and can't be clobbered.
+**Items are the mode's own, not Dota's.** Labyrinth reforges Dota's items into "Advanced" and
+"Greater" versions with their own numbers, and adds a shelf of run-only consumables — the
+potions, books and mushrooms — that don't exist in the base game. Only those two kinds are on
+the page: an untouched Dota item a run also sells is just Dota, and its stats live in Valve's
+files rather than this workshop's, so there's nothing here to say about it. That's the honest
+line the page draws, and it's why the count is 72 rather than the couple of hundred rows the
+item KVs hold.
+
+That means **`lib/artifacts.generated.ts`, `lib/relics.generated.ts`,
+`lib/items.generated.ts` and `lib/abilities.generated.ts` are never edited by hand.** Anything
+you type into them is gone at the next regeneration. Opinions go in the comment thread on each
+page, which lives in the database and can't be clobbered.
 
 ## Regenerating
 
 After a game update:
 
 ```bash
-npm run catalogue:generate   # rewrites all three generated files
+npm run catalogue:generate   # rewrites all four generated files
 npm run artifacts:check      # validates, and diffs against the game files
 ```
 
@@ -46,21 +55,32 @@ still writes *some* files, but every texture that needs real decoding fails with
 one. Put the whole folder's contents on your PATH, in `tools/`, or point `SOURCE2VIEWER_CLI`
 at the exe.
 
-One run does both catalogues: 106 artifact icons into `public/artifacts/` and 84 relic icons
-into `public/relics/`.
+One run does all three extracted catalogues: 106 artifact icons into `public/artifacts/`, 84
+relic icons into `public/relics/`, and 45 item icons into `public/items/`.
 
 Without the tool everything else still works — anything with no art falls back to a coloured
 diamond rather than a broken image, so the site is usable with zero icons extracted.
 
-**Abilities are the exception: nothing is extracted for them.** Labyrinth reuses Valve's own
-ability art, so an ability's `AbilityTextureName` is a Valve texture id and the page builds a
-`cdn.cloudflare.steamstatic.com` URL from it via `abilityIconUrl()`. There is no
-`public/abilities/`, and `catalogue:icons` doesn't touch them. The handful of genuinely custom
-Labyrinth icons aren't on the CDN under any name and fall back to the diamond.
+**Items are split, and abilities are extracted for not at all.** Both reach for Valve's CDN the
+same way an ability does, via a `cdn.cloudflare.steamstatic.com` URL built from a texture id:
 
-That also means **`proxy.ts` needs no `abilities/.*\.png` exclusion.** The ones there for
-artifacts and relics exist because `next/image` re-fetches *local* files over HTTP without a
-session cookie; a remote CDN source is fetched by the optimiser directly.
+- **Abilities** are entirely CDN. An ability's `AbilityTextureName` is a Valve texture id, the
+  page builds the URL via `abilityIconUrl()`, and there is no `public/abilities/`. The handful
+  of genuinely custom Labyrinth icons aren't on the CDN under any name and fall to the diamond.
+- **Items are both.** The mode's own items — the potions, books and mushrooms — ship a texture
+  in the VPK and are extracted to `public/items/` like an artifact. The reforged Dota items
+  reuse Valve's stock art, which isn't in this workshop VPK at all, so `itemIconUrl()` builds a
+  CDN URL from the texture instead. Their textures are arcana- or number-skinned variants the
+  CDN doesn't serve (`item_desolator2`, `item_radiance_spectre_arcana_alt2`), so `itemIconUrl`
+  strips them back to the base Dota item — the honest icon for a reforged version of it. The two
+  with no Dota base, the Attribute Gems, fall to the diamond.
+
+That's also why **`proxy.ts` excludes `items/.*\.png` but not `abilities/.*\.png`.** The
+exclusions exist because `next/image` re-fetches *local* files over HTTP without a session
+cookie, so a gated path gets redirected and the optimiser reports "isn't a valid image."
+Artifacts, relics and the mode's own items all have local files and all need the line; a remote
+CDN source (every ability, every reforged item) is fetched by the optimiser directly and needs
+nothing.
 
 ## Where the data comes from
 
@@ -68,15 +88,19 @@ session cookie; a remote CDN source is fetched by the optimiser directly.
 |---|---|
 | `scripts/npc/items/item_player_artifact.kv` | stats, growth, costs, drop weights, level caps |
 | `scripts/npc/spell_modify/spell_modify_relics.kv` | relic roll ranges and weights |
+| `scripts/npc/items/item_original_item_override.kv` | the reforged "Advanced"/"Greater" items |
+| `scripts/npc/items/item_aghanim_treasure.kv` | the run's consumables — potions, books, mushrooms, drops |
+| `scripts/npc/items/item_aghanim.kv`, `scripts/npc/items/item_hd_custom.kv` | a few one-off shop and encounter items |
 | `scripts/npc/abilities/hero_abilities.kv` | hero abilities, and the talents they reference |
 | `scripts/npc/abilities/hero_epic_upgrade.kv` | epic upgrades, attached to an ability by name |
 | `scripts/npc/abilities/hero_ability_upgrade.kv` | shard upgrades, keyed on an ability and a value |
 | `resource/addon_english.txt` | every name, effect, note and flavour line |
 | `panorama/images/custom_game/aritfact/` | the Archive icons |
 | `panorama/images/custom_game/relic/` | the relic icons |
+| `panorama/images/items/` | the mode's own item icons (potions, books, mushrooms) |
 | `panorama/images/interface/`, `panorama/images/bonus_level/` | five shared pictures that effect text embeds inline |
 
-Artifacts and relics are parsed by `scripts/lib/catalogue.mjs`, abilities by
+Artifacts, relics and items are parsed by `scripts/lib/catalogue.mjs`, abilities by
 `scripts/lib/abilities.mjs`. The two share only their text handling, which lives in
 `scripts/lib/text.mjs` — markup conversion and template resolution.
 
@@ -107,6 +131,28 @@ A few things worth knowing if you touch `scripts/lib/catalogue.mjs`:
   they sit in directories holding the game's whole UI, where a bulk decompile costs minutes and
   hundreds of stray PNGs. A new folder under `public/` also needs adding to the `proxy.ts`
   matcher, or `next/image` fetches it back through the passphrase gate and fails.
+
+And for the item half of `scripts/lib/catalogue.mjs`:
+
+- **The name gate is what keeps the page to the mode's own items.** `item_original_item_override.kv`
+  holds ~190 rows, but the untouched Dota items in it inherit their name from Dota's base files
+  and so have no `DOTA_Tooltip_ability_<id>` string in *this* VPK. Requiring a localized name
+  drops them and leaves the ~20 reforged items that were actually renamed. The tolerant
+  `DOTA_Tooltip_ability_` / `DOTA_Tooltip_Ability_` casing matters here — the game spells it both
+  ways in the same file.
+- **An item's numbers are single values**, not a growth formula or a per-level array. A stat line
+  is only kept when the game gives that value a tooltip label; the unlabelled ones are internal
+  mechanics — charge delays, particle flags — the tooltip never shows.
+- **Descriptions carry `<h1>` section headers, `<br>`, and literal `\n`** the other catalogues'
+  strings don't. `preprocessItemText` turns the header into a `[[head]]` marker so it survives
+  the tag strip, and normalises the breaks to real whitespace so they collapse like any other —
+  otherwise a raw `\n` prints on the page.
+- **Three rows are excluded by id in `ITEM_EXCLUDE`.** Two are debug (a 99999-gold blink, a
+  texture-less "Nameless Thingy"); the third, `item_bloodstone`, leaves three of the values its
+  description quotes to Dota's base item, which isn't in this VPK, so it would card with holes.
+  The reforged `item_bloodstone2` is self-contained and stays.
+- **Dedup is on rendered name + text, first-wins.** A couple of drops ship a second `_shop` copy
+  identical bar its id; one card reads better than two saying the same thing.
 
 And for `scripts/lib/abilities.mjs`:
 

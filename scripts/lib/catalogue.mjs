@@ -249,6 +249,143 @@ function readSources(fromList, english) {
   return [...seen]
 }
 
+/**
+ * The shop-item files, and the category each maps to.
+ *
+ * `itemsAdvanced` reforges Dota's own items into the "Advanced"/"Greater" versions the shop
+ * sells deeper in a run; `itemsConsumable` and `itemsAghanim` are the run's potions, books,
+ * mushrooms and one-off drops; `itemsEncounter` holds the few items an encounter hands you.
+ * Read in this order because dedup is first-wins, and the shop copy of a drop should lose to
+ * the drop it was copied from.
+ */
+const ITEM_FILES = [
+  ['itemsAdvanced', 'advanced'],
+  ['itemsConsumable', 'consumable'],
+  ['itemsAghanim', 'consumable'],
+  ['itemsEncounter', 'encounter'],
+]
+
+/**
+ * Rows in these files that can't be shown correctly, excluded by id so a broad heuristic can't
+ * drop a real item by accident:
+ *
+ *  * `item_blink_debug`, `item_mushroom_007_a` -- debug rows the game ships but never sells: a
+ *    99999-gold blink for testing, and a texture-less mushroom named "Nameless Thingy"
+ *    ("Might be delicious."). Both carry real localization, so they'd pass the name gate.
+ *  * `item_bloodstone` -- a reforged item whose override leaves three of the values its
+ *    description quotes (%spell_lifesteal_while_active%, %buff_duration%, %aura_radius%) to
+ *    Dota's base item, which isn't in this workshop VPK. The reforged "Greater Bloodstone"
+ *    (item_bloodstone2) is self-contained and ships; this one would card with holes in it.
+ */
+const ITEM_EXCLUDE = new Set(['item_blink_debug', 'item_mushroom_007_a', 'item_bloodstone'])
+
+/** Value keys that belong in the tooltip's footer, not its stat lines. */
+const ITEM_CAST_KEYS = { AbilityCooldown: 'cooldown', AbilityManaCost: 'manaCost' }
+
+/**
+ * Item descriptions carry markup the other catalogues' strings don't: an inline
+ * `<h1>Active: Blink</h1>` header on each section, `<br>` breaks, and literal `\n` escapes the
+ * KV stores two-character rather than as real newlines. The header becomes a `[[head]]` marker
+ * so it survives the tag strip and renders as its own line; the breaks are turned into real
+ * whitespace so they fall to the same collapse every description on the site already goes
+ * through, rather than printing a raw "\n" on the page.
+ */
+const preprocessItemText = (raw) =>
+  raw
+    .replace(/\\[nrt]/g, '\n')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<h1\b[^>]*>([\s\S]*?)<\/h1>/gi, '[[head]]$1[[/]]')
+
+/** 'item_greater_crit2' -> 'greater-crit2'. */
+const toItemSlug = (gameId) => gameId.replace(/^item_/, '').replace(/_/g, '-')
+
+/**
+ * The localization for an item string, tolerant of the casing the game is inconsistent about.
+ *
+ * Most item tooltips key on `DOTA_Tooltip_ability_<id>`, but a handful -- Healing Lotus,
+ * Purification Potion, the HP Rune -- capitalise it `DOTA_Tooltip_Ability_<id>`. Both spellings
+ * occur in the same file, so each lookup tries the two rather than guessing per item.
+ */
+const itemString = (english, id, suffix = '') =>
+  english.get(`DOTA_Tooltip_ability_${id}${suffix}`) ??
+  english.get(`DOTA_Tooltip_Ability_${id}${suffix}`)
+
+/**
+ * The label for one item stat line.
+ *
+ * Item labels come in two shapes the two other catalogues each handle only half of. The
+ * reforged Dota items write `$token` references like an artifact ("+$agi"), so those resolve
+ * through the same variable/standard tables; the mode's own items write the label out in prose
+ * like an ability ("Heal/Damage:", "RADIUS:"), so those get the trailing colon dropped and the
+ * shout-case re-cased. One helper covers both because a single item mixes them.
+ */
+function itemValueLabel(raw, key, variableLabels) {
+  if (!raw) return titleCase(key)
+
+  const token = raw.match(/\$([a-z0-9_]+)/i)?.[1]
+  if (token) {
+    return (
+      variableLabels.get(token) ??
+      STANDARD_LABELS[token] ??
+      STANDARD_LABELS[key.replace(/^bonus_/, '')] ??
+      titleCase(key)
+    )
+  }
+
+  const text = stripTags(raw).replace(/^%/, '').replace(/:\s*$/, '').trim()
+  if (!text) return titleCase(key)
+  if (text === text.toUpperCase()) {
+    return text
+      .toLowerCase()
+      .split(/\s+/)
+      .map((word) => (word ? word[0].toUpperCase() + word.slice(1) : word))
+      .join(' ')
+  }
+  return text
+}
+
+/**
+ * The stat lines and the cast footer for one item.
+ *
+ * An item's numbers don't scale -- unlike an ability, the game writes each one once -- so a
+ * value is a single number (or the rare string the KV leaves un-numeric). Only the values the
+ * game gives a tooltip label become stat lines; the unlabelled ones are internal mechanics
+ * (charge delays, particle flags, land times) the tooltip never shows, and printing them reads
+ * as noise rather than information.
+ */
+function readItemValues(gameId, entry, english, variableLabels) {
+  const values = []
+  const cast = {}
+
+  for (const [key, raw] of Object.entries(entry.AbilityValues ?? {})) {
+    const scalar =
+      typeof raw === 'string' ? raw : raw && typeof raw === 'object' ? raw.value : undefined
+    if (typeof scalar !== 'string') continue
+
+    const parsed = num(scalar)
+
+    if (ITEM_CAST_KEYS[key]) {
+      if (parsed !== undefined && parsed !== 0) cast[ITEM_CAST_KEYS[key]] = parsed
+      continue
+    }
+
+    const localized = itemString(english, gameId, `_${key}`)
+    if (!localized) continue
+
+    const block = raw && typeof raw === 'object' ? raw : {}
+
+    values.push({
+      key,
+      name: itemValueLabel(localized, key, variableLabels),
+      value: parsed ?? scalar,
+      ...(localized.trimStart().startsWith('%') ? { unit: '%' } : {}),
+      ...(block.affected_by_aoe_increase === '1' ? { scalesWithAoe: true } : {}),
+    })
+  }
+
+  return { values, cast }
+}
+
 export function buildCatalogue() {
   const problems = []
   const vpk = readVpk(findGameVpk())
@@ -444,7 +581,88 @@ export function buildCatalogue() {
       })
     }
 
-    return { artifacts, relics, eraNames, problems }
+    // --- items -----------------------------------------------------------------------
+    //
+    // The mode's own item art -- the potions, books and mushrooms -- lives in the VPK under
+    // panorama/images/items. The reforged Dota items reuse Valve's stock art, which isn't in
+    // this archive at all, so their texture stays as a bare name for the site to resolve from
+    // Valve's CDN and only the ones with a file here get a local `icon`.
+    const itemArt = new Set()
+    for (const { path: entryPath } of vpk.entries) {
+      const match = entryPath.match(/^panorama\/images\/items\/(.+)_png\.vtex_c$/)
+      if (match) itemArt.add(match[1])
+    }
+
+    const items = []
+    const seenItems = new Set()
+
+    for (const [sourceKey, category] of ITEM_FILES) {
+      const itemKv = parseKv(vpk.readPath(SOURCE_FILES[sourceKey]).toString('utf8'))
+
+      for (const [gameId, entry] of Object.entries(itemKv)) {
+        if (ITEM_EXCLUDE.has(gameId)) continue
+
+        const name = itemString(english, gameId)
+        if (!name) continue
+
+        const values = flattenValues(entry.AbilityValues)
+        const refs = { localization: english, iconLabels }
+
+        const description = itemString(english, gameId, '_Description')
+        const note = itemString(english, gameId, '_Note0')
+        const flavor = itemString(english, gameId, '_Lore')
+
+        const resolvedDescription = description
+          ? resolveTemplate(preprocessItemText(description), values, refs, problems, `${gameId} description`)
+          : undefined
+
+        // Dedup on the rendered name and text, first-wins: a couple of drops (the growth
+        // elixirs) ship a second `_shop` copy that is identical bar its id, and one card per
+        // item reads better than two that say the same thing.
+        const fingerprint = `${stripTags(name)} ${resolvedDescription ?? ''}`
+        if (seenItems.has(fingerprint)) continue
+        seenItems.add(fingerprint)
+
+        const slug = toItemSlug(gameId)
+        const texture = entry.AbilityTextureName ?? null
+        const { values: valueLines, cast } = readItemValues(
+          gameId,
+          entry,
+          english,
+          variableLabels,
+        )
+
+        const cost = num(entry.ItemCost)
+        const quality = entry.ItemQuality
+        const stock = num(entry.ItemStockMax)
+        const cooldown = cast.cooldown ?? num(entry.AbilityCooldown)
+        const manaCost = cast.manaCost ?? num(entry.AbilityManaCost)
+
+        items.push({
+          slug,
+          gameId,
+          name: stripTags(name),
+          category,
+          // Local art only when the VPK actually has it; the texture name always rides along so
+          // the site can fall back to Valve's CDN for the reforged Dota items.
+          icon: texture && itemArt.has(texture) ? `/items/${slug}.png` : null,
+          iconName: texture,
+          ...(quality && quality !== '0' ? { quality } : {}),
+          ...(cost ? { cost } : {}),
+          ...(stock ? { stock } : {}),
+          ...(cooldown ? { cooldown } : {}),
+          ...(manaCost ? { manaCost } : {}),
+          ...(resolvedDescription ? { description: resolvedDescription } : {}),
+          ...(note
+            ? { note: resolveTemplate(preprocessItemText(note), values, refs, problems, `${gameId} note`) }
+            : {}),
+          ...(flavor ? { flavor: stripTags(flavor) } : {}),
+          values: valueLines,
+        })
+      }
+    }
+
+    return { artifacts, relics, items, eraNames, problems }
   } finally {
     vpk.close()
   }

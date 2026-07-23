@@ -49,20 +49,22 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
 Two hand-written source files, both flat arrays with getters, so either can move to the database
 later without changing call sites.
 
-**Heroes are hand-written. Artifacts and relics are generated.**
+**Heroes are hand-written. Artifacts, relics and items are generated.**
 
 `lib/heroes.ts` — the 63-hero Labyrinth roster, in the order the in-game picker shows them.
 Portraits and turntable renders load from Valve's CDN, so no images need committing for the grid
 to work. When this moves to a database, replace `getHeroes` / `getHero` / `heroesByAttribute` and
 keep the `Hero` and `Ability` shapes.
 
-`lib/artifacts.generated.ts` and `lib/relics.generated.ts` — 106 artifacts and 117 relics, read
-straight out of the game's own files. **Never edit these by hand**; a regeneration overwrites
-them. The hand-written `lib/artifacts.ts` / `lib/relics.ts` sit on top and hold the behaviour.
+`lib/artifacts.generated.ts`, `lib/relics.generated.ts` and `lib/items.generated.ts` — 106
+artifacts, 117 relics and 72 items, read straight out of the game's own files. **Never edit
+these by hand**; a regeneration overwrites them. The hand-written `lib/artifacts.ts` /
+`lib/relics.ts` / `lib/items.ts` sit on top and hold the behaviour. (Items are the mode's own
+reforged and consumable gear, not Dota's stock shop — see [ARTIFACTS.md](ARTIFACTS.md).)
 
 ```bash
-npm run catalogue:generate   # rewrite both generated files from the game files
-npm run catalogue:icons      # extract artifact art (needs Source 2 Viewer)
+npm run catalogue:generate   # rewrite the generated files from the game files
+npm run catalogue:icons      # extract artifact, relic and item art (needs Source 2 Viewer)
 npm run artifacts:check      # validate, and diff the committed data against the game
 ```
 

@@ -267,6 +267,57 @@ export type HeroAbility = {
 }
 `
 
+const ITEM_TYPES = `
+export const ITEM_CATEGORIES = ['advanced', 'consumable', 'encounter'] as const
+
+export type ItemCategory = (typeof ITEM_CATEGORIES)[number]
+
+/**
+ * One stat line on an item.
+ *
+ * Unlike an artifact stat or an ability value, an item's number neither scales by a formula nor
+ * grows by level -- the game writes it once -- so \`value\` is a single number, or the rare
+ * string the KV leaves un-numeric.
+ */
+export type ItemValue = {
+  key: string
+  name: string
+  value: number | string
+  unit?: '%'
+  /** Grows with the run's area-of-effect bonus. */
+  scalesWithAoe?: boolean
+}
+
+export type Item = {
+  slug: string
+  /** The game's own id, so a row can be traced back to the KV it came from. */
+  gameId: string
+  name: string
+  category: ItemCategory
+  /**
+   * Local art, or null. Only the mode's own items (potions, books, mushrooms) ship a texture in
+   * the VPK; the reforged Dota items reuse Valve's stock art, resolved from the CDN via
+   * \`iconName\` instead.
+   */
+  icon: string | null
+  /** The game's texture name -- the local file's source, and the CDN key when there's no file. */
+  iconName: string | null
+  /** The game's own rarity word: consumable, rare, epic or artifact. */
+  quality?: string
+  /** Gold cost, when the item is bought rather than found. */
+  cost?: number
+  /** Shop stock cap, for the few items the shop rations. */
+  stock?: number
+  cooldown?: number
+  manaCost?: number
+  description?: string
+  /** The smaller grey clarification the tooltip prints underneath. */
+  note?: string
+  flavor?: string
+  values: ItemValue[]
+}
+`
+
 function write(file, banner, types, name, type, rows) {
   const body = rows.map((row) => `  ${serialize(row, 1)}`).join(',\n')
   const source = `${banner}${types}\nexport const ${name}: ${type}[] = [\n${body},\n]\n`
@@ -274,9 +325,11 @@ function write(file, banner, types, name, type, rows) {
   return source.split('\n').length
 }
 
-const { artifacts, relics, eraNames, problems } = buildCatalogue()
+const { artifacts, relics, items, eraNames, problems } = buildCatalogue()
 const { abilities, heroes, problems: abilityProblems } = buildAbilities()
 problems.push(...abilityProblems)
+
+const ITEM_CATEGORY_ORDER = ['advanced', 'consumable', 'encounter']
 
 // Archive order: era first, then rarest-first inside it, so the grid reads the way the
 // collection actually feels rather than in the KV's arbitrary order.
@@ -285,6 +338,14 @@ artifacts.sort((a, b) => {
   return eras.indexOf(a.era) - eras.indexOf(b.era) || a.name.localeCompare(b.name)
 })
 relics.sort((a, b) => Number(a.isAttribute) - Number(b.isAttribute) || a.name.localeCompare(b.name))
+
+// Shelf order: category first (reforged items, then consumables, then encounter items), then
+// alphabetical inside it -- the way the page groups them.
+items.sort(
+  (a, b) =>
+    ITEM_CATEGORY_ORDER.indexOf(a.category) - ITEM_CATEGORY_ORDER.indexOf(b.category) ||
+    a.name.localeCompare(b.name),
+)
 
 // Skill-bar order within a hero: the order the abilities unlock, ultimates last. That's the
 // order a player already has in their head, which beats anything alphabetical.
@@ -305,6 +366,9 @@ const relicLines = write(
 const abilityLines = write(
   'lib/abilities.generated.ts', BANNER, ABILITY_TYPES, 'ABILITIES', 'HeroAbility', abilities,
 )
+const itemLines = write(
+  'lib/items.generated.ts', BANNER, ITEM_TYPES, 'ITEMS', 'Item', items,
+)
 
 const byEra = {}
 for (const artifact of artifacts) byEra[artifact.era] = (byEra[artifact.era] ?? 0) + 1
@@ -314,6 +378,13 @@ console.log(
   `  eras: ${Object.entries(byEra).map(([era, n]) => `${eraNames[era]} ${n}`).join(', ')}`,
 )
 console.log(`lib/relics.generated.ts     ${relics.length} relics, ${relicLines} lines`)
+
+const byCategory = {}
+for (const item of items) byCategory[item.category] = (byCategory[item.category] ?? 0) + 1
+console.log(`lib/items.generated.ts      ${items.length} items, ${itemLines} lines`)
+console.log(
+  `  ${Object.entries(byCategory).map(([category, n]) => `${category} ${n}`).join(', ')}`,
+)
 
 const epicCount = abilities.reduce((total, ability) => total + ability.epics.length, 0)
 const shardCount = abilities.reduce((total, ability) => total + ability.shards.length, 0)

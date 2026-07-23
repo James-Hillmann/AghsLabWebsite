@@ -34,6 +34,19 @@ function wrap(frame: Frame, key: number): React.ReactNode {
       </span>
     )
   }
+  if (frame.kind === 'head') {
+    // Item tooltips break themselves into "Active: …" / "Passive: …" sections with an inline
+    // heading the other catalogues' strings don't use. Rendered as its own line so the header
+    // reads as a header rather than running into the sentence after it.
+    return (
+      <span
+        key={key}
+        className="label mt-2.5 block text-[0.6rem] text-frost first:mt-0"
+      >
+        {frame.nodes}
+      </span>
+    )
+  }
   if (frame.kind === 'icon' && frame.param && ICON_PATH.test(frame.param)) {
     // The game draws these inline and writes around them -- "converted into <shard>" means
     // nothing without the picture. Sized in em so it tracks the surrounding text at any font
@@ -60,7 +73,7 @@ function wrap(frame: Frame, key: number): React.ReactNode {
 
 /**
  * Renders the `[[color:#hex]]...[[/]]` / `[[value]]...[[/]]` / `[[ref]]...[[/]]` /
- * `[[icon:path]]label[[/]]` markers the generators embed in catalogue text (see
+ * `[[head]]...[[/]]` / `[[icon:path]]label[[/]]` markers the generators embed in catalogue text (see
  * `resolveTemplate` in scripts/lib/text.mjs) as styled spans, mirroring the game's own tooltip
  * highlighting -- element keywords in their real color, substituted numbers glowing,
  * self-references underlined, and the pictures the game draws inline. Every

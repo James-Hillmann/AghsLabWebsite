@@ -179,8 +179,11 @@ function extract({ kind, source, out, perFile }, bySlug) {
 }
 
 try {
-  const { artifacts, relics } = buildCatalogue()
-  const entriesFor = { artifact: artifacts, relic: relics }
+  const { artifacts, relics, items } = buildCatalogue()
+  // Only items with a local `icon` are extracted: the reforged Dota items reuse Valve's stock
+  // art, which isn't in this VPK, and feeding their textures here would just churn the shared
+  // items directory looking for files that were never in it.
+  const entriesFor = { artifact: artifacts, relic: relics, item: items.filter((item) => item.icon) }
 
   for (const set of ICON_SETS) {
     extract(set, set.textures ? new Map(Object.entries(set.textures)) : iconTargets(entriesFor[set.kind]))
